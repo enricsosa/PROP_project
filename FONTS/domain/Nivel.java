@@ -2,7 +2,7 @@ package domain;
 
 /** imports **/
 
-public class Asignatura {
+public class Nivel {
     /** atributos **/
     private string id;
     private string nombre;
@@ -13,7 +13,7 @@ public class Asignatura {
     /** METODOS PUBLICOS **/
 
     /** constructoras **/
-    public Asignatura(string id, string nom) {
+    public Nivel(string id, string nom) {
         this.id = id;
         this.nombre = nom;
     }

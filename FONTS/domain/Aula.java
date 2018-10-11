@@ -2,10 +2,10 @@ package domain;
 
 /** imports **/
 
-public class Asignatura {
+public class Aula {
     /** atributos **/
     private string id;
-    private string nombre;
+    private int plazas;
 
     /** METODOS PRIVADOS **/
 
@@ -13,9 +13,9 @@ public class Asignatura {
     /** METODOS PUBLICOS **/
 
     /** constructoras **/
-    public Asignatura(string id, string nom) {
+    public Aula(string id, int plazas) {
         this.id = id;
-        this.nombre = nom;
+        this.plazas = plazas;
     }
 
     /** modificadoras **/
