@@ -1,0 +1,19 @@
+{
+  "aulas": [
+    {
+      "id": "A5001",
+      "plazas": "120",
+      "tipoAula": "Teoria",
+    },
+    {
+      "id": "A5S108",
+      "plazas": "25",
+      "tipoAula": "Laboratorio",
+    },
+    {
+      "id": "A5201",
+      "plazas": "40",
+      "tipoAula": "Problemas",
+    }
+  ]
+}

@@ -6,6 +6,7 @@ public class Asignatura {
     /** atributos **/
     private string id;
     private string nombre;
+    private string descripcion;
 
     /** METODOS PRIVADOS **/
 
@@ -13,9 +14,10 @@ public class Asignatura {
     /** METODOS PUBLICOS **/
 
     /** constructoras **/
-    public Asignatura(string id, string nom) {
+    public Asignatura(string id, string nom, string des) {
         this.id = id;
         this.nombre = nom;
+        this.descripcion = des;
     }
 
     /** modificadoras **/

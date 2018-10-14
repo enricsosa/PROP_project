@@ -1,0 +1,29 @@
+{
+  "asignaturas": [
+    {
+      "id": "F",
+      "nombre": "Fisica",
+      "descripcion": "Electromagnetisme, teoria de circuits, ones electromagnetiques i fonaments dels circuits digitals.",
+      "nivel": "S1"
+    },
+    {
+      "id": "FM",
+      "nombre": "Fonaments Matematics",
+      "descripcion": "Principis de logica proposicional i conceptes basics de l'aritmetica d'enters.",
+      "nivel": "S1"
+    },
+    {
+      "id": "IC",
+      "nombre": "Introduccio als Computadors",
+      "descripcion": "Comprensió en detall de la construcció d'un computador senzill amb un processador RISC.",
+      "nivel": "S1"
+    },
+    {
+      "id": "PRO1",
+      "nombre": "Programacio I",
+      "descripcion": "Conceptes i tecniques basiques per a la construccio de programes en llenguatges imperatius.",
+      "nivel": "S1"
+    }
+
+  ]
+}
