@@ -1,0 +1,13 @@
+RESTRICCIONES
+
+Obligatorias (imposible incumplirlas)
+  - En una misma aula no se pueden dar más de una clase en una misma hora determinada.
+  - Un grupo no puede tener asignado un aula con menor capacidad que la cantidad de alumnos en dicho grupo.
+  - No se pueden dar clases fuera de la franja horaria lectiva.
+  - Un grupo de cierto tipo no se le puede asignar una aula que soporte dicho tipo.
+  - No puede haber solapamientos de hora entre un grupo y sus subgrupos.
+
+Opcionales
+  - Los grupos con mismo número pero con asignaturas diferentes que son correquisito entre sí no se pueden solapar (en hora).
+  - Las asignaturas que pertenecen a cierto nivel no deben pasarse de la franja horaria lectiva de dicho nivel.
+  
