@@ -35,7 +35,7 @@ public class Asignatura {
         this.nombre = nombre;
     }
 
-    public void addSesion(Session sesion) {
+    public void addSesion(Sesion sesion) {
         this.sesiones.add(sesion);
     }
 

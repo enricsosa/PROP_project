@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import domain.TipoClase;
 import domain.SubGrupo;
 
 public class Grupo {
@@ -52,19 +53,19 @@ public class Grupo {
 
     public Map<String, SubGrupo> getSubGruposTeoria() {
         return this.subGrupos.entrySet().stream()
-                .filter(map -> map.getValue().getTipo() == Teoria)
+                .filter(map -> map.getValue().getTipo() == TipoClase.Teoria)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
     public Map<String, SubGrupo> getSubGruposLaboratorio() {
         return this.subGrupos.entrySet().stream()
-                .filter(map -> map.getValue().getTipo() == Laboratorio)
+                .filter(map -> map.getValue().getTipo() == TipoClase.Laboratorio)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
     public Map<String, SubGrupo> getSubGruposProblemas() {
         return this.subGrupos.entrySet().stream()
-                .filter(map -> map.getValue().getTipo() == Problemas)
+                .filter(map -> map.getValue().getTipo() == TipoClase.Problemas)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 

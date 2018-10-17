@@ -1,13 +1,19 @@
-RESTRICCIONES
+Restricciones
 
 Obligatorias (imposible incumplirlas)
-  - En una misma aula no se pueden dar más de una clase en una misma hora determinada.
-  - Un grupo no puede tener asignado un aula con menor capacidad que la cantidad de alumnos en dicho grupo.
-  - No se pueden dar clases fuera de la franja horaria lectiva.
-  - Un grupo de cierto tipo no se le puede asignar una aula que soporte dicho tipo.
-  - No puede haber solapamientos de hora entre un grupo y sus subgrupos.
+  - Una Aula no puede estar involucrada en 2 Asignaciones que se solapen en el tiempo.
+  - Un SubGrupo no puede estar involucrado en una Asignacion en una Aula con menor capacidad que la cantidad de plazas en dicho SubGrupo.
+  - Un SubGrupo de cierto tipo no se le puede asignar una aula que soporte dicho tipo.
+  - Un SubGrupo no puede estar involucrado en 2 Asignaciones que se solapen en el tiempo.
+  - Los SubGrupos de un mismo Grupo pero de distinto tipo no pueden esar involucrados en Asignaciones que se solapen en el tiempo.
 
 Opcionales
-  - Los grupos con mismo número pero con asignaturas diferentes que son correquisito entre sí no se pueden solapar (en hora).
-  - Las asignaturas que pertenecen a cierto nivel no deben pasarse de la franja horaria lectiva de dicho nivel.
+  - Los SubGrupos de Grupos con mismo id pero de Asignaturas diferentes que son Correquisito entre sí no pueden estar asociados a Asignaciones que se solapan en el tiempo.
+  - Las Asignaturas que pertenecen a un Nivel deben restringirse a una cierta franja horaria.
+  - Todas las Asignaciones deben restringirse a cierta franja horaria.
+  - No se puede hacer ninguna Asignacion en un/os dia/s de la semana.
+  - Dos Assignaturas de un Nivel no pueden estar associadas a Asignaciones que se solapen en el tiempo.
+  - Una Asignatura no puede estar asociada a dos Asignaciones que se solapen en el tiempo.
+  - Todas las Asignaciones de una Asignatura deben restringirse a una franja horaria.
+  - Una Aula no puede estar involucrada en Asignaciones con una Clase associada de tipo diferente a cierto TipoClase.
   

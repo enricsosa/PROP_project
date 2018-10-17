@@ -2,7 +2,7 @@ package domain;
 
 /** Imports **/
 
-import java.time;
+import java.time.Duration;
 
 import domain.TipoClase;
 

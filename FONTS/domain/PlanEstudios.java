@@ -86,7 +86,7 @@ public class PlanEstudios {
     }
 
     public Nivel getNivel(String nom) {
-        return this.niveles[nom];
+        return this.niveles.get(nom);
     }
 
     public Map<String, Asignatura> getAsignaturas() {
@@ -94,14 +94,15 @@ public class PlanEstudios {
     }
 
     public Asignatura getAsignatura(String nom) {
-        return this.asignaturas[nom];
+        return this.asignaturas.get(nom);
     }
 
     public Map<String, Aula> getAulas() {
-        return this.aula;
+        return this.aulas;
     }
+
     public Aula getAula(String id) {
-        return this.aulas[id];
+        return this.aulas.get(id);
     }
 
     public Horario getHorarioGeneral() {

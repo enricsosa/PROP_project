@@ -2,10 +2,10 @@ package domain;
 
 /** Imports **/
 
-import java.time;
+import java.time.Clock;
 
-import domain.clase;
-import domain.aula;
+import domain.Clase;
+import domain.Aula;
 
 public class Asignacion {
 

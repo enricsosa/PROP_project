@@ -50,7 +50,7 @@ public class Nivel {
     }
 
     public Asignatura getAsignatura(String nom) {
-        return this.asignaturasget(nom);
+        return this.asignaturas.get(nom);
     }
 
     /** Métodos redefinidos **/
