@@ -2,7 +2,7 @@ package data;
 
 /** Imports **/
 
-public class CtrlAsignaturaFichero {
+public class CtrlAsignaturasFile {
 
     /** Atributos **/
 

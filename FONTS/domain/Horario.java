@@ -4,7 +4,7 @@ package domain;
 
 import java.util.ArrayList;
 
-import domain.Asignacion
+import domain.Asignacion;
 
 public class Horario {
 
@@ -22,7 +22,7 @@ public class Horario {
 
     /** Métodos públicos **/
 
-    public void setId {
+    public void setId() {
         this.id = id;
     }
 

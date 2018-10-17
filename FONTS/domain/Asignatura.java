@@ -11,14 +11,14 @@ public class Asignatura {
 
     /** Atributos **/
 
-    private string id;
-    private string nombre;
+    private String id;
+    private String nombre;
     private ArrayList sesiones;
     private ArrayList grupos;
 
     /** Constructoras **/
 
-    public Asignatura(string id, string nom) {
+    public Asignatura(String id, String nom) {
         this.id = id;
         this.nombre = nom;
         this.sesiones = new ArrayList();
@@ -27,7 +27,7 @@ public class Asignatura {
 
     /** Métodos públicos **/
 
-    public void setId(string id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,11 +53,11 @@ public class Asignatura {
 
     /** Consultoras **/
 
-    public string getId() {
+    public String getId() {
         return this.id;
     }
 
-    public string getNombre() {
+    public String getNombre() {
         return this.nombre;
     }
 

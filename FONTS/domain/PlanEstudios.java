@@ -94,7 +94,7 @@ public class PlanEstudios {
     }
 
     public Asignatura getAsignatura(String nom) {
-        return this.asignaturas[nom]
+        return this.asignaturas[nom];
     }
 
     public Map<String, Aula> getAulas() {

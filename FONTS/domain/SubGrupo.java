@@ -2,7 +2,7 @@ package domain;
 
 /** Imports **/
 
-import domain.TipoClase
+import domain.TipoClase;
 
 public class SubGrupo {
 

@@ -4,7 +4,7 @@ package domain;
 
 import java.time;
 
-import domain.TipoClase
+import domain.TipoClase;
 
 public class Sesion {
 

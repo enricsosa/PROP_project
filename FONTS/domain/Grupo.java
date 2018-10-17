@@ -19,7 +19,7 @@ public class Grupo {
 
     public Grupo(String id) {
         this.id = id;
-        this.subGrupos = new HashMap<String, SubGrupo>()
+        this.subGrupos = new HashMap<String, SubGrupo>();
     }
 
     /** Métodos públicos **/
@@ -46,23 +46,23 @@ public class Grupo {
         return this.id;
     }
 
-    public Map<String, SubGrupo> getSubGrupos {
+    public Map<String, SubGrupo> getSubGrupos() {
         return this.subGrupos;
     }
 
-    public Map<String, SubGrupo> getSubGruposTeoria {
+    public Map<String, SubGrupo> getSubGruposTeoria() {
         return this.subGrupos.entrySet().stream()
                 .filter(map -> map.getValue().getTipo() == Teoria)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
-    public Map<String, SubGrupo> getSubGruposLaboratorio {
+    public Map<String, SubGrupo> getSubGruposLaboratorio() {
         return this.subGrupos.entrySet().stream()
                 .filter(map -> map.getValue().getTipo() == Laboratorio)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
-    public Map<String, SubGrupo> getSubGruposProblemas {
+    public Map<String, SubGrupo> getSubGruposProblemas() {
         return this.subGrupos.entrySet().stream()
                 .filter(map -> map.getValue().getTipo() == Problemas)
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
