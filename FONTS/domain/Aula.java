@@ -1,22 +1,47 @@
 package domain;
 
-/** imports **/
+/** Imports **/
 
 public class Aula {
-    /** atributos **/
-    private string id;
-    private int plazas;
 
-    /** METODOS PRIVADOS **/
+    /** Atributos **/
 
+    private String id;
+    private Integer plazas;
 
-    /** METODOS PUBLICOS **/
+    /** Constructoras **/
 
-    /** constructoras **/
-    public Aula(string id, int plazas) {
+    public Aula(String id, Integer plazas) {
         this.id = id;
         this.plazas = plazas;
     }
 
-    /** modificadoras **/
+    /** Métodos públicos **/
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPlazas(Integer plazas) {
+        this.plazas = plazas;
+    }
+
+    /** Consultoras **/
+
+    public String getId() {
+        return this.id;
+    }
+
+    public Integer getPlazas() {
+        return this.plazas;
+    }
+
+    /** Métodos redefinidos **/
+
+    @Override
+    public String toString() {
+        return id;
+    }
+
+
 }

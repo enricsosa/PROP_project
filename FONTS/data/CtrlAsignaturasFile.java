@@ -1,17 +1,17 @@
 package data;
 
-//imports
+/** Imports **/
 
 public class CtrlAsignaturaFichero {
-    /** atributos **/
 
+    /** Atributos **/
 
-    /** METODOS PRIVADOS **/
+    /** Constructoras **/
 
+    /** Métodos públicos **/
 
-    /** METODOS PUBLICOS **/
+    /** Consultoras **/
 
-    /** constructoras **/
+    /** Métodos redefinidos **/
 
-    /** modificadoras **/
 }
