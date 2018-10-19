@@ -43,6 +43,7 @@ public class CtrlAsignaturasFile {
         for (Object o : a) {
             JSONObject assignatura = (JSONObject) o;
 
+            //Debugging
             String id = (String) assignatura.get("id");
             System.out.println(id);
 
