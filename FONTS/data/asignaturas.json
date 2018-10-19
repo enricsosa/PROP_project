@@ -1,0 +1,25 @@
+{
+  "asignaturas": [
+    {
+      "id": "F",
+      "nombre": "Fisica",
+      "nivel": "S1"
+    },
+    {
+      "id": "FM",
+      "nombre": "Fonaments Matematics",
+      "nivel": "S1"
+    },
+    {
+      "id": "IC",
+      "nombre": "Introduccio als Computadors",
+      "nivel": "S1"
+    },
+    {
+      "id": "PRO1",
+      "nombre": "Programacio I",
+      "nivel": "S1"
+    }
+
+  ]
+}
