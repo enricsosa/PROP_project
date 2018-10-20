@@ -13,19 +13,19 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 
 
-public class CtrlAsignaturasFile {
+public class CtrlAulasFile {
 
     /** Atributos **/
-    private static CtrlAsignaturasFile infoAsignaturas;
+    private static CtrlAulasFile infoAsignaturas;
 
     /** Constructoras **/
 
-    private CtrlAsignaturasFile() {
+    private CtrlAulasFile() {
     }
 
-    public static CtrlAsignaturasFile getInstance() {
+    public static CtrlAulasFile getInstance() {
         if (infoAsignaturas == null)
-            infoAsignaturas = new CtrlAsignaturasFile() {
+            infoAsignaturas = new CtrlAulasFile() {
             };
         return infoAsignaturas;
     }
@@ -35,17 +35,17 @@ public class CtrlAsignaturasFile {
     /** Consultoras **/
 
     public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
-        LinkedList<JSONObject> asignaturas = new LinkedList<JSONObject>();
+        LinkedList<JSONObject> aulas = new LinkedList<JSONObject>();
 
-        JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/asignaturas.json"));
-        JSONArray a = (JSONArray)obj.get("asignaturas");
+        JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/aulas.json"));
+        JSONArray a = (JSONArray)obj.get("aulas");
 
         for (Object o : a) {
-            JSONObject assignatura = (JSONObject) o;
-            asignaturas.add(assignatura);
+            JSONObject aula = (JSONObject) o;
+            aulas.add(aula);
         }
 
-        return asignaturas;
+        return aulas;
     }
 
     /** Métodos redefinidos **/
