@@ -8,12 +8,14 @@ public class Aula {
 
     private String id;
     private Integer plazas;
+    private TipoClase[] tipos;
 
     /** Constructoras **/
 
-    public Aula(String id, Integer plazas) {
+    public Aula(String id, Integer plazas, TipoClase[] tipos) {
         this.id = id;
         this.plazas = plazas;
+        this.tipos = tipos;
     }
 
     /** Métodos públicos **/
@@ -26,6 +28,10 @@ public class Aula {
         this.plazas = plazas;
     }
 
+    public void setTipos(TipoClase[] tipos) {
+        this.tipos = tipos;
+    }
+
     /** Consultoras **/
 
     public String getId() {
@@ -34,6 +40,10 @@ public class Aula {
 
     public Integer getPlazas() {
         return this.plazas;
+    }
+
+    public TipoClase[] getTipos() {
+        return this.tipos;
     }
 
     /** Métodos redefinidos **/
