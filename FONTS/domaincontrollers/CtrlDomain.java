@@ -15,6 +15,7 @@ import data.CtrlAsignaturasFile;
 import data.CtrlAulasFile;
 import domain.Asignatura;
 import domain.Aula;
+import domain.TipoClase;
 
 public class CtrlDomain {
 
@@ -43,6 +44,19 @@ public class CtrlDomain {
             Asignatura asignatura = new Asignatura((String)o.get("id"), (String)o.get("nombre"));
             this.asignaturas.put(asignatura.getId(), asignatura);
             list.put(asignatura.getId(), asignatura);
+        }
+
+        return list;
+    }
+
+    public Map<String, Aula> cargarAllAulas() throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> aulasData = controladorAulas.getAll();
+        Map<String, Aula> list = new HashMap<String, Aula>();
+
+        for (JSONObject o : aulasData) {
+            Aula aula = new Aula((String)o.get("id"), (Integer)o.get("plazas"), (TipoClase[])o.get("tipoAula"));
+            this.aulas.put(aula.getId(), aula);
+            list.put(aula.getId(), aula);
         }
 
         return list;
