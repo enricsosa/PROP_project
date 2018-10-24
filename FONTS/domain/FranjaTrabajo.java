@@ -4,8 +4,6 @@ package domain;
 
 import java.time.Clock;
 
-import domain.TipoRestriccion;
-
 public class FranjaTrabajo extends Restriccion {
 
     /** Atributos **/

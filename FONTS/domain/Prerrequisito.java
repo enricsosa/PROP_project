@@ -2,9 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.Asignatura;
-import domain.TipoRestriccion;
-
 public class Prerrequisito extends Restriccion {
 
     /** Atributos **/

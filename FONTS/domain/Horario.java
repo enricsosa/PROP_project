@@ -4,8 +4,6 @@ package domain;
 
 import java.util.ArrayList;
 
-import domain.Asignacion;
-
 public class Horario {
 
     /** Atributos **/

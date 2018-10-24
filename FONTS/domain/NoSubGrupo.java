@@ -2,9 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.Grupo;
-import domain.TipoRestriccion;
-
 public class NoSubGrupo extends Restriccion {
 
     /** Atributos **/

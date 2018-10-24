@@ -2,13 +2,9 @@ package domain;
 
 /** Imports **/
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-
-import domain.Asignatura;
-import domain.Horario;
-import domain.Aula;
-import domain.Nivel;
 
 public class PlanEstudios {
 
@@ -19,6 +15,7 @@ public class PlanEstudios {
     private Map<String, Asignatura> asignaturas;
     private Map<String, Aula> aulas;
     private Horario horarioGeneral;
+    private ArrayList restricciones;
 
     /** Constructoras **/
 
@@ -27,6 +24,7 @@ public class PlanEstudios {
         this.niveles = new HashMap<String, Nivel>();
         this.asignaturas = new HashMap<String, Asignatura>();
         this.aulas = new HashMap<String, Aula>();
+        this.restricciones = new ArrayList();
     }
 
     /** Métodos públicos **/
@@ -75,6 +73,18 @@ public class PlanEstudios {
         this.horarioGeneral = horarioGeneral;
     }
 
+    public void setRestricciones(ArrayList restricciones) {
+        this.restricciones = restricciones;
+    }
+
+    public void addRestriccion(Restriccion restriccion) {
+        this.restricciones.add(restriccion);
+    }
+
+    public void eliminarRestriccion(Integer posicion) {
+        this.restricciones.remove(posicion);
+    }
+
     /** Consultoras **/
 
     public String getNombre() {
@@ -107,6 +117,10 @@ public class PlanEstudios {
 
     public Horario getHorarioGeneral() {
         return this.horarioGeneral;
+    }
+
+    public ArrayList getRestricciones() {
+        return this.restricciones;
     }
 
     /** Métodos redefinidos **/

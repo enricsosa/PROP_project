@@ -1,10 +1,9 @@
 package domaincontrollers;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
+import domain.PlanEstudios;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,8 +21,10 @@ public class CtrlDomain {
     /** Atributos **/
     private CtrlAsignaturasFile controladorAsignaturas;
     private CtrlAulasFile controladorAulas;
+    private PlanEstudios planEstudios;
     private Map<String, Asignatura> asignaturas;
     private Map<String, Aula> aulas;
+    private ArrayList restricciones;
 
     /** Constructoras **/
 
@@ -41,7 +42,7 @@ public class CtrlDomain {
         Map<String, Asignatura> list = new HashMap<String, Asignatura>();
 
         for (JSONObject o : asignaturasData) {
-            Asignatura asignatura = new Asignatura((String)o.get("id"), (String)o.get("nombre"));
+            Asignatura asignatura = new Asignatura((String)o.get("id"), (String)o.get("nombre"), this.planEstudios);
             this.asignaturas.put(asignatura.getId(), asignatura);
             list.put(asignatura.getId(), asignatura);
         }

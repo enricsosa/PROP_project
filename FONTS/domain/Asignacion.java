@@ -4,9 +4,6 @@ package domain;
 
 import java.time.Clock;
 
-import domain.Clase;
-import domain.Aula;
-
 public class Asignacion {
 
     /** Atributos **/

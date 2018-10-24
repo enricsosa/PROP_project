@@ -2,31 +2,41 @@ package domain;
 
 /** Imports **/
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Collectors;
-
-import domain.TipoClase;
-import domain.SubGrupo;
 
 public class Grupo {
 
     /** Atributos **/
 
     private String id;
+    private Asignatura asignatura;
     private Map<String, SubGrupo> subGrupos;
+    private ArrayList restricciones;
 
     /** Constructoras **/
 
-    public Grupo(String id) {
+    public Grupo(String id, Asignatura asignatura) {
         this.id = id;
+        this.asignatura = asignatura;
         this.subGrupos = new HashMap<String, SubGrupo>();
+        this.restricciones = new ArrayList();
     }
 
     /** Métodos públicos **/
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
+        this.subGrupos = subGrupos;
     }
 
     public void addSubGrupo(SubGrupo subGrupo) {
@@ -41,10 +51,26 @@ public class Grupo {
         this.subGrupos.remove(id);
     }
 
+    public void setRestricciones(ArrayList restricciones) {
+        this.restricciones = restricciones;
+    }
+
+    public void addRestriccion(Restriccion restriccion) {
+        this.restricciones.add(restriccion);
+    }
+
+    public void eliminarRestriccion(Integer posicion) {
+        this.restricciones.remove(posicion);
+    }
+
     /** Consultoras **/
 
     public String getId() {
         return this.id;
+    }
+
+    public Asignatura getAsignatura() {
+        return this.asignatura;
     }
 
     public Map<String, SubGrupo> getSubGrupos() {
@@ -71,6 +97,10 @@ public class Grupo {
 
     public SubGrupo getSubGrupo(String id) {
         return this.subGrupos.get(id);
+    }
+
+    public ArrayList getRestricciones() {
+        return this.restricciones;
     }
 
     /** Métodos redefinidos **/

@@ -2,9 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.Nivel;
-import domain.TipoRestriccion;
-
 public class NivelHora extends Restriccion {
 
     /** Atributos **/

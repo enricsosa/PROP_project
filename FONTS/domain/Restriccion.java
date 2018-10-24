@@ -2,8 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.TipoRestriccion;
-
 public abstract class Restriccion {
 
     /** Atributos **/

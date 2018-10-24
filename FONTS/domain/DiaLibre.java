@@ -2,8 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.TipoRestriccion;
-
 public class DiaLibre extends Restriccion {
 
     /** Atributos **/

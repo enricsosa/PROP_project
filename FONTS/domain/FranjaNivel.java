@@ -4,9 +4,6 @@ package domain;
 
 import java.time.Clock;
 
-import domain.Nivel;
-import domain.TipoRestriccion;
-
 public class FranjaNivel extends Restriccion {
 
     /** Atributos **/

@@ -2,9 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.SubGrupo;
-import domain.Sesion;
-
 public class Clase {
 
     /** Atributos **/
