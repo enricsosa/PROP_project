@@ -29,6 +29,10 @@ public class CtrlDomain {
     /** Constructoras **/
 
     public CtrlDomain() {
+        this.initCtrlDomain();
+    }
+
+    public void initCtrlDomain() {
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
         controladorAulas = CtrlAulasFile.getInstance();
         asignaturas = new HashMap<String, Asignatura>();
