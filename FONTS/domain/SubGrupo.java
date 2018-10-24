@@ -2,8 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domain.TipoClase;
-
 public class SubGrupo {
 
     /** Atributos **/
