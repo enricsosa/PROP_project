@@ -29,6 +29,14 @@ public class PlanEstudios {
 
     /** Métodos públicos **/
 
+    public ArrayList<Clase> getAllClases() {
+        ArrayList<Clase> clases = new ArrayList<Clase>();
+        for (Map.Entry<String, Asignatura> entry : this.asignaturas.entrySet()) {
+            clases.addAll(entry.getValue().getAllClases());
+        }
+        return clases;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

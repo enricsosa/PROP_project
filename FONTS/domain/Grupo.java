@@ -43,7 +43,7 @@ public class Grupo {
         this.subGrupos.putIfAbsent(subGrupo.getId(), subGrupo);
     }
 
-    public void replaceSubGrupo2(SubGrupo subGrupo) {
+    public void replaceSubGrupo(SubGrupo subGrupo) {
         this.subGrupos.replace(subGrupo.getId(), subGrupo);
     }
 

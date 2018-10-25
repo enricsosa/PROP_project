@@ -22,7 +22,7 @@ public class CtrlHorario {
         this.planEstudios = planEstudios;
         this.restricciones = restricciones;
         this.loadLimitacionesHorario();
-        this.ocupaciones = new Ocupaciones[7][24];
+        this.initOcupaciones();
     }
 
     /** Métodos públicos **/
@@ -43,7 +43,52 @@ public class CtrlHorario {
         }
     }
 
+    public void initOcupaciones() {
+        this.ocupaciones = new Ocupaciones[7][24];
+        for (int i = 0; i < 7; ++i) {
+            for (int j = 0; i < 24; ++j) {
+                this.ocupaciones[i][j] = new Ocupaciones();
+            }
+        }
+    }
+
+    public ArrayList<Clase> getAllClases() {
+        return this.planEstudios.getAllClases();
+    }
+
+    public void setPlanEstudios(PlanEstudios planEstudios) {
+        this.planEstudios = planEstudios;
+    }
+
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
+        this.restricciones = restricciones;
+    }
+
+    public void setLimitacionesHorario(LimitacionesHorario limitacionesHorario) {
+        this.limitacionesHorario = limitacionesHorario;
+    }
+
+    public void setOcupaciones(Ocupaciones[][] ocupaciones) {
+        this.ocupaciones = ocupaciones;
+    }
+
     /** Consultoras **/
+
+    public PlanEstudios getPlanEstudios() {
+        return planEstudios;
+    }
+
+    public ArrayList<Restriccion> getRestricciones() {
+        return restricciones;
+    }
+
+    public LimitacionesHorario getLimitacionesHorario() {
+        return limitacionesHorario;
+    }
+
+    public Ocupaciones[][] getOcupaciones() {
+        return ocupaciones;
+    }
 
     /** Métodos redefinidos **/
 
