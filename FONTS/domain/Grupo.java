@@ -14,7 +14,7 @@ public class Grupo {
     private String id;
     private Asignatura asignatura;
     private Map<String, SubGrupo> subGrupos;
-    private ArrayList restricciones;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
@@ -22,7 +22,7 @@ public class Grupo {
         this.id = id;
         this.asignatura = asignatura;
         this.subGrupos = new HashMap<String, SubGrupo>();
-        this.restricciones = new ArrayList();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
     /** Métodos públicos **/
@@ -51,7 +51,7 @@ public class Grupo {
         this.subGrupos.remove(id);
     }
 
-    public void setRestricciones(ArrayList restricciones) {
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
@@ -99,7 +99,7 @@ public class Grupo {
         return this.subGrupos.get(id);
     }
 
-    public ArrayList getRestricciones() {
+    public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 

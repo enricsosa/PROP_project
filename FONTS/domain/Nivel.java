@@ -12,14 +12,14 @@ public class Nivel {
 
     private String nombre;
     private Map<String, Asignatura> asignaturas;
-    private ArrayList restricciones;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
     public Nivel(String nombre) {
         this.nombre = nombre;
         this.asignaturas = new HashMap<String, Asignatura>();
-        this.restricciones = new ArrayList();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
     /** Métodos públicos **/
@@ -40,7 +40,7 @@ public class Nivel {
         this.asignaturas.remove(nombre);
     }
 
-    public void setRestricciones(ArrayList restricciones) {
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
@@ -66,7 +66,7 @@ public class Nivel {
         return this.asignaturas.get(nom);
     }
 
-    public ArrayList getRestricciones() {
+    public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 

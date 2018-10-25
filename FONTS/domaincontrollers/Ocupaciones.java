@@ -1,36 +1,49 @@
-package domain;
+package domaincontrollers;
 
 /** Imports **/
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import domain.*;
 
-public class PlanEstudios {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Ocupaciones {
 
     /** Atributos **/
 
-    private String nombre;
     private Map<String, Nivel> niveles;
     private Map<String, Asignatura> asignaturas;
     private Map<String, Aula> aulas;
-    private Horario horarioGeneral;
+    private Map<String, SubGrupo> subGrupos;
     private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
-    public PlanEstudios(String nombre) {
-        this.nombre = nombre;
+    public Ocupaciones() {
         this.niveles = new HashMap<String, Nivel>();
         this.asignaturas = new HashMap<String, Asignatura>();
         this.aulas = new HashMap<String, Aula>();
+        this.subGrupos = new HashMap<String, SubGrupo>();
         this.restricciones = new ArrayList<Restriccion>();
     }
 
-    /** Métodos públicos **/
+    /** Metodos publicos **/
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNiveles(Map<String, Nivel> niveles) {
+        this.niveles = niveles;
+    }
+
+    public void setAsignaturas(Map<String, Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+
+    public void setAulas(Map<String, Aula> aulas) {
+        this.aulas = aulas;
+    }
+
+    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
+        this.subGrupos = subGrupos;
     }
 
     public void addNivel(Nivel nivel) {
@@ -69,10 +82,6 @@ public class PlanEstudios {
         this.aulas.remove(id);
     }
 
-    public void setHorarioGeneral (Horario horarioGeneral) {
-        this.horarioGeneral = horarioGeneral;
-    }
-
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
@@ -87,51 +96,26 @@ public class PlanEstudios {
 
     /** Consultoras **/
 
-    public String getNombre() {
-        return this.nombre;
-    }
-
     public Map<String, Nivel> getNiveles() {
-        return this.niveles;
-    }
-
-    public Nivel getNivel(String nom) {
-        return this.niveles.get(nom);
+        return niveles;
     }
 
     public Map<String, Asignatura> getAsignaturas() {
-        return this.asignaturas;
-    }
-
-    public Asignatura getAsignatura(String nom) {
-        return this.asignaturas.get(nom);
+        return asignaturas;
     }
 
     public Map<String, Aula> getAulas() {
-        return this.aulas;
+        return aulas;
     }
 
-    public Aula getAula(String id) {
-        return this.aulas.get(id);
-    }
-
-    public Horario getHorarioGeneral() {
-        return this.horarioGeneral;
+    public Map<String, SubGrupo> getSubGrupos() {
+        return subGrupos;
     }
 
     public ArrayList<Restriccion> getRestricciones() {
-        return this.restricciones;
-    }
-
-    public Restriccion getRestriccion(Integer i) {
-        return this.restricciones.get(i);
+        return restricciones;
     }
 
     /** Métodos redefinidos **/
-
-    @Override
-    public String toString() {
-        return nombre;
-    }
 
 }

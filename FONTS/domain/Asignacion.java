@@ -8,14 +8,14 @@ public class Asignacion {
 
     /** Atributos **/
 
-    private Clock horaIni;
+    private Integer horaIni;
     private Integer DiaSemana;
     private Aula aula;
     private Clase clase;
 
     /** Constructoras **/
 
-    public Asignacion(Clock horaIni, Integer diaSemana, Aula aula, Clase clase) {
+    public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase) {
         this.horaIni = horaIni;
         this.DiaSemana = diaSemana;
         this.aula = aula;
@@ -24,7 +24,7 @@ public class Asignacion {
 
     /** Métodos públicos **/
 
-    public void setHoraIni(Clock horaIni) {
+    public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
@@ -42,12 +42,16 @@ public class Asignacion {
 
     /** Consultoras **/
 
-    public Clock getHoraIni() {
+    public Integer getHoraIni() {
         return this.horaIni;
     }
 
     public Integer getDiaSemana() {
         return this.DiaSemana;
+    }
+
+    public Integer getHoraFin() {
+        return this.horaIni + this.clase.getSesion().getDuracion();
     }
 
     public Aula getAula() {

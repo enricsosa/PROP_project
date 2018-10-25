@@ -9,12 +9,12 @@ public class FranjaAsignatura extends Restriccion {
     /** Atributos **/
 
     private Asignatura asignatura;
-    private Clock horaIni;
-    private Clock horaFin;
+    private Integer horaIni;
+    private Integer horaFin;
 
     /** Constructoras **/
 
-    public FranjaAsignatura(Asignatura asignatura, Clock horaIni, Clock horaFin) {
+    public FranjaAsignatura(Asignatura asignatura, Integer horaIni, Integer horaFin) {
         this.asignatura = asignatura;
         this.horaIni = horaIni;
         this.horaFin = horaFin;
@@ -26,11 +26,11 @@ public class FranjaAsignatura extends Restriccion {
         this.asignatura = asignatura;
     }
 
-    public void setHoraIni(Clock horaIni) {
+    public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
-    public void setHoraFin(Clock horaFin) {
+    public void setHoraFin(Integer horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -40,11 +40,11 @@ public class FranjaAsignatura extends Restriccion {
         return this.asignatura;
     }
 
-    public Clock getHoraIni() {
+    public Integer getHoraIni() {
         return horaIni;
     }
 
-    public Clock getHoraFin() {
+    public Integer getHoraFin() {
         return this.horaFin;
     }
 

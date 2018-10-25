@@ -9,13 +9,13 @@ public class Horario {
     /** Atributos **/
 
     private String id;
-    private ArrayList assignaciones;
+    private ArrayList<Asignacion> assignaciones;
 
     /** Constructoras **/
 
     public Horario(String id) {
         this.id = id;
-        this.assignaciones = new ArrayList();
+        this.assignaciones = new ArrayList<Asignacion>();
     }
 
     /** Métodos públicos **/
@@ -38,7 +38,7 @@ public class Horario {
         return this.id;
     }
 
-    public ArrayList getAssignaciones() {
+    public ArrayList<Asignacion> getAssignaciones() {
         return this.assignaciones;
     }
 

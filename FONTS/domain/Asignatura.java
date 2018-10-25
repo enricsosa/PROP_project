@@ -12,9 +12,9 @@ public class Asignatura {
     private String nombre;
     private PlanEstudios planEstudios;
     private Nivel nivel;
-    private ArrayList sesiones;
-    private ArrayList grupos;
-    private ArrayList restricciones;
+    private ArrayList<Sesion> sesiones;
+    private ArrayList<Grupo> grupos;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
@@ -22,9 +22,9 @@ public class Asignatura {
         this.id = id;
         this.nombre = nom;
         this.planEstudios = planEstudios;
-        this.sesiones = new ArrayList();
-        this.grupos = new ArrayList();
-        this.restricciones = new ArrayList();
+        this.sesiones = new ArrayList<Sesion>();
+        this.grupos = new ArrayList<Grupo>();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
     public Asignatura(String id, String nom, PlanEstudios planEstudios, Nivel nivel) {
@@ -32,28 +32,28 @@ public class Asignatura {
         this.nombre = nom;
         this.planEstudios = planEstudios;
         this.nivel = nivel;
-        this.sesiones = new ArrayList();
-        this.grupos = new ArrayList();
-        this.restricciones = new ArrayList();
+        this.sesiones = new ArrayList<Sesion>();
+        this.grupos = new ArrayList<Grupo>();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
-    public Asignatura(String id, String nom, PlanEstudios planEstudios, ArrayList sesiones, ArrayList grupos) {
+    public Asignatura(String id, String nom, PlanEstudios planEstudios, ArrayList<Sesion> sesiones, ArrayList<Grupo> grupos) {
         this.id = id;
         this.nombre = nom;
         this.planEstudios = planEstudios;
         this.sesiones = sesiones;
         this.grupos = grupos;
-        this.restricciones = new ArrayList();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
-    public Asignatura(String id, String nom, PlanEstudios planEstudios, Nivel nivel, ArrayList sesiones, ArrayList grupos) {
+    public Asignatura(String id, String nom, PlanEstudios planEstudios, Nivel nivel, ArrayList<Sesion> sesiones, ArrayList<Grupo> grupos) {
         this.id = id;
         this.nombre = nom;
         this.planEstudios = planEstudios;
         this.nivel = nivel;
         this.sesiones = sesiones;
         this.grupos = grupos;
-        this.restricciones = new ArrayList();
+        this.restricciones = new ArrayList<Restriccion>();
     }
 
     /** Métodos públicos **/
@@ -74,15 +74,15 @@ public class Asignatura {
         this.nivel = nivel;
     }
 
-    public void setSesiones(ArrayList sesiones) {
+    public void setSesiones(ArrayList<Sesion> sesiones) {
         this.sesiones = sesiones;
     }
 
-    public void setGrupos(ArrayList grupos) {
+    public void setGrupos(ArrayList<Grupo> grupos) {
         this.grupos = grupos;
     }
 
-    public void setRestricciones(ArrayList restricciones) {
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
@@ -128,15 +128,15 @@ public class Asignatura {
         return this.nivel;
     }
 
-    public ArrayList getSesiones() {
+    public ArrayList<Sesion> getSesiones() {
         return this.sesiones;
     }
 
-    public ArrayList getGrupos() {
+    public ArrayList<Grupo> getGrupos() {
         return this.grupos;
     }
 
-    public ArrayList getRestricciones() {
+    public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 

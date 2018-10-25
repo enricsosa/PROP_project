@@ -2,19 +2,17 @@ package domain;
 
 /** Imports **/
 
-import java.time.Duration;
-
 public class Sesion {
 
     /** Atributos **/
 
-    private Duration duracion;
+    private Integer duracion;
     private TipoClase tipo;
     private Asignatura asignatura;
 
     /** Constructoras **/
 
-    public Sesion(Duration duracion, TipoClase tipo, Asignatura asignatura) {
+    public Sesion(Integer duracion, TipoClase tipo, Asignatura asignatura) {
         this.duracion = duracion;
         this.tipo = tipo;
         this.asignatura = asignatura;
@@ -22,7 +20,7 @@ public class Sesion {
 
     /** Métodos públicos **/
 
-    public void setDuracion(Duration duracion) {
+    public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
 
@@ -36,7 +34,7 @@ public class Sesion {
 
     /** Consultoras **/
 
-    public Duration getDuracion() {
+    public Integer getDuracion() {
         return this.duracion;
     }
 

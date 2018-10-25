@@ -2,19 +2,17 @@ package domain;
 
 /** Imports **/
 
-import java.time.Clock;
-
 public class FranjaNivel extends Restriccion {
 
     /** Atributos **/
 
     private Nivel nivel;
-    private Clock horaIni;
-    private Clock horaFin;
+    private Integer horaIni;
+    private Integer horaFin;
 
     /** Constructoras **/
 
-    public FranjaNivel(Nivel nivel, Clock horaIni, Clock horaFin) {
+    public FranjaNivel(Nivel nivel, Integer horaIni, Integer horaFin) {
         this.nivel = nivel;
         this.horaIni = horaIni;
         this.horaFin = horaFin;
@@ -26,11 +24,11 @@ public class FranjaNivel extends Restriccion {
         this.nivel = nivel;
     }
 
-    public void setHoraIni(Clock horaIni) {
+    public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
-    public void setHoraFin(Clock horaFin) {
+    public void setHoraFin(Integer horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -40,11 +38,11 @@ public class FranjaNivel extends Restriccion {
         return this.nivel;
     }
 
-    public Clock getHoraIni() {
+    public Integer getHoraIni() {
         return this.horaIni;
     }
 
-    public Clock getHoraFin() {
+    public Integer getHoraFin() {
         return this.horaFin;
     }
 
