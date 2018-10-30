@@ -2,7 +2,7 @@ package domain;
 
 /** Imports **/
 
-import java.time.Clock;
+import java.util.ArrayList;
 
 public class Asignacion {
 
@@ -12,6 +12,7 @@ public class Asignacion {
     private Integer DiaSemana;
     private Aula aula;
     private Clase clase;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
@@ -20,6 +21,25 @@ public class Asignacion {
         this.DiaSemana = diaSemana;
         this.aula = aula;
         this.clase = clase;
+        this.restricciones = new ArrayList<Restriccion>();
+    }
+
+    public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase, ArrayList<Restriccion> restricciones) {
+        this.horaIni = horaIni;
+        this.DiaSemana = diaSemana;
+        this.aula = aula;
+        this.clase = clase;
+        this.restricciones = restricciones;
+    }
+
+    public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase, ArrayList<Restriccion> restriccionesAula, ArrayList<Restriccion> restriccionesClase) {
+        this.horaIni = horaIni;
+        this.DiaSemana = diaSemana;
+        this.aula = aula;
+        this.clase = clase;
+        this.restricciones = new ArrayList<Restriccion>();
+        this.restricciones.addAll(restriccionesAula);
+        this.restricciones.addAll(restriccionesClase);
     }
 
     /** Métodos públicos **/
@@ -38,6 +58,18 @@ public class Asignacion {
 
     public void setClase(Clase clase) {
         this.clase = clase;
+    }
+
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
+        this.restricciones = restricciones;
+    }
+
+    public void addRestriccion(Restriccion restriccion) {
+        this.restricciones.add(restriccion);
+    }
+
+    public void eliminarRestriccion(Integer posicion) {
+        this.restricciones.remove(posicion);
     }
 
     /** Consultoras **/
@@ -60,6 +92,10 @@ public class Asignacion {
 
     public Clase getClase() {
         return this.clase;
+    }
+
+    public ArrayList<Restriccion> getRestricciones() {
+        return this.restricciones;
     }
 
     /** Métodos redefinidos **/

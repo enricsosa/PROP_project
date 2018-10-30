@@ -44,7 +44,7 @@ public class CtrlHorario {
     }
 
     public void initOcupaciones() {
-        this.ocupaciones = new Ocupaciones[7][24];
+        this.ocupaciones = new Ocupaciones[7][25]; // [i][0] es la acumulada del dia.
         for (int i = 0; i < 7; ++i) {
             for (int j = 0; i < 24; ++j) {
                 this.ocupaciones[i][j] = new Ocupaciones();

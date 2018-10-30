@@ -66,7 +66,12 @@ public class Asignatura {
             for (Map.Entry<String, SubGrupo> entry2 : entry.getValue().getSubGrupos().entrySet()) {
                 for (int i = 0; i < this.sesiones.size(); ++i) {
                     if (entry2.getValue().getTipo() == this.sesiones.get(i).getTipo()) {
-                        clases.add(new Clase(entry2.getValue(), this.sesiones.get(i)));
+                        if (this.nivel != null) {
+                            clases.add(new Clase(entry2.getValue(), this.sesiones.get(i), this.restricciones, entry2.getValue().getGrupo().getRestricciones()));
+                        }
+                        else {
+                            clases.add(new Clase(entry2.getValue(), this.sesiones.get(i), this.nivel.getRestricciones(), this.restricciones, entry2.getValue().getGrupo().getRestricciones()));
+                        }
                     }
                 }
             }
