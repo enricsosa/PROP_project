@@ -25,6 +25,18 @@ public class CtrlHorario {
 
     /** Métodos públicos **/
 
+    public Horario generarHorario(String id) {
+        Horario horario = new Horario(id);
+        ArrayList<Asignacion> asignaciones = new ArrayList<Asignacion>();
+        Ocupaciones[][] ocupaciones = newOcupaciones();
+        ArrayList<Clase> clases = this.getAllClases();
+        return horario;
+    }
+
+    /*public returnSet generarAsignaciones(ArrayList<Asignacion> asignaciones, Asignacion asignacion, ArrayList<Clase> clases) {
+
+    }*/
+
     public void loadLimitacionesHorario() {
         Integer horaIni = 0;
         Integer horaFin = 24;
@@ -69,7 +81,7 @@ public class CtrlHorario {
         return asignaciones;
     }
 
-    static ArrayList<Asignacion> addAsignacion(ArrayList<Asignacion> oldAsignaciones, Asignacion asignacion) {
+    static ArrayList<Asignacion> copyAddAsignacion(ArrayList<Asignacion> oldAsignaciones, Asignacion asignacion) {
         ArrayList<Asignacion> asignaciones = new ArrayList<Asignacion>();
         for (int i = 0; i < oldAsignaciones.size(); ++i) {
             if (oldAsignaciones.get(i).getDiaSemana() >= asignacion.getDiaSemana() && oldAsignaciones.get(i).getHoraIni() >= asignacion.getHoraIni()) {
@@ -78,6 +90,14 @@ public class CtrlHorario {
             asignaciones.add(oldAsignaciones.get(i));
         }
         return asignaciones;
+    }
+
+    static ArrayList<Clase> copyRemoveClases (ArrayList<Clase> oldClases, int j) {
+        ArrayList<Clase> clases = new ArrayList<Clase>();
+        for (int i = 0; i < oldClases.size(); ++i) {
+            if (i != j) clases.add(oldClases.get(i));
+        }
+        return clases;
     }
 
     static ArrayList<Clase> copyClases (ArrayList<Clase> oldClases) {

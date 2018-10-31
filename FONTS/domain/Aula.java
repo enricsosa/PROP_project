@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 /** Imports **/
 
 public class Aula {
@@ -8,11 +10,11 @@ public class Aula {
 
     private String id;
     private Integer plazas;
-    private TipoClase[] tipos;
+    private ArrayList<TipoClase> tipos;
 
     /** Constructoras **/
 
-    public Aula(String id, Integer plazas, TipoClase[] tipos) {
+    public Aula(String id, Integer plazas, ArrayList<TipoClase> tipos) {
         this.id = id;
         this.plazas = plazas;
         this.tipos = tipos;
@@ -28,7 +30,7 @@ public class Aula {
         this.plazas = plazas;
     }
 
-    public void setTipos(TipoClase[] tipos) {
+    public void setTipos(ArrayList<TipoClase> tipos) {
         this.tipos = tipos;
     }
 
@@ -42,8 +44,29 @@ public class Aula {
         return this.plazas;
     }
 
-    public TipoClase[] getTipos() {
+    public ArrayList<TipoClase> getTipos() {
         return this.tipos;
+    }
+
+    public Boolean tieneTeoria() {
+        for (int i = 0; i < tipos.size(); ++i) {
+            if (tipos.get(i) == TipoClase.Teoria) return true;
+        }
+        return false;
+    }
+
+    public Boolean tieneLaboratorio() {
+        for (int i = 0; i < tipos.size(); ++i) {
+            if (tipos.get(i) == TipoClase.Laboratorio) return true;
+        }
+        return false;
+    }
+
+    public Boolean tieneProblemas() {
+        for (int i = 0; i < tipos.size(); ++i) {
+            if (tipos.get(i) == TipoClase.Problemas) return true;
+        }
+        return false;
     }
 
     /** Métodos redefinidos **/

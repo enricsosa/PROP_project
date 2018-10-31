@@ -5,6 +5,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class PlanEstudios {
 
@@ -117,6 +118,24 @@ public class PlanEstudios {
 
     public Map<String, Aula> getAulas() {
         return this.aulas;
+    }
+
+    public Map<String, Aula> getAulasTeoria() {
+        return this.aulas.entrySet().stream()
+                .filter(map -> map.getValue().tieneTeoria())
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+    }
+
+    public Map<String, Aula> getAulasLaboratorio() {
+        return this.aulas.entrySet().stream()
+                .filter(map -> map.getValue().tieneLaboratorio())
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+    }
+
+    public Map<String, Aula> getAulasProblemas() {
+        return this.aulas.entrySet().stream()
+                .filter(map -> map.getValue().tieneProblemas())
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
     public Aula getAula(String id) {

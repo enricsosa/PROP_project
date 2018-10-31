@@ -75,6 +75,10 @@ public class Clase {
         return this.sesion;
     }
 
+    public TipoClase getTipoSesion() {
+        return this.sesion.getTipo();
+    }
+
     /** Métodos redefinidos **/
 
 }
