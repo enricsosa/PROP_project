@@ -28,6 +28,14 @@ public class Ocupaciones {
         this.restricciones = new ArrayList<Restriccion>();
     }
 
+    public Ocupaciones(Ocupaciones oldOcupaciones) {
+        this.niveles = oldOcupaciones.getNiveles();
+        this.asignaturas = oldOcupaciones.getAsignaturas();
+        this.aulas = oldOcupaciones.getAulas();
+        this.subGrupos = oldOcupaciones.getSubGrupos();
+        this.restricciones = oldOcupaciones.getRestricciones();
+    }
+
     /** Metodos publicos **/
 
     public void setNiveles(Map<String, Nivel> niveles) {

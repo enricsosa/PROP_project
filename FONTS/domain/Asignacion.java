@@ -42,6 +42,14 @@ public class Asignacion {
         this.restricciones.addAll(restriccionesClase);
     }
 
+    public Asignacion(Asignacion oldAsignacion) {
+        this.horaIni = oldAsignacion.getHoraIni();
+        this.DiaSemana = oldAsignacion.getDiaSemana();
+        this.aula = oldAsignacion.getAula();
+        this.clase = oldAsignacion.getClase();
+        this.restricciones = oldAsignacion.getRestricciones();
+    }
+
     /** Métodos públicos **/
 
     public void setHoraIni(Integer horaIni) {

@@ -14,7 +14,6 @@ public class CtrlHorario {
     private PlanEstudios planEstudios;
     private ArrayList<Restriccion> restricciones;
     private LimitacionesHorario limitacionesHorario;
-    private Ocupaciones[][] ocupaciones;
 
     /** Constructoras **/
 
@@ -22,7 +21,6 @@ public class CtrlHorario {
         this.planEstudios = planEstudios;
         this.restricciones = restricciones;
         this.loadLimitacionesHorario();
-        this.initOcupaciones();
     }
 
     /** Métodos públicos **/
@@ -43,13 +41,51 @@ public class CtrlHorario {
         }
     }
 
-    public void initOcupaciones() {
-        this.ocupaciones = new Ocupaciones[7][25]; // [i][0] es la acumulada del dia.
+    static Ocupaciones[][] newOcupaciones() {
+        Ocupaciones[][] ocupaciones = new Ocupaciones[7][25]; // [i][0] es la acumulada del dia.
         for (int i = 0; i < 7; ++i) {
             for (int j = 0; i < 24; ++j) {
-                this.ocupaciones[i][j] = new Ocupaciones();
+                ocupaciones[i][j] = new Ocupaciones();
             }
         }
+        return ocupaciones;
+    }
+
+    static Ocupaciones[][] copyOcupaciones(Ocupaciones[][] oldOcupaciones) {
+        Ocupaciones[][] ocupaciones = new Ocupaciones[7][25]; // [i][0] es la acumulada del dia.
+        for (int i = 0; i < 7; ++i) {
+            for (int j = 0; i < 24; ++j) {
+                ocupaciones[i][j] = new Ocupaciones(oldOcupaciones[i][j]);
+            }
+        }
+        return ocupaciones;
+    }
+
+    static ArrayList<Asignacion> copyAsignaciones(ArrayList<Asignacion> oldAsignaciones) {
+        ArrayList<Asignacion> asignaciones = new ArrayList<Asignacion>();
+        for (int i = 0; i < oldAsignaciones.size(); ++i) {
+            asignaciones.add(oldAsignaciones.get(i));
+        }
+        return asignaciones;
+    }
+
+    static ArrayList<Asignacion> addAsignacion(ArrayList<Asignacion> oldAsignaciones, Asignacion asignacion) {
+        ArrayList<Asignacion> asignaciones = new ArrayList<Asignacion>();
+        for (int i = 0; i < oldAsignaciones.size(); ++i) {
+            if (oldAsignaciones.get(i).getDiaSemana() >= asignacion.getDiaSemana() && oldAsignaciones.get(i).getHoraIni() >= asignacion.getHoraIni()) {
+                asignaciones.add(asignacion);
+            }
+            asignaciones.add(oldAsignaciones.get(i));
+        }
+        return asignaciones;
+    }
+
+    static ArrayList<Clase> copyClases (ArrayList<Clase> oldClases) {
+        ArrayList<Clase> clases = new ArrayList<Clase>();
+        for (int i = 0; i < oldClases.size(); ++i) {
+            clases.add(oldClases.get(i));
+        }
+        return clases;
     }
 
     public ArrayList<Clase> getAllClases() {
@@ -68,10 +104,6 @@ public class CtrlHorario {
         this.limitacionesHorario = limitacionesHorario;
     }
 
-    public void setOcupaciones(Ocupaciones[][] ocupaciones) {
-        this.ocupaciones = ocupaciones;
-    }
-
     /** Consultoras **/
 
     public PlanEstudios getPlanEstudios() {
@@ -84,10 +116,6 @@ public class CtrlHorario {
 
     public LimitacionesHorario getLimitacionesHorario() {
         return limitacionesHorario;
-    }
-
-    public Ocupaciones[][] getOcupaciones() {
-        return ocupaciones;
     }
 
     /** Métodos redefinidos **/
