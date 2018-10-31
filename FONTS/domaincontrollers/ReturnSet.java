@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /** Imports **/
 
-public class returnSet {
+public class ReturnSet {
 
     /** Atributos **/
 
@@ -15,7 +15,7 @@ public class returnSet {
 
     /** Constructoras **/
 
-    public returnSet(Boolean validez, ArrayList<Asignacion> asignaciones) {
+    public ReturnSet(Boolean validez, ArrayList<Asignacion> asignaciones) {
         this.validez = validez;
         this.asignaciones = asignaciones;
     }

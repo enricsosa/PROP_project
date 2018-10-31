@@ -6,6 +6,8 @@ import domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
 
 public class CtrlHorario {
 
@@ -26,16 +28,45 @@ public class CtrlHorario {
     /** Métodos públicos **/
 
     public Horario generarHorario(String id) {
+
         Horario horario = new Horario(id);
         ArrayList<Asignacion> asignaciones = new ArrayList<Asignacion>();
         Ocupaciones[][] ocupaciones = newOcupaciones();
         ArrayList<Clase> clases = this.getAllClases();
+
+        for (int dia = 1; dia < 8; ++dia) {
+
+            if (this.limitacionesHorario.getDiasLibres()[dia - 1]) {
+
+                for (int horaIni = this.limitacionesHorario.getHoraIni(); horaIni < (this.limitacionesHorario.getHoraFin() - 1); ++horaIni) {
+
+                    for (int i = 0; i < clases.size(); ++i) {
+
+                        for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
+
+                            Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i), clases.get(i).getRestricciones());
+                            ReturnSet returnSet = this.generarAsignaciones(copyAsignaciones(asignaciones), asignacion, copyRemoveClases(clases, i), copyOcupaciones(ocupaciones));
+
+                            if (returnSet.getValidez()) {
+                                horario.setAssignaciones(returnSet.getAsignaciones());
+                                return horario;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
         return horario;
     }
 
-    /*public returnSet generarAsignaciones(ArrayList<Asignacion> asignaciones, Asignacion asignacion, ArrayList<Clase> clases) {
-
-    }*/
+    public ReturnSet generarAsignaciones(ArrayList<Asignacion> asignaciones, Asignacion asignacion, ArrayList<Clase> clases, Ocupaciones[][] ocupaciones) {
+        return new ReturnSet(true, new ArrayList<Asignacion>());
+    }
 
     public void loadLimitacionesHorario() {
         Integer horaIni = 0;
@@ -51,6 +82,12 @@ public class CtrlHorario {
                 this.limitacionesHorario.setHoraFin(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraFin());
             }
         }
+    }
+
+    public Map<String, Aula> getAulasAdecuadas(Clase clase) {
+        if (clase.getTipoSesion() == TipoClase.Teoria) return this.planEstudios.getAulasTeoria();
+        else if (clase.getTipoSesion() == TipoClase.Laboratorio) return this.planEstudios.getAulasLaboratorio();
+        else return this.planEstudios.getAulasProblemas();
     }
 
     static Ocupaciones[][] newOcupaciones() {
@@ -89,6 +126,7 @@ public class CtrlHorario {
             }
             asignaciones.add(oldAsignaciones.get(i));
         }
+        if (asignaciones.size() == 0) asignaciones.add(asignacion);
         return asignaciones;
     }
 

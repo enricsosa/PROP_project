@@ -32,16 +32,6 @@ public class Asignacion {
         this.restricciones = restricciones;
     }
 
-    public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase, ArrayList<Restriccion> restriccionesAula, ArrayList<Restriccion> restriccionesClase) {
-        this.horaIni = horaIni;
-        this.DiaSemana = diaSemana;
-        this.aula = aula;
-        this.clase = clase;
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(restriccionesAula);
-        this.restricciones.addAll(restriccionesClase);
-    }
-
     public Asignacion(Asignacion oldAsignacion) {
         this.horaIni = oldAsignacion.getHoraIni();
         this.DiaSemana = oldAsignacion.getDiaSemana();

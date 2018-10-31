@@ -75,6 +75,10 @@ public class Clase {
         return this.sesion;
     }
 
+    public ArrayList<Restriccion> getRestricciones() {
+        return restricciones;
+    }
+
     public TipoClase getTipoSesion() {
         return this.sesion.getTipo();
     }

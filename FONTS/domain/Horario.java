@@ -24,6 +24,10 @@ public class Horario {
         this.id = id;
     }
 
+    public void setAssignaciones(ArrayList<Asignacion> assignaciones) {
+        this.assignaciones = assignaciones;
+    }
+
     public void addAsignacion(Asignacion asignacion) {
         this.assignaciones.add(asignacion);
     }

@@ -14,4 +14,5 @@ Intervienen varios elementos:
   - (Configurable) Todas las Asignaciones donde intervienen Asignaturas que son Correquisito no pueden solaparse en el tiempo si intervienen Grupos con el mismo id.
   - (Configurable) Todas las Asignaciones donde intervienen Asignaturas de un mismo Nivel no pueden solaparse en el tiempo si intervienen Grupos con el mismo id.
   - (Implícita) Dos Asignaciones que se solapen en el tiempo no pueden estar asociadas a la misma Aula.
+  - (Implícita) No puede haber 2 o más Asignaciones el mismo dia que impliquen al mismo Grupo de una Asignatura.
 
