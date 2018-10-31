@@ -100,4 +100,30 @@ public class Asignacion {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        String t, tipo, hi, hf;
+        hi = "";
+        hf = "";
+        if (this.horaIni < 10) hi = "0";
+        if (this.getHoraFin() < 10) hf = "0";
+        if (this.clase.getSesion().getTipo() == TipoClase.Laboratorio) {
+            t = "L";
+            tipo = "Laboratorio";
+        }
+        else if (this.clase.getSesion().getTipo() == TipoClase.Teoria) {
+            t = "T";
+            tipo = "Teoria";
+        }
+        else {
+            t = "P";
+            tipo = "Problemas";
+        }
+        return this.clase.getSubGrupo().getGrupo().getAsignatura().getId() + " " + this.clase.getSubGrupo().getIdCompleta()
+                + " " + t + "\n    Asignatura: " + this.clase.getSubGrupo().getGrupo().getAsignatura().getNombre()
+                + "\n    Grupo: " + this.clase.getSubGrupo().getIdCompleta() + "\n    Aula: " + this.aula.getId()
+                + "Tipo: " + tipo + "\n    HoraIni: " + hi + this.horaIni.toString() + ":00\n    HoraFin: " + hf
+                + this.getHoraFin() + ":00\n";
+    }
+
 }
