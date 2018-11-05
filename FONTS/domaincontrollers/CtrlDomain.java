@@ -3,7 +3,7 @@ package domaincontrollers;
 import java.io.IOException;
 import java.util.*;
 
-import domain.PlanEstudios;
+import domain.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,59 +12,92 @@ import java.io.FileNotFoundException;
 
 import data.CtrlAsignaturasFile;
 import data.CtrlAulasFile;
-import domain.Asignatura;
-import domain.Aula;
-import domain.TipoClase;
+import data.CtrlPlanEstudiosFile;
 
 public class CtrlDomain {
 
     /** Atributos **/
     private CtrlAsignaturasFile controladorAsignaturas;
     private CtrlAulasFile controladorAulas;
+    private CtrlPlanEstudiosFile controladorPlanEstudios;
+
     private PlanEstudios planEstudios;
-    private Map<String, Asignatura> asignaturas;
-    private Map<String, Aula> aulas;
-    private ArrayList restricciones;
+    //private Map<String, Asignatura> asignaturas;
+    //private Map<String, Aula> aulas;
+
+    //private ArrayList<restricciones> restricciones;
 
     /** Constructoras **/
 
-    public CtrlDomain() {
+    public CtrlDomain()throws FileNotFoundException, IOException, ParseException  {
         this.initCtrlDomain();
     }
 
-    public void initCtrlDomain() {
+    public void initCtrlDomain() throws FileNotFoundException, IOException, ParseException {
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
         controladorAulas = CtrlAulasFile.getInstance();
-        asignaturas = new HashMap<String, Asignatura>();
-        aulas = new HashMap<String, Aula>();
+        controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
+        this.cargarPlanEstudios();
+        this.cargarAllAsignaturas();
+        this.cargarAllAulas();
     }
 
     /** Métodos públicos **/
 
-    public Map<String, Asignatura> cargarAllAsignaturas() throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> asignaturasData = controladorAsignaturas.getAll();
-        Map<String, Asignatura> list = new HashMap<String, Asignatura>();
+    public void cargarPlanEstudios() throws FileNotFoundException, IOException, ParseException {
+        JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudios();
+        planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
+        String niveles = planEstudiosData.get("niveles").toString();
 
-        for (JSONObject o : asignaturasData) {
-            Asignatura asignatura = new Asignatura((String)o.get("id"), (String)o.get("nombre"), this.planEstudios);
-            this.asignaturas.put(asignatura.getId(), asignatura);
-            list.put(asignatura.getId(), asignatura);
+        String s = new String();
+        for (int i = 0; i < niveles.length()-1; i+=5) {
+            s = niveles.substring(niveles.indexOf("\"", i) + 1, niveles.indexOf("\"", i) + 3);
+            Nivel nivel = new Nivel(s);
+            planEstudios.addNivel(nivel);
         }
-
-        return list;
     }
 
-    public Map<String, Aula> cargarAllAulas() throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> aulasData = controladorAulas.getAll();
-        Map<String, Aula> list = new HashMap<String, Aula>();
+    public void cargarAllAsignaturas() throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> asignaturasData = controladorAsignaturas.getAll();
 
-        for (JSONObject o : aulasData) {
-            Aula aula = new Aula((String)o.get("id"), (Integer)o.get("plazas"), (TipoClase[])o.get("tipoAula"));
-            this.aulas.put(aula.getId(), aula);
-            list.put(aula.getId(), aula);
+        for (JSONObject assig : asignaturasData) {
+            Asignatura asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios);
+
+            for (JSONObject ses : (List<JSONObject>)assig.get("sesiones")) {
+                Integer hora = new Integer(((Long)ses.get("horas")).intValue());
+                Sesion sesion = new Sesion(hora, TipoClase.valueOf((String)ses.get("TipoClase")), asignatura);
+                asignatura.addSesion(sesion);
+            }
+
+            for (JSONObject gr : (List<JSONObject>)assig.get("grupos")) {
+                Grupo grupo = new Grupo((String)gr.get("id"), asignatura);
+
+                for (JSONObject subgr : (List<JSONObject>)gr.get("subGrupos")) {
+                    Integer plazas = new Integer(((Long)subgr.get("plazas")).intValue());
+                    SubGrupo subg = new SubGrupo((String)subgr.get("id"), plazas, TipoClase.valueOf((String)subgr.get("tipo")), grupo);
+                    grupo.addSubGrupo(subg);
+                }
+                asignatura.addGrupo(grupo);
+            }
+            planEstudios.addAsignatura(asignatura);
+        }
+    }
+
+    public void cargarAllAulas() throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> aulasData = controladorAulas.getAll();
+
+        for (JSONObject au : aulasData) {
+            Integer plazas = new Integer(((Long)au.get("plazas")).intValue());
+            TipoClase[] tipos = new TipoClase[3];
+            int i = 0;
+            for (String tipo : (List<String>)au.get("tipos")) {
+                tipos[i] = TipoClase.valueOf(tipo);
+                ++i;
+            }
+            Aula aula = new Aula((String)au.get("id"), plazas, tipos);
+            planEstudios.addAula(aula);
         }
 
-        return list;
     }
 
     /** Consultoras **/

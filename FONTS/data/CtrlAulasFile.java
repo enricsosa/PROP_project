@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 public class CtrlAulasFile {
 
     /** Atributos **/
-    private static CtrlAulasFile infoAsignaturas;
+    private static CtrlAulasFile infoAulas;
 
     /** Constructoras **/
 
@@ -24,10 +24,10 @@ public class CtrlAulasFile {
     }
 
     public static CtrlAulasFile getInstance() {
-        if (infoAsignaturas == null)
-            infoAsignaturas = new CtrlAulasFile() {
+        if (infoAulas == null)
+            infoAulas = new CtrlAulasFile() {
             };
-        return infoAsignaturas;
+        return infoAulas;
     }
 
     /** Métodos públicos **/

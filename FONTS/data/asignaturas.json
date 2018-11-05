@@ -7,17 +7,14 @@
       "sesiones": [
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Teoria"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Laboratorio"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Problemas"
         }
       ],
@@ -181,17 +178,14 @@
       "sesiones": [
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Teoria"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Laboratorio"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Problemas"
         }
       ],
@@ -355,17 +349,14 @@
       "sesiones": [
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Teoria"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Laboratorio"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Problemas"
         }
       ],
@@ -529,17 +520,14 @@
       "sesiones": [
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Teoria"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Laboratorio"
         },
         {
           "horas": 2,
-          "minutos": 0,
           "TipoClase": "Problemas"
         }
       ],
