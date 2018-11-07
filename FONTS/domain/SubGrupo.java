@@ -60,6 +60,10 @@ public class SubGrupo {
         return this.grupo;
     }
 
+    public Asignatura getAsignatura() {
+        return this.grupo.getAsignatura();
+    }
+
     /** Métodos redefinidos **/
 
 }

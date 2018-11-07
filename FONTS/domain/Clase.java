@@ -79,8 +79,20 @@ public class Clase {
         return restricciones;
     }
 
+    public int getPlazas() {
+        return this.subGrupo.getPlazas();
+    }
+
+    public Grupo getGrupo() {
+        return this.subGrupo.getGrupo();
+    }
+
     public TipoClase getTipoSesion() {
         return this.sesion.getTipo();
+    }
+
+    public Asignatura getAsignatura() {
+        return this.subGrupo.getAsignatura();
     }
 
     /** Métodos redefinidos **/

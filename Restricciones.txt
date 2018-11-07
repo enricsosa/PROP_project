@@ -1,18 +1,17 @@
 Restricciones
 
 Interviene 1 elemento:
-  - (Implícita) Una Asignacion no puede estar asociada a una Aula con un número de plazas menor que el número de plazas de la Clase a la que está asociada.
-  - (Implícita) Una Clase no puede estar asociada a un SubGrupo y una Sesion de diferente TipoClase.
-  - (Implícita) Una Asignacion no puede estar asociada a una Clase de TipoClase diferente a los TipoClase de un Aula.
+  Done - (Implícita) Una Asignacion no puede estar asociada a una Aula con un número de plazas menor que el número de plazas de la Clase a la que está asociada.
+  Done - (Implícita) Una Clase no puede estar asociada a un SubGrupo y una Sesion de diferente TipoClase.
+  Done - (Implícita) Una Asignacion no puede estar asociada a una Clase de TipoClase diferente a los TipoClase de un Aula.
   - (Configurable) Toda Asignacion donde interviene una Asignatura de cierto Nivel debe restringirse a una franja horaria.
   - (Configurable) Toda Asignacion donde interviene una Asignatura debe restringirse a una franja horaria.
-  - (Configurable) Toda Asignacion debe restringirse a una franja horaria.
-  - (Configurable) Ninguna Asignacion debe puede asignarse a cierto día de la semana.
+  Done - (Configurable) Toda Asignacion debe restringirse a una franja horaria.
+  Done - (Configurable) Ninguna Asignacion debe puede asignarse a cierto día de la semana.
 
 Intervienen varios elementos:
-  - (Implícita) Todas las Asignaciones asociadas a Clases de SubGrupos de un mismo Grupo no pueden solaparse en el tiempo.
+  Done - (Implícita) Dos Asignaciones que se solapen en el tiempo no pueden estar asociadas a la misma Aula.
+  Done - (Implícita) No puede haber 2 o más Asignaciones el mismo dia que impliquen al mismo Grupo de una Asignatura con Subgrupos de diferente tipo.
   - (Configurable) Todas las Asignaciones donde intervienen Asignaturas que son Correquisito no pueden solaparse en el tiempo si intervienen Grupos con el mismo id.
   - (Configurable) Todas las Asignaciones donde intervienen Asignaturas de un mismo Nivel no pueden solaparse en el tiempo si intervienen Grupos con el mismo id.
-  - (Implícita) Dos Asignaciones que se solapen en el tiempo no pueden estar asociadas a la misma Aula.
-  - (Implícita) No puede haber 2 o más Asignaciones el mismo dia que impliquen al mismo Grupo de una Asignatura.
 

@@ -1,5 +1,7 @@
 package domain;
 
+import domaincontrollers.Ocupaciones;
+
 /** Imports **/
 
 public abstract class Restriccion {
@@ -15,6 +17,8 @@ public abstract class Restriccion {
     /** Consultoras **/
 
     public abstract TipoRestriccion getTipoRestriccion();
+
+    public abstract Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones);
 
     /** Métodos redefinidos **/
 

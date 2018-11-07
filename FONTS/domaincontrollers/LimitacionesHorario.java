@@ -14,6 +14,13 @@ public class LimitacionesHorario {
 
     /** Constructoras **/
 
+    public LimitacionesHorario() {
+        this.diasLibres = new Boolean[7];
+        Arrays.fill(this.diasLibres, Boolean.FALSE);
+        this.horaIni = 0;
+        this.horaFin = 24;
+    }
+
     public LimitacionesHorario(Boolean[] diasLibres, Integer horaIni, Integer horaFin) {
         this.diasLibres = diasLibres;
         this.horaIni = horaIni;
@@ -42,6 +49,10 @@ public class LimitacionesHorario {
 
     public Boolean[] getDiasLibres() {
         return diasLibres;
+    }
+
+    public Boolean getDiaLibre(int dia) {
+        return this.diasLibres[dia - 1];
     }
 
     public Integer getHoraIni() {

@@ -2,6 +2,8 @@ package domain;
 
 /** Imports **/
 
+import domaincontrollers.Ocupaciones;
+
 import java.util.ArrayList;
 
 public class Asignacion {
@@ -70,6 +72,17 @@ public class Asignacion {
         this.restricciones.remove(posicion);
     }
 
+    public Boolean comprovarRestricciones(Ocupaciones ocupaciones) {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (!(this.getRestriccion(i).comprovarRestriccion(this, ocupaciones))) return false;
+        }
+        return true;
+    }
+
+    public Boolean noCabeSubGrupo() {
+        return (this.clase.getPlazas() > this.aula.getPlazas());
+    }
+
     /** Consultoras **/
 
     public Integer getHoraIni() {
@@ -88,12 +101,28 @@ public class Asignacion {
         return this.aula;
     }
 
+    public Grupo getGrupo() {
+        return this.clase.getGrupo();
+    }
+
+    public SubGrupo getSubGrupo() {
+        return this.clase.getSubGrupo();
+    }
+
     public Clase getClase() {
         return this.clase;
     }
 
     public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
+    }
+
+    public Restriccion getRestriccion(int i) {
+        return this.restricciones.get(i);
+    }
+
+    public Asignatura getAsignatura() {
+        return this.clase.getAsignatura();
     }
 
     /** Métodos redefinidos **/
