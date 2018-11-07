@@ -88,16 +88,21 @@ public class CtrlDomain {
 
         for (JSONObject au : aulasData) {
             Integer plazas = new Integer(((Long)au.get("plazas")).intValue());
-            TipoClase[] tipos = new TipoClase[3];
+            ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
             int i = 0;
             for (String tipo : (List<String>)au.get("tipos")) {
-                tipos[i] = TipoClase.valueOf(tipo);
+                tipos.add(TipoClase.valueOf(tipo));
                 ++i;
             }
             Aula aula = new Aula((String)au.get("id"), plazas, tipos);
             planEstudios.addAula(aula);
         }
 
+    }
+
+    public CtrlHorario getCtrlHorario() {
+
+        return null;
     }
 
     /** Consultoras **/
