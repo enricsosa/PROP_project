@@ -2,8 +2,6 @@ package domain;
 
 /** Imports **/
 
-import java.util.ArrayList;
-
 public class Horario {
 
     /** Atributos **/

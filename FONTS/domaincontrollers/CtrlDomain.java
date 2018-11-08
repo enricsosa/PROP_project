@@ -25,7 +25,7 @@ public class CtrlDomain {
     //private Map<String, Asignatura> asignaturas;
     //private Map<String, Aula> aulas;
 
-    //private ArrayList<restricciones> restricciones;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 

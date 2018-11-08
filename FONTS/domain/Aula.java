@@ -1,8 +1,8 @@
 package domain;
 
-import java.util.ArrayList;
-
 /** Imports **/
+
+import java.util.ArrayList;
 
 public class Aula {
 

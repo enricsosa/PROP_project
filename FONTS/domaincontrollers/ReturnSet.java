@@ -1,10 +1,7 @@
 package domaincontrollers;
 
-import domain.Asignacion;
 import domain.Horario;
 import domain.Ocupaciones;
-
-import java.util.ArrayList;
 
 /** Imports **/
 
@@ -17,6 +14,10 @@ public class ReturnSet {
     private Horario horario;
 
     /** Constructoras **/
+
+    public ReturnSet(Boolean validez) {
+        this.validez = validez;
+    }
 
     public ReturnSet(Boolean validez, Ocupaciones ocupaciones) {
         this.validez = validez;
