@@ -1,7 +1,5 @@
 package domain;
 
-import domaincontrollers.Ocupaciones;
-
 /** Imports **/
 
 public class Prerrequisito extends Restriccion {

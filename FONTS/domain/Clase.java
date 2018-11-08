@@ -18,29 +18,9 @@ public class Clase {
         this.subGrupo = subGrupo;
         this.sesion = sesion;
         this.restricciones = new ArrayList<Restriccion>();
-    }
-
-    public Clase(SubGrupo subGrupo, Sesion sesion, ArrayList<Restriccion> restricciones) {
-        this.subGrupo = subGrupo;
-        this.sesion = sesion;
-        this.restricciones = restricciones;
-    }
-
-    public Clase(SubGrupo subGrupo, Sesion sesion, ArrayList<Restriccion> restriccionesAsignatura, ArrayList<Restriccion> restriccionesGrupo) {
-        this.subGrupo = subGrupo;
-        this.sesion = sesion;
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(restriccionesAsignatura);
-        this.restricciones.addAll(restriccionesGrupo);
-    }
-
-    public Clase(SubGrupo subGrupo, Sesion sesion, ArrayList<Restriccion> restriccionesNivel, ArrayList<Restriccion> restriccionesAsignatura, ArrayList<Restriccion> restriccionesGrupo) {
-        this.subGrupo = subGrupo;
-        this.sesion = sesion;
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(restriccionesNivel);
-        this.restricciones.addAll(restriccionesAsignatura);
-        this.restricciones.addAll(restriccionesGrupo);
+        this.restricciones.addAll(subGrupo.getGrupo().getRestricciones());
+        this.restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
+        if (subGrupo.getAsignatura().tieneNivel()) this.restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
     }
 
     /** Métodos públicos **/

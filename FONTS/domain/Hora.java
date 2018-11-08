@@ -1,15 +1,12 @@
-package domaincontrollers;
+package domain;
 
 /** Imports **/
 
-import domain.*;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Dia {
+public class Hora {
 
     /** Atributos **/
 
@@ -18,39 +15,36 @@ public class Dia {
     private Map<String, Aula> aulas;
     private Map<String, Grupo> grupos;
     private Map<String, SubGrupo> subGrupos;
+    private Map<String, Asignacion> asignaciones;
     private ArrayList<Restriccion> restricciones;
-    private Hora[] horas;
 
     /** Constructoras **/
 
-    public Dia() {
+    public Hora() {
         this.niveles = new HashMap<String, Nivel>();
         this.asignaturas = new HashMap<String, Asignatura>();
         this.aulas = new HashMap<String, Aula>();
         this.grupos = new HashMap<String, Grupo>();
         this.subGrupos = new HashMap<String, SubGrupo>();
+        this.asignaciones = new HashMap<String, Asignacion>();
         this.restricciones = new ArrayList<Restriccion>();
-        this.horas = new Hora[24];
-        Arrays.fill(this.horas, new Hora());
     }
 
-    public Dia(Dia oldDia) {
+    public Hora(Hora oldHora) {
         this.niveles = new HashMap<String, Nivel>();
-        this.niveles.putAll(oldDia.niveles);
+        this.niveles.putAll(oldHora.niveles);
         this.asignaturas = new HashMap<String, Asignatura>();
-        this.asignaturas.putAll(oldDia.asignaturas);
+        this.asignaturas.putAll(oldHora.asignaturas);
         this.aulas = new HashMap<String, Aula>();
-        this.aulas.putAll(oldDia.aulas);
+        this.aulas.putAll(oldHora.aulas);
         this.grupos = new HashMap<String, Grupo>();
-        this.grupos.putAll(oldDia.grupos);
+        this.grupos.putAll(oldHora.grupos);
         this.subGrupos = new HashMap<String, SubGrupo>();
-        this.subGrupos.putAll(oldDia.subGrupos);
+        this.subGrupos.putAll(oldHora.subGrupos);
+        this.asignaciones = new HashMap<String, Asignacion>();
+        this.asignaciones.putAll(oldHora.asignaciones);
         this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(oldDia.restricciones);
-        this.horas = new Hora[24];
-        for (int i = 0; i < 24; ++i) {
-            this.horas[i] = new Hora(oldDia.getHora(i));
-        }
+        this.restricciones.addAll(oldHora.restricciones);
     }
 
     /** Metodos publicos **/
@@ -75,6 +69,10 @@ public class Dia {
         this.subGrupos = subGrupos;
     }
 
+    public void setAsignaciones(Map<String, Asignacion> asignaciones) {
+        this.asignaciones = asignaciones;
+    }
+
     public void addNivel(Nivel nivel) {
         this.niveles.putIfAbsent(nivel.getNombre(), nivel);
     }
@@ -88,23 +86,23 @@ public class Dia {
     }
 
     public void addAsignatura(Asignatura asignatura) {
-        this.asignaturas.putIfAbsent(asignatura.getNombre(), asignatura);
+        this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
     }
 
     public void replaceAsignatura(Asignatura asignatura) {
-        this.asignaturas.replace(asignatura.getNombre(), asignatura);
+        this.asignaturas.replace(asignatura.getId(), asignatura);
     }
 
-    public void eliminarAsignatura(String nombre) {
-        this.asignaturas.remove(nombre);
+    public void eliminarAsignatura(String id) {
+        this.asignaturas.remove(id);
     }
 
     public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getNombre(), subGrupo);
+        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId(), subGrupo);
     }
 
     public void replaceSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getNombre(), subGrupo);
+        this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId(), subGrupo);
     }
 
     public void eliminarSubGrupo(String key) {
@@ -112,15 +110,27 @@ public class Dia {
     }
 
     public void addGrupo(Grupo grupo) {
-        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getNombre(), grupo);
+        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getId(), grupo);
     }
 
     public void replaceGrupo(Grupo grupo) {
-        this.grupos.replace(grupo.getId() + grupo.getAsignatura().getNombre(), grupo);
+        this.grupos.replace(grupo.getId() + grupo.getAsignatura().getId(), grupo);
     }
 
     public void eliminarGrupo(String key) {
         this.grupos.remove(key);
+    }
+
+    public void addAsignacion(Asignacion asignacion) {
+        this.asignaciones.putIfAbsent(asignacion.generateKey(), asignacion);
+    }
+
+    public void replaceAsignacion(Asignacion asignacion) {
+        this.asignaciones.replace(asignacion.generateKey(), asignacion);
+    }
+
+    public void eliminarAsignacion(String key) {
+        this.asignaciones.remove(key);
     }
 
     public void addAula(Aula aula) {
@@ -151,14 +161,6 @@ public class Dia {
         this.restricciones.remove(posicion);
     }
 
-    public void setHoras(Hora[] horas) {
-        this.horas = horas;
-    }
-
-    public void setHora(Hora hora, int i) {
-        this.horas[i] = hora;
-    }
-
     /** Consultoras **/
 
     public Map<String, Nivel> getNiveles() {
@@ -182,7 +184,7 @@ public class Dia {
     }
 
     public Boolean tieneAsignatura(Asignatura asignatura) {
-        return (this.asignaturas.get(asignatura.getNombre()) != null);
+        return (this.asignaturas.get(asignatura.getId()) != null);
     }
 
     public Map<String, Aula> getAulas() {
@@ -206,7 +208,11 @@ public class Dia {
     }
 
     public Boolean tieneGrupo(Grupo grupo) {
-        return (this.grupos.get(grupo.getId() + grupo.getAsignatura().getNombre()) != null);
+        return (this.grupos.get(grupo.getId() + grupo.getAsignatura().getId()) != null);
+    }
+
+    public Boolean tieneGrupo(Asignatura asignatura, Grupo grupo) {
+        return (this.grupos.get(grupo.getId() + asignatura.getId()) != null);
     }
 
     public Map<String, SubGrupo> getSubGrupos() {
@@ -218,7 +224,19 @@ public class Dia {
     }
 
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getNombre()) != null);
+        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId()) != null);
+    }
+
+    public Map<String, Asignacion> getAsignaciones() {
+        return this.asignaciones;
+    }
+
+    public Asignacion getAsignacion(String key) {
+        return this.asignaciones.get(key);
+    }
+
+    public Boolean tieneAsignacion(Asignacion asignacion) {
+        return (this.asignaciones.get(asignacion.generateKey()) != null);
     }
 
     public ArrayList<Restriccion> getRestricciones() {
@@ -227,14 +245,6 @@ public class Dia {
 
     public Restriccion getRestriccion(int i) {
         return this.restricciones.get(i);
-    }
-
-    public Hora[] getHoras() {
-        return horas;
-    }
-
-    public Hora getHora(int hora) {
-        return this.horas[hora];
     }
 
     /** Métodos redefinidos **/

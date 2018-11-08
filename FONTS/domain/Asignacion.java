@@ -2,8 +2,6 @@ package domain;
 
 /** Imports **/
 
-import domaincontrollers.Ocupaciones;
-
 import java.util.ArrayList;
 
 public class Asignacion {
@@ -24,14 +22,7 @@ public class Asignacion {
         this.aula = aula;
         this.clase = clase;
         this.restricciones = new ArrayList<Restriccion>();
-    }
-
-    public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase, ArrayList<Restriccion> restricciones) {
-        this.horaIni = horaIni;
-        this.DiaSemana = diaSemana;
-        this.aula = aula;
-        this.clase = clase;
-        this.restricciones = restricciones;
+        this.restricciones.addAll(clase.getRestricciones());
     }
 
     public Asignacion(Asignacion oldAsignacion) {
@@ -39,13 +30,18 @@ public class Asignacion {
         this.DiaSemana = oldAsignacion.getDiaSemana();
         this.aula = oldAsignacion.getAula();
         this.clase = oldAsignacion.getClase();
-        this.restricciones = oldAsignacion.getRestricciones();
+        this.restricciones = new ArrayList<Restriccion>();
+        this.restricciones.addAll(oldAsignacion.getRestricciones());
     }
 
     /** Métodos públicos **/
 
     public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
+    }
+
+    public String generateKey() {
+        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId());
     }
 
     public void setDiaSemana(Integer diaSemana) {
@@ -66,6 +62,10 @@ public class Asignacion {
 
     public void addRestriccion(Restriccion restriccion) {
         this.restricciones.add(restriccion);
+    }
+
+    public void addRestricciones(ArrayList<Restriccion> restricciones) {
+        this.restricciones.addAll(restricciones);
     }
 
     public void eliminarRestriccion(Integer posicion) {

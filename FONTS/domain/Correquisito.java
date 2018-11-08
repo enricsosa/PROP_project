@@ -1,10 +1,8 @@
 package domain;
 
-/** Imports **/
+import java.util.Map;
 
-import domain.Asignatura;
-import domain.TipoRestriccion;
-import domaincontrollers.Ocupaciones;
+/** Imports **/
 
 public class Correquisito extends Restriccion {
 
@@ -64,6 +62,9 @@ public class Correquisito extends Restriccion {
         Asignatura target;
         if (this.getIndex(asignacion.getAsignatura()) == 1) target = asignatura2;
         else target = asignatura1;
-
+        for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
+            if (ocupaciones.getDia(asignacion.getDiaSemana()).getHora(hora).tieneGrupo(target, asignacion.getGrupo())) return false;
+        }
+        return true;
     }
 }

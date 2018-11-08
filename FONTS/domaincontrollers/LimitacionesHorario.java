@@ -51,7 +51,7 @@ public class LimitacionesHorario {
         return diasLibres;
     }
 
-    public Boolean getDiaLibre(int dia) {
+    public Boolean esDiaLibre(int dia) {
         return this.diasLibres[dia - 1];
     }
 

@@ -29,15 +29,15 @@ public class Nivel {
     }
 
     public void addAsignatura(Asignatura asignatura) {
-        this.asignaturas.putIfAbsent(asignatura.getNombre(), asignatura);
+        this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
     }
 
     public void replaceAsignatura(Asignatura asignatura) {
-        this.asignaturas.replace(asignatura.getNombre(), asignatura);
+        this.asignaturas.replace(asignatura.getId(), asignatura);
     }
 
-    public void eliminarAsignatura(String nombre) {
-        this.asignaturas.remove(nombre);
+    public void eliminarAsignatura(String id) {
+        this.asignaturas.remove(id);
     }
 
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
@@ -64,6 +64,14 @@ public class Nivel {
 
     public Asignatura getAsignatura(String nom) {
         return this.asignaturas.get(nom);
+    }
+
+    public Boolean tieneAsignatura(Asignatura asignatura) {
+        return (this.asignaturas.get(asignatura.getId()) != null);
+    }
+
+    public Boolean tieneAsignatura(String id) {
+        return (this.asignaturas.get(id) != null);
     }
 
     public ArrayList<Restriccion> getRestricciones() {

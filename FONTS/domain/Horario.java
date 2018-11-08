@@ -9,13 +9,23 @@ public class Horario {
     /** Atributos **/
 
     private String id;
-    private ArrayList<Asignacion> assignaciones;
+    private Ocupaciones ocupaciones;
 
     /** Constructoras **/
 
     public Horario(String id) {
         this.id = id;
-        this.assignaciones = new ArrayList<Asignacion>();
+        this.ocupaciones = new Ocupaciones();
+    }
+
+    public Horario(String id, Ocupaciones ocupaciones) {
+        this.id = id;
+        this.ocupaciones = ocupaciones;
+    }
+
+    public Horario(Horario oldHorario) {
+        this.id = oldHorario.getId();
+        this.ocupaciones = new Ocupaciones(oldHorario.getOcupaciones());
     }
 
     /** Métodos públicos **/
@@ -24,16 +34,8 @@ public class Horario {
         this.id = id;
     }
 
-    public void setAssignaciones(ArrayList<Asignacion> assignaciones) {
-        this.assignaciones = assignaciones;
-    }
-
-    public void addAsignacion(Asignacion asignacion) {
-        this.assignaciones.add(asignacion);
-    }
-
-    public void removeAsignacion(Integer posicion) {
-        this.assignaciones.remove(posicion);
+    public void setOcupaciones(Ocupaciones ocupaciones) {
+        this.ocupaciones = ocupaciones;
     }
 
     /** Consultoras **/
@@ -42,8 +44,16 @@ public class Horario {
         return this.id;
     }
 
-    public ArrayList<Asignacion> getAssignaciones() {
-        return this.assignaciones;
+    public Ocupaciones getOcupaciones() {
+        return this.ocupaciones;
+    }
+
+    public Dia getDia(int dia) {
+        return this.ocupaciones.getDia(dia);
+    }
+
+    public Hora getHora(int dia, int hora) {
+        return this.ocupaciones.getHora(dia, hora);
     }
 
     /** Métodos redefinidos **/

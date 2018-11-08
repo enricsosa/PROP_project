@@ -1,13 +1,7 @@
-package domaincontrollers;
+package domain;
 
 /** Imports **/
 
-import domain.*;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Arrays;
 
 public class Ocupaciones {
@@ -56,6 +50,7 @@ public class Ocupaciones {
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addGrupo(asignacion.getGrupo());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addSubGrupo(asignacion.getSubGrupo());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addRestricciones(asignacion.getRestricciones());
+            this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignacion(asignacion);
         }
     }
 
@@ -67,6 +62,10 @@ public class Ocupaciones {
 
     public Dia getDia(int dia) {
         return this.dias[dia - 1];
+    }
+
+    public Hora getHora(int dia, int hora) {
+        return this.dias[dia -1].getHora(hora);
     }
 
     /** Métodos redefinidos **/

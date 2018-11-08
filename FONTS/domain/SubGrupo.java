@@ -64,6 +64,14 @@ public class SubGrupo {
         return this.grupo.getAsignatura();
     }
 
+    public Boolean tieneNivel() {
+        return this.getAsignatura().tieneNivel();
+    }
+
+    public Nivel getNivel() {
+        return this.getAsignatura().getNivel();
+    }
+
     /** Métodos redefinidos **/
 
 }

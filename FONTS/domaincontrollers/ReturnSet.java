@@ -2,6 +2,7 @@ package domaincontrollers;
 
 import domain.Asignacion;
 import domain.Horario;
+import domain.Ocupaciones;
 
 import java.util.ArrayList;
 
@@ -12,20 +13,20 @@ public class ReturnSet {
     /** Atributos **/
 
     private Boolean validez;
-    private ArrayList<Asignacion> asignaciones;
+    private Ocupaciones ocupaciones;
     private Horario horario;
 
     /** Constructoras **/
 
-    public ReturnSet(Boolean validez, ArrayList<Asignacion> asignaciones) {
+    public ReturnSet(Boolean validez, Ocupaciones ocupaciones) {
         this.validez = validez;
-        this.asignaciones = asignaciones;
+        this.ocupaciones = ocupaciones;
         this.horario = null;
     }
 
     public ReturnSet(Boolean validez, Horario horario) {
         this.validez = validez;
-        this.asignaciones = null;
+        this.ocupaciones = null;
         this.horario = horario;
     }
 
@@ -37,8 +38,8 @@ public class ReturnSet {
         return this.validez;
     }
 
-    public ArrayList<Asignacion> getAsignaciones() {
-        return this.asignaciones;
+    public Ocupaciones getOcupaciones() {
+        return this.ocupaciones;
     }
 
     public Horario getHorario() {

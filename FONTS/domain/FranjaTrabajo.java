@@ -42,4 +42,9 @@ public class FranjaTrabajo extends Restriccion {
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.FranjaTrabajo;
     }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
+    }
 }
