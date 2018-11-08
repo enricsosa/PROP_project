@@ -133,6 +133,14 @@ public class Asignacion {
         return this.getAsignatura().getNivel();
     }
 
+    public String toStringResumido() {
+        String tipo;
+        if (this.clase.getTipoSesion() == TipoClase.Teoria) tipo = "T";
+        else if (this.clase.getTipoSesion() == TipoClase.Laboratorio) tipo = "L";
+        else tipo = "P";
+        return (this.getAsignatura().getId() + " " + this.getSubGrupo().getIdCompleta() + " " + tipo + " [" + this.getAula().getId() + "]");
+    }
+
     /** Métodos redefinidos **/
 
     @Override

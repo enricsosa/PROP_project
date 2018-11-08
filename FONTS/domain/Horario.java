@@ -56,4 +56,9 @@ public class Horario {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        return "Horario: " + this.id + "\n" + this.ocupaciones.toString();
+    }
+
 }

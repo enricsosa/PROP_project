@@ -2,6 +2,7 @@ package domain;
 
 /** Imports **/
 
+import java.util.Map;
 import java.util.Arrays;
 
 public class Ocupaciones {
@@ -70,4 +71,49 @@ public class Ocupaciones {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        String text = "";
+        for (int dia = 1; dia <= 7; ++dia) {
+            if (this.getDia(dia).getAsignaturas().size() > 0) {
+                text += (spacer() + "\n" + spacer() + "\n" + getNombreDia(dia) + "\n");
+                for (int hora = 0; hora < 24; ++hora) {
+                    if (this.getHora(dia, hora).getAsignaciones().size() > 0) {
+                        text += (spacer() + "\n" + getHoraCompleta(hora) + "-" + getHoraCompleta(hora + 1) + "\n" + lspacer() + "\n");
+                        for (Map.Entry<String, Asignacion> entry : this.getHora(dia, hora).getAsignaciones().entrySet()) {
+                            text += (entry.getValue().toString() + "\n");
+                        }
+                    }
+                }
+            }
+        }
+        text += spacer();
+        return text;
+    }
+
+    /** Otros **/
+
+    static String getNombreDia(int dia) {
+        if (dia == 1) return "Lunes";
+        else if (dia == 2) return "Martes";
+        else if (dia == 3) return "Miercoles";
+        else if (dia == 4) return "Jueves";
+        else if (dia == 5) return "Viernes";
+        else if (dia == 6) return "Sábado";
+        else return "Domingo";
+    }
+
+    static String getHoraCompleta(int hora) {
+        if (hora == 24) return "00:00";
+        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
+        return Integer.toString(hora) + ":00";
+    }
+
+    static String spacer() {
+        return "----------------------------------------------------------------------------------------------";
+    }
+
+    static String lspacer() {
+        return "..............................................................................................";
+    }
 }
