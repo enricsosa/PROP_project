@@ -1,5 +1,7 @@
 package domain;
 
+import domaincontrollers.Ocupaciones;
+
 /** Imports **/
 
 public class DiaLibre extends Restriccion {
@@ -31,6 +33,11 @@ public class DiaLibre extends Restriccion {
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.DiaLibre;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        return (asignacion.getDiaSemana() != this.dia);
     }
 
 }

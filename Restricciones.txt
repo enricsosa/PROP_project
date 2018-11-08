@@ -4,8 +4,8 @@ Interviene 1 elemento:
   Done - (Implícita) Una Asignacion no puede estar asociada a una Aula con un número de plazas menor que el número de plazas de la Clase a la que está asociada.
   Done - (Implícita) Una Clase no puede estar asociada a un SubGrupo y una Sesion de diferente TipoClase.
   Done - (Implícita) Una Asignacion no puede estar asociada a una Clase de TipoClase diferente a los TipoClase de un Aula.
-  - (Configurable) Toda Asignacion donde interviene una Asignatura de cierto Nivel debe restringirse a una franja horaria.
-  - (Configurable) Toda Asignacion donde interviene una Asignatura debe restringirse a una franja horaria.
+  Done - (Configurable) Toda Asignacion donde interviene una Asignatura de cierto Nivel debe restringirse a una franja horaria.
+  Done - (Configurable) Toda Asignacion donde interviene una Asignatura debe restringirse a una franja horaria.
   Done - (Configurable) Toda Asignacion debe restringirse a una franja horaria.
   Done - (Configurable) Ninguna Asignacion debe puede asignarse a cierto día de la semana.
 

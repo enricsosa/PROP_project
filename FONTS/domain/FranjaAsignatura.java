@@ -2,6 +2,8 @@ package domain;
 
 /** Imports **/
 
+import domaincontrollers.Ocupaciones;
+
 import java.time.Clock;
 
 public class FranjaAsignatura extends Restriccion {
@@ -53,5 +55,11 @@ public class FranjaAsignatura extends Restriccion {
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.FranjaAsignatura;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        if (asignacion.getAsignatura() != asignatura) return true;
+        return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
     }
 }

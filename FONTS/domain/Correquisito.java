@@ -4,6 +4,7 @@ package domain;
 
 import domain.Asignatura;
 import domain.TipoRestriccion;
+import domaincontrollers.Ocupaciones;
 
 public class Correquisito extends Restriccion {
 
@@ -29,6 +30,17 @@ public class Correquisito extends Restriccion {
         this.asignatura2 = asignatura2;
     }
 
+    public Boolean tieneAsignatura(Asignatura asignatura) {
+        if (asignatura == asignatura1) return true;
+        if (asignatura == asignatura2) return true;
+        return false;
+    }
+
+    public int getIndex(Asignatura asignatura) {
+        if (asignatura == asignatura1) return 1;
+        return 2;
+    }
+
     /** Consultoras **/
 
     public Asignatura getAsignatura1() {
@@ -44,5 +56,14 @@ public class Correquisito extends Restriccion {
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.Correquisito;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        if (!(this.tieneAsignatura(asignacion.getAsignatura()))) return true;
+        Asignatura target;
+        if (this.getIndex(asignacion.getAsignatura()) == 1) target = asignatura2;
+        else target = asignatura1;
+
     }
 }

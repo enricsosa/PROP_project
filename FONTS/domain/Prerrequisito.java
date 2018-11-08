@@ -1,5 +1,7 @@
 package domain;
 
+import domaincontrollers.Ocupaciones;
+
 /** Imports **/
 
 public class Prerrequisito extends Restriccion {
@@ -41,5 +43,10 @@ public class Prerrequisito extends Restriccion {
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.Prerrequisito;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        return true;
     }
 }

@@ -103,6 +103,14 @@ public class Grupo {
         return this.restricciones;
     }
 
+    public Boolean tieneNivel() {
+        return this.asignatura.tieneNivel();
+    }
+
+    public Nivel getNivel() {
+        return this.asignatura.getNivel();
+    }
+
     /** Métodos redefinidos **/
 
     @Override

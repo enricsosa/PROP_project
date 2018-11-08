@@ -1,5 +1,7 @@
 package domain;
 
+import domaincontrollers.Ocupaciones;
+
 /** Imports **/
 
 public class FranjaNivel extends Restriccion {
@@ -51,5 +53,12 @@ public class FranjaNivel extends Restriccion {
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.FranjaNivel;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
+        if (!(asignacion.tieneNivel())) return true;
+        if (!(asignacion.getNivel() != this.nivel)) return true;
+        return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
     }
 }
