@@ -169,6 +169,10 @@ public class Asignatura {
         return this.restricciones;
     }
 
+    public Boolean tieneNivel() {
+        return (this.nivel != null);
+    }
+
     /** Métodos redefinidos **/
 
     @Override

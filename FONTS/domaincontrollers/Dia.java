@@ -143,6 +143,10 @@ public class Dia {
         this.restricciones.add(restriccion);
     }
 
+    public void addRestricciones(ArrayList<Restriccion> restricciones) {
+        this.restricciones.addAll(restricciones);
+    }
+
     public void eliminarRestriccion(Integer posicion) {
         this.restricciones.remove(posicion);
     }
