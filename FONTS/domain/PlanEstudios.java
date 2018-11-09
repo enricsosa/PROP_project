@@ -120,21 +120,21 @@ public class PlanEstudios {
         return this.aulas;
     }
 
-    public Map<String, Aula> getAulasTeoria() {
+    public Map<String, Aula> getAulasTeoria(int plazas) {
         return this.aulas.entrySet().stream()
-                .filter(map -> map.getValue().tieneTeoria())
+                .filter(map -> (map.getValue().tieneTeoria() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
-    public Map<String, Aula> getAulasLaboratorio() {
+    public Map<String, Aula> getAulasLaboratorio(int plazas) {
         return this.aulas.entrySet().stream()
-                .filter(map -> map.getValue().tieneLaboratorio())
+                .filter(map -> (map.getValue().tieneLaboratorio() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
-    public Map<String, Aula> getAulasProblemas() {
+    public Map<String, Aula> getAulasProblemas(int plazas) {
         return this.aulas.entrySet().stream()
-                .filter(map -> map.getValue().tieneProblemas())
+                .filter(map -> (map.getValue().tieneProblemas() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 

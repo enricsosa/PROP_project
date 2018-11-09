@@ -78,6 +78,10 @@ public class Nivel {
         return this.restricciones;
     }
 
+    public Restriccion getRestriccion(int i) {
+        return this.restricciones.get(i);
+    }
+
     /** Métodos redefinidos **/
 
     @Override

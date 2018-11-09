@@ -100,9 +100,10 @@ public class CtrlDomain {
 
     }
 
-    public CtrlHorario getCtrlHorario() {
-
-        return null;
+    public void generarHorario(String id) {
+        CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios, this.restricciones);
+        ReturnSet horario = ctrlHorario.generarHorario(id);
+        if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
     }
 
     /** Consultoras **/

@@ -12,6 +12,8 @@ public class ReturnSet {
     private Boolean validez;
     private Ocupaciones ocupaciones;
     private Horario horario;
+    private int horaIni;
+    private int horaFin;
 
     /** Constructoras **/
 
@@ -31,6 +33,11 @@ public class ReturnSet {
         this.horario = horario;
     }
 
+    public ReturnSet(int horaIni, int horaFin) {
+        this.horaIni = horaIni;
+        this.horaFin = horaFin;
+    }
+
     /** Metodos públicos **/
 
     /** Consultoras **/
@@ -45,6 +52,14 @@ public class ReturnSet {
 
     public Horario getHorario() {
         return this.horario;
+    }
+
+    public int getHoraIni() {
+        return this.horaIni;
+    }
+
+    public int getHoraFin() {
+        return this.horaFin;
     }
 
     /** Métodos redefinidos **/
