@@ -25,7 +25,7 @@ public class CtrlDomain {
 
     private PlanEstudios planEstudios;
 
-    //private ArrayList<restricciones> restricciones;
+    private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
@@ -113,6 +113,7 @@ public class CtrlDomain {
             Integer diaN = new Integer(dia.intValue());
             DiaLibre diaLib = new DiaLibre(diaN);
             planEstudios.addRestriccion(diaLib);
+            this.addRestriccion(diaLib);
         }
 
         //R: franjaTrabajo
@@ -121,12 +122,14 @@ public class CtrlDomain {
         Integer horaFin = new Integer(((Long)franjaTrabajo.get("horaFin")).intValue());
         FranjaTrabajo ft = new FranjaTrabajo(horaIni, horaFin);
         planEstudios.addRestriccion(ft);
+        this.addRestriccion(ft);
 
         //R: nivelHora
         JSONObject nivelHora = restriccionesData.get(2);
         for (String nivel : (List<String>)nivelHora.get("niveles")) {
             NivelHora nh = new NivelHora(planEstudios.getNivel(nivel));
-            planEstudios.addRestriccion(nh);
+            planEstudios.getNivel(nivel).addRestriccion(nh);
+            this.addRestriccion(nh);
         }
 
         //R: correquisitos
@@ -137,7 +140,7 @@ public class CtrlDomain {
             Correquisito co = new Correquisito(planEstudios.getAsignatura(a1), planEstudios.getAsignatura(a2));
             planEstudios.getAsignatura(a1).addRestriccion(co);
             planEstudios.getAsignatura(a2).addRestriccion(co);
-
+            this.addRestriccion(co);
         }
 
         //R: prerrequisitos
@@ -147,6 +150,7 @@ public class CtrlDomain {
             String a2 = (String)as.get("idAsigPre");
             Prerrequisito pre = new Prerrequisito(planEstudios.getAsignatura(a1), planEstudios.getAsignatura(a2));
             planEstudios.getAsignatura(a1).addRestriccion(pre);
+            this.addRestriccion(pre);
         }
 
         //R: franjaAsignatura
@@ -157,6 +161,7 @@ public class CtrlDomain {
             String idAs = (String)as.get("idAsig");
             FranjaAsignatura fa = new FranjaAsignatura(planEstudios.getAsignatura(idAs), hi, hf);
             planEstudios.getAsignatura(idAs).addRestriccion(fa);
+            this.addRestriccion(fa);
         }
 
         //R: franjaNivel
@@ -165,14 +170,20 @@ public class CtrlDomain {
             Integer hi = new Integer(((Long)ni.get("horaIni")).intValue());
             Integer hf = new Integer(((Long)ni.get("horaFin")).intValue());
             String idNi = (String)ni.get("idNivel");
-            FranjaNivel fa = new FranjaNivel(planEstudios.getNivel(idNi), hi, hf);
-            planEstudios.getAsignatura(idNi).addRestriccion(fa);
+            FranjaNivel fn = new FranjaNivel(planEstudios.getNivel(idNi), hi, hf);
+            planEstudios.getNivel(idNi).addRestriccion(fn);
+            this.addRestriccion(fn);
         }
     }
 
-    public CtrlHorario getCtrlHorario() {
+    public void generarHorario(String id) {
+        CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios, this.restricciones);
+        ReturnSet horario = ctrlHorario.generarHorario(id);
+        if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
+    }
 
-        return null;
+    public void addRestriccion(Restriccion restriccion) {
+        this.restricciones.add(restriccion);
     }
 
     /** Consultoras **/
