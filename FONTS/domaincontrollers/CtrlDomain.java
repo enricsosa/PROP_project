@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import data.CtrlAsignaturasFile;
 import data.CtrlAulasFile;
 import data.CtrlPlanEstudiosFile;
+import data.CtrlRestriccionesFile;
 
 public class CtrlDomain {
 
@@ -20,12 +21,11 @@ public class CtrlDomain {
     private CtrlAsignaturasFile controladorAsignaturas;
     private CtrlAulasFile controladorAulas;
     private CtrlPlanEstudiosFile controladorPlanEstudios;
+    private CtrlRestriccionesFile controladorRestricciones;
 
     private PlanEstudios planEstudios;
-    //private Map<String, Asignatura> asignaturas;
-    //private Map<String, Aula> aulas;
 
-    private ArrayList<Restriccion> restricciones;
+    //private ArrayList<restricciones> restricciones;
 
     /** Constructoras **/
 
@@ -37,9 +37,11 @@ public class CtrlDomain {
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
         controladorAulas = CtrlAulasFile.getInstance();
         controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
+        controladorRestricciones = CtrlRestriccionesFile.getInstance();
         this.cargarPlanEstudios();
         this.cargarAllAsignaturas();
         this.cargarAllAulas();
+        this.cargarAllRestricciones();
     }
 
     /** Métodos públicos **/
@@ -49,7 +51,7 @@ public class CtrlDomain {
         planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
         String niveles = planEstudiosData.get("niveles").toString();
 
-        String s = new String();
+        String s;
         for (int i = 0; i < niveles.length()-1; i+=5) {
             s = niveles.substring(niveles.indexOf("\"", i) + 1, niveles.indexOf("\"", i) + 3);
             Nivel nivel = new Nivel(s);
@@ -98,6 +100,74 @@ public class CtrlDomain {
             planEstudios.addAula(aula);
         }
 
+    }
+
+    public void cargarAllRestricciones() throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> restriccionesData = controladorRestricciones.getAll();
+        System.out.println(restriccionesData);
+        System.out.print("\n");
+
+        //R: diaLibre
+        JSONObject diaLibre = restriccionesData.get(0);
+        for (Long dia : (List<Long>)diaLibre.get("dias")) {
+            Integer diaN = new Integer(dia.intValue());
+            DiaLibre diaLib = new DiaLibre(diaN);
+            planEstudios.addRestriccion(diaLib);
+        }
+
+        //R: franjaTrabajo
+        JSONObject franjaTrabajo = restriccionesData.get(1);
+        Integer horaIni = new Integer(((Long)franjaTrabajo.get("horaIni")).intValue());
+        Integer horaFin = new Integer(((Long)franjaTrabajo.get("horaFin")).intValue());
+        FranjaTrabajo ft = new FranjaTrabajo(horaIni, horaFin);
+        planEstudios.addRestriccion(ft);
+
+        //R: nivelHora
+        JSONObject nivelHora = restriccionesData.get(2);
+        for (String nivel : (List<String>)nivelHora.get("niveles")) {
+            NivelHora nh = new NivelHora(planEstudios.getNivel(nivel));
+            planEstudios.addRestriccion(nh);
+        }
+
+        //R: correquisitos
+        JSONObject correquisitos = restriccionesData.get(3);
+        for (JSONObject as : (List<JSONObject>)correquisitos.get("parAsigs")) {
+            String a1 = (String)as.get("idAsig1");
+            String a2 = (String)as.get("idAsig2");
+            Correquisito co = new Correquisito(planEstudios.getAsignatura(a1), planEstudios.getAsignatura(a2));
+            planEstudios.getAsignatura(a1).addRestriccion(co);
+            planEstudios.getAsignatura(a2).addRestriccion(co);
+
+        }
+
+        //R: prerrequisitos
+        JSONObject prerrequisitos = restriccionesData.get(4);
+        for (JSONObject as : (List<JSONObject>)prerrequisitos.get("parAsigs")) {
+            String a1 = (String)as.get("idAsig");
+            String a2 = (String)as.get("idAsigPre");
+            Prerrequisito pre = new Prerrequisito(planEstudios.getAsignatura(a1), planEstudios.getAsignatura(a2));
+            planEstudios.getAsignatura(a1).addRestriccion(pre);
+        }
+
+        //R: franjaAsignatura
+        JSONObject franjaAsignatura = restriccionesData.get(5);
+        for (JSONObject as : (List<JSONObject>)franjaAsignatura.get("asignaturas")) {
+            Integer hi = new Integer(((Long)as.get("horaIni")).intValue());
+            Integer hf = new Integer(((Long)as.get("horaFin")).intValue());
+            String idAs = (String)as.get("idAsig");
+            FranjaAsignatura fa = new FranjaAsignatura(planEstudios.getAsignatura(idAs), hi, hf);
+            planEstudios.getAsignatura(idAs).addRestriccion(fa);
+        }
+
+        //R: franjaNivel
+        JSONObject franjaNivel = restriccionesData.get(6);
+        for (JSONObject ni : (List<JSONObject>)franjaNivel.get("niveles")) {
+            Integer hi = new Integer(((Long)ni.get("horaIni")).intValue());
+            Integer hf = new Integer(((Long)ni.get("horaFin")).intValue());
+            String idNi = (String)ni.get("idNivel");
+            FranjaNivel fa = new FranjaNivel(planEstudios.getNivel(idNi), hi, hf);
+            planEstudios.getAsignatura(idNi).addRestriccion(fa);
+        }
     }
 
     public CtrlHorario getCtrlHorario() {
