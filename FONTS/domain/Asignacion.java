@@ -133,18 +133,7 @@ public class Asignacion {
         return this.getAsignatura().getNivel();
     }
 
-    public String toStringResumido() {
-        String tipo;
-        if (this.clase.getTipoSesion() == TipoClase.Teoria) tipo = "T";
-        else if (this.clase.getTipoSesion() == TipoClase.Laboratorio) tipo = "L";
-        else tipo = "P";
-        return (this.getAsignatura().getId() + " " + this.getSubGrupo().getIdCompleta() + " " + tipo + " [" + this.getAula().getId() + "]");
-    }
-
-    /** Métodos redefinidos **/
-
-    @Override
-    public String toString() {
+    public String toStringCompleto() {
         String t, tipo, hi, hf;
         hi = "";
         hf = "";
@@ -167,6 +156,19 @@ public class Asignacion {
                 + "\n    Grupo: " + this.clase.getSubGrupo().getIdCompleta() + "\n    Aula: " + this.aula.getId()
                 + "Tipo: " + tipo + "\n    HoraIni: " + hi + this.horaIni.toString() + ":00\n    HoraFin: " + hf
                 + this.getHoraFin() + ":00\n";
+    }
+
+    /** Métodos redefinidos **/
+
+    @Override
+    public String toString() {
+        String tipo;
+        String nivel = "";
+        if (this.tieneNivel()) nivel = " (" + this.getNivel().getNombre() + ")";
+        if (this.clase.getTipoSesion() == TipoClase.Teoria) tipo = "T";
+        else if (this.clase.getTipoSesion() == TipoClase.Laboratorio) tipo = "L";
+        else tipo = "P";
+        return (this.getAsignatura().getId() + nivel + " " + this.getSubGrupo().getIdCompleta() + " " + tipo + " [" + this.getAula().getId() + "]");
     }
 
 }

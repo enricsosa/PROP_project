@@ -22,9 +22,7 @@ public class CtrlDomain {
     private CtrlAulasFile controladorAulas;
     private CtrlPlanEstudiosFile controladorPlanEstudios;
     private CtrlRestriccionesFile controladorRestricciones;
-
     private PlanEstudios planEstudios;
-
     private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
@@ -103,6 +101,8 @@ public class CtrlDomain {
     }
 
     public void cargarAllRestricciones() throws FileNotFoundException, IOException, ParseException {
+        this.restricciones = new ArrayList<Restriccion>();
+
         List<JSONObject> restriccionesData = controladorRestricciones.getAll();
         System.out.println(restriccionesData);
         System.out.print("\n");
@@ -182,8 +182,12 @@ public class CtrlDomain {
         if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
     }
 
+    public CtrlHorario getCtrlHorario() {
+        return new CtrlHorario(this.planEstudios, this.restricciones);
+    }
+
     public void addRestriccion(Restriccion restriccion) {
-        this.restricciones.add(restriccion);
+        restricciones.add(restriccion);
     }
 
     /** Consultoras **/
