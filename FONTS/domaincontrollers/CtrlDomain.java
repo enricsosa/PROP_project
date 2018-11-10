@@ -15,6 +15,8 @@ import data.CtrlAulasFile;
 import data.CtrlPlanEstudiosFile;
 import data.CtrlRestriccionesFile;
 
+import static java.lang.System.out;
+
 public class CtrlDomain {
 
     /** Atributos **/
@@ -40,6 +42,7 @@ public class CtrlDomain {
         this.cargarAllAsignaturas();
         this.cargarAllAulas();
         this.cargarAllRestricciones();
+        out.println(this.planEstudios.toString());
     }
 
     /** Métodos públicos **/
@@ -61,7 +64,15 @@ public class CtrlDomain {
         List<JSONObject> asignaturasData = controladorAsignaturas.getAll();
 
         for (JSONObject assig : asignaturasData) {
-            Asignatura asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios);
+            Asignatura asignatura;
+
+            if (((String)assig.get("nivel")).length() != 0) {
+                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios, this.planEstudios.getNivel((String)assig.get("nivel")));
+                this.planEstudios.getNivel((String)assig.get("nivel")).addAsignatura(asignatura);
+            }
+            else {
+                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios);
+            }
 
             for (JSONObject ses : (List<JSONObject>)assig.get("sesiones")) {
                 Integer hora = new Integer(((Long)ses.get("horas")).intValue());

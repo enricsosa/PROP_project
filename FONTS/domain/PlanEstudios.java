@@ -164,11 +164,11 @@ public class PlanEstudios {
     public String toString() {
         String text = "Plan Estudios: " + this.nombre + "\n-Niveles:";
         for (Map.Entry<String, Nivel> entry : this.niveles.entrySet()) text += ("\n-- " + entry.getValue().toString());
-        text += "\n-Asignaturas:";
+        text += "\n\n-Asignaturas:";
         for (Map.Entry<String, Asignatura> entry : this.asignaturas.entrySet()) text += ("\n-- " + entry.getValue().toString());
-        text += "\n-Aulas:";
+        text += "\n\n-Aulas:";
         for (Map.Entry<String, Aula> entry : this.aulas.entrySet()) text += ("\n-- " + entry.getValue().toString());
-        text += "\n-Restricciones:";
+        text += "\n\n-Restricciones:";
         for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
         if (this.tieneHorario()) text += "\n-" + this.horarioGeneral.toString();
         return text;
