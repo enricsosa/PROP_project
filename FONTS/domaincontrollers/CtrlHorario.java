@@ -58,9 +58,13 @@ public class CtrlHorario {
     public ReturnSet generarAsignaciones(Asignacion asignacion, ArrayList<Clase> clases, Ocupaciones ocupaciones) {
         //out.println("Provando Asignacion:");
         //out.println(asignacion.toString() + "\n");
-        if (!(this.comprovarRestricciones(asignacion, ocupaciones))) return new ReturnSet(false);
+        //out.println(clases.size());
+        if (!(this.comprovarRestricciones(asignacion, ocupaciones))) {
+            //out.println("asignacion no valida");
+            return new ReturnSet(false);
+        }
         ocupaciones.addAsignacion(asignacion);
-        //out.println("asignacion valida");
+        out.println("asignacion valida");
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i));
@@ -127,8 +131,11 @@ public class CtrlHorario {
     public Boolean comprovarGrupoDia(Clase clase, int dia, Ocupaciones ocupaciones) {
         if (!(ocupaciones.getDia(dia).tieneGrupo(clase.getGrupo()))) return false;
         for (Map.Entry<String, SubGrupo> entry : clase.getGrupo().getSubGrupos().entrySet()) {
-            if (ocupaciones.getDia(dia).tieneSubGrupo(entry.getValue())
-                && (ocupaciones.getDia(dia).getSubGrupo(entry.getValue()).getTipo() != entry.getValue().getTipo())) return true;
+            if (clase.getSubGrupo() != entry.getValue()) {
+                if (ocupaciones.getDia(dia).tieneSubGrupo(entry.getValue())) {
+                    if (entry.getValue().getTipo() != clase.getSubGrupo().getTipo()) return true;
+                }
+            }
         }
         return false;
     }
