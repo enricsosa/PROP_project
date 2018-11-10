@@ -45,7 +45,7 @@ public class CtrlDomain {
         this.cargarAllAulas("Default");
         this.cargarAllRestricciones("Default");
         this.generarHorario("Horario 1");
-        //out.println(this.planEstudios.toString());
+        out.println(this.planEstudios.toString());
         controladorEscenarios = CtrlEscenariosDir.getInstance();
     }
 

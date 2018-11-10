@@ -37,8 +37,6 @@ public class NivelHora extends Restriccion {
 
     @Override
     public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        if (!(asignacion.tieneNivel())) return true;
-        if (asignacion.getNivel() != this.nivel) return true;
         for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
             for (Map.Entry<String, Grupo> entry : ocupaciones.getDia(asignacion.getDiaSemana()).getHora(hora).getGrupos().entrySet()) {
                 if (entry.getValue().getId() == asignacion.getGrupo().getId()) {

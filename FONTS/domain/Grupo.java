@@ -40,15 +40,15 @@ public class Grupo {
     }
 
     public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getId(), subGrupo);
+        this.subGrupos.putIfAbsent(subGrupo.getKey(), subGrupo);
     }
 
     public void replaceSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.replace(subGrupo.getId(), subGrupo);
+        this.subGrupos.replace(subGrupo.getKey(), subGrupo);
     }
 
-    public void eliminarSubGrupo(String id) {
-        this.subGrupos.remove(id);
+    public void eliminarSubGrupo(String key) {
+        this.subGrupos.remove(key);
     }
 
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
@@ -95,8 +95,12 @@ public class Grupo {
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
-    public SubGrupo getSubGrupo(String id) {
-        return this.subGrupos.get(id);
+    public SubGrupo getSubGrupo(String key) {
+        return this.subGrupos.get(key);
+    }
+
+    public SubGrupo getSubGrupo(SubGrupo subGrupo) {
+        return this.subGrupos.get(subGrupo.getKey());
     }
 
     public ArrayList<Restriccion> getRestricciones() {

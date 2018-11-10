@@ -38,7 +38,7 @@ public class CtrlHorario {
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i));
             for (int dia = 1; dia <= 7; ++dia) {
-                if(this.limitacionesHorario.esDiaLibre(dia)) {
+                if(!(this.limitacionesHorario.esDiaLibre(dia))) {
                     for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
                             Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
@@ -64,20 +64,40 @@ public class CtrlHorario {
             return new ReturnSet(false);
         }
         ocupaciones.addAsignacion(asignacion);
-        out.println("asignacion valida");
+        //out.println("asignacion valida");
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
+
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i));
-            for (int dia = 1; dia <= 7; ++dia) {
-                if ((!(this.limitacionesHorario.esDiaLibre(dia)))
-                        && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
-                        && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
-                    for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
-                        for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
-                            if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), ocupaciones))) {
-                                Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
-                                ReturnSet returnSet = this.generarAsignaciones(nextAsignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
-                                if (returnSet.getValidez()) return returnSet;
+            if ((clases.size() % 2) == 0) {
+                for (int dia = 1; dia <= 7; ++dia) {
+                    if ((!(this.limitacionesHorario.esDiaLibre(dia)))
+                            && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
+                            && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
+                        for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
+                            for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
+                                if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), ocupaciones))) {
+                                    Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
+                                    ReturnSet returnSet = this.generarAsignaciones(nextAsignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
+                                    if (returnSet.getValidez()) return returnSet;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                for (int dia = 7; dia >= 0; --dia) {
+                    if ((!(this.limitacionesHorario.esDiaLibre(dia)))
+                            && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
+                            && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
+                        for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
+                            for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
+                                if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), ocupaciones))) {
+                                    Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
+                                    ReturnSet returnSet = this.generarAsignaciones(nextAsignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
+                                    if (returnSet.getValidez()) return returnSet;
+                                }
                             }
                         }
                     }
@@ -158,6 +178,7 @@ public class CtrlHorario {
                 this.limitacionesHorario.setHoraFin(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraFin());
             }
         }
+        out.println(limitacionesHorario.toString());
     }
 
     public Map<String, Aula> getAulasAdecuadas(Clase clase) {

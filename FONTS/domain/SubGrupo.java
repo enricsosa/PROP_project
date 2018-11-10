@@ -2,6 +2,8 @@ package domain;
 
 /** Imports **/
 
+import static java.lang.System.out;
+
 public class SubGrupo {
 
     /** Atributos **/
@@ -18,6 +20,8 @@ public class SubGrupo {
         this.plazas = plazas;
         this.tipo = tipo;
         this.grupo = grupo;
+        //out.println(tipo);
+        //out.println(this.toString());
     }
 
     /** Métodos públicos **/
@@ -42,6 +46,10 @@ public class SubGrupo {
 
     public String getId() {
         return this.id;
+    }
+
+    public String getKey() {
+        return this.id + this.getTipo().toString();
     }
 
     public String getIdCompleta() {

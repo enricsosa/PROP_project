@@ -64,4 +64,33 @@ public class LimitacionesHorario {
     }
 
     /** Métodos redefinidos **/
+
+    @Override
+    public String toString() {
+        String text = "Limitaciones Horario:\n-Hora Ini: " + this.horaIni.toString() +"\n-Hora Fin: " + getHoraCompleta(this.horaFin)
+                    + "\nDias Libres: ";
+        for (int i = 0; i < 7; ++i) {
+            if (this.diasLibres[i]) {
+                text += getNombreDia(i + 1);
+                if (i != 6) text += ", ";
+            }
+        }
+        return text;
+    }
+
+    static String getNombreDia(int dia) {
+        if (dia == 1) return "Lunes";
+        else if (dia == 2) return "Martes";
+        else if (dia == 3) return "Miercoles";
+        else if (dia == 4) return "Jueves";
+        else if (dia == 5) return "Viernes";
+        else if (dia == 6) return "Sábado";
+        else return "Domingo";
+    }
+
+    static String getHoraCompleta(int hora) {
+        if (hora == 24) return "00:00";
+        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
+        return Integer.toString(hora) + ":00";
+    }
 }

@@ -64,7 +64,8 @@ public class CtrlPresentacionGenHorario {
                 CD.cargarEscenario(Escenarios.get(op-1));
                 System.out.print("\nDatos cargados\n");
                 System.out.print("Generando horario...");
-                //CDh.generarHorario("Horario#" + idHorario.toString());
+                CDh.generarHorario("Horario#" + idHorario.toString());
+
                 ++idHorario;
             }
         }
