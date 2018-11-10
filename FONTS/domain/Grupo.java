@@ -115,7 +115,12 @@ public class Grupo {
 
     @Override
     public String toString() {
-        return this.id;
+        String text = "Grupo: " + this.id + "\n-Asignatura: " + this.asignatura.getId();
+        text += "\n-SubGrupos:";
+        for (Map.Entry<String, SubGrupo> entry : this.subGrupos.entrySet()) text += ("\n-- " + entry.getValue().toString());
+        text += "\n-Restricciones:";
+        for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
+        return text;
     }
 
 }

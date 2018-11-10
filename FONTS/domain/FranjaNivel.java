@@ -59,4 +59,16 @@ public class FranjaNivel extends Restriccion {
         if ((asignacion.getNivel() != this.nivel)) return true;
         return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
     }
+
+    @Override
+    public String toString() {
+        return ("Franja Nivel:\n-Nivel: " + this.nivel.getNombre() + "\n-Hora inicio: " + getHoraCompleta(this.horaIni)
+                + "\n-Hora fin: " + getHoraCompleta(this.horaFin));
+    }
+
+    static String getHoraCompleta(int hora) {
+        if (hora == 24) return "00:00";
+        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
+        return Integer.toString(hora) + ":00";
+    }
 }

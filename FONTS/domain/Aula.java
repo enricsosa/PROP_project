@@ -73,7 +73,18 @@ public class Aula {
 
     @Override
     public String toString() {
-        return id;
+        String text = ("Aula: " + this.id + "\n-Plazas: " + this.plazas.toString() + "\n-Tipos:");
+        for (int i = 0; i < this.tipos.size(); ++i) {
+            text += (" " + strTipo(tipos.get(i)));
+            if (i != (this.tipos.size() - 1)) text += ",";
+        }
+        return text;
+    }
+
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
     }
 
 

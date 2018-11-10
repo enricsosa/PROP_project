@@ -67,4 +67,9 @@ public class Correquisito extends Restriccion {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return ("Correquisito:\n- " + this.asignatura1.getId() + "\n- " + this.asignatura2.getId());
+    }
 }

@@ -172,7 +172,14 @@ public class Asignatura {
 
     @Override
     public String toString() {
-        return nombre;
+        String text = "Asignatura: " + this.id + "\n-Nombre: " + this.nombre;
+        if (this.tieneNivel()) text += "\n-Nivel: " + this.nivel.getNombre() + "\n-Sesiones:";
+        for (int i = 0; i < this.sesiones.size(); ++i) text += ("\n-- " + this.sesiones.get(i).toString());
+        text += "\n-Grupos:";
+        for (Map.Entry<String, Grupo> entry : this.grupos.entrySet()) text += ("\n-- " + entry.getValue().toString());
+        text += "\n-Restricciones:";
+        for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
+        return text;
     }
 
 }

@@ -51,4 +51,9 @@ public class NivelHora extends Restriccion {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Nivel hora: " + this.nivel.getNombre();
+    }
+
 }

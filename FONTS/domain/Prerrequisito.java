@@ -47,4 +47,9 @@ public class Prerrequisito extends Restriccion {
     public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return ("Prerequisito:\n-Asignatura: " + this.asignatura.getId() + "\n-Prerrequisito: " + this.prerrequisito.getId());
+    }
 }

@@ -89,4 +89,10 @@ public class Clase {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        return ("Clase:\nAsignatura: " + this.getAsignatura().getId() + "\n-Grupo: " + this.getGrupo().getId() + "\n-SubGrupo: "
+                + this.getSubGrupo().getId() + "\n- " + this.sesion.toString());
+    }
+
 }

@@ -48,4 +48,22 @@ public class Sesion {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        return "Sesion:\n-Asignatura: " + this.asignatura.getId() + "\n-Tipo: " + strTipo(this.tipo) + "\n-Duracion: "
+                + getHoraCompleta(this.duracion);
+    }
+
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
+    }
+
+    static String getHoraCompleta(int hora) {
+        if (hora == 24) return "00:00";
+        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
+        return Integer.toString(hora) + ":00";
+    }
+
 }

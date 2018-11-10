@@ -146,6 +146,10 @@ public class PlanEstudios {
         return this.horarioGeneral;
     }
 
+    public Boolean tieneHorario() {
+        return this.horarioGeneral != null;
+    }
+
     public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
@@ -158,7 +162,16 @@ public class PlanEstudios {
 
     @Override
     public String toString() {
-        return nombre;
+        String text = "Plan Estudios: " + this.nombre + "\n-Niveles:";
+        for (Map.Entry<String, Nivel> entry : this.niveles.entrySet()) text += ("\n-- " + entry.getValue().toString());
+        text += "\n-Asignaturas:";
+        for (Map.Entry<String, Asignatura> entry : this.asignaturas.entrySet()) text += ("\n-- " + entry.getValue().toString());
+        text += "\n-Aulas:";
+        for (Map.Entry<String, Aula> entry : this.aulas.entrySet()) text += ("\n-- " + entry.getValue().toString());
+        text += "\n-Restricciones:";
+        for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
+        if (this.tieneHorario()) text += "\n-" + this.horarioGeneral.toString();
+        return text;
     }
 
 }

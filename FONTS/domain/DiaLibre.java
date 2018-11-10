@@ -38,4 +38,19 @@ public class DiaLibre extends Restriccion {
         return (asignacion.getDiaSemana() != this.dia);
     }
 
+    @Override
+    public String toString() {
+        return "Dia Libre: " + getNombreDia(this.dia);
+    }
+
+    static String getNombreDia(int dia) {
+        if (dia == 1) return "Lunes";
+        else if (dia == 2) return "Martes";
+        else if (dia == 3) return "Miercoles";
+        else if (dia == 4) return "Jueves";
+        else if (dia == 5) return "Viernes";
+        else if (dia == 6) return "Sábado";
+        else return "Domingo";
+    }
+
 }

@@ -86,7 +86,12 @@ public class Nivel {
 
     @Override
     public String toString() {
-        return nombre;
+        String text = "Nivel: " + this.nombre;
+        text += "\n-Asignaturas:";
+        for (Map.Entry<String, Asignatura> entry : this.asignaturas.entrySet()) text += ("\n-- " + entry.getValue().getId());
+        text += "\n-Restricciones:";
+        for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
+        return text;
     }
 
 

@@ -74,4 +74,16 @@ public class SubGrupo {
 
     /** Métodos redefinidos **/
 
+    @Override
+    public String toString() {
+        return "Subgrupo: " + this.id + "\n-Asignatura: " + this.getAsignatura().getId() + "\n-Grupo: " + this.grupo.getId()
+                + "\n-Tipo: " + strTipo(this.tipo);
+    }
+
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
+    }
+
 }
