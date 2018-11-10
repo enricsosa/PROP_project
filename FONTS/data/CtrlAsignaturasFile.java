@@ -48,6 +48,20 @@ public class CtrlAsignaturasFile {
         return asignaturas;
     }
 
+    public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
+        LinkedList<JSONObject> asignaturas = new LinkedList<JSONObject>();
+
+        JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/" + escenario + "/asignaturas.json"));
+        JSONArray a = (JSONArray)obj.get("asignaturas");
+
+        for (Object o : a) {
+            JSONObject assignatura = (JSONObject) o;
+            asignaturas.add(assignatura);
+        }
+
+        return asignaturas;
+    }
+
     /** Métodos redefinidos **/
 
 }

@@ -14,6 +14,7 @@ import data.CtrlAsignaturasFile;
 import data.CtrlAulasFile;
 import data.CtrlPlanEstudiosFile;
 import data.CtrlRestriccionesFile;
+import data.CtrlEscenariosDir;
 
 import static java.lang.System.out;
 
@@ -24,6 +25,7 @@ public class CtrlDomain {
     private CtrlAulasFile controladorAulas;
     private CtrlPlanEstudiosFile controladorPlanEstudios;
     private CtrlRestriccionesFile controladorRestricciones;
+    private CtrlEscenariosDir controladorEscenarios;
     private PlanEstudios planEstudios;
     private ArrayList<Restriccion> restricciones;
 
@@ -38,17 +40,30 @@ public class CtrlDomain {
         controladorAulas = CtrlAulasFile.getInstance();
         controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
         controladorRestricciones = CtrlRestriccionesFile.getInstance();
-        this.cargarPlanEstudios();
-        this.cargarAllAsignaturas();
-        this.cargarAllAulas();
-        this.cargarAllRestricciones();
-        out.println(this.planEstudios.toString());
+        this.cargarPlanEstudios("Default");
+        this.cargarAllAsignaturas("Default");
+        this.cargarAllAulas("Default");
+        this.cargarAllRestricciones("Default");
+
+        controladorEscenarios = CtrlEscenariosDir.getInstance();
     }
 
     /** Métodos públicos **/
 
-    public void cargarPlanEstudios() throws FileNotFoundException, IOException, ParseException {
-        JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudios();
+    public void cargarEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
+        this.cargarPlanEstudios(escenario);
+        this.cargarAllAsignaturas(escenario);
+        this.cargarAllAulas(escenario);
+        this.cargarAllRestricciones(escenario);
+    }
+
+    public ArrayList<String> allEscenarios() {
+        controladorEscenarios.escanearAllEscenarios();
+        return controladorEscenarios.getAllEscenarios();
+    }
+
+    public void cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
+        JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
         planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
         String niveles = planEstudiosData.get("niveles").toString();
 
@@ -60,8 +75,8 @@ public class CtrlDomain {
         }
     }
 
-    public void cargarAllAsignaturas() throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> asignaturasData = controladorAsignaturas.getAll();
+    public void cargarAllAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
 
         for (JSONObject assig : asignaturasData) {
             Asignatura asignatura;
@@ -94,8 +109,8 @@ public class CtrlDomain {
         }
     }
 
-    public void cargarAllAulas() throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> aulasData = controladorAulas.getAll();
+    public void cargarAllAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
 
         for (JSONObject au : aulasData) {
             Integer plazas = new Integer(((Long)au.get("plazas")).intValue());
@@ -111,10 +126,10 @@ public class CtrlDomain {
 
     }
 
-    public void cargarAllRestricciones() throws FileNotFoundException, IOException, ParseException {
+    public void cargarAllRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
         this.restricciones = new ArrayList<Restriccion>();
 
-        List<JSONObject> restriccionesData = controladorRestricciones.getAll();
+        List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
         System.out.println(restriccionesData);
         System.out.print("\n");
 

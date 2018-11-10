@@ -1,0 +1,13 @@
+{
+  "aulas": [
+      {
+        "id": "a1",
+        "plazas": 40,
+        "tipos": [
+          "Teoria",
+          "Laboratorio",
+          "Problemas"
+        ]
+      }
+    ]
+}

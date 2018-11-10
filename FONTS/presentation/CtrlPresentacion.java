@@ -5,6 +5,8 @@ import java.io.IOException;
 import domaincontrollers.CtrlHorario;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import domaincontrollers.CtrlDomain;
 
 public class CtrlPresentacion {
@@ -22,8 +24,9 @@ public class CtrlPresentacion {
         Vmh = new VistaMantHorario();
     }
 
-    public void initMantenimientoHorario() {
-        CPgh = new CtrlPresentacionGenHorario(Vmh, CDh);
+    public void initMantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
+        ArrayList<String> escenarios = this.CD.allEscenarios();
+        CPgh = new CtrlPresentacionGenHorario(Vmh, CDh, escenarios, CD);
         CPgh.mantenimientoHorario();
     }
 
