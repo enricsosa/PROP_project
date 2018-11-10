@@ -47,6 +47,20 @@ public class CtrlRestriccionesFile {
         return restricciones;
     }
 
+    public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
+        LinkedList<JSONObject> restricciones = new LinkedList<JSONObject>();
+
+        JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/" + escenario + "/restricciones.json"));
+        JSONArray r = (JSONArray)obj.get("restricciones");
+
+        for (Object o : r) {
+            JSONObject restriccion = (JSONObject) o;
+            restricciones.add(restriccion);
+        }
+
+        return restricciones;
+    }
+
     /** Métodos redefinidos **/
 
 }

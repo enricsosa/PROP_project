@@ -12,32 +12,42 @@ public class VistaMantHorario {
 
     public int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;
-        while (op < 0 || op > nOps) {
+        while (op == -1) {
             String s = in.next();
             int num = (int)(s.charAt(0) - '0');
             if (num > 0 && num <= nOps) {
-                op = in.nextInt();
+                op = num;
             } else {
                 out.printf("ERROR: el parámetro \"%s\" no es válido\n", s);
-                out.printf("Opción: ");
+                out.print("Opción: ");
             }
         }
-        out.printf("\n");
+        out.print("\n");
         return op;
     }
 
     public void mostrarMenu(String menu) {
         switch (menu) {
             case "mainMenu":
-                out.printf("1. Generar horario\n");
-                out.printf("2. Consultar horarios generados\n");
-                out.printf("3. Salir\n");
-                out.printf("Opción: ");
+                out.print("1. Escoger escenario\n");
+                out.print("2. Consultar horarios generados\n");
+                out.print("3. Salir\n");
+                out.print("Opción: ");
                 break;
 
             default:
                 break;
         }
+    }
+
+    public void mostrarMenuEscenarios(ArrayList<String> escenarios) {
+        int n = escenarios.size();
+        out.printf("\nEscenarios detectados disponibles:\n");
+        for (int i = 0; i < n; ++i) {
+            out.printf("%d. %s\n", i+1, escenarios.get(i));
+        }
+        out.printf("%d. (Atrás)\n", n+1);
+        out.printf("Opción: ");
     }
 
     public void mostrarError(String e) {

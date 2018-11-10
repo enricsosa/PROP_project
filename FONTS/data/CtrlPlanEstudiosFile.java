@@ -41,6 +41,13 @@ public class CtrlPlanEstudiosFile {
         return plaEstudis;
     }
 
+    public JSONObject getPlanEstudiosByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
+        JSONObject plaEstudis = new JSONObject();
+        plaEstudis = (JSONObject)new JSONParser().parse(new FileReader("DATA/" + escenario + "/pla_estudis.json"));
+
+        return plaEstudis;
+    }
+
     /** Métodos redefinidos **/
 
 }
