@@ -7,6 +7,7 @@ import domain.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+import static java.lang.System.out;
 
 public class CtrlHorario {
 
@@ -28,10 +29,12 @@ public class CtrlHorario {
     /** Métodos públicos **/
 
     public ReturnSet generarHorario(String id) {
+        out.println("Se inicia generarHorario().\n");
         Horario horario = new Horario(id);
         Ocupaciones ocupaciones = new Ocupaciones();
         ArrayList<Clase> clases = this.getAllClases();
         Collections.shuffle(clases);
+        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i));
             for (int dia = 1; dia <= 7; ++dia) {
@@ -53,13 +56,16 @@ public class CtrlHorario {
     }
 
     public ReturnSet generarAsignaciones(Asignacion asignacion, ArrayList<Clase> clases, Ocupaciones ocupaciones) {
+        //out.println("Provando Asignacion:");
+        //out.println(asignacion.toString() + "\n");
         if (!(this.comprovarRestricciones(asignacion, ocupaciones))) return new ReturnSet(false);
         ocupaciones.addAsignacion(asignacion);
+        //out.println("asignacion valida");
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i));
             for (int dia = 1; dia <= 7; ++dia) {
-                if ((this.limitacionesHorario.esDiaLibre(dia))
+                if ((!(this.limitacionesHorario.esDiaLibre(dia)))
                         && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
                         && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
                     for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
@@ -121,11 +127,16 @@ public class CtrlHorario {
     public Boolean comprovarGrupoDia(Clase clase, int dia, Ocupaciones ocupaciones) {
         if (!(ocupaciones.getDia(dia).tieneGrupo(clase.getGrupo()))) return false;
         for (Map.Entry<String, SubGrupo> entry : clase.getGrupo().getSubGrupos().entrySet()) {
-            if ((entry.getValue().getId() != clase.getSubGrupo().getId())
-                    && (entry.getValue().getTipo() != clase.getSubGrupo().getTipo())
-                    && ocupaciones.getDia(dia).tieneSubGrupo(entry.getValue())) return true;
+            if (ocupaciones.getDia(dia).tieneSubGrupo(entry.getValue())
+                && (ocupaciones.getDia(dia).getSubGrupo(entry.getValue()).getTipo() != entry.getValue().getTipo())) return true;
         }
         return false;
+    }
+
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
     }
 
     public void loadLimitacionesHorario() {

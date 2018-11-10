@@ -97,12 +97,18 @@ public class Dia {
         this.asignaturas.remove(id);
     }
 
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
+    }
+
     public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId(), subGrupo);
+        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
     }
 
     public void replaceSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId(), subGrupo);
+        this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
     }
 
     public void eliminarSubGrupo(String key) {
@@ -219,8 +225,12 @@ public class Dia {
         return this.subGrupos.get(id);
     }
 
+    public SubGrupo getSubGrupo(SubGrupo subGrupo) {
+        return this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()));
+    }
+
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId()) != null);
+        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo())) != null);
     }
 
     public ArrayList<Restriccion> getRestricciones() {

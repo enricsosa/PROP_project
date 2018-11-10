@@ -20,8 +20,8 @@ public class Ocupaciones {
 
     public Ocupaciones(Ocupaciones oldOcupaciones) {
         this.dias = new Dia[7];
-        for (int i = 0; i < 7; ++i) {
-            this.dias[i] = new Dia(oldOcupaciones.getDia(i));
+        for (int i = 1; i <= 7; ++i) {
+            this.dias[i - 1] = new Dia(oldOcupaciones.getDia(i));
         }
     }
 
