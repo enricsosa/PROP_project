@@ -44,7 +44,7 @@ public class CtrlDomain {
         this.cargarAllAsignaturas("Default");
         this.cargarAllAulas("Default");
         this.cargarAllRestricciones("Default");
-        this.generarHorario("Horario 1");
+        //this.generarHorario("Horario 1");
         out.println(this.planEstudios.toString());
         controladorEscenarios = CtrlEscenariosDir.getInstance();
     }
@@ -208,8 +208,8 @@ public class CtrlDomain {
         ReturnSet horario = ctrlHorario.generarHorario(id);
         if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
         if (horario.getValidez()) {
-            out.println("Horario generado");
             out.println(horario.getHorario().toString());
+            out.println("Horario generado");
         }
         else out.println("Horario no generado");
     }

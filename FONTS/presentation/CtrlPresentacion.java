@@ -12,7 +12,6 @@ import domaincontrollers.CtrlDomain;
 public class CtrlPresentacion {
 
     private CtrlDomain CD = new CtrlDomain();
-    private CtrlHorario CDh;
     private CtrlPresentacionGenHorario CPgh;
     private VistaMantHorario Vmh;
 
@@ -20,13 +19,12 @@ public class CtrlPresentacion {
 
     public void initCtrlPresentacion() throws FileNotFoundException, IOException, ParseException {
         this.CD.initCtrlDomain();
-        CDh = CD.getCtrlHorario();
         Vmh = new VistaMantHorario();
     }
 
     public void initMantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
         ArrayList<String> escenarios = this.CD.allEscenarios();
-        CPgh = new CtrlPresentacionGenHorario(Vmh, CDh, escenarios, CD);
+        CPgh = new CtrlPresentacionGenHorario(Vmh, escenarios, CD);
         CPgh.mantenimientoHorario();
     }
 

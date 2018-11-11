@@ -11,15 +11,12 @@ import java.util.*;
 public class CtrlPresentacionGenHorario {
 
     private VistaMantHorario Vmh;
-    private CtrlHorario CDh;
     private CtrlDomain CD;
     private ArrayList<String> Escenarios;
     private Integer idHorario = 0;
 
-    public CtrlPresentacionGenHorario(VistaMantHorario vmh, CtrlHorario cdh,
-                                      ArrayList<String> escenarios, CtrlDomain cd) {
+    public CtrlPresentacionGenHorario(VistaMantHorario vmh, ArrayList<String> escenarios, CtrlDomain cd) {
         Vmh = vmh;
-        CDh = cdh;
         Escenarios = escenarios;
         CD = cd;
     }
@@ -64,7 +61,7 @@ public class CtrlPresentacionGenHorario {
                 CD.cargarEscenario(Escenarios.get(op-1));
                 System.out.print("\nDatos cargados\n");
                 System.out.print("Generando horario...");
-                CDh.generarHorario("Horario#" + idHorario.toString());
+                CD.generarHorario("Horario#" + idHorario.toString());
 
                 ++idHorario;
             }
