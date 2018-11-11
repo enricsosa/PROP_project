@@ -39,7 +39,7 @@ public class CtrlHorario {
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i).toStringResumido());
         /////Collections.shuffle(clases);
         sortClases(clases, this.limitacionesHorario);
-        for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
+        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
         //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
             ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);

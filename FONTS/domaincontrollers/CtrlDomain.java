@@ -45,7 +45,7 @@ public class CtrlDomain {
         this.cargarAllAulas("Default");
         this.cargarAllRestricciones("Default");
         //this.generarHorario("Horario 1");
-        out.println(this.planEstudios.toString());
+        //out.println(this.planEstudios.toString());
         controladorEscenarios = CtrlEscenariosDir.getInstance();
     }
 
@@ -131,8 +131,8 @@ public class CtrlDomain {
         this.restricciones = new ArrayList<Restriccion>();
 
         List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
-        System.out.println(restriccionesData);
-        System.out.print("\n");
+        //System.out.println(restriccionesData);
+        //System.out.print("\n");
 
         //R: diaLibre
         JSONObject diaLibre = restriccionesData.get(0);
