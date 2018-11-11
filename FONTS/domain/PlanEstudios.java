@@ -170,7 +170,6 @@ public class PlanEstudios {
         for (Map.Entry<String, Aula> entry : this.aulas.entrySet()) text += ("\n-- " + entry.getValue().toString());
         text += "\n\n-Restricciones:";
         for (int i = 0; i < this.restricciones.size(); ++i) text += ("\n-- " + this.restricciones.get(i).toString());
-        if (this.tieneHorario()) text += "\n-" + this.horarioGeneral.toString();
         return text;
     }
 

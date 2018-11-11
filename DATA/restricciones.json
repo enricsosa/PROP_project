@@ -9,8 +9,8 @@
     },
     {
       "nombre": "franjaTrabajo",
-      "horaIni": 8,
-      "horaFin": 20
+      "horaIni": 7,
+      "horaFin": 19
     },
     {
       "nombre": "nivelHora",
@@ -42,8 +42,8 @@
       "asignaturas": [
         {
           "idAsig": "PRO1",
-          "horaIni": 8,
-          "horaFin": 20
+          "horaIni": 10,
+          "horaFin": 14
         }
       ]
     },
@@ -52,8 +52,8 @@
       "niveles": [
         {
           "idNivel": "S1",
-          "horaIni": 8,
-          "horaFin": 20
+          "horaIni": 10,
+          "horaFin": 16
         }
       ]
     }

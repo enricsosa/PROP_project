@@ -29,7 +29,7 @@ public class CtrlHorario {
     /** Métodos públicos **/
 
     public ReturnSet generarHorario(String id) {
-        out.println("Se inicia generarHorario().\n");
+        //out.println("Se inicia generarHorario().\n");
         Horario horario = new Horario(id);
         Ocupaciones ocupaciones = new Ocupaciones();
         ArrayList<Clase> clases = this.getAllClases();
@@ -178,7 +178,7 @@ public class CtrlHorario {
                 this.limitacionesHorario.setHoraFin(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraFin());
             }
         }
-        out.println(limitacionesHorario.toString());
+        //out.println(limitacionesHorario.toString());
     }
 
     public Map<String, Aula> getAulasAdecuadas(Clase clase) {

@@ -67,7 +67,7 @@ public class LimitacionesHorario {
 
     @Override
     public String toString() {
-        String text = "Limitaciones Horario:\n-Hora Ini: " + this.horaIni.toString() +"\n-Hora Fin: " + getHoraCompleta(this.horaFin)
+        String text = "Limitaciones Horario:\n-Hora Ini: " + getHoraCompleta(this.horaIni) +"\n-Hora Fin: " + getHoraCompleta(this.horaFin)
                     + "\nDias Libres: ";
         for (int i = 0; i < 7; ++i) {
             if (this.diasLibres[i]) {
