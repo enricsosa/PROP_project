@@ -696,6 +696,10 @@
         {
           "horas": 2,
           "TipoClase": "Laboratorio"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Problemas"
         }
       ],
       "grupos": [

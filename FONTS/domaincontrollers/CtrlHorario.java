@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import static java.lang.System.out;
+import java.util.Comparator;
 
 public class CtrlHorario {
 
@@ -29,17 +30,27 @@ public class CtrlHorario {
     /** Métodos públicos **/
 
     public ReturnSet generarHorario(String id) {
+        //out.println(this.planEstudios);
         //out.println("Se inicia generarHorario().\n");
         Horario horario = new Horario(id);
         Ocupaciones ocupaciones = new Ocupaciones();
         ArrayList<Clase> clases = this.getAllClases();
-        Collections.shuffle(clases);
-        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
+        //out.println("CP 1");
+        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i).toStringResumido());
+        /////Collections.shuffle(clases);
+        sortClases(clases, this.limitacionesHorario);
+        for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
+        //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
-            ReturnSet franja = getFranjaClase(clases.get(i));
+            ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);
+            //out.println("CP 3");
             for (int dia = 1; dia <= 7; ++dia) {
+                //out.println(dia);
+                //out.println("CP 4");
                 if(!(this.limitacionesHorario.esDiaLibre(dia))) {
+                    //out.println("CP 5");
                     for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
+                        //out.println("CP 6");
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
                             Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
                             ReturnSet returnSet = this.generarAsignaciones(asignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
@@ -55,22 +66,41 @@ public class CtrlHorario {
         return new ReturnSet(false);
     }
 
+    public void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh) {
+        Collections.shuffle(clases);
+        Collections.sort(clases, new Comparator<Clase>() {
+            @Override
+            public int compare(Clase c1, Clase c2)
+            {
+                ReturnSet rc1 = getFranjaClase(c1, lh);
+                int fc1 = rc1.getHoraFin() - rc1.getHoraIni();
+
+                ReturnSet rc2 = getFranjaClase(c2, lh);
+                int fc2 = rc2.getHoraFin() - rc2.getHoraIni();
+
+                return fc1 - fc2;
+            }
+        });
+    }
+
     public ReturnSet generarAsignaciones(Asignacion asignacion, ArrayList<Clase> clases, Ocupaciones ocupaciones) {
+        //out.println("CP 7");
         //out.println("Provando Asignacion:");
         //out.println(asignacion.toString() + "\n");
         //out.println(clases.size());
         if (!(this.comprovarRestricciones(asignacion, ocupaciones))) {
-            //out.println("asignacion no valida");
+            out.println("asignacion no valida");
             return new ReturnSet(false);
         }
         ocupaciones.addAsignacion(asignacion);
-        //out.println("asignacion valida");
+        out.println("asignacion valida");
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
 
         for (int i = 0; i < clases.size(); ++i) {
-            ReturnSet franja = getFranjaClase(clases.get(i));
+            ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);
             if ((clases.size() % 2) == 0) {
                 for (int dia = 1; dia <= 7; ++dia) {
+                    //out.println(dia);
                     if ((!(this.limitacionesHorario.esDiaLibre(dia)))
                             && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
                             && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
@@ -87,7 +117,9 @@ public class CtrlHorario {
                 }
             }
             else {
-                for (int dia = 7; dia >= 0; --dia) {
+                for (int dia = 7; dia >= 1; --dia) {
+                    //out.println("CP 8");
+                    //out.println(dia);
                     if ((!(this.limitacionesHorario.esDiaLibre(dia)))
                             && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
                             && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
@@ -107,9 +139,9 @@ public class CtrlHorario {
         return new ReturnSet(false);
     }
 
-    public ReturnSet getFranjaClase(Clase clase) {
-        int horaIni = this.limitacionesHorario.getHoraIni();
-        int horaFin = this.limitacionesHorario.getHoraFin();
+    static ReturnSet getFranjaClase(Clase clase, LimitacionesHorario limitacionesHorario) {
+        int horaIni = limitacionesHorario.getHoraIni();
+        int horaFin = limitacionesHorario.getHoraFin();
         if (clase.tieneNivel()) {
             ArrayList<Restriccion> restricciones = clase.getNivel().getRestricciones();
             Boolean found = false;

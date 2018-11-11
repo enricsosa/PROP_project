@@ -43,7 +43,7 @@
         {
           "idAsig": "PRO1",
           "horaIni": 8,
-          "horaFin": 20
+          "horaFin": 14
         }
       ]
     },
@@ -53,7 +53,7 @@
         {
           "idNivel": "S1",
           "horaIni": 8,
-          "horaFin": 20
+          "horaFin": 16
         }
       ]
     }

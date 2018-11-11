@@ -45,6 +45,11 @@ public class Clase {
         this.restricciones.remove(posicion);
     }
 
+    public String toStringResumido() {
+        return "Clase: " + this.getAsignatura().getId() + " " + this.getSubGrupo().getIdCompleta() + " "
+                + this.getSubGrupo().getTipo().toString() + " " + this.getSesion().getDuracion().toString();
+    }
+
     /** Consultoras **/
 
     public SubGrupo getSubGrupo() {
@@ -91,8 +96,8 @@ public class Clase {
 
     @Override
     public String toString() {
-        return ("Clase:\nAsignatura: " + this.getAsignatura().getId() + "\n-Grupo: " + this.getGrupo().getId() + "\n-SubGrupo: "
-                + this.getSubGrupo().getId() + "\n- " + this.sesion.toString());
+        return ("Clase:\n-Asignatura: " + this.getAsignatura().getId() + "\n-Grupo: " + this.getGrupo().getId() + "\n-SubGrupo: "
+                + this.getSubGrupo().getId() + "\n-" + this.sesion.toString());
     }
 
 }
