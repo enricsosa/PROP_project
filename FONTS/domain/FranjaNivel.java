@@ -61,6 +61,13 @@ public class FranjaNivel extends Restriccion {
     }
 
     @Override
+    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        if (!(clase.tieneNivel())) return true;
+        if ((clase.getNivel() != this.nivel)) return true;
+        return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
+    }
+
+    @Override
     public String toString() {
         return ("Franja Nivel:\n-Nivel: " + this.nivel.getNombre() + "\n-Hora inicio: " + getHoraCompleta(this.horaIni)
                 + "\n-Hora fin: " + getHoraCompleta(this.horaFin));

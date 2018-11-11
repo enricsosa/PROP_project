@@ -60,6 +60,12 @@ public class FranjaAsignatura extends Restriccion {
     }
 
     @Override
+    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        if (clase.getAsignatura() != this.asignatura) return true;
+        return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
+    }
+
+    @Override
     public String toString() {
         return ("Franja Asignatura:\n-Asignatura: " + this.asignatura.getId() + "\n-Hora inicio: " + getHoraCompleta(this.horaIni)
                 + "\n-Hora fin: " + getHoraCompleta(this.horaFin));

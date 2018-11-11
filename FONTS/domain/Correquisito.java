@@ -69,6 +69,18 @@ public class Correquisito extends Restriccion {
     }
 
     @Override
+    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        if (!(this.tieneAsignatura(clase.getAsignatura()))) return true;
+        Asignatura target;
+        if (this.getIndex(clase.getAsignatura()) == 1) target = asignatura2;
+        else target = asignatura1;
+        for (int hora = horaIni; hora < horaIni + clase.getDuracion(); ++hora) {
+            if (ocupaciones.getDia(dia).getHora(hora).tieneGrupo(target, clase.getGrupo())) return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return ("Correquisito:\n- " + this.asignatura1.getId() + "\n- " + this.asignatura2.getId());
     }

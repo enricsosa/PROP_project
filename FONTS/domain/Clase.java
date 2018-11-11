@@ -50,6 +50,14 @@ public class Clase {
                 + this.getSubGrupo().getTipo().toString() + " " + this.getSesion().getDuracion().toString();
     }
 
+    public Boolean comprovarRestricciones(int dia, int horaIni, Ocupaciones ocupaciones) {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (!(this.getRestriccion(i).comprovarRestriccion(this, dia, horaIni, ocupaciones))) return false;
+        }
+        return true;
+    }
+
+
     /** Consultoras **/
 
     public SubGrupo getSubGrupo() {
@@ -62,6 +70,10 @@ public class Clase {
 
     public ArrayList<Restriccion> getRestricciones() {
         return restricciones;
+    }
+
+    public Restriccion getRestriccion(int i) {
+        return this.restricciones.get(i);
     }
 
     public int getPlazas() {

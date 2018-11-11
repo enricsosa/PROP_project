@@ -38,32 +38,33 @@ public class NivelHora extends Restriccion {
 
     @Override
     public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        //out.println("Se evalua NivelHora-------------------------------------");
-        //out.println(asignacion);
-        //out.println(asignacion.getDiaSemana());
-        //out.println(asignacion.getHoraIni());
-        //out.println(asignacion.getHoraFin());
         for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
-            //out.println(hora);
-            //out.println(ocupaciones.getHora(asignacion.getDiaSemana(),hora).getGrupos().keySet());
             for (Map.Entry<String, Grupo> entry : ocupaciones.getHora(asignacion.getDiaSemana(),hora).getGrupos().entrySet()) {
-                //out.println(asignacion.getGrupo().getId() + " " + entry.getValue().getId());
                 if (entry.getValue().getId().equals(asignacion.getGrupo().getId())) {
-                    //out.println("tienen el mismo grupo");
                     if (entry.getValue().tieneNivel()) {
-                        //out.println(asignacion.getNivel());
-                        //out.println("");
-                        //out.println(entry.getValue().getNivel());
                         if ((entry.getValue().getNivel() == asignacion.getNivel()) && (entry.getValue().getAsignatura() != asignacion.getAsignatura())) {
-                            //out.println("No se cumple");
                             return false;
                         }
                     }
                 }
-                //else out.println("No tienen el mismo grupo");
             }
         }
-        //out.println("Se cumple");
+        return true;
+    }
+
+    @Override
+    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {
+            for (Map.Entry<String, Grupo> entry : ocupaciones.getHora(dia,hora).getGrupos().entrySet()) {
+                if (entry.getValue().getId().equals(clase.getGrupo().getId())) {
+                    if (entry.getValue().tieneNivel()) {
+                        if ((entry.getValue().getNivel() == clase.getNivel()) && (entry.getValue().getAsignatura() != clase.getAsignatura())) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
         return true;
     }
 

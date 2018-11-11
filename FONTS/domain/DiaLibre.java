@@ -39,6 +39,11 @@ public class DiaLibre extends Restriccion {
     }
 
     @Override
+    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        return (this.dia != dia);
+    }
+
+    @Override
     public String toString() {
         return "Dia Libre: " + getNombreDia(this.dia);
     }
