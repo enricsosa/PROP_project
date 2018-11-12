@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Dia contiene la información de un dia dentro de Ocupaciones.
+ * Dia contiene la información de lo que sucede un dia dentro de Ocupaciones.
  * @author  Daniel Martín
  * @see     Arrays
  * @see     HashMap
@@ -81,38 +81,6 @@ public class Dia {
     }
 
     /**
-     * Asigna un nuevo conjunto de Asignaturas a un Dia.
-     * @param asignaturas   Nuevo conjunto de Asignaturas que se asigna a Dia.
-     */
-    public void setAsignaturas(Map<String, Asignatura> asignaturas) {
-        this.asignaturas = asignaturas;
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Aulas a un Dia.
-     * @param aulas Nuevo conjunto de Aulas que se asigna a Dia.
-     */
-    public void setAulas(Map<String, Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Grupos a un Dia.
-     * @param grupos    Nuevo conjunto de Grupos que se asigna a Dia.
-     */
-    public void setGrupos(Map<String, Grupo> grupos) {
-        this.grupos = grupos;
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Subgrupos a un Dia.
-     * @param subGrupos Nuevo conjunto de SubGrupos que se asigna a Dia.
-     */
-    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
-        this.subGrupos = subGrupos;
-    }
-
-    /**
      * Añade un Nivel a los niveles de Dia.
      * @param nivel Nivel que se quiere añadir a Dia.
      */
@@ -121,7 +89,7 @@ public class Dia {
     }
 
     //public void replaceNivel(Nivel nivel) {
-      //  this.niveles.replace(nivel.getNombre(), nivel);
+    //  this.niveles.replace(nivel.getNombre(), nivel);
     //}
 
     /**
@@ -133,6 +101,14 @@ public class Dia {
     }
 
     /**
+     * Asigna un nuevo conjunto de Asignaturas a un Dia.
+     * @param asignaturas   Nuevo conjunto de Asignaturas que se asigna a Dia.
+     */
+    public void setAsignaturas(Map<String, Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
+    }
+
+    /**
      * Añade una Asignatura a las Asignaturas de Dia.
      * @param asignatura    Asignatura que se quiere añadir a Dia.
      */
@@ -141,7 +117,7 @@ public class Dia {
     }
 
     //public void replaceAsignatura(Asignatura asignatura) {
-      //  this.asignaturas.replace(asignatura.getId(), asignatura);
+    //  this.asignaturas.replace(asignatura.getId(), asignatura);
     //}
 
     /**
@@ -153,54 +129,11 @@ public class Dia {
     }
 
     /**
-     * Convierte un TipoClase a un String con su forma abreviada.
-     * @param tipo  TipoClase que se quiere convertir.
-     * @return  Devuelve un String con la forma abreviada del TipoClase.
+     * Asigna un nuevo conjunto de Aulas a un Dia.
+     * @param aulas Nuevo conjunto de Aulas que se asigna a Dia.
      */
-    static String strTipo(TipoClase tipo) {
-        if (tipo == TipoClase.Teoria) return "T";
-        else if (tipo == TipoClase.Laboratorio) return "L";
-        return "P";
-    }
-
-    /**
-     * Añade un SubGrupo al conjunto de SubGrupos de Dia.
-     * @param subGrupo  SubGrupo que se quiere añadir a Dia.
-     */
-    public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
-    }
-
-    //public void replaceSubGrupo(SubGrupo subGrupo) {
-      //  this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
-    //}
-
-    /**
-     * Dada una key elimina un SubGrupo de Dia.
-     * @param key   key del SubGrupo que se quiere eliminar.
-     */
-    public void eliminarSubGrupo(String key) {
-        this.subGrupos.remove(key);
-    }
-
-    /**
-     * Añade un Grupo al conjunto de Grupos de Dia.
-     * @param grupo Grupo que se quiere añadir a Dia.
-     */
-    public void addGrupo(Grupo grupo) {
-        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    }
-
-    //public void replaceGrupo(Grupo grupo) {
-      //  this.grupos.replace(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    //}
-
-    /**
-     * Elimina un Grupo de Dia a partir de su key.
-     * @param key   key del Grupo que se quiere eliminar.
-     */
-    public void eliminarGrupo(String key) {
-        this.grupos.remove(key);
+    public void setAulas(Map<String, Aula> aulas) {
+        this.aulas = aulas;
     }
 
     /**
@@ -212,7 +145,7 @@ public class Dia {
     }
 
     //public void replaceAula(Aula aula) {
-      //  this.aulas.replace(aula.getId(), aula);
+    //  this.aulas.replace(aula.getId(), aula);
     //}
 
     /**
@@ -221,6 +154,73 @@ public class Dia {
      */
     public void eliminarAula(String id) {
         this.aulas.remove(id);
+    }
+
+    /**
+     * Asigna un nuevo conjunto de Grupos a un Dia.
+     * @param grupos    Nuevo conjunto de Grupos que se asigna a Dia.
+     */
+    public void setGrupos(Map<String, Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
+    /**
+     * Añade un Grupo al conjunto de Grupos de Dia.
+     * @param grupo Grupo que se quiere añadir a Dia.
+     */
+    public void addGrupo(Grupo grupo) {
+        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getId(), grupo);
+    }
+
+    //public void replaceGrupo(Grupo grupo) {
+    //  this.grupos.replace(grupo.getId() + grupo.getAsignatura().getId(), grupo);
+    //}
+
+    /**
+     * Elimina un Grupo de Dia a partir de su key.
+     * @param key   key del Grupo que se quiere eliminar.
+     */
+    public void eliminarGrupo(String key) {
+        this.grupos.remove(key);
+    }
+
+    /**
+     * Asigna un nuevo conjunto de Subgrupos a un Dia.
+     * @param subGrupos Nuevo conjunto de SubGrupos que se asigna a Dia.
+     */
+    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
+        this.subGrupos = subGrupos;
+    }
+
+    /**
+     * Añade un SubGrupo al conjunto de SubGrupos de Dia.
+     * @param subGrupo  SubGrupo que se quiere añadir a Dia.
+     */
+    public void addSubGrupo(SubGrupo subGrupo) {
+        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
+    }
+
+    //public void replaceSubGrupo(SubGrupo subGrupo) {
+    //  this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
+    //}
+
+    /**
+     * Dada una key elimina un SubGrupo de Dia.
+     * @param key   key del SubGrupo que se quiere eliminar.
+     */
+    public void eliminarSubGrupo(String key) {
+        this.subGrupos.remove(key);
+    }
+
+    /**
+     * Convierte un TipoClase a un String con su forma abreviada.
+     * @param tipo  TipoClase que se quiere convertir.
+     * @return  Devuelve un String con la forma abreviada del TipoClase.
+     */
+    static String strTipo(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "T";
+        else if (tipo == TipoClase.Laboratorio) return "L";
+        return "P";
     }
 
     //public void setRestricciones(ArrayList<Restriccion> restricciones) {

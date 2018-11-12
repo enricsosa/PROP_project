@@ -219,7 +219,6 @@ public class CtrlDomain {
     public String generarHorario(String id) {
         CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios, this.restricciones);
         ReturnSet horario = ctrlHorario.generarHorario(id);
-        if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
         if (horario.getValidez())
             return horario.getHorario().toString();
         else

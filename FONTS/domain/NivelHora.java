@@ -1,35 +1,60 @@
+/**NivelHora*/
+
+/**Imports*/
+
 package domain;
 
 import java.util.Map;
 
-/** Imports **/
-
+/**
+ * NivelHora contiene la información de una Restriccion que indica que no se pueden dar Clases de mismo Nivel y Grupo
+ * simultáneamente.
+ * @author  Daniel Martín
+ * @see     Map
+ */
 public class NivelHora extends Restriccion {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**Nivel al que se aplica la Restriccion.*/
     private Nivel nivel;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Constructora de la Clase NivelHora.
+     * @param nivel Nivel que se asigna a la Restriccion.
+     */
     public NivelHora(Nivel nivel) {
         this.nivel = nivel;
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Asigna un nuevo Nivel a la Restriccion.
+     * @param nivel Nuevo Nivel que se asignará a Restricción.
+     */
     public void setNivel(Nivel nivel) {
         this.nivel = nivel;
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Devuelve el Nivel de la Restriccion.
+     * @return  Nivel de Retriccion.
+     */
     public Nivel getNivel() {
         return this.nivel;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
+    /**
+     * Devuelve el TipoRestriccion correspondiente.
+     * @return  TipoRestriccion.NivelHora.
+     */
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.NivelHora;
@@ -59,6 +84,10 @@ public class NivelHora extends Restriccion {
         return true;
     }
 
+    /**
+     * Convierte NivelHora a un String con su información.
+     * @return  String con la información NivelHora.
+     */
     @Override
     public String toString() {
         return "Nivel hora: " + this.nivel.getNombre();

@@ -1,89 +1,160 @@
-package domain;
+/**Nivel*/
 
-/** Imports **/
+/**Imports*/
+
+package domain;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Nivel representa una relación entre varias Asignaturas.
+ * @author  Daniel Martín
+ * @see     ArrayList
+ * @see     Map
+ * @see     HashMap
+ */
 public class Nivel {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**nombre que identifica al Nivel.*/
     private String nombre;
+    /**Asignaturas que pertenecen al Nivel.*/
     private Map<String, Asignatura> asignaturas;
+    /**Restricciones que afectan al Nivel.*/
     private ArrayList<Restriccion> restricciones;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Contructora de la clase Nivel.
+     * @param nombre    nombre que se asigna a Nivel.
+     */
     public Nivel(String nombre) {
         this.nombre = nombre;
         this.asignaturas = new HashMap<String, Asignatura>();
         this.restricciones = new ArrayList<Restriccion>();
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Asigna un nuevo nombre a Nivel.
+     * @param nombre    Nuevo nombre que se asignará a Nivel.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Añade una Asignatura a Nivel
+     * @param asignatura    Asignatura que se añade a Nivel.
+     */
     public void addAsignatura(Asignatura asignatura) {
         this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
     }
 
-    public void replaceAsignatura(Asignatura asignatura) {
-        this.asignaturas.replace(asignatura.getId(), asignatura);
-    }
+    //public void replaceAsignatura(Asignatura asignatura) {
+      //  this.asignaturas.replace(asignatura.getId(), asignatura);
+    //}
 
+    /**
+     * Elimina de Nivel la Asignatura con id indicada.
+     * @param id    id de la Asignatura que se quiere eliminar.
+     */
     public void eliminarAsignatura(String id) {
         this.asignaturas.remove(id);
     }
 
+    /**
+     * Asigna un conjunto de Restricciones a Nivel.
+     * @param restricciones Conjunto de Restricciones que se asignará a Nivel.
+     */
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
+    /**
+     * Añade una Restricción al conjunto de Restricciones de Nivel.
+     * @param restriccion   Restriccion que se quiere añadir a Nivel.
+     */
     public void addRestriccion(Restriccion restriccion) {
         this.restricciones.add(restriccion);
     }
 
+    /**
+     * Elimina una Restricción dada su posición dentro del conjunto de Restricciones.
+     * @param posicion  posicion de la Restriccion que se quiere eliminar.
+     */
     public void eliminarRestriccion(Integer posicion) {
         this.restricciones.remove(posicion);
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Devuelve el nombre que identifica al Nivel.
+     * @return  nombre del Nivel.
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * Devuelve las Asignaturas que pertenecen al Nivel.
+     * @return  Asignaturas que pertenecen al Nivel.
+     */
     public Map<String, Asignatura> getAsignaturas() {
         return this.asignaturas;
     }
 
-    public Asignatura getAsignatura(String nom) {
-        return this.asignaturas.get(nom);
+    /**
+     * Devuelve una Asignatura de Nivel dado su id.
+     * @param id    id de la Asignatura que se quiere obtener.
+     * @return      Asignatura con id indicado.
+     */
+    public Asignatura getAsignatura(String id) {
+        return this.asignaturas.get(id);
     }
 
+    /**
+     * Dada una Asignatura indica si forma parte del Nivel.
+     * @param asignatura    Asignatura que se quiere saber si pertenece a Nivel.
+     * @return              true si asignatura forma parte de Nivel, false en caso contrario.
+     */
     public Boolean tieneAsignatura(Asignatura asignatura) {
         return (this.asignaturas.get(asignatura.getId()) != null);
     }
 
-    public Boolean tieneAsignatura(String id) {
-        return (this.asignaturas.get(id) != null);
-    }
+    //public Boolean tieneAsignatura(String id) {
+    //    return (this.asignaturas.get(id) != null);
+    //}
 
+    /**
+     * Devuelve las Restricciones asociadas al Nivel.
+     * @return  Restricciones asociadas al Nivel.
+     */
     public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 
-    public Restriccion getRestriccion(int i) {
-        return this.restricciones.get(i);
+    /**
+     * Devuelve la Restriccion situada en la posicion indicada de las Restricciones del Nivel.
+     * @param posicion  posicion de la Restriccion que se quiere obtener.
+     * @return          Restriccion de Nivel en la posicion indicada.
+     */
+    public Restriccion getRestriccion(int posicion) {
+        return this.restricciones.get(posicion);
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
+    /**
+     * Convierte el Nivel en String.
+     * @return  Devuelve un String con la información del Nivel.
+     */
     @Override
     public String toString() {
         String text = "Nivel: " + this.nombre;
