@@ -48,7 +48,6 @@ public class CtrlPresentacionGenHorario {
     }
 
     private void escogerEscenarios() throws FileNotFoundException, IOException, ParseException {
-        System.out.println("caca");
         int op = -1;
         Vmh.mostrarMenuEscenarios(Escenarios);
 

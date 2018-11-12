@@ -16,9 +16,9 @@ public class driverAula {
         out.println("Introduzca id:");
         String id = sc.nextLine();
         out.println("Introduzca plazas:");
-        Integer plazas = sc.nextInt();
+        Integer plazas = Integer.parseInt(sc.nextLine());
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         for (int i = 0; i < n; ++i) {
             out.println("Introduzca tipo (Teoria/Laboratorio/Problemas):");
@@ -32,7 +32,7 @@ public class driverAula {
             }
         }
         Aula aula = new Aula(id, plazas, tipos);
-        out.println("Aula creada exitosamente:");
+        out.println("Aula creada exitosamente.");
     }
 
     public static void testGetId() {
@@ -49,7 +49,7 @@ public class driverAula {
         Scanner sc = new Scanner(System.in);
         out.println("Test getPlazas()");
         out.println("Introduzca plazas:");
-        Integer plazas = sc.nextInt();
+        Integer plazas = Integer.parseInt(sc.nextLine());
         Aula aula = new Aula(null, plazas, null);
         if (plazas.equals(aula.getPlazas())) out.println("El valor de getPlazas() se corresponde con el número de plazas dado.");
         else out.println("El valor de getPlazas() no se corresponde con el número de plazas dado.");
@@ -59,7 +59,7 @@ public class driverAula {
         Scanner sc = new Scanner(System.in);
         out.println("Test getTipos()");
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         for (int i = 0; i < n; ++i) {
             out.println("Introduzca tipo (Teoria/Laboratorio/Problemas):");
@@ -93,7 +93,7 @@ public class driverAula {
         out.println("Test setPlazas(Integer plazas)");
         Aula aula = new Aula(null, -999, null);
         out.println("Introduzca plazas:");
-        Integer plazas = sc.nextInt();
+        Integer plazas = Integer.parseInt(sc.nextLine());
         aula.setPlazas(plazas);
         if (aula.getPlazas().equals(plazas)) out.println("El valor de plazas ha cambiado al valor introducido.");
         else out.println("El valor de plazas ha no cambiado al valor introducido.");
@@ -104,7 +104,7 @@ public class driverAula {
         out.println("Test setTipos(ArrayList<TipoClase> tipos)");
         Aula aula = new Aula(null, 0, null);
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         for (int i = 0; i < n; ++i) {
             out.println("Introduzca tipo (Teoria/Laboratorio/Problemas):");
@@ -126,7 +126,7 @@ public class driverAula {
         Scanner sc = new Scanner(System.in);
         out.println("Test tieneTeoria()");
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         Boolean teoria = false;
         for (int i = 0; i < n; ++i) {
@@ -150,7 +150,7 @@ public class driverAula {
         Scanner sc = new Scanner(System.in);
         out.println("Test tieneLaboratorio()");
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         Boolean laboratorio = false;
         for (int i = 0; i < n; ++i) {
@@ -174,7 +174,7 @@ public class driverAula {
         Scanner sc = new Scanner(System.in);
         out.println("Test tieneProblemas()");
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         Boolean problemas = false;
         for (int i = 0; i < n; ++i) {
@@ -200,9 +200,9 @@ public class driverAula {
         out.println("Introduzca id:");
         String id = sc.nextLine();
         out.println("Introduzca plazas:");
-        Integer plazas = sc.nextInt();
+        Integer plazas = Integer.parseInt(sc.nextLine());
         out.println("Introduzca número de tipos (entre 1 y 3):");
-        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
         for (int i = 0; i < n; ++i) {
             out.println("Introduzca tipo (Teoria/Laboratorio/Problemas):");
@@ -219,17 +219,91 @@ public class driverAula {
         out.println(aula.toString());
     }
 
-    public static void main(String[] args) {
+    public static void runAllTests() {
         testConstructor();
+        out.println();
         testGetId();
+        out.println();
         testGetPlazas();
+        out.println();
         testGetTipos();
+        out.println();
         testSetId();
+        out.println();
         testSetPlazas();
+        out.println();
         testSetTipos();
+        out.println();
         testTieneTeoria();
+        out.println();
         testTieneLaboratorio();
+        out.println();
         testTieneProblemas();
+        out.println();
         testToString();
+        out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        out.println("driverAula");
+        String action = "";
+        out.println("Opciones:\n    1-Test Constructor\n    2-Test getId()\n    3-Test getPlazas()\n    4-Test getTipos()\n"
+                    + "    5-Test setId(String id)\n    6-Test setPlazas(Integer plazas)\n    7-Test setTipos(ArrayList<TipoClase> tipos)\n"
+                    + "    8-Test tieneTeoria()\n    9-Test tieneLaboratorio()\n    10-Test tieneProblemas()\n"
+                    + "    11-Test toString()\n    12-Run all tests\n    13-Salir");
+        out.println("Introduce una opción:");
+        action = sc.nextLine();
+        while (!action.equals("13")) {
+            if (action.equals("1")) {
+                testConstructor();
+                out.println();
+            }
+            else if (action.equals("2")) {
+                testGetId();
+                out.println();
+            }
+            else if (action.equals("3")) {
+                testGetPlazas();
+                out.println();
+            }
+            else if (action.equals("4")) {
+                testGetTipos();
+                out.println();
+            }
+            else if (action.equals("5")) {
+                testSetId();
+                out.println();
+            }
+            else if (action.equals("6")) {
+                testSetPlazas();
+                out.println();
+            }
+            else if (action.equals("7")) {
+                testSetTipos();
+                out.println();
+            }
+            else if (action.equals("8")) {
+                testTieneTeoria();
+                out.println();
+            }
+            else if (action.equals("9")) {
+                testTieneLaboratorio();
+                out.println();
+            }
+            else if (action.equals("10")) {
+                testTieneProblemas();
+                out.println();
+            }
+            else if (action.equals("11")) {
+                testToString();
+                out.println();
+            }
+            else if (action.equals("12")) {
+                runAllTests();
+            }
+            action = sc.nextLine();
+        }
+        return;
     }
 }

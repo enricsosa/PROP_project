@@ -1,29 +1,44 @@
-package domain;
+/**Clase*/
 
-/** Imports **/
+/**Imports*/
+
+package domain;
 
 import java.util.ArrayList;
 
+/**
+ * Clase contiene la información de una Sesión asociada a un SubGrupo.
+ * @author  Daniel Martín
+ * @see     ArrayList
+ */
 public class Clase {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**Subgrupo que realiza la Clase.*/
     private SubGrupo subGrupo;
+    /**Sesion que se realiza en la Clase*/
     private Sesion sesion;
+    /**Conjunto de Restricciones formado por las Restricciones de la Asignatura y el Nivel (si tiene) del Grupo.*/
     private ArrayList<Restriccion> restricciones;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Constructora de la clase Clase.
+     * @param subGrupo  Subgrupo que se asigna a la Clase.
+     * @param sesion    Sesion que se da en la Clase.
+     */
     public Clase(SubGrupo subGrupo, Sesion sesion) {
         this.subGrupo = subGrupo;
         this.sesion = sesion;
         this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(subGrupo.getGrupo().getRestricciones());
+        //this.restricciones.addAll(subGrupo.getGrupo().getRestricciones());
         this.restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
         if (subGrupo.getAsignatura().tieneNivel()) this.restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
     public void setSubGrupo(SubGrupo subGrupo) {
         this.subGrupo = subGrupo;
@@ -58,7 +73,7 @@ public class Clase {
     }
 
 
-    /** Consultoras **/
+    /**Consultoras*/
 
     public SubGrupo getSubGrupo() {
         return this.subGrupo;
@@ -104,7 +119,7 @@ public class Clase {
         return this.sesion.getDuracion();
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
     @Override
     public String toString() {

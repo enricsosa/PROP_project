@@ -1,21 +1,40 @@
-package domain;
+/**Asignacion*/
 
-/** Imports **/
+/**Imports*/
+
+package domain;
 
 import java.util.ArrayList;
 
+/**
+ * Asignacion contiene la informacion relativa a una Clase que se da en una Aula a una hora y dia determinados.
+ * @author  Daniel Martín
+ * @see     ArrayList
+ */
 public class Asignacion {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /** Hora de inicio de la Asignacion.*/
     private Integer horaIni;
+    /** Representa el dia de la semana en el cual se da la Asignacion.*/
     private Integer DiaSemana;
+    /** Representa el Aula donde se da la Asignacion.*/
     private Aula aula;
+    /** Representa la Clase que re realiza en la Asignacion.*/
     private Clase clase;
+    /** Arraylist que contiene todas la restricciones de los actores involucrados en la Asignacion.*/
     private ArrayList<Restriccion> restricciones;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Constructora de la clase Asignacion.
+     * @param horaIni   hora a la que empieza la Asignacion.
+     * @param diaSemana dia de la semana en que se produce la Asignacion.
+     * @param aula      Aula en la que se produce la Asignacion.
+     * @param clase     Clase que se realiza en la Asignacion.
+     */
     public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase) {
         this.horaIni = horaIni;
         this.DiaSemana = diaSemana;
@@ -25,6 +44,10 @@ public class Asignacion {
         this.restricciones.addAll(clase.getRestricciones());
     }
 
+    /**
+     * Constructora que copia el contenido de otra Asignacion.
+     * @param oldAsignacion Asignacion de la que se copia la información.
+     */
     public Asignacion(Asignacion oldAsignacion) {
         this.horaIni = oldAsignacion.getHoraIni();
         this.DiaSemana = oldAsignacion.getDiaSemana();
@@ -34,44 +57,77 @@ public class Asignacion {
         this.restricciones.addAll(oldAsignacion.getRestricciones());
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Asigna una nueva horaIni a Asignacion.
+     * @param horaIni   Nueva horaIni que se asignará a la Asignacion.
+     */
     public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
-    public String generateKey() {
-        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId());
-    }
-
+    /**
+     * Asigna un nuevo diaSemana a Asignacion.
+     * @param diaSemana Nuevo diaSemana que se asignará a la Asignacion.
+     */
     public void setDiaSemana(Integer diaSemana) {
         DiaSemana = diaSemana;
     }
 
+    /**
+     * Asigna una nueva Aula a Asignacion.
+     * @param aula  Nueva Aula que se asignará a la Asignacion.
+     */
     public void setAula(Aula aula) {
         this.aula = aula;
     }
 
+    /**
+     * Asigna una nueva Clase a Asignacion.
+     * @param clase Nueva Clase que se asignará a la Asignacion.
+     */
     public void setClase(Clase clase) {
         this.clase = clase;
     }
 
+    /**
+     * Asigna un nuevo conjunto de Restricciones a la Asignacion.
+     * @param restricciones Conjunto de Restricciones que se asignará a la Asignación.
+     */
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
+    /**
+     * Añade una Restriccion a las Restricciones de la Asignacion.
+     * @param restriccion   Restriccion que se añade a la Asignacion.
+     */
     public void addRestriccion(Restriccion restriccion) {
         this.restricciones.add(restriccion);
     }
 
+    /**
+     * Añade un conjunto de Restricciones a las Restricciones de la Asignacion.
+     * @param restricciones Conjunto de Restriccones que se añade a la Asignacion.
+     */
     public void addRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones.addAll(restricciones);
     }
 
-    public void eliminarRestriccion(Integer posicion) {
+    /**
+     * Elimina una Restriccion de la Asignacion en función de su posición.
+     * @param posicion  Posición de la Restrccion que se quiere eliminar.
+     */
+    public void eliminarRestriccion(int posicion) {
         this.restricciones.remove(posicion);
     }
 
+    /**
+     * Comprueva que todas las restricciones de una Asignacion se cumplen dadas unas Ocupaciones.
+     * @param ocupaciones   Ocupaciones en función de las cuales se evaluan la restricciones.
+     * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
+     */
     public Boolean comprovarRestricciones(Ocupaciones ocupaciones) {
         for (int i = 0; i < this.restricciones.size(); ++i) {
             if (!(this.getRestriccion(i).comprovarRestriccion(this, ocupaciones))) return false;
@@ -79,60 +135,125 @@ public class Asignacion {
         return true;
     }
 
+    /**
+     * Comprueba que no existe conflicto entre SubGrupo y Aula involucrados.
+     * @return  Devuelve true si no hay conflicto de plazas, false en caso contrario.
+     */
     public Boolean noCabeSubGrupo() {
         return (this.clase.getPlazas() > this.aula.getPlazas());
     }
 
-    /** Consultoras **/
+    /**
+     * Genera una clave única para la Asignacion.
+     * @return  Devuelve un String con la clave única de la Asignación.
+     */
+    public String generateKey() {
+        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId());
+    }
 
+    /**Consultoras*/
+
+    /**
+     * Devuelve un Integer con el valor de horaIni.
+     * @return  Devuelve el atributo horaIni.
+     */
     public Integer getHoraIni() {
         return this.horaIni;
     }
 
+    /**
+     * Devuelve un Integer con el valor de diaSemana.
+     * @return  Devuelve el atributo diaSemana.
+     */
     public Integer getDiaSemana() {
         return this.DiaSemana;
     }
 
+    /**
+     * Devuelve un Integer con la hora a la que finaliza la Asignacion.
+     * @return  Devuelve un la hora a la que finaliza la Asignacion.
+     */
     public Integer getHoraFin() {
         return this.horaIni + this.clase.getSesion().getDuracion();
     }
 
+    /**
+     * Devuelve el Aula donde se realiza la Asignacion.
+     * @return  Devuelve el atributo aula
+     */
     public Aula getAula() {
         return this.aula;
     }
 
+    /**
+     * Devuelve el Grupo del Subgrupo asociado a la Clase de la Asignacion.
+     * @return  Devuleve el Grupo involucrado en la Asignacion.
+     */
     public Grupo getGrupo() {
         return this.clase.getGrupo();
     }
 
+    /**
+     * Devuelve el Subgrupo asociado a la Clase de la Asignacion.
+     * @return  Devuelve el Subgrupo involucrado en la Asignacion.
+     */
     public SubGrupo getSubGrupo() {
         return this.clase.getSubGrupo();
     }
 
+    /**
+     * Devuelve la Clase que se realiza en la Asignación.
+     * @return  Devuelve el atributo clase.
+     */
     public Clase getClase() {
         return this.clase;
     }
 
+    /**
+     * Devuelve las Restricciones de la Asignacion.
+     * @return  Devuelve el atributo restricciones.
+     */
     public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 
-    public Restriccion getRestriccion(int i) {
-        return this.restricciones.get(i);
+    /**
+     * Devuelve una Restriccion de la Asignacion en función de su posición.
+     * @param posicion  Posicion de la Restriccion dentro del Arraylist de Restricciones.
+     * @return          Devuelve la Restricion que se encuentra en la posicion dada.
+     */
+    public Restriccion getRestriccion(int posicion) {
+        return this.restricciones.get(posicion);
     }
 
+    /**
+     * Devuelve la Asignatura asociada al Grupo del SubGrupo asociado a la Clase de la Asignación.
+     * @return  Devuelve la Asignatura asociada a la Asignacion.
+     */
     public Asignatura getAsignatura() {
         return this.clase.getAsignatura();
     }
 
+    /**
+     * Devuelve si la Asignatura asociada a la Asignacion tiene un Nivel asociado.
+     * @return  Devuelve true si la Asignatura asociada a la Asignacion tiene nivel, false en caso contrario.
+     */
     public Boolean tieneNivel() {
         return this.getAsignatura().tieneNivel();
     }
 
+    /**
+     * Devuelve el Nivel asociado a la Asignatura que interviene en la Asignacion.
+     * @return  Devuelve el nivel que interviene en la Asignacion.
+     */
     public Nivel getNivel() {
         return this.getAsignatura().getNivel();
     }
 
+    /**
+     * Devuelve un String con la información detallada sobre la Asignacion.
+     * @return Devuelve una versión detallada de la Asignacion.
+     */
     public String toStringCompleto() {
         String t, tipo, hi, hf;
         hi = "";
@@ -158,8 +279,12 @@ public class Asignacion {
                 + this.getHoraFin() + ":00\n";
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
+    /**
+     * Convierte la Asignacion en String.
+     * @return  Devuelve un String con la información de la Asignacion.
+     */
     @Override
     public String toString() {
         String tipo;
