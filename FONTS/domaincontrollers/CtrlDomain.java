@@ -1,6 +1,7 @@
 package domaincontrollers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import domain.*;
@@ -61,6 +62,18 @@ public class CtrlDomain {
     public ArrayList<String> allEscenarios() {
         controladorEscenarios.escanearAllEscenarios();
         return controladorEscenarios.getAllEscenarios();
+    }
+
+    public ArrayList<String> allHorarios() {
+        return controladorEscenarios.escanearAllHorarios();
+    }
+
+    public void writeHorario(String horario, Integer idHorario) throws IOException {
+        controladorEscenarios.writeHorario(horario, idHorario);
+    }
+
+    public String readHorario(String horario) throws FileNotFoundException, IOException {
+        return controladorEscenarios.readHorario(horario);
     }
 
     public void cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
@@ -203,15 +216,14 @@ public class CtrlDomain {
         }
     }
 
-    public void generarHorario(String id) {
+    public String generarHorario(String id) {
         CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios, this.restricciones);
         ReturnSet horario = ctrlHorario.generarHorario(id);
         if (horario.getValidez()) planEstudios.setHorarioGeneral(horario.getHorario());
-        if (horario.getValidez()) {
-            out.println(horario.getHorario().toString());
-            out.println("Horario generado");
-        }
-        else out.println("Horario no generado");
+        if (horario.getValidez())
+            return horario.getHorario().toString();
+        else
+            return "false";
     }
 
     public CtrlHorario getCtrlHorario() {

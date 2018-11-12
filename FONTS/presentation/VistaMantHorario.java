@@ -35,16 +35,35 @@ public class VistaMantHorario {
                 out.print("Opción: ");
                 break;
 
+            case "escGenHor":
+                out.print("1. Generar un documento .txt\n");
+                out.print("2. Solamente mostrar el horario\n");
+                out.print("3. (Atrás)\n");
+                out.print("Opción: ");
+                break;
+
             default:
                 break;
         }
     }
 
-    public void mostrarMenuEscenarios(ArrayList<String> escenarios) {
-        int n = escenarios.size();
-        out.printf("\nEscenarios detectados disponibles:\n");
+    public void mostrarMenuDinamico(ArrayList<String> array, String tipo) {
+        int n = array.size();
+        switch (tipo) {
+            case "escenario":
+                out.printf("\nEscenarios detectados disponibles:\n");
+                break;
+
+            case "horario":
+                out.printf("\nHorarios generados disponibles:\n");
+                break;
+
+            default:
+                break;
+        }
+
         for (int i = 0; i < n; ++i) {
-            out.printf("%d. %s\n", i+1, escenarios.get(i));
+            out.printf("%d. %s\n", i+1, array.get(i));
         }
         out.printf("%d. (Atrás)\n", n+1);
         out.printf("Opción: ");
