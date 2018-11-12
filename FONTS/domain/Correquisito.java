@@ -1,8 +1,8 @@
+/**Correquisito*/
+
+/**Imports*/
+
 package domain;
-
-import java.util.ArrayList;
-
-/** Imports **/
 
 public class Correquisito extends Restriccion {
 

@@ -18,13 +18,13 @@ public class Asignacion {
     /** Hora de inicio de la Asignacion.*/
     private Integer horaIni;
     /** Representa el dia de la semana en el cual se da la Asignacion.*/
-    private Integer DiaSemana;
+    private Integer diaSemana;
     /** Representa el Aula donde se da la Asignacion.*/
     private Aula aula;
     /** Representa la Clase que re realiza en la Asignacion.*/
     private Clase clase;
-    /** Arraylist que contiene todas la restricciones de los actores involucrados en la Asignacion.*/
-    private ArrayList<Restriccion> restricciones;
+    //** Arraylist que contiene todas la restricciones de los actores involucrados en la Asignacion.*/
+    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
@@ -37,11 +37,11 @@ public class Asignacion {
      */
     public Asignacion(Integer horaIni, Integer diaSemana, Aula aula, Clase clase) {
         this.horaIni = horaIni;
-        this.DiaSemana = diaSemana;
+        this.diaSemana = diaSemana;
         this.aula = aula;
         this.clase = clase;
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(clase.getRestricciones());
+        //this.restricciones = new ArrayList<Restriccion>();
+        //this.restricciones.addAll(clase.getRestricciones());
     }
 
     /**
@@ -50,11 +50,11 @@ public class Asignacion {
      */
     public Asignacion(Asignacion oldAsignacion) {
         this.horaIni = oldAsignacion.getHoraIni();
-        this.DiaSemana = oldAsignacion.getDiaSemana();
+        this.diaSemana = oldAsignacion.getDiaSemana();
         this.aula = oldAsignacion.getAula();
         this.clase = oldAsignacion.getClase();
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(oldAsignacion.getRestricciones());
+        //this.restricciones = new ArrayList<Restriccion>();
+        //this.restricciones.addAll(oldAsignacion.getRestricciones());
     }
 
     /**Métodos públicos*/
@@ -72,7 +72,7 @@ public class Asignacion {
      * @param diaSemana Nuevo diaSemana que se asignará a la Asignacion.
      */
     public void setDiaSemana(Integer diaSemana) {
-        DiaSemana = diaSemana;
+        this.diaSemana = diaSemana;
     }
 
     /**
@@ -91,37 +91,37 @@ public class Asignacion {
         this.clase = clase;
     }
 
-    /**
-     * Asigna un nuevo conjunto de Restricciones a la Asignacion.
-     * @param restricciones Conjunto de Restricciones que se asignará a la Asignación.
-     */
-    public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones = restricciones;
-    }
+    ///**
+     //* Asigna un nuevo conjunto de Restricciones a la Asignacion.
+     //* @param restricciones Conjunto de Restricciones que se asignará a la Asignación.
+    ////*/
+    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
+      //  this.restricciones = restricciones;
+    //}
 
-    /**
-     * Añade una Restriccion a las Restricciones de la Asignacion.
-     * @param restriccion   Restriccion que se añade a la Asignacion.
-     */
-    public void addRestriccion(Restriccion restriccion) {
-        this.restricciones.add(restriccion);
-    }
+    //**
+     //* Añade una Restriccion a las Restricciones de la Asignacion.
+     //* @param restriccion   Restriccion que se añade a la Asignacion.
+     //*/
+    //public void addRestriccion(Restriccion restriccion) {
+      //  this.restricciones.add(restriccion);
+    //}
 
-    /**
-     * Añade un conjunto de Restricciones a las Restricciones de la Asignacion.
-     * @param restricciones Conjunto de Restriccones que se añade a la Asignacion.
-     */
-    public void addRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones.addAll(restricciones);
-    }
+    //**
+     //* Añade un conjunto de Restricciones a las Restricciones de la Asignacion.
+     //* @param restricciones Conjunto de Restriccones que se añade a la Asignacion.
+     //*/
+    //public void addRestricciones(ArrayList<Restriccion> restricciones) {
+      //  this.restricciones.addAll(restricciones);
+    //}
 
-    /**
-     * Elimina una Restriccion de la Asignacion en función de su posición.
-     * @param posicion  Posición de la Restrccion que se quiere eliminar.
-     */
-    public void eliminarRestriccion(int posicion) {
-        this.restricciones.remove(posicion);
-    }
+    ///**
+     //* Elimina una Restriccion de la Asignacion en función de su posición.
+    //* @param posicion  Posición de la Restrccion que se quiere eliminar.
+     //*/
+    //public void eliminarRestriccion(int posicion) {
+      //  this.restricciones.remove(posicion);
+    //}
 
     /**
      * Comprueva que todas las restricciones de una Asignacion se cumplen dadas unas Ocupaciones.
@@ -129,10 +129,7 @@ public class Asignacion {
      * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
     public Boolean comprovarRestricciones(Ocupaciones ocupaciones) {
-        for (int i = 0; i < this.restricciones.size(); ++i) {
-            if (!(this.getRestriccion(i).comprovarRestriccion(this, ocupaciones))) return false;
-        }
-        return true;
+        return this.clase.comprovarRestricciones(this.diaSemana, this.horaIni, ocupaciones);
     }
 
     /**
@@ -166,7 +163,7 @@ public class Asignacion {
      * @return  Devuelve el atributo diaSemana.
      */
     public Integer getDiaSemana() {
-        return this.DiaSemana;
+        return this.diaSemana;
     }
 
     /**
@@ -214,7 +211,7 @@ public class Asignacion {
      * @return  Devuelve el atributo restricciones.
      */
     public ArrayList<Restriccion> getRestricciones() {
-        return this.restricciones;
+        return this.clase.getRestricciones();
     }
 
     /**
@@ -223,7 +220,7 @@ public class Asignacion {
      * @return          Devuelve la Restricion que se encuentra en la posicion dada.
      */
     public Restriccion getRestriccion(int posicion) {
-        return this.restricciones.get(posicion);
+        return this.clase.getRestriccion(posicion);
     }
 
     /**
