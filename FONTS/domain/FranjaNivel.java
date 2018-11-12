@@ -1,53 +1,97 @@
+/**FranjaNivel*/
+
+/**Imports*/
+
 package domain;
 
-/** Imports **/
-
+/**
+ * FranjaAsignatura contiene la información de una Restriccion que indica que no se pueden dar Clases de un Nivel fuera
+ * de una franja horaria.
+ * @author  Daniel Martín
+ */
 public class FranjaNivel extends Restriccion {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**Nivel al que se aplica la Restriccion.*/
     private Nivel nivel;
+    /**Hora de inicio de la franja horaria.*/
     private Integer horaIni;
+    /**Hora en que acaba la franja horaria.*/
     private Integer horaFin;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Constructora de la clase FranjaNivel.
+     * @param nivel     Asignatura que se asociará a la Restriccion.
+     * @param horaIni   horaUni que se asociará a la Restricción.
+     * @param horaFin   horaFin que se asociará a la Restricción.
+     */
     public FranjaNivel(Nivel nivel, Integer horaIni, Integer horaFin) {
         this.nivel = nivel;
         this.horaIni = horaIni;
         this.horaFin = horaFin;
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Asigna un nuevo Nivel a la Restriccion.
+     * @param nivel Nuevo Nivel que se asociará a la Restriccion.
+     */
     public void setNivel(Nivel nivel) {
         this.nivel = nivel;
     }
 
+    /**
+     * Asigna una nueva horaIni a la Restriccion.
+     * @param horaIni   Nueva horaIni que se asociará a la Restriccion.
+     */
     public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
+    /**
+     * Asigna una nueva horaFin a la Restriccion.
+     * @param horaFin   Nueva horaFin que se asociará a la Restriccion.
+     */
     public void setHoraFin(Integer horaFin) {
         this.horaFin = horaFin;
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Devuelve el Nivel asociado a la Restriccion.
+     * @return  Nivel de la Restriccion.
+     */
     public Nivel getNivel() {
         return this.nivel;
     }
 
+    /**
+     * Devuelve la horaIni de la Restriccion.
+     * @return horaIni de la Restriccion.
+     */
     public Integer getHoraIni() {
         return this.horaIni;
     }
 
+    /**
+     * Devuelve la horaFin de la Restriccion.
+     * @return horaFin de la Restriccion.
+     */
     public Integer getHoraFin() {
         return this.horaFin;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
+    /**
+     * Devuelve el TipoRestriccion correspondiente.
+     * @return  TipoRestriccion.FranjaNivel.
+     */
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.FranjaNivel;
@@ -68,12 +112,21 @@ public class FranjaNivel extends Restriccion {
         return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
     }
 
+    /**
+     * Convierte FranjaNivel a un String con su información.
+     * @return  String con la información FranjaNivel.
+     */
     @Override
     public String toString() {
         return ("Franja Nivel:\n-Nivel: " + this.nivel.getNombre() + "\n-Hora inicio: " + getHoraCompleta(this.horaIni)
                 + "\n-Hora fin: " + getHoraCompleta(this.horaFin));
     }
 
+    /**
+     * Tranforma un int representando una hora a un String que representa la hora de forma normativa.
+     * @param hora  hora que se quiere convertir a String.
+     * @return      Devuelve el String representando la hora introducida.
+     */
     static String getHoraCompleta(int hora) {
         if (hora == 24) return "00:00";
         else if (hora < 10) return "0" + Integer.toString(hora) + ":00";

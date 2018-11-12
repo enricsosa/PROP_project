@@ -1,43 +1,77 @@
+/**FranjaTrabajo*/
+
+/**Imports*/
+
 package domain;
 
-/** Imports **/
-
+/**
+ * FranjaTrabajo contiene la información de una Restriccion que indica que no se pueden dar Clases fuera de una franja
+ * horaria.
+ * @author  Daniel Martín
+ */
 public class FranjaTrabajo extends Restriccion {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**Hora de inicio de la franja horaria.*/
     private Integer horaIni;
+    /**Hora en que acaba la franja horaria.*/
     private Integer horaFin;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Constructora de la clase FranjaTrabajo.
+     * @param horaIni   horaUni que se asociará a la Restricción.
+     * @param horaFin   horaFin que se asociará a la Restricción.
+     */
     public FranjaTrabajo(Integer horaIni, Integer horaFin) {
         this.horaIni = horaIni;
         this.horaFin = horaFin;
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Asigna una nueva horaIni a la Restriccion.
+     * @param horaIni   Nueva horaIni que se asociará a la Restriccion.
+     */
     public void setHoraIni(Integer horaIni) {
         this.horaIni = horaIni;
     }
 
+    /**
+     * Asigna una nueva horaFin a la Restriccion.
+     * @param horaFin   Nueva horaFin que se asociará a la Restriccion.
+     */
     public void setHoraFin(Integer horaFin) {
         this.horaFin = horaFin;
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Devuelve la horaIni de la Restriccion.
+     * @return horaIni de la Restriccion.
+     */
     public Integer getHoraIni() {
         return horaIni;
     }
 
+    /**
+     * Devuelve la horaFin de la Restriccion.
+     * @return horaFin de la Restriccion.
+     */
     public Integer getHoraFin() {
         return this.horaFin;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
+    /**
+     * Devuelve el TipoRestriccion correspondiente.
+     * @return  TipoRestriccion.FranjaTrabajo.
+     */
     @Override
     public TipoRestriccion getTipoRestriccion() {
         return TipoRestriccion.FranjaTrabajo;
@@ -56,11 +90,20 @@ public class FranjaTrabajo extends Restriccion {
         return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
     }
 
+    /**
+     * Convierte FranjaTrabajo a un String con su información.
+     * @return  String con la información FranjaTrabajo.
+     */
     @Override
     public String toString() {
         return ("Franja Trabajo:\n-Hora inicio: " + getHoraCompleta(this.horaIni) + "\n-Hora fin: " + getHoraCompleta(this.horaFin));
     }
 
+    /**
+     * Tranforma un int representando una hora a un String que representa la hora de forma normativa.
+     * @param hora  hora que se quiere convertir a String.
+     * @return      Devuelve el String representando la hora introducida.
+     */
     static String getHoraCompleta(int hora) {
         if (hora == 24) return "00:00";
         else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
