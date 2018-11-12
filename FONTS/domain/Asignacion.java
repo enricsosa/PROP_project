@@ -15,13 +15,13 @@ public class Asignacion {
 
     /**Atributos*/
 
-    /** Hora de inicio de la Asignacion.*/
+    /**Hora de inicio de la Asignacion.*/
     private Integer horaIni;
-    /** Representa el dia de la semana en el cual se da la Asignacion.*/
+    /**Representa el dia de la semana en el cual se da la Asignacion.*/
     private Integer diaSemana;
-    /** Representa el Aula donde se da la Asignacion.*/
+    /**Representa el Aula donde se da la Asignacion.*/
     private Aula aula;
-    /** Representa la Clase que re realiza en la Asignacion.*/
+    /**Representa la Clase que re realiza en la Asignacion.*/
     private Clase clase;
     //** Arraylist que contiene todas la restricciones de los actores involucrados en la Asignacion.*/
     //private ArrayList<Restriccion> restricciones;

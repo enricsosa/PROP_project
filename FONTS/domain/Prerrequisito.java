@@ -44,11 +44,6 @@ public class Prerrequisito extends Restriccion {
     }
 
     @Override
-    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        return true;
-    }
-
-    @Override
     public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         return true;
     }

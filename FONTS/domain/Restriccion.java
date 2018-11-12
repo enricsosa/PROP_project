@@ -16,8 +16,6 @@ public abstract class Restriccion {
 
     public abstract TipoRestriccion getTipoRestriccion();
 
-    public abstract Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones);
-
     public abstract Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones);
 
     /** Métodos redefinidos **/

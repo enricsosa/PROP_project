@@ -19,19 +19,19 @@ public class Asignatura {
 
     /**Atributos*/
 
-    /** Codigo identifcador de la Asignatura.*/
+    /**Codigo identifcador de la Asignatura.*/
     private String id;
-    /** Nombre completo de la Asignatura.*/
+    /**Nombre completo de la Asignatura.*/
     private String nombre;
-    /** PlanEstudios al cual pertence la Asignatura.*/
+    /**PlanEstudios al cual pertence la Asignatura.*/
     private PlanEstudios planEstudios;
-    /** Nivel al cual pertenece la Asignatura.*/
+    /**Nivel al cual pertenece la Asignatura.*/
     private Nivel nivel;
-    /** Conjunto de Sesiones que se dan en la Asignatura.*/
+    /**Conjunto de Sesiones que se dan en la Asignatura.*/
     private ArrayList<Sesion> sesiones;
-    /** Conjunto de Grupos que tiene la Asignatura.*/
+    /**Conjunto de Grupos que tiene la Asignatura.*/
     private Map<String, Grupo> grupos;
-    /** Conjunto de Restricciones de la Asignatura.*/
+    /**Conjunto de Restricciones de la Asignatura.*/
     private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/

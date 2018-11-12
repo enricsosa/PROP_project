@@ -19,8 +19,8 @@ public class Clase {
     private SubGrupo subGrupo;
     /**Sesion que se realiza en la Clase*/
     private Sesion sesion;
-    /**Conjunto de Restricciones formado por las Restricciones de la Asignatura y el Nivel (si tiene) del Grupo.*/
-    private ArrayList<Restriccion> restricciones;
+    //**Conjunto de Restricciones formado por las Restricciones de la Asignatura y el Nivel (si tiene) del Grupo.*/
+    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
@@ -32,10 +32,10 @@ public class Clase {
     public Clase(SubGrupo subGrupo, Sesion sesion) {
         this.subGrupo = subGrupo;
         this.sesion = sesion;
-        this.restricciones = new ArrayList<Restriccion>();
+        //this.restricciones = new ArrayList<Restriccion>();
         //this.restricciones.addAll(subGrupo.getGrupo().getRestricciones());
-        this.restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
-        if (subGrupo.getAsignatura().tieneNivel()) this.restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
+        //this.restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
+        //if (subGrupo.getAsignatura().tieneNivel()) this.restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
     }
 
     /**Métodos públicos*/
@@ -56,29 +56,29 @@ public class Clase {
         this.sesion = sesion;
     }
 
-    /**
-     * Asigna un nuevo conjunto de Restricciones a Clase.
-     * @param restricciones Nuevo conjunto de Restricciones que se asignará a Clase.
-     */
-    public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones = restricciones;
-    }
+    //**
+    // * Asigna un nuevo conjunto de Restricciones a Clase.
+    // * @param restricciones Nuevo conjunto de Restricciones que se asignará a Clase.
+    // */
+    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
+    //    this.restricciones = restricciones;
+    //}
 
-    /**
-     * Añade una Restriccion al conjunto de Restricciones de Clase.
-     * @param restriccion   Restriccion que se añade a las Restricciones de la Clase.
-     */
-    public void addRestriccion(Restriccion restriccion) {
-        this.restricciones.add(restriccion);
-    }
+    //**
+    // * Añade una Restriccion al conjunto de Restricciones de Clase.
+    // * @param restriccion   Restriccion que se añade a las Restricciones de la Clase.
+    // */
+    //public void addRestriccion(Restriccion restriccion) {
+    //    this.restricciones.add(restriccion);
+    //}
 
-    /**
-     * ELimina una Restriccion en funcion de su posicion dentro de las Restricciones de la Clase.
-     * @param posicion  posicion de la Restriccion que se quiere eliminar dentro de las Restricciones de la Clase.
-     */
-    public void eliminarRestriccion(Integer posicion) {
-        this.restricciones.remove(posicion);
-    }
+    //**
+    // * ELimina una Restriccion en funcion de su posicion dentro de las Restricciones de la Clase.
+    // * @param posicion  posicion de la Restriccion que se quiere eliminar dentro de las Restricciones de la Clase.
+     //*/
+    //public void eliminarRestriccion(Integer posicion) {
+    //    this.restricciones.remove(posicion);
+    //}
 
     /**
      * Convierte la Clase a un String que contiene su información de forma resumida.
@@ -97,8 +97,9 @@ public class Clase {
      * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
     public Boolean comprovarRestricciones(int dia, int horaIni, Ocupaciones ocupaciones) {
-        for (int i = 0; i < this.restricciones.size(); ++i) {
-            if (!(this.getRestriccion(i).comprovarRestriccion(this, dia, horaIni, ocupaciones))) return false;
+        ArrayList<Restriccion> restricciones = this.getRestricciones();
+        for (int i = 0; i < restricciones.size(); ++i) {
+            if (!(restricciones.get(i).comprovarRestriccion(this, dia, horaIni, ocupaciones))) return false;
         }
         return true;
     }
@@ -123,11 +124,14 @@ public class Clase {
     }
 
     /**
-     * Devuelve el conjunto de Restriciiones de la Clase.
+     * Devuelve el conjunto de Restricciones de la Clase.
      * @return  Restricciones de la Clase.
      */
     public ArrayList<Restriccion> getRestricciones() {
-        return this.restricciones;
+        ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+        restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
+        if (subGrupo.getAsignatura().tieneNivel()) restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
+        return restricciones;
     }
 
     /**
@@ -136,7 +140,7 @@ public class Clase {
      * @return          Restriccion situada en la posicion indicada de las Restricciones de la Clase.
      */
     public Restriccion getRestriccion(int posicion) {
-        return this.restricciones.get(posicion);
+        return this.getRestricciones().get(posicion);
     }
 
     /**

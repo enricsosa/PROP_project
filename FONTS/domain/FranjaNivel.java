@@ -53,13 +53,14 @@ public class FranjaNivel extends Restriccion {
         return TipoRestriccion.FranjaNivel;
     }
 
-    @Override
-    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        if (!(asignacion.tieneNivel())) return true;
-        if ((asignacion.getNivel() != this.nivel)) return true;
-        return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
-    }
-
+    /**
+     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y ocupaciones.
+     * @param clase         Clase de la que se comprueba la Retriccion.
+     * @param dia           dia en que se comprueba la Restriccion.
+     * @param horaIni       horaIni con la que se comprueba la Restriccion.
+     * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
+     * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
+     */
     @Override
     public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         if (!(clase.tieneNivel())) return true;

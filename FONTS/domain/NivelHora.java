@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Map;
-import static java.lang.System.out;
 
 /** Imports **/
 
@@ -36,22 +35,14 @@ public class NivelHora extends Restriccion {
         return TipoRestriccion.NivelHora;
     }
 
-    @Override
-    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
-            for (Map.Entry<String, Grupo> entry : ocupaciones.getHora(asignacion.getDiaSemana(),hora).getGrupos().entrySet()) {
-                if (entry.getValue().getId().equals(asignacion.getGrupo().getId())) {
-                    if (entry.getValue().tieneNivel()) {
-                        if ((entry.getValue().getNivel() == asignacion.getNivel()) && (entry.getValue().getAsignatura() != asignacion.getAsignatura())) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
+    /**
+     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y ocupaciones.
+     * @param clase         Clase de la que se comprueba la Retriccion.
+     * @param dia           dia en que se comprueba la Restriccion.
+     * @param horaIni       horaIni con la que se comprueba la Restriccion.
+     * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
+     * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
+     */
     @Override
     public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {

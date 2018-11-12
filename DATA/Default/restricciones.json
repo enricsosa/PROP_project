@@ -52,8 +52,8 @@
       "niveles": [
         {
           "idNivel": "S1",
-          "horaIni": 8,
-          "horaFin": 16
+          "horaIni": 10,
+          "horaFin": 20
         }
       ]
     }

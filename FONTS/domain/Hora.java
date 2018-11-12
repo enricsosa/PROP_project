@@ -16,7 +16,7 @@ public class Hora {
     private Map<String, Grupo> grupos;
     private Map<String, SubGrupo> subGrupos;
     private Map<String, Asignacion> asignaciones;
-    private ArrayList<Restriccion> restricciones;
+    //private ArrayList<Restriccion> restricciones;
 
     /** Constructoras **/
 
@@ -27,7 +27,7 @@ public class Hora {
         this.grupos = new HashMap<String, Grupo>();
         this.subGrupos = new HashMap<String, SubGrupo>();
         this.asignaciones = new HashMap<String, Asignacion>();
-        this.restricciones = new ArrayList<Restriccion>();
+        //this.restricciones = new ArrayList<Restriccion>();
     }
 
     public Hora(Hora oldHora) {
@@ -43,8 +43,8 @@ public class Hora {
         this.subGrupos.putAll(oldHora.subGrupos);
         this.asignaciones = new HashMap<String, Asignacion>();
         this.asignaciones.putAll(oldHora.asignaciones);
-        this.restricciones = new ArrayList<Restriccion>();
-        this.restricciones.addAll(oldHora.restricciones);
+        //this.restricciones = new ArrayList<Restriccion>();
+        //this.restricciones.addAll(oldHora.restricciones);
     }
 
     /** Metodos publicos **/
@@ -151,21 +151,21 @@ public class Hora {
         this.aulas.remove(id);
     }
 
-    public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones = restricciones;
-    }
+    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
+      //  this.restricciones = restricciones;
+    //}
 
-    public void addRestriccion(Restriccion restriccion) {
-        this.restricciones.add(restriccion);
-    }
+    //public void addRestriccion(Restriccion restriccion) {
+      //  this.restricciones.add(restriccion);
+    //}
 
-    public void addRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones.addAll(restricciones);
-    }
+    //public void addRestricciones(ArrayList<Restriccion> restricciones) {
+      //  this.restricciones.addAll(restricciones);
+    //}
 
-    public void eliminarRestriccion(Integer posicion) {
-        this.restricciones.remove(posicion);
-    }
+    //public void eliminarRestriccion(Integer posicion) {
+      //  this.restricciones.remove(posicion);
+    //}
 
     /** Consultoras **/
 
@@ -249,13 +249,13 @@ public class Hora {
         return (this.asignaciones.get(asignacion.generateKey()) != null);
     }
 
-    public ArrayList<Restriccion> getRestricciones() {
-        return restricciones;
-    }
+    //public ArrayList<Restriccion> getRestricciones() {
+     //   return restricciones;
+    //}
 
-    public Restriccion getRestriccion(int i) {
-        return this.restricciones.get(i);
-    }
+    //public Restriccion getRestriccion(int i) {
+      //  return this.restricciones.get(i);
+    //}
 
     /** Métodos redefinidos **/
 

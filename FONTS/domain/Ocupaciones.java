@@ -43,14 +43,14 @@ public class Ocupaciones {
         this.getDia(asignacion.getDiaSemana()).addAula(asignacion.getAula());
         this.getDia(asignacion.getDiaSemana()).addGrupo(asignacion.getGrupo());
         this.getDia(asignacion.getDiaSemana()).addSubGrupo(asignacion.getSubGrupo());
-        this.getDia(asignacion.getDiaSemana()).addRestricciones(asignacion.getRestricciones());
+        //this.getDia(asignacion.getDiaSemana()).addRestricciones(asignacion.getRestricciones());
 
         for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignatura(asignacion.getAsignatura());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addAula(asignacion.getAula());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addGrupo(asignacion.getGrupo());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addSubGrupo(asignacion.getSubGrupo());
-            this.getDia(asignacion.getDiaSemana()).getHora(hora).addRestricciones(asignacion.getRestricciones());
+            //this.getDia(asignacion.getDiaSemana()).getHora(hora).addRestricciones(asignacion.getRestricciones());
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignacion(asignacion);
         }
     }

@@ -43,11 +43,14 @@ public class FranjaTrabajo extends Restriccion {
         return TipoRestriccion.FranjaTrabajo;
     }
 
-    @Override
-    public Boolean comprovarRestriccion(Asignacion asignacion, Ocupaciones ocupaciones) {
-        return ((asignacion.getHoraIni() >= this.horaIni) && (asignacion.getHoraFin() <= this.horaFin));
-    }
-
+    /**
+     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y ocupaciones.
+     * @param clase         Clase de la que se comprueba la Retriccion.
+     * @param dia           dia en que se comprueba la Restriccion.
+     * @param horaIni       horaIni con la que se comprueba la Restriccion.
+     * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
+     * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
+     */
     @Override
     public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
