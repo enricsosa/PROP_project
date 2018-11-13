@@ -1,29 +1,65 @@
+/**CtrlPresentacionGenHorario*/
+
+/**Imports*/
+
 package presentation;
 
-import domaincontrollers.CtrlDomain;
-import domaincontrollers.CtrlHorario;
-import org.json.simple.parser.ParseException;
-
-import java.io.File;
+//import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
+//import java.io.PrintWriter;
+import java.util.ArrayList;
+import org.json.simple.parser.ParseException;
 
+import domaincontrollers.CtrlDomain;
+//import domaincontrollers.CtrlHorario;
+
+/**
+ * Controlador de Presentacion que gestiona la generación de Horarios.
+ * @author  Enric Sosa
+ * @see     FileNotFoundException
+ * @see     IOException
+ * @see     ArrayList
+ * @see     ParseException
+ * @see     CtrlDomain
+ */
 public class CtrlPresentacionGenHorario {
 
+    /**Atributos*/
+
+    /**VistaMantHorario del programa.*/
     private VistaMantHorario Vmh;
+    /**CtrlDomain del programa.*/
     private CtrlDomain CD;
+    /**Escenarios almacenados.*/
     private ArrayList<String> Escenarios;
+    /**id del siguiente horario a generar.*/
     private Integer idHorario = 1;
+    /**String que contiene información de un Horario.*/
     private String horario;
 
+    /**Constructoras*/
+
+    /**
+     * Creadora de la clase CtrlPresentacionGenHorario.
+     * @param vmh           VistaMantHorario que se asigna a CtrlPresentacionGenHorario.
+     * @param escenarios    Listado de escenarios que se asigna a CtrlPresentacionGenHorario.
+     * @param cd            CtrlDomain que se asigna a CtrlPresentacionGenHorario.
+     */
     public CtrlPresentacionGenHorario(VistaMantHorario vmh, ArrayList<String> escenarios, CtrlDomain cd) {
         Vmh = vmh;
         Escenarios = escenarios;
         CD = cd;
     }
 
+    /**Métodos públicos*/
+
+    /**
+     * Gestiona el menú de Horarios.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void mantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
         boolean br = false;
@@ -56,6 +92,12 @@ public class CtrlPresentacionGenHorario {
         }
     }
 
+    /**
+     * Gestiona el menú de selección de escenarios.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     private void escogerEscenarios() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
         Vmh.mostrarMenuDinamico(Escenarios, "escenario");
@@ -84,6 +126,12 @@ public class CtrlPresentacionGenHorario {
         }
     }
 
+    /**
+     * Gestiona el menú de generación de Horarios.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     private void escogerGenHorario() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
         Vmh.mostrarMenu("escGenHor");
@@ -112,6 +160,13 @@ public class CtrlPresentacionGenHorario {
         }
     }
 
+    /**
+     * Muestra un Horario por consola.
+     * @param saveHorario
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     private void mostrarHorario(boolean saveHorario) throws FileNotFoundException, IOException, ParseException {
         System.out.println(this.horario);
         if (saveHorario) {
@@ -120,6 +175,11 @@ public class CtrlPresentacionGenHorario {
         }
     }
 
+    /**
+     * Consulta un Horario.
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     private void consultarHorarios() throws FileNotFoundException, IOException {
         int op = -1;
         ArrayList<String> horarios = new ArrayList<String>();
@@ -137,5 +197,9 @@ public class CtrlPresentacionGenHorario {
             }
         }
     }
+
+    /**Consultoras*/
+
+    /**Métodos redefinidos*/
 
 }

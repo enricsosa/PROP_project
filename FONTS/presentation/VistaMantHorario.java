@@ -1,15 +1,37 @@
+/**VistaMantHorario*/
+
+/**Imports*/
+
 package presentation;
 
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.InputMismatchException;
+//import java.io.*;
 import static java.lang.System.out;
 
+/**
+ * VistaMantHorario gestiona las interacciones de los menús del programa.
+ * @author  Daniel Martín
+ * @see     ArrayList
+ * @see     Scanner
+ * @see     InputMismatchException
+ * @see     System
+ */
 public class VistaMantHorario {
 
+    /**Instancia de Scanner para las lecturas.*/
     private Scanner in = new Scanner(System.in);
 
+    /**Constructora de VistaMantHorario.*/
     public VistaMantHorario() {}
 
+    /**
+     * Gestiona la orden que da el usuario.
+     * @param nOps  Orden que da el usuario.
+     * @return      Valor necesario para interpretar la orden.
+     * @throws InputMismatchException
+     */
     public int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;
         while (op == -1) {
@@ -26,6 +48,10 @@ public class VistaMantHorario {
         return op;
     }
 
+    /**
+     * Muestra un menú en función del nombre de menú que se le da.
+     * @param menu  Nombre del menu que se quiere mostrar.
+     */
     public void mostrarMenu(String menu) {
         switch (menu) {
             case "mainMenu":
@@ -47,6 +73,11 @@ public class VistaMantHorario {
         }
     }
 
+    /**
+     * Muestra un menú dinámico en función del nombre de menú que se le da y la información proporcionada.
+     * @param array Información para el menú dinámico.
+     * @param tipo  Nombre del menu que se quiere mostrar.
+     */
     public void mostrarMenuDinamico(ArrayList<String> array, String tipo) {
         int n = array.size();
         switch (tipo) {
