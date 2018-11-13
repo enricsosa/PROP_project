@@ -20,7 +20,7 @@ public class Grupo {
 
     /**Atributos*/
 
-    /**Código identificador del Grupo.*/
+    /**Código identificador del Grupo dentro de su Asignatura.*/
     private String id;
     /**Asignatura a la que pertenece el Grupo.*/
     private Asignatura asignatura;

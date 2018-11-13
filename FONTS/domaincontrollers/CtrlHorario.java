@@ -7,7 +7,7 @@ import domain.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
-import static java.lang.System.out;
+//import static java.lang.System.out;
 import java.util.Comparator;
 
 public class CtrlHorario {
@@ -152,8 +152,8 @@ public class CtrlHorario {
             for (int i = 0; (i < restricciones.size()) && (!found); ++i) {
                 if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel) {
                     found = true;
-                    horaIni = max(horaIni, ((FranjaNivel)(restricciones.get(i))).getHoraIni());
-                    horaFin = min(horaFin, ((FranjaNivel)(restricciones.get(i))).getHoraFin());
+                    horaIni = Aux.max(horaIni, ((FranjaNivel)(restricciones.get(i))).getHoraIni());
+                    horaFin = Aux.min(horaFin, ((FranjaNivel)(restricciones.get(i))).getHoraFin());
                 }
             }
         }
@@ -162,8 +162,8 @@ public class CtrlHorario {
         for (int i = 0; (i < restricciones.size()) && (!found); ++i) {
             if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaAsignatura) {
                 found = true;
-                horaIni = max(horaIni, ((FranjaAsignatura)(restricciones.get(i))).getHoraIni());
-                horaFin = min(horaFin, ((FranjaAsignatura)(restricciones.get(i))).getHoraFin());
+                horaIni = Aux.max(horaIni, ((FranjaAsignatura)(restricciones.get(i))).getHoraIni());
+                horaFin = Aux.min(horaFin, ((FranjaAsignatura)(restricciones.get(i))).getHoraFin());
             }
         }
         return new ReturnSet(horaIni, horaFin);
@@ -198,12 +198,6 @@ public class CtrlHorario {
             }
         }
         return false;
-    }
-
-    static String strTipo(TipoClase tipo) {
-        if (tipo == TipoClase.Teoria) return "T";
-        else if (tipo == TipoClase.Laboratorio) return "L";
-        return "P";
     }
 
     public void loadLimitacionesHorario() {
@@ -253,16 +247,6 @@ public class CtrlHorario {
 
     public void setLimitacionesHorario(LimitacionesHorario limitacionesHorario) {
         this.limitacionesHorario = limitacionesHorario;
-    }
-
-    static int max(int x, int y) {
-        if (x >= y) return x;
-        return y;
-    }
-
-    static int min(int x, int y) {
-        if (x <= y) return x;
-        return y;
     }
 
     /** Consultoras **/

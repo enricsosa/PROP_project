@@ -75,22 +75,7 @@ public class DiaLibre extends Restriccion {
      */
     @Override
     public String toString() {
-        return "Dia Libre: " + getNombreDia(this.dia);
-    }
-
-    /**
-     * Obtiene el String con el nombre del dia de la Semana que corresponde a un int representando un dia.
-     * @param dia   dia de la semana del que se quiere obtener el nombre.
-     * @return      String con el nombre de dia.
-     */
-    static String getNombreDia(int dia) {
-        if (dia == 1) return "Lunes";
-        else if (dia == 2) return "Martes";
-        else if (dia == 3) return "Miercoles";
-        else if (dia == 4) return "Jueves";
-        else if (dia == 5) return "Viernes";
-        else if (dia == 6) return "Sábado";
-        else return "Domingo";
+        return "Dia Libre: " + Aux.getNombreDia(this.dia);
     }
 
 }

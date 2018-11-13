@@ -17,7 +17,7 @@ import data.CtrlPlanEstudiosFile;
 import data.CtrlRestriccionesFile;
 import data.CtrlEscenariosDir;
 
-import static java.lang.System.out;
+//import static java.lang.System.out;
 
 public class CtrlDomain {
 

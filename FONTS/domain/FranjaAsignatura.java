@@ -117,18 +117,7 @@ public class FranjaAsignatura extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Franja Asignatura:\n-Asignatura: " + this.asignatura.getId() + "\n-Hora inicio: " + getHoraCompleta(this.horaIni)
-                + "\n-Hora fin: " + getHoraCompleta(this.horaFin));
-    }
-
-    /**
-     * Tranforma un int representando una hora a un String que representa la hora de forma normativa.
-     * @param hora  hora que se quiere convertir a String.
-     * @return      Devuelve el String representando la hora introducida.
-     */
-    static String getHoraCompleta(int hora) {
-        if (hora == 24) return "00:00";
-        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
-        return Integer.toString(hora) + ":00";
+        return ("Franja Asignatura:\n-Asignatura: " + this.asignatura.getId() + "\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni)
+                + "\n-Hora fin: " + Aux.getHoraCompleta(this.horaFin));
     }
 }

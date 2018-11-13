@@ -131,21 +131,10 @@ public class Aula {
     public String toString() {
         String text = ("Aula: " + this.id + "\n-Plazas: " + this.plazas.toString() + "\n-Tipos:");
         for (int i = 0; i < this.tipos.size(); ++i) {
-            text += (" " + strTipo(tipos.get(i)));
+            text += (" " + Aux.strTipo(tipos.get(i)));
             if (i != (this.tipos.size() - 1)) text += ",";
         }
         return text;
-    }
-
-    /**
-     * Convierte un TipoClase a un String con su forma abreviada.
-     * @param tipo  TipoClase que se quiere convertir.
-     * @return  Devuelve un String con la forma abreviada del TipoClase.
-     */
-    static String strTipo(TipoClase tipo) {
-        if (tipo == TipoClase.Teoria) return "T";
-        else if (tipo == TipoClase.Laboratorio) return "L";
-        return "P";
     }
 
 

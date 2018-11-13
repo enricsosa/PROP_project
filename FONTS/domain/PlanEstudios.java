@@ -159,48 +159,91 @@ public class PlanEstudios {
 
     /**Consultoras*/
 
+    /**
+     * Devuelve un String con el nombre del PlanEstudios.
+     * @return  String con el nombre del PlanEstudios.
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    /**
+     * Devuelve un Map con los Niveles de PlanEstudios.
+     * @return  Map con los Niveles de PlanEstudios.
+     */
     public Map<String, Nivel> getNiveles() {
         return this.niveles;
     }
 
-    public Nivel getNivel(String nom) {
-        return this.niveles.get(nom);
+    /**
+     * Dado su nombre devuelve un Nivel de PlanEstudios.
+     * @param nombre    Nombre del Nivel que se quiere obtener.
+     * @return          niveld e PlanEstudios con el nombre dado.
+     */
+    public Nivel getNivel(String nombre) {
+        return this.niveles.get(nombre);
     }
 
+    /**
+     * Devuelve un Map con las Asignaturas de PlanEstudios.
+     * @return  Map con las Asignaturas de PlanEstudios.
+     */
     public Map<String, Asignatura> getAsignaturas() {
         return this.asignaturas;
     }
 
-    public Asignatura getAsignatura(String nom) {
-        return this.asignaturas.get(nom);
+    /**
+     * Dado su id devuelve una Asignatura de PlanEstudios.
+     * @param id    id de la Asignatura que se quiere obtener.
+     * @return      Asignatura de PlanEstudios con la id dada.
+     */
+    public Asignatura getAsignatura(String id) {
+        return this.asignaturas.get(id);
     }
 
+    /**
+     * Devuelve un Map con las Aulas de PlanEstudios.
+     * @return  Map con las Aulas de PlanEstudios.
+     */
     public Map<String, Aula> getAulas() {
         return this.aulas;
     }
 
+    /**
+     * Devuelve un Map con las Aulas compatibles con Clases de Teoria de PlanEstudios.
+     * @return  Map con las Aulas compatibles con Clases de Teoria de PlanEstudios.
+     */
     public Map<String, Aula> getAulasTeoria(int plazas) {
         return this.aulas.entrySet().stream()
                 .filter(map -> (map.getValue().tieneTeoria() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
+    /**
+     * Devuelve un Map con las Aulas compatibles con Clases de Laboratorio de PlanEstudios.
+     * @return  Map con las Aulas compatibles con Clases de Laboratorio de PlanEstudios.
+     */
     public Map<String, Aula> getAulasLaboratorio(int plazas) {
         return this.aulas.entrySet().stream()
                 .filter(map -> (map.getValue().tieneLaboratorio() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
+    /**
+     * Devuelve un Map con las Aulas compatibles con Clases de Problemas de PlanEstudios.
+     * @return  Map con las Aulas compatibles con Clases de Problemas de PlanEstudios.
+     */
     public Map<String, Aula> getAulasProblemas(int plazas) {
         return this.aulas.entrySet().stream()
                 .filter(map -> (map.getValue().tieneProblemas() && (map.getValue().getPlazas() >= plazas)))
                 .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
     }
 
+    /**
+     * Devuelve el Aula de PlanEstudios con la id dada.
+     * @param id    id del Aula que se quiere obtener.
+     * @return      Aula de PlanEstudios con la id dada.
+     */
     public Aula getAula(String id) {
         return this.aulas.get(id);
     }
@@ -213,16 +256,29 @@ public class PlanEstudios {
       //  return this.horarioGeneral != null;
     //}
 
+    /**
+     * Devuelve el conjunto de Restricciones de PlanEstudios.
+     * @return  ArrayList con las Restricciones de PlanEstudios.
+     */
     public ArrayList<Restriccion> getRestricciones() {
         return this.restricciones;
     }
 
-    public Restriccion getRestriccion(Integer i) {
-        return this.restricciones.get(i);
+    /**
+     * Dada su posicion en el conjunto de Restricciones de PlanEstudios devuelve una Restriccion.
+     * @param posicion  posicion en el conjunto de Restricciones de PlanEstudios de la Restriccion que se quiere obtener.
+     * @return          Restrcccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de PlanEstudios.
+     */
+    public Restriccion getRestriccion(int posicion) {
+        return this.restricciones.get(posicion);
     }
 
     /**Métodos redefinidos*/
 
+    /**
+     * Convierte PlanEstudios en un String que contiene toda su información.
+     * @return  String que contiene toda la información de PlanEstudios.
+     */
     @Override
     public String toString() {
         String text = "Plan Estudios: " + this.nombre + "\n-Niveles:";

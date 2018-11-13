@@ -109,10 +109,10 @@ public class Ocupaciones {
         String text = "";
         for (int dia = 1; dia <= 7; ++dia) {
             if (this.getDia(dia).getAsignaturas().size() > 0) {
-                text += (spacer() + "\n" + spacer() + "\n" + getNombreDia(dia) + "\n");
+                text += (Aux.spacer() + "\n" + Aux.spacer() + "\n" + Aux.getNombreDia(dia) + "\n");
                 for (int hora = 0; hora < 24; ++hora) {
                     if (this.getHora(dia, hora).getAsignaciones().size() > 0) {
-                        text += (spacer() + "\n" + getHoraCompleta(hora) + "-" + getHoraCompleta(hora + 1) + "\n" + lspacer() + "\n");
+                        text += (Aux.spacer() + "\n" + Aux.getHoraCompleta(hora) + "-" + Aux.getHoraCompleta(hora + 1) + "\n" + Aux.lspacer() + "\n");
                         for (Map.Entry<String, Asignacion> entry : this.getHora(dia, hora).getAsignaciones().entrySet()) {
                             text += (entry.getValue().toString() + "\n");
                         }
@@ -120,49 +120,7 @@ public class Ocupaciones {
                 }
             }
         }
-        text += spacer();
+        text += Aux.spacer();
         return text;
-    }
-
-    /**
-     * Obtiene el String con el nombre del dia de la Semana que corresponde a un int representando un dia.
-     * @param dia   dia de la semana del que se quiere obtener el nombre.
-     * @return      String con el nombre de dia.
-     */
-    static String getNombreDia(int dia) {
-        if (dia == 1) return "Lunes";
-        else if (dia == 2) return "Martes";
-        else if (dia == 3) return "Miercoles";
-        else if (dia == 4) return "Jueves";
-        else if (dia == 5) return "Viernes";
-        else if (dia == 6) return "Sábado";
-        else return "Domingo";
-    }
-
-    /**
-     * Tranforma un int representando una hora a un String que representa la hora de forma normativa.
-     * @param hora  hora que se quiere convertir a String.
-     * @return      Devuelve el String representando la hora introducida.
-     */
-    static String getHoraCompleta(int hora) {
-        if (hora == 24) return "00:00";
-        else if (hora < 10) return "0" + Integer.toString(hora) + ":00";
-        return Integer.toString(hora) + ":00";
-    }
-
-    /**
-     * Devuelve un String con una linea de guiones.
-     * @return  String con una linea de guiones.
-     */
-    static String spacer() {
-        return "----------------------------------------------------------------";
-    }
-
-    /**
-     * Devuelve un String con una linea de puntos.
-     * @return  String con una linea de puntos.
-     */
-    static String lspacer() {
-        return "................................................................";
     }
 }

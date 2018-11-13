@@ -197,7 +197,7 @@ public class Dia {
      * @param subGrupo  SubGrupo que se quiere añadir a Dia.
      */
     public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
+        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo()), subGrupo);
     }
 
     //public void replaceSubGrupo(SubGrupo subGrupo) {
@@ -210,17 +210,6 @@ public class Dia {
      */
     public void eliminarSubGrupo(String key) {
         this.subGrupos.remove(key);
-    }
-
-    /**
-     * Convierte un TipoClase a un String con su forma abreviada.
-     * @param tipo  TipoClase que se quiere convertir.
-     * @return  Devuelve un String con la forma abreviada del TipoClase.
-     */
-    static String strTipo(TipoClase tipo) {
-        if (tipo == TipoClase.Teoria) return "T";
-        else if (tipo == TipoClase.Laboratorio) return "L";
-        return "P";
     }
 
     //public void setRestricciones(ArrayList<Restriccion> restricciones) {
@@ -367,7 +356,7 @@ public class Dia {
      * @return          true si subGrupo se encuentra entre los subGrupos de Dia, false en caso contrario.
      */
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo())) != null);
+        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
     }
 
     //public ArrayList<Restriccion> getRestricciones() {

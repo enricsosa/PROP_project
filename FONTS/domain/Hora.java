@@ -192,7 +192,7 @@ public class Hora {
      * @param subGrupo  SubGrupo que se quiere añadir a Hora.
      */
     public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
+        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo()), subGrupo);
     }
 
     //public void replaceSubGrupo(SubGrupo subGrupo) {
@@ -213,17 +213,6 @@ public class Hora {
      */
     public void setAsignaciones(Map<String, Asignacion> asignaciones) {
         this.asignaciones = asignaciones;
-    }
-
-    /**
-     * Convierte un TipoClase a un String con su forma abreviada.
-     * @param tipo  TipoClase que se quiere convertir.
-     * @return  Devuelve un String con la forma abreviada del TipoClase.
-     */
-    static String strTipo(TipoClase tipo) {
-        if (tipo == TipoClase.Teoria) return "T";
-        else if (tipo == TipoClase.Laboratorio) return "L";
-        return "P";
     }
 
     /**
@@ -395,7 +384,7 @@ public class Hora {
      * @return          true si subGrupo se encuentra entre los subGrupos de Hora, false en caso contrario.
      */
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo())) != null);
+        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
     }
 
     /**
