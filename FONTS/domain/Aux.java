@@ -63,11 +63,23 @@ public class Aux {
         return "................................................................";
     }
 
+    /**
+     * Devuelve el paramentro de valor más alto introducido.
+     * @param x Primer parámetro que se compara.
+     * @param y Segundo parámetro que se compara.
+     * @return  Paramentro de valor más alto introducido.
+     */
     public static int max(int x, int y) {
         if (x >= y) return x;
         return y;
     }
 
+    /**
+     * Devuelve el paramentro de valor más bajo introducido.
+     * @param x Primer parámetro que se compara.
+     * @param y Segundo parámetro que se compara.
+     * @return  Paramentro de valor más bajo introducido.
+     */
     public static int min(int x, int y) {
         if (x <= y) return x;
         return y;

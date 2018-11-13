@@ -1,7 +1,10 @@
+/**CtrlAsignaturasFile*/
+
+/**Imports*/
+
 package data;
 
-/** Imports **/
-import java.io.File;
+//import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -12,17 +15,36 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 
-
+/**
+ * Clase para obtener datos de Asignaturas de archivos JSON.
+ * @author  Enric Sosa
+ * @see     FileReader
+ * @see     IOException
+ * @see     LinkedList
+ * @see     List
+ * @see     JSONArray
+ * @see     JSONObject
+ * @see     JSONParser
+ * @see     ParseException
+ * @see     FileNotFoundException
+ */
 public class CtrlAsignaturasFile {
 
-    /** Atributos **/
+    /**Atributos*/
+
+    /**Información de las Asignaturas.*/
     private static CtrlAsignaturasFile infoAsignaturas;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**Constructora de la clase CtrlAsignaturasFile.*/
     private CtrlAsignaturasFile() {
     }
 
+    /**
+     * Devuelve una instancia de CtrlAsignaturasFile.
+     * @return  Instancia de CtrlAsignaturasFile.
+     */
     public static CtrlAsignaturasFile getInstance() {
         if (infoAsignaturas == null)
             infoAsignaturas = new CtrlAsignaturasFile() {
@@ -30,10 +52,17 @@ public class CtrlAsignaturasFile {
         return infoAsignaturas;
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Extrae toda la información de Asignaturas del archivo JSON.
+     * @return  Devuelve la información de las Asignaturas en forma de JSON object.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> asignaturas = new LinkedList<JSONObject>();
 
@@ -48,6 +77,14 @@ public class CtrlAsignaturasFile {
         return asignaturas;
     }
 
+    /**
+     * Extrae toda la información de Asignaturas del archivo JSON de un escenario.
+     * @param escenario Nombre del escenario del que se quiere extraer la información.
+     * @return          Devuelve la información de las Asignaturas de un escenario en forma de JSON object.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> asignaturas = new LinkedList<JSONObject>();
 
@@ -62,6 +99,6 @@ public class CtrlAsignaturasFile {
         return asignaturas;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
 }

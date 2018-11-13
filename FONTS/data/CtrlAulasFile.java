@@ -1,7 +1,10 @@
+/**CtrlAulasFile*/
+
+/**Imports*/
+
 package data;
 
-/** Imports **/
-import java.io.File;
+//import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -12,17 +15,32 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 
-
+/**
+ * Clase para obtener datos de Aulas de archivos JSON.
+ * @author  Enric Sosa
+ * @see     FileReader
+ * @see     IOException
+ * @see     LinkedList
+ * @see     List
+ * @see     JSONArray
+ * @see     JSONObject
+ * @see     JSONParser
+ * @see     ParseException
+ * @see     FileNotFoundException
+ */
 public class CtrlAulasFile {
 
-    /** Atributos **/
+    /**Atributos*/
+
+    /**Información de las Aulas.*/
     private static CtrlAulasFile infoAulas;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
     private CtrlAulasFile() {
     }
 
+    /**Constructora de la clase CtrlAulasFile.*/
     public static CtrlAulasFile getInstance() {
         if (infoAulas == null)
             infoAulas = new CtrlAulasFile() {
@@ -30,10 +48,17 @@ public class CtrlAulasFile {
         return infoAulas;
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
-    /** Consultoras **/
+    /**Consultoras*/
 
+    /**
+     * Extrae toda la información de Aulas del archivo JSON.
+     * @return  Devuelve la información de las Aulas en forma de JSON object.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> aulas = new LinkedList<JSONObject>();
 
@@ -48,6 +73,14 @@ public class CtrlAulasFile {
         return aulas;
     }
 
+    /**
+     * Extrae toda la información de Aulas del archivo JSON de un escenario.
+     * @param escenario Nombre del escenario del que se quiere extraer la información.
+     * @return          Devuelve la información de las Aulas de un escenario en forma de JSON object.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> aulas = new LinkedList<JSONObject>();
 
@@ -62,6 +95,6 @@ public class CtrlAulasFile {
         return aulas;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
 }

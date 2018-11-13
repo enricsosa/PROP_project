@@ -1,0 +1,61 @@
+{
+  "restricciones": [
+    {
+      "nombre": "diaLibre",
+      "dias": [
+        6,
+        7
+      ]
+    },
+    {
+      "nombre": "franjaTrabajo",
+      "horaIni": 8,
+      "horaFin": 20
+    },
+    {
+      "nombre": "nivelHora",
+      "niveles": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "nombre": "correquisitos",
+      "parAsigs": [
+        {
+          "idAsig1": "PRO1",
+          "idAsig2": "IC"
+        }
+      ]
+    },
+    {
+      "nombre": "prerrequisitos",
+      "parAsigs": [
+        {
+          "idAsig": "IC",
+          "idAsigPre": "PRO1"
+        }
+      ]
+    },
+    {
+      "nombre": "franjaAsignatura",
+      "asignaturas": [
+        {
+          "idAsig": "PRO1",
+          "horaIni": 8,
+          "horaFin": 14
+        }
+      ]
+    },
+    {
+      "nombre": "franjaNivel",
+      "niveles": [
+        {
+          "idNivel": "S1",
+          "horaIni": 10,
+          "horaFin": 20
+        }
+      ]
+    }
+  ]
+}

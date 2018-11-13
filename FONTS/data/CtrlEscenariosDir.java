@@ -1,23 +1,38 @@
+/**CtrlEscenariosDir*/
+
+/**Imports*/
+
 package data;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+//import java.util.LinkedList;
+//import java.util.List;
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
 
+/**
+ * CtrlEscenariosDir gestiona la carga de datos desde los directorios donde se encuentran los diversos escenarios.
+ * @author  Enric Sosa
+ * @see     ArrayList
+ * @see     System
+ */
 public class CtrlEscenariosDir {
     private static CtrlEscenariosDir escenarios;
     private static ArrayList<String> nomEscenarios;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**Constructora de la clase CtrlEscenariosDir.*/
     private CtrlEscenariosDir() {
     }
 
+    /**
+     * Devuelve una instancia de CtrlEscenariosDir.
+     * @return  Instancia de CtrlEscenariosDir.
+     */
     public static CtrlEscenariosDir getInstance() {
         if (escenarios == null)
             escenarios = new CtrlEscenariosDir() {
@@ -26,6 +41,10 @@ public class CtrlEscenariosDir {
         return escenarios;
     }
 
+    /**
+     * Escanea los escenarios que hay disponibles.
+     * @throws NullPointerException
+     */
     public void escanearAllEscenarios() throws NullPointerException {
         File dir = new File("DATA/");
         File[] listEsc = dir.listFiles();
@@ -38,6 +57,11 @@ public class CtrlEscenariosDir {
         }
     }
 
+    /**
+     * Escanea en busca de Horarios y los devuelve en forma de ArrayList de Strings.
+     * @return  ArrayList de String con los Horarios guardados.
+     * @throws NullPointerException
+     */
     public ArrayList<String> escanearAllHorarios() throws NullPointerException {
         ArrayList<String> horarios = new ArrayList<String>();
         File dir = new File("DATA/Output/");
@@ -50,12 +74,25 @@ public class CtrlEscenariosDir {
         return horarios;
     }
 
+    /**
+     * Guarda un Horario en un archivo txt.
+     * @param horario       String con la información de un Horario.
+     * @param idHorario     Código identificador del Horario.
+     * @throws IOException
+     */
     public void writeHorario(String horario, Integer idHorario) throws IOException {
         PrintWriter writer = new PrintWriter("DATA/Output/"+"Horario#" + idHorario.toString(), "UTF-8");
         writer.println(horario);
         writer.close();
     }
 
+    /**
+     * Lee un Horario de un archivo txt.
+     * @param horario                  Nombre del horario que se quiere cargar.
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public String readHorario(String horario) throws FileNotFoundException, IOException {
         File file = new File("DATA/Output/" + horario);
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -67,6 +104,10 @@ public class CtrlEscenariosDir {
         return ret;
     }
 
+    /**
+     * Devuelve el nombre de todos los escenarios.
+     * @return  Devuelve un ArrayList de Strings con los nombres de los escenarios.
+     */
     public ArrayList<String> getAllEscenarios() {
         return nomEscenarios;
     }
