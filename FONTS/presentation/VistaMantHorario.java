@@ -51,11 +51,11 @@ public class VistaMantHorario {
         int n = array.size();
         switch (tipo) {
             case "escenario":
-                out.printf("\nEscenarios detectados disponibles:\n");
+                out.print("\nEscenarios detectados disponibles:\n");
                 break;
 
             case "horario":
-                out.printf("\nHorarios generados disponibles:\n");
+                out.print("\nHorarios generados disponibles:\n");
                 break;
 
             default:
@@ -66,7 +66,7 @@ public class VistaMantHorario {
             out.printf("%d. %s\n", i+1, array.get(i));
         }
         out.printf("%d. (Atrás)\n", n+1);
-        out.printf("Opción: ");
+        out.print("Opción: ");
     }
 
     public void mostrarError(String e) {
