@@ -1,8 +1,8 @@
+/**CtrlHorario*/
+
+/**Imports*/
+
 package domaincontrollers;
-
-/** Imports **/
-
-import domain.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,15 +10,29 @@ import java.util.Map;
 //import static java.lang.System.out;
 import java.util.Comparator;
 
+import domain.*;
+
+/**
+ * CtrlHorario es un controlador de Dominio que se encarga de generar un Horario dado un escenario.
+ * @author  Daniel Martín
+ * @see     ArrayList
+ * @see     Collections
+ * @see     Map
+ * @see     Comparator
+ * @see     domain
+ */
 public class CtrlHorario {
 
-    /** Atributos **/
+    /**Atributos*/
 
+    /**PlanEstudios del escenario del que se genera el Horario.*/
     private PlanEstudios planEstudios;
+    /**Restricciones del escenario del que se genera el Horario.*/
     private ArrayList<Restriccion> restricciones;
+    /**FranjaTrabajo y diasLibres del escenario del que se genera el Horario.*/
     private LimitacionesHorario limitacionesHorario;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
     CtrlHorario(PlanEstudios planEstudios, ArrayList restricciones) {
         this.planEstudios = planEstudios;
@@ -27,7 +41,7 @@ public class CtrlHorario {
         this.loadLimitacionesHorario();
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
     public ReturnSet generarHorario(String id) {
         //out.println(this.planEstudios);
@@ -249,7 +263,7 @@ public class CtrlHorario {
         this.limitacionesHorario = limitacionesHorario;
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
     public PlanEstudios getPlanEstudios() {
         return planEstudios;
@@ -267,6 +281,6 @@ public class CtrlHorario {
         return limitacionesHorario;
     }
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 
 }

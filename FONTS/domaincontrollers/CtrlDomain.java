@@ -1,41 +1,75 @@
+/**CtrlDomain*/
+
+/**Imports*/
+
 package domaincontrollers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
-
-import domain.*;
-import org.json.simple.JSONArray;
+//import java.io.PrintWriter;
+import java.util.List;
+import java.util.ArrayList;
+//import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
-
-import data.CtrlAsignaturasFile;
-import data.CtrlAulasFile;
-import data.CtrlPlanEstudiosFile;
-import data.CtrlRestriccionesFile;
-import data.CtrlEscenariosDir;
-
 //import static java.lang.System.out;
 
+import domain.*;
+
+import data.*;
+
+/**
+ * CtrlDominio es el controlador del Dominio que coordina todos los controladores de Dominio, las clases de Dominio y se comunica con las capas
+ * de Presentacion y Datos.
+ * @author  Enric Sosa
+ * @see     IOException
+ * @see     List
+ * @see     ArrayList
+ * @see     JSONObject
+ * @see     ParseException
+ * @see     FileNotFoundException
+ * @see     PlanEstudios
+ * @see     domain
+ * @see     data
+ */
 public class CtrlDomain {
 
-    /** Atributos **/
+    /**Atributos*/
+
+    /**Controlador para cargar Asignaturas.*/
     private CtrlAsignaturasFile controladorAsignaturas;
+    /**Controlador para cargar Aulas.*/
     private CtrlAulasFile controladorAulas;
+    /**Controlador para cargar PlanEstudios.*/
     private CtrlPlanEstudiosFile controladorPlanEstudios;
+    /**Controlador para cargar Restricciones.*/
     private CtrlRestriccionesFile controladorRestricciones;
+    /**Controlador para gestionar escenarios.*/
     private CtrlEscenariosDir controladorEscenarios;
+    /**PlanEstudios con el que trabaja CtrlDominio.*/
     private PlanEstudios planEstudios;
+    /**ArrayList con todas las Restricciones del escenario.*/
     private ArrayList<Restriccion> restricciones;
 
-    /** Constructoras **/
+    /**Constructoras*/
 
+    /**
+     * Creadora de la clase CtrlDomain.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public CtrlDomain()throws FileNotFoundException, IOException, ParseException  {
         this.initCtrlDomain();
     }
 
+    /**
+     * Ejecuta las acciones necesarias para la inicialización de CtrlDomain.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void initCtrlDomain() throws FileNotFoundException, IOException, ParseException {
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
         controladorAulas = CtrlAulasFile.getInstance();
@@ -50,8 +84,15 @@ public class CtrlDomain {
         controladorEscenarios = CtrlEscenariosDir.getInstance();
     }
 
-    /** Métodos públicos **/
+    /**Métodos públicos*/
 
+    /**
+     * Carga en CtrlDominio el escenario con el nombre indicado.
+     * @param escenario                 Nombre del escenario que se quiere cargar.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void cargarEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         this.cargarPlanEstudios(escenario);
         this.cargarAllAsignaturas(escenario);
@@ -59,23 +100,51 @@ public class CtrlDomain {
         this.cargarAllRestricciones(escenario);
     }
 
+    /**
+     * Devuelve todos los escenarios disponibles.
+     * @return  ArrayList de String con los nombres de todos los escenerios disponibles.
+     */
     public ArrayList<String> allEscenarios() {
         controladorEscenarios.escanearAllEscenarios();
         return controladorEscenarios.getAllEscenarios();
     }
 
+    /**
+     * Devuelve todos los Horarios disponibles.
+     * @return  ArrayList de String con los nombres de todos los Horarios disponibles.
+     */
     public ArrayList<String> allHorarios() {
         return controladorEscenarios.escanearAllHorarios();
     }
 
+    /**
+     * Escribe un Horario por consola.
+     * @param horario   String con los datos de Horario.
+     * @param idHorario id del Horarioque se escribe.
+     * @throws IOException
+     */
     public void writeHorario(String horario, Integer idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
     }
 
+    /**
+     * Lee un horario guardado préviamente.
+     * @param horario                   Nombre del Horario que se quiere leer.
+     * @return                          String con los datos del Horario indicado.
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public String readHorario(String horario) throws FileNotFoundException, IOException {
         return controladorEscenarios.readHorario(horario);
     }
 
+    /**
+     * Carga el PlanEstudios del escenario indicado.
+     * @param escenario                 Escenario que se quiere cargar.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
         JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
         planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
@@ -89,6 +158,13 @@ public class CtrlDomain {
         }
     }
 
+    /**
+     * Carga los datos de las Asignaturas del escenario indicado.
+     * @param escenario                 Escenario que se quiere cargar.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void cargarAllAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
 
@@ -123,6 +199,13 @@ public class CtrlDomain {
         }
     }
 
+    /**
+     * Carga los datos de las Aulas del escenario indicado.
+     * @param escenario                 Escenario que se quiere cargar.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void cargarAllAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
 
@@ -140,6 +223,13 @@ public class CtrlDomain {
 
     }
 
+    /**
+     * Carga las Restricciones del escenario indicado.
+     * @param escenario                 Escenario que se quiere cargar.
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void cargarAllRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
         this.restricciones = new ArrayList<Restriccion>();
 
@@ -225,15 +315,23 @@ public class CtrlDomain {
             return "false";
     }
 
+    /**
+     * Genera una instancia de CtrlHorario con los datos de CtrlDominio.
+     * @return  Instancia de CtrlHorario con los datos de CtrlDominio.
+     */
     public CtrlHorario getCtrlHorario() {
         return new CtrlHorario(this.planEstudios, this.restricciones);
     }
 
+    /**
+     * Añade una Restriccion al escenario
+     * @param restriccion   Restriccion que se quiere añadir.
+     */
     public void addRestriccion(Restriccion restriccion) {
         restricciones.add(restriccion);
     }
 
-    /** Consultoras **/
+    /**Consultoras*/
 
-    /** Métodos redefinidos **/
+    /**Métodos redefinidos*/
 }
