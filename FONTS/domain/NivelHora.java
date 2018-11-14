@@ -69,7 +69,7 @@ public class NivelHora extends Restriccion {
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
     @Override
-    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {
             for (Map.Entry<String, Grupo> entry : ocupaciones.getHora(dia,hora).getGrupos().entrySet()) {
                 if (entry.getValue().getId().equals(clase.getGrupo().getId())) {

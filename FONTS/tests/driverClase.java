@@ -6,6 +6,7 @@ import java.util.*;
 
 import static java.lang.System.out;
 
+/**@author Enric Sosa*/
 public class driverClase {
 
     private static Scanner in = new Scanner(System.in);
@@ -141,9 +142,9 @@ public class driverClase {
                     }
                     break;
 
-                case 3: //comprovarRestricciones
+                case 3: //comprobarRestricciones
                     try {
-                        out.println(c.comprovarRestricciones(0, 8, ocu).toString());
+                        out.println(c.comprobarRestricciones(0, 8, ocu).toString());
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -431,7 +432,7 @@ public class driverClase {
         out.print("1- Clase(SubGrupo, Sesion)\n");
         out.print("CONSULTORAS:\n");
         out.print("2- toStringResumido()\n");
-        out.print("3- comprovarRestricciones(int, int, Ocupaciones)\n");
+        out.print("3- comprobarRestricciones(int, int, Ocupaciones)\n");
         out.print("4- getSubGrupo()\n");
         out.print("5- getSesion()\n");
         out.print("6- getRestricciones()\n");
