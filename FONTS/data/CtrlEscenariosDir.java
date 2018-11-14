@@ -92,6 +92,7 @@ public class CtrlEscenariosDir {
      * @return
      * @throws FileNotFoundException
      * @throws IOException
+     * @return String con los datos de un Horario.
      */
     public String readHorario(String horario) throws FileNotFoundException, IOException {
         File file = new File("DATA/Output/" + horario);

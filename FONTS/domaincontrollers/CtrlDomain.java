@@ -29,9 +29,27 @@ import data.*;
  * @see     JSONObject
  * @see     ParseException
  * @see     FileNotFoundException
- * @see     PlanEstudios
- * @see     domain
- * @see     data
+ * @see     domain.PlanEstudios
+ * @see     domain.Restriccion
+ * @see     domain.Nivel
+ * @see     domain.Asignatura
+ * @see     domain.Sesion
+ * @see     domain.Grupo
+ * @see     domain.SubGrupo
+ * @see     domain.TipoClase
+ * @see     domain.Aula
+ * @see     domain.DiaLibre
+ * @see     domain.FranjaTrabajo
+ * @see     domain.NivelHora
+ * @see     domain.Correquisito
+ * @see     domain.Prerrequisito
+ * @see     domain.FranjaAsignatura
+ * @see     domain.FranjaNivel
+ * @see     data.CtrlAsignaturasFile
+ * @see     data.CtrlAulasFile
+ * @see     data.CtrlPlanEstudiosFile
+ * @see     data.CtrlRestriccionesFile
+ * @see     data.CtrlEscenariosDir
  */
 public class CtrlDomain {
 

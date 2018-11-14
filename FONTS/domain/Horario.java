@@ -6,7 +6,7 @@ package domain;
 
 /**
  * Horario contiene unas Ocupaciones que contiene las Asignaciones que lo definen y una id que lo identifica.
- * @æuthor Daniel Martín
+ * @author Daniel Martín
  */
 public class Horario {
 

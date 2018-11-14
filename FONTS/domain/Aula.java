@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Aula contiene la informacion relativa a una Aula de un PlanEstudios.
- * @æuthor Daniel Martín
+ * @author Daniel Martín
  * @see ArrayList
  */
 public class Aula {

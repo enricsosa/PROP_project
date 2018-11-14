@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Hora contiene la información de lo que sucede una Hora dentro de Dia.
- * @æuthor  Daniel Martín
+ * @author  Daniel Martín
  * @see HashMap
  * @see Map
  */
@@ -356,7 +356,7 @@ public class Hora {
      * Indica si Hora tiene un grupo con la id de grupo de asignatura.
      * @param asignatura    Asignatura de la cual es el grupo que se quiere comprovar si tiene Hora.
      * @param grupo         Grupo cuya id tiene el grupo que se quiere comprovar si tiene Hora.
-     * @return
+     * @return              true si Hora tiene un grupo con la id de grupo de asignatura, false en caso contrario.
      */
     public Boolean tieneGrupo(Asignatura asignatura, Grupo grupo) {
         return (this.grupos.get(grupo.getId() + asignatura.getId()) != null);
