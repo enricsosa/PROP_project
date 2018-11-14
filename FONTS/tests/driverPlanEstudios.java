@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import static java.lang.System.out;
 
+/**@author Enric Sosa*/
 public class driverPlanEstudios {
 
     private static Scanner in = new Scanner(System.in);

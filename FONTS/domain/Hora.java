@@ -404,14 +404,14 @@ public class Hora {
         return this.asignaciones.get(key);
     }
 
-    /**
-     * Indica si una Asignacion se encuentra entre las Asignaciones de Hora.
-     * @param asignacion  Asignacion de la que se quiere saber si está en Hora.
-     * @return            true si asignacion se encuentra entre las Asignaciones de Hora, false en caso contrario.
-     */
-    public Boolean tieneAsignacion(Asignacion asignacion) {
-        return (this.asignaciones.get(asignacion.generateKey()) != null);
-    }
+    //**
+     //* Indica si una Asignacion se encuentra entre las Asignaciones de Hora.
+     //* @param asignacion  Asignacion de la que se quiere saber si está en Hora.
+     //* @return            true si asignacion se encuentra entre las Asignaciones de Hora, false en caso contrario.
+     //*/
+    //public Boolean tieneAsignacion(Asignacion asignacion) {
+      //  return (this.asignaciones.get(asignacion.generateKey()) != null);
+    //}
 
     //public ArrayList<Restriccion> getRestricciones() {
      //   return restricciones;

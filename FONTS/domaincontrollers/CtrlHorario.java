@@ -127,7 +127,7 @@ public class CtrlHorario {
         //out.println("CP 1");
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i).toStringResumido());
         /////Collections.shuffle(clases);
-        sortClases(clases, this.limitacionesHorario);
+        sortClases(clases, this.limitacionesHorario, false);
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
         //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
@@ -265,9 +265,11 @@ public class CtrlHorario {
      * manera ascendente.
      * @param clases    Clases que se quiere ordenar.
      * @param lh        LimitacionesHorario del escenario cargado.
+     * @param random    Boolean que indica si se añade un factor de aleatoriedad para cuando 2 clases tienen franaj del
+     *                  mismo tamaño.
      */
-    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh) {
-        Collections.shuffle(clases);
+    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh, Boolean random) {
+        if (random) Collections.shuffle(clases);
         Collections.sort(clases, new Comparator<Clase>() {
             @Override
             public int compare(Clase c1, Clase c2)

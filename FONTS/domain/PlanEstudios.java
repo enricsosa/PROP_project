@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
- * PlanEstudios Contiene toda la información para generar un Horario.
+ * PlanEstudios contiene toda la información para generar un Horario.
  * @author  Daniel Martín
  * @see     ArrayList
  * @see     Map
@@ -67,6 +67,14 @@ public class PlanEstudios {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * Asigna un conjunto de Restricciones a PlanEstudios.
+     * @param restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
+     */
+    public void setRestricciones(ArrayList<Restriccion> restricciones) {
+        this.restricciones = restricciones;
     }
 
     /**
@@ -132,14 +140,6 @@ public class PlanEstudios {
     //public void setHorarioGeneral (Horario horarioGeneral) {
       //  this.horarioGeneral = horarioGeneral;
     //}
-
-    /**
-     * Asigna un conjunto de Restricciones a PlanEstudios.
-     * @param restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
-     */
-    public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones = restricciones;
-    }
 
     /**
      * Añade una Restriccion a PlanEstudios.
