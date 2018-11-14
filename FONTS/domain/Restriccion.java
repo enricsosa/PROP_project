@@ -35,7 +35,7 @@ public abstract class Restriccion {
      * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
-    public abstract Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones);
+    public abstract Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones);
 
     /**Métodos redefinidos*/
 

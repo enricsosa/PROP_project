@@ -106,7 +106,7 @@ public class FranjaNivel extends Restriccion {
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
     @Override
-    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         if (!(clase.tieneNivel())) return true;
         if ((clase.getNivel() != this.nivel)) return true;
         return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));

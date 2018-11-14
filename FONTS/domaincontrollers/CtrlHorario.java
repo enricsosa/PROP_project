@@ -127,7 +127,7 @@ public class CtrlHorario {
         //out.println("CP 1");
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i).toStringResumido());
         /////Collections.shuffle(clases);
-        sortClases(clases, this.limitacionesHorario);
+        sortClases(clases, this.limitacionesHorario, false);
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
         //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
@@ -170,7 +170,7 @@ public class CtrlHorario {
         //out.println("Provando Asignacion:");
         //out.println(asignacion.toString() + "\n");
         //out.println(clases.size());
-        //if (!(this.comprovarRestricciones(asignacion, ocupaciones))) {
+        //if (!(this.comprobarRestricciones(asignacion, ocupaciones))) {
             //out.println("asignacion no valida");
             //return new ReturnSet(false);
         //}
@@ -187,7 +187,7 @@ public class CtrlHorario {
                             && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
                             && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
                         for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
-                            if(this.comprovarRestricciones(clases.get(i), dia, horaIni, ocupaciones)) {
+                            if(this.comprobarRestricciones(clases.get(i), dia, horaIni, ocupaciones)) {
                                 for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
                                     if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), ocupaciones))) {
                                         Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
@@ -208,7 +208,7 @@ public class CtrlHorario {
                             && (!(comprovarSubGrupoDia(clases.get(i), dia, ocupaciones)))
                             && (!(comprovarGrupoDia(clases.get(i), dia, ocupaciones)))) {
                         for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
-                            if (this.comprovarRestricciones(clases.get(i), dia, horaIni, ocupaciones)) {
+                            if (this.comprobarRestricciones(clases.get(i), dia, horaIni, ocupaciones)) {
                                 for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
                                     if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), ocupaciones))) {
                                         Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
@@ -265,9 +265,11 @@ public class CtrlHorario {
      * manera ascendente.
      * @param clases    Clases que se quiere ordenar.
      * @param lh        LimitacionesHorario del escenario cargado.
+     * @param random    Boolean que indica si se añade un factor de aleatoriedad para cuando 2 clases tienen franaj del
+     *                  mismo tamaño.
      */
-    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh) {
-        Collections.shuffle(clases);
+    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh, Boolean random) {
+        if (random) Collections.shuffle(clases);
         Collections.sort(clases, new Comparator<Clase>() {
             @Override
             public int compare(Clase c1, Clase c2)
@@ -300,8 +302,8 @@ public class CtrlHorario {
         return false;
     }
 
-    //public Boolean comprovarRestricciones(Asignacion asignacion, Ocupaciones ocupaciones) {
-      //  return asignacion.comprovarRestricciones(ocupaciones);
+    //public Boolean comprobarRestricciones(Asignacion asignacion, Ocupaciones ocupaciones) {
+      //  return asignacion.comprobarRestricciones(ocupaciones);
     //}
 
     /**
@@ -313,8 +315,8 @@ public class CtrlHorario {
      * @param ocupaciones   Ocupaciones a las que se pretende añadir una Asignacion candidata.
      * @return              true si no se incumple ninguna Restriccion, false en caso contrario.
      */
-    public Boolean comprovarRestricciones(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
-        return clase.comprovarRestricciones(dia, horaIni, ocupaciones);
+    public Boolean comprobarRestricciones(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+        return clase.comprobarRestricciones(dia, horaIni, ocupaciones);
     }
 
     /**

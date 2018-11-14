@@ -86,7 +86,7 @@ public class FranjaTrabajo extends Restriccion {
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
     @Override
-    public Boolean comprovarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
         return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
     }
 

@@ -128,8 +128,8 @@ public class Asignacion {
      * @param ocupaciones   Ocupaciones en función de las cuales se evaluan la restricciones.
      * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
-    public Boolean comprovarRestricciones(Ocupaciones ocupaciones) {
-        return this.clase.comprovarRestricciones(this.diaSemana, this.horaIni, ocupaciones);
+    public Boolean comprobarRestricciones(Ocupaciones ocupaciones) {
+        return this.clase.comprobarRestricciones(this.diaSemana, this.horaIni, ocupaciones);
     }
 
     /**

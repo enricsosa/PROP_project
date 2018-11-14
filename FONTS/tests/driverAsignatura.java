@@ -6,6 +6,7 @@ import java.util.*;
 
 import static java.lang.System.out;
 
+/**@author Enric Sosa*/
 public class driverAsignatura {
 
     private static Scanner in = new Scanner(System.in);

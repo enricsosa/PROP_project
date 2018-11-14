@@ -96,10 +96,10 @@ public class Clase {
      * @param ocupaciones   Ocupaciones en función de las cuales se evaluan la restricciones.
      * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
-    public Boolean comprovarRestricciones(int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestricciones(int dia, int horaIni, Ocupaciones ocupaciones) {
         ArrayList<Restriccion> restricciones = this.getRestricciones();
         for (int i = 0; i < restricciones.size(); ++i) {
-            if (!(restricciones.get(i).comprovarRestriccion(this, dia, horaIni, ocupaciones))) return false;
+            if (!(restricciones.get(i).comprobarRestriccion(this, dia, horaIni, ocupaciones))) return false;
         }
         return true;
     }
