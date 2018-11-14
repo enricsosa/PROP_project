@@ -7,6 +7,7 @@ import java.util.*;
 
 import static java.lang.System.out;
 
+
 /**@author Enric Sosa*/
 public class driverGrupo {
 
@@ -92,9 +93,11 @@ public class driverGrupo {
                                 g = new Grupo(id, as1);
                             else
                                 g = new Grupo(id, as2);
+                            out.println("HA FUNCIONADO CORRECTAMENTE");
+                            out.println("(AVISO: Grupo vacío, sólo tiene un Id y una Asignatura)");
+                        } else if (ni != 3) {
+                            out.printf("ERROR: el parámetro \"%s\" no es válido\n", nivel);
                         }
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("(AVISO: Grupo vacío, sólo tiene un Id y una Asignatura)");
                         out.println("\n");
                     } catch (NullPointerException e) {
                         out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");

@@ -229,7 +229,7 @@ public class driverSubGrupo {
                     }
                     break;
 
-                case 9: //getAsignatura
+                case 9: //tieneNivel
                     try {
                         out.println("(La Asignatura as1 tiene un Nivel Asociado, la Asignatura as2 no)");
                         if (sg.tieneNivel()) {
