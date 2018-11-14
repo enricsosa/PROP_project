@@ -2,25 +2,18 @@ package tests;
 
 import domain.*;
 
-
 import java.util.*;
 
 import static java.lang.System.out;
 
-
-public class driverGrupo {
+public class driverSubGrupo {
 
     private static Scanner in = new Scanner(System.in);
 
     private static PlanEstudios peAS = null;
+    private static Grupo g1 = null;
+    private static Grupo g2 = null;
     private static Nivel n1 = new Nivel("n1");
-    private static Asignatura as1 = new Asignatura("as1", "AS1", peAS, n1);
-    private static Asignatura as2 = new Asignatura("as2", "AS2", peAS);
-
-    private static SubGrupo sg1 = null;
-    private static SubGrupo sg2 = null;
-    private static Map<String, SubGrupo> subgs = new HashMap<String, SubGrupo>();
-
 
     private static int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;
@@ -48,56 +41,88 @@ public class driverGrupo {
     }
 
     private static void initValues() {
-        Asignatura as = new Asignatura("as", "AS", peAS);
-        Grupo g = new Grupo("Dummy", as);
-        sg1 = new SubGrupo("1", 60, TipoClase.valueOf("Teoria"), g);
-        sg2 = new SubGrupo("2", 30, TipoClase.valueOf("Problemas"), g);
-        subgs.put(sg1.getId(), sg1);
-        subgs.put(sg2.getId(), sg2);
+        Asignatura as1 = new Asignatura("as1", "AS1", peAS, n1);
+        Asignatura as2 = new Asignatura("as2", "AS2", peAS);
+        g1 = new Grupo("Grupo1", as1);
+        g2 = new Grupo("Grupo2", as2);
     }
 
     public static void main (String argv[]) {
-        out.print("Driver clase Grupo\n");
-        Grupo g = null;
+        out.print("Driver clase SubGrupo\n");
+        SubGrupo sg = null;
         initValues();
         mostrarMenu();
         int op = -1;
 
         while (op != 0) {
-            op = obtenerOp(16);
+            op = obtenerOp(15);
             switch (op) {
                 case 1:
                     try {
-                        out.println("Introduzca el id del Grupo:");
+                        out.println("Introduzca el id(String) del SubGrupo:");
                         String id = in.next();
 
-                        out.println("Asignaturas disponibles predeterminadas:");
-                        out.println("1- as1");
-                        out.println("2- as2");
-                        out.println("3- (Cancelar)");
-                        out.print("Escoge una para añadirla: ");
-                        String nivel = in.next();
-                        int ni = 0;
+                        out.println("Introduzca las plazas(Integer) del SubGrupo:");
+                        String plazas = in.next();
+                        int pl = 0;
                         boolean valid = true;
-                        for (int i = 0; i < nivel.length() && valid; ++i) {
-                            ni *= 10;
-                            if (nivel.charAt(i) >= '0' && nivel.charAt(i) <= '9') {
-                                ni += (int)(nivel.charAt(i) - '0');
+                        for (int i = 0; i < plazas.length() && valid; ++i) {
+                            pl *= 10;
+                            if (plazas.charAt(i) >= '0' && plazas.charAt(i) <= '9') {
+                                pl += (int) (plazas.charAt(i) - '0');
                             } else {
                                 valid = false;
                             }
                         }
-                        if (ni == 1 || ni == 2) {
-                            if (ni == 1)
-                                g = new Grupo(id, as1);
-                            else
-                                g = new Grupo(id, as2);
+
+                        if (valid) {
+                            out.println("Introduzca el tipo del SubGrupo:");
+                            out.println("Tipos: (t)Teoria, (l)Laboratorio, (p)Problemas (t,l,p)");
+                            String t = in.next();
+                            String tipo;
+                            if (t.length() == 1 && (t.charAt(0) == 't' || t.charAt(0) == 'l' || t.charAt(0) == 'p')) {
+                                if (t.charAt(0) == 't') {
+                                    tipo = "Teoria";
+                                } else if (t.charAt(0) == 'l') {
+                                    tipo = "Laboratorio";
+                                } else {
+                                    tipo = "Problemas";
+                                }
+                                out.println("Grupos disponibles predeterminados:");
+                                out.println("1- g1");
+                                out.println("2- g2");
+                                out.println("3- (Cancelar)");
+                                out.print("Escoge uno para asignarselo: ");
+                                String nivel = in.next();
+                                int ni = 0;
+                                valid = true;
+                                for (int i = 0; i < nivel.length() && valid; ++i) {
+                                    ni *= 10;
+                                    if (nivel.charAt(i) >= '0' && nivel.charAt(i) <= '9') {
+                                        ni += (int) (nivel.charAt(i) - '0');
+                                    } else {
+                                        valid = false;
+                                    }
+                                }
+                                if (ni == 1 || ni == 2) {
+                                    if (ni == 1)
+                                        sg = new SubGrupo(id, pl, TipoClase.valueOf(tipo), g1);
+                                    else
+                                        sg = new SubGrupo(id, pl, TipoClase.valueOf(tipo), g2);
+
+                                    out.println("HA FUNCIONADO CORRECTAMENTE");
+                                } else if (ni != 3) {
+                                    out.printf("ERROR: el parámetro \"%s\" no es válido\n", nivel);
+                                }
+                            } else {
+                                out.printf("ERROR: el parámetro \"%s\" no es válido\n", t);
+                            }
+                        } else {
+                            out.printf("ERROR: el parámetro \"%s\" no es válido\n", plazas);
                         }
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("(AVISO: Grupo vacío, sólo tiene un Id y una Asignatura)");
                         out.println("\n");
                     } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
+                        out.println("*** NullPointerException ***");
                         out.println("\n");
                     } catch (Exception e) {
                         out.println("NO HA FUNCIONADO");
@@ -105,104 +130,9 @@ public class driverGrupo {
                     }
                     break;
 
-                case 2:
+                case 2: //getId
                     try {
-                        out.println(g.getId());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 3:
-                    try {
-                        out.println(g.getAsignatura().toString());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 4:
-                    try {
-                        out.println(g.getSubGrupos().toString());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 5:
-                    try {
-                        out.println(g.getSubGruposTeoria().toString());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 6:
-                    try {
-                        out.println(g.getSubGruposLaboratorio().toString());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 7:
-                    try {
-                        out.println(g.getSubGruposProblemas().toString());
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException: NO SE HA INICIALIZADO EL GRUPO ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 8: //getSubGrupo
-                    try {
-                        out.println("Introduzca el número de la posición del SubGrupo en el Array");
-                        out.println("de subgrupos del Grupo (para obtener dicho SubGrupo)");
-                        out.println("\n(Array de subgrupos:)");
-                        try {
-                            out.println(g.getSubGrupos());
-                        } catch (Exception e) {
-                            out.println("ERROR EN getSubGrupos()");
-                            out.println("\n");
-                            break;
-                        }
-                        String plazas = in.next();
-                        out.println(g.getSubGrupo(plazas).toString());
+                        out.println(sg.getId());
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -214,13 +144,97 @@ public class driverGrupo {
                     }
                     break;
 
-                case 9: //tieneNivel
+                case 3: //getKey
+                    try {
+                        out.println(sg.getKey());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 4: //getIdCompleta
+                    try {
+                        out.println(sg.getIdCompleta());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 5: //getPlazas
+                    try {
+                        out.println(sg.getPlazas().toString());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 6: //getTipo
+                    try {
+                        out.println(sg.getTipo().toString());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 7: //getGrupo
+                    try {
+                        out.println(sg.getGrupo().toString());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 8: //getAsignatura
+                    try {
+                        out.println(sg.getAsignatura().toString());
+                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 9: //getAsignatura
                     try {
                         out.println("(La Asignatura as1 tiene un Nivel Asociado, la Asignatura as2 no)");
-                        if (g.tieneNivel()) {
-                            out.println("La Asignatura del Grupo tiene un Nivel Asociado");
+                        if (sg.tieneNivel()) {
+                            out.println("Su Asignatura asociada a su Grupo tiene un Nivel asociado");
                         } else {
-                            out.println("La Asignatura del Grupo NO tiene un Nivel Asociado");
+                            out.println("Su Asignatura asociada a su Grupo NO tiene un Nivel asociado");
                         }
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
@@ -235,7 +249,7 @@ public class driverGrupo {
 
                 case 10: //getNivel
                     try {
-                        out.println(g.getNivel().toString());
+                        out.println(sg.getNivel().toString());
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -249,9 +263,9 @@ public class driverGrupo {
 
                 case 11: //setId
                     try {
-                        out.println("Introduzca la id del Grupo:");
+                        out.println("Introduzca el id(String) del SubGrupo:");
                         String id = in.next();
-                        g.setId(id);
+                        sg.setId(id);
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -263,46 +277,25 @@ public class driverGrupo {
                     }
                     break;
 
-                case 12: //setAsignatura
+                case 12: //setPlazas
                     try {
-                        out.println("Asignaturas disponibles predeterminadas:");
-                        out.println("1- as1");
-                        out.println("2- as2");
-                        out.println("3- (Cancelar)");
-                        out.print("Escoge una para substituir la antigua: ");
-                        String nivel = in.next();
-                        int ni = 0;
+                        out.println("Introduzca las plazas(Integer) del SubGrupo:");
+                        String plazas = in.next();
+                        int pl = 0;
                         boolean valid = true;
-                        for (int i = 0; i < nivel.length() && valid; ++i) {
-                            ni *= 10;
-                            if (nivel.charAt(i) >= '0' && nivel.charAt(i) <= '9') {
-                                ni += (int)(nivel.charAt(i) - '0');
+                        for (int i = 0; i < plazas.length() && valid; ++i) {
+                            pl *= 10;
+                            if (plazas.charAt(i) >= '0' && plazas.charAt(i) <= '9') {
+                                pl += (int)(plazas.charAt(i) - '0');
                             } else {
                                 valid = false;
                             }
                         }
-                        if (ni == 1 || ni == 2) {
-                            if (ni == 1)
-                                g.setAsignatura(as1);
-                            else
-                                g.setAsignatura(as2);
-                        }
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-                case 13:
-                    try {
-                        out.println("Se van a introducir los siguientes SubGrupos:");
-                        out.println(subgs.toString());
-                        g.setSubGrupos(subgs);
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
+                        sg.setPlazas(pl);
+                        if (valid)
+                            out.println("HA FUNCIONADO CORRECTAMENTE");
+                        else
+                            out.printf("ERROR: el parámetro \"%s\" no es válido\n", plazas);
                         out.println("\n");
                     } catch (NullPointerException e) {
                         out.println("*** NullPointerException ***");
@@ -313,29 +306,58 @@ public class driverGrupo {
                     }
                     break;
 
-                case 14: //addSubGrupo
+                case 13: //setTipo
                     try {
-                        out.println("SubGrupos disponibles predeterminados:");
-                        out.println("1- sg1");
-                        out.println("2- sg2");
+                        out.println("Introduzca el tipo del SubGrupo:");
+                        out.println("Tipos: (t)Teoria, (l)Laboratorio, (p)Problemas (t,l,p)");
+                        String t = in.next();
+                        String tipo;
+                        if (t.length() == 1 && (t.charAt(0) == 't' || t.charAt(0) == 'l' || t.charAt(0) == 'p')) {
+                            if (t.charAt(0) == 't') {
+                                tipo = "Teoria";
+                            } else if (t.charAt(0) == 'l') {
+                                tipo = "Laboratorio";
+                            } else {
+                                tipo = "Problemas";
+                            }
+                            sg.setTipo(TipoClase.valueOf(tipo));
+                            out.println("HA FUNCIONADO CORRECTAMENTE");
+                        } else {
+                            out.printf("ERROR: el parámetro \"%s\" no es válido\n", t);
+                        }
+                        out.println("\n");
+                    } catch (NullPointerException e) {
+                        out.println("*** NullPointerException ***");
+                        out.println("\n");
+                    } catch (Exception e) {
+                        out.println("NO HA FUNCIONADO");
+                        out.println("\n");
+                    }
+                    break;
+
+                case 14: //setAsignatura
+                    try {
+                        out.println("Grupos disponibles predeterminados:");
+                        out.println("1- g1");
+                        out.println("2- g2");
                         out.println("3- (Cancelar)");
-                        out.print("Escoge uno para añadirlo: ");
+                        out.print("Escoge uno para asignarselo: ");
                         String nivel = in.next();
                         int ni = 0;
                         boolean valid = true;
                         for (int i = 0; i < nivel.length() && valid; ++i) {
                             ni *= 10;
                             if (nivel.charAt(i) >= '0' && nivel.charAt(i) <= '9') {
-                                ni += (int)(nivel.charAt(i) - '0');
+                                ni += (int) (nivel.charAt(i) - '0');
                             } else {
                                 valid = false;
                             }
                         }
                         if (ni == 1 || ni == 2) {
                             if (ni == 1)
-                                g.addSubGrupo(sg1);
+                                sg.setGrupo(g1);
                             else
-                                g.addSubGrupo(sg2);
+                                sg.setGrupo(g2);
 
                             out.println("HA FUNCIONADO CORRECTAMENTE");
                         } else if (ni != 3) {
@@ -351,32 +373,7 @@ public class driverGrupo {
                     }
                     break;
 
-                case 15: //eliminarSubGrupo
-                    try {
-                        out.println("Introduzca el id del SubGrupo en el Array de SubGrupos");
-                        out.println("del Grupo (para eliminar dicho SubGrupo)");
-                        out.println("\n(Array de SubGrupos:)");
-                        try {
-                            out.println(g.getSubGrupos());
-                        } catch (Exception e) {
-                            out.println("ERROR EN getSubGrupos()");
-                            out.println("\n");
-                            break;
-                        }
-                        String plazas = in.next();
-                        g.eliminarSubGrupo(plazas);
-                        out.println("HA FUNCIONADO CORRECTAMENTE");
-                        out.println("\n");
-                    } catch (NullPointerException e) {
-                        out.println("*** NullPointerException ***");
-                        out.println("\n");
-                    } catch (Exception e) {
-                        out.println("NO HA FUNCIONADO");
-                        out.println("\n");
-                    }
-                    break;
-
-                case 16:
+                case 15:
                     out.println("Saliendo...");
                     op = 0;
                     break;
@@ -385,35 +382,34 @@ public class driverGrupo {
 
                     break;
             }
-
             if (op != 0) {
                 mostrarMenu();
             }
-
         }
+
     }
 
     private static void mostrarMenu() {
         out.print("Opciones:\n");
         out.print("CONSTRUCTORAS:\n");
-        out.print("1- Grupo(String, Asignatura)\n");
+        out.print("1- SubGrupo(String, Integer, TipoClase, Grupo)\n");
         out.print("CONSULTORAS:\n");
         out.print("2- getId()\n");
-        out.print("3- getAsignatura()\n");
-        out.print("4- getSubGrupos()\n");
-        out.print("5- getSubGruposTeoria()\n");
-        out.print("6- getSubGruposLaboratorio()\n");
-        out.print("7- getSubGruposProblemas()\n");
-        out.print("8- getSubGrupo(String)\n");
+        out.print("3- getKey()\n");
+        out.print("4- getIdCompleta()\n");
+        out.print("5- getPlazas()\n");
+        out.print("6- getTipo()\n");
+        out.print("7- getGrupo()\n");
+        out.print("8- getAsignatura()\n");
         out.print("9- tieneNivel()\n");
         out.print("10- getNivel()\n");
         out.print("MODIFICADORAS:\n");
         out.print("11- setId(String)\n");
-        out.print("12- setAsignatura(Asignatura)\n");
-        out.print("13- setSubGrupos(Map<String, SubGrupo>)\n");
-        out.print("14- addSubGrupo(SubGrupo)\n");
-        out.print("15- eliminarSubGrupo(String)\n");
-        out.print("16- Salir\n");
+        out.print("12- setPlazas(Integer)\n");
+        out.print("13- setTipo(TipoClase)\n");
+        out.print("14- setGrupo(Grupo)\n");
+        out.print("15- Salir\n");
         out.print("Tu opción: ");
     }
+
 }
