@@ -1,4 +1,4 @@
-package tests;
+package tests.driversAutomaticos;
 
 import domain.Aula;
 import domain.TipoClase;
