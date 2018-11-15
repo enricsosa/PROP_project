@@ -39,7 +39,7 @@
       "id": "a5",
       "plazas": 15,
       "tipos": [
-        "Laboratorio"
+        "Laboratorio",
       ]
     },
     {
@@ -143,15 +143,6 @@
     },
     {
       "id": "a18",
-      "plazas": 40,
-      "tipos": [
-        "Teoria",
-        "Laboratorio",
-        "Problemas"
-      ]
-    },
-    {
-      "id": "a19",
       "plazas": 40,
       "tipos": [
         "Teoria",

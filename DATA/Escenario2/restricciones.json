@@ -1,0 +1,46 @@
+{
+  "restricciones": [
+    {
+      "nombre": "diaLibre",
+      "dias": [
+        6,
+        7
+      ]
+    },
+    {
+      "nombre": "franjaTrabajo",
+      "horaIni": 8,
+      "horaFin": 20
+    },
+    {
+      "nombre": "nivelHora",
+      "niveles": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ]
+    },
+    {
+      "nombre": "correquisitos",
+      "parAsigs": []
+    },
+    {
+      "nombre": "prerrequisitos",
+      "parAsigs": [
+        {
+          "idAsig": "IC1",
+          "idAsigPre": "PRO1"
+        }
+      ]
+    },
+    {
+      "nombre": "franjaAsignatura",
+      "asignaturas": []
+    },
+    {
+      "nombre": "franjaNivel",
+      "niveles": []
+    }
+  ]
+}

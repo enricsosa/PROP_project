@@ -11,17 +11,36 @@
     },
     {
       "id": "a2",
-      "plazas": 20,
+      "plazas": 40,
       "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a3",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a4",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
         "Laboratorio",
         "Problemas"
       ]
     },
     {
       "id": "a5",
-      "plazas": 15,
+      "plazas": 20,
       "tipos": [
-        "Laboratorio",
+        "Laboratorio"
       ]
     },
     {
@@ -36,25 +55,22 @@
       "id": "a7",
       "plazas": 40,
       "tipos": [
-        "Teoria"
+        "Teoria",
+        "Problemas"
       ]
     },
     {
       "id": "a8",
-      "plazas": 40,
+      "plazas": 20,
       "tipos": [
-        "Teoria",
-        "Laboratorio",
-        "Problemas"
+        "Laboratorio"
       ]
     },
     {
       "id": "a9",
-      "plazas": 40,
+      "plazas": 20,
       "tipos": [
-        "Teoria",
-        "Laboratorio",
-        "Problemas"
+        "Laboratorio"
       ]
     },
     {

@@ -16,7 +16,8 @@
       "nombre": "nivelHora",
       "niveles": [
         "N1",
-        "N2"
+        "N2",
+        "N4"
       ]
     },
     {
@@ -24,7 +25,23 @@
       "parAsigs": [
         {
           "idAsig1": "PRO1",
-          "idAsig2": "IC"
+          "idAsig2": "IC2"
+        },
+        {
+          "idAsig1": "PRO1",
+          "idAsig2": "PRO2"
+        },
+        {
+          "idAsig1": "PRO2",
+          "idAsig2": "PRO3"
+        },
+        {
+          "idAsig1": "IC2",
+          "idAsig2": "IC3"
+        },
+        {
+          "idAsig1": "F3",
+          "idAsig2": "F4"
         }
       ]
     },
@@ -32,7 +49,7 @@
       "nombre": "prerrequisitos",
       "parAsigs": [
         {
-          "idAsig": "IC",
+          "idAsig": "IC1",
           "idAsigPre": "PRO1"
         }
       ]
@@ -44,6 +61,21 @@
           "idAsig": "PRO1",
           "horaIni": 8,
           "horaFin": 14
+        },
+        {
+          "idAsig": "IC2",
+          "horaIni": 12,
+          "horaFin": 18
+        },
+        {
+          "idAsig": "F3",
+          "horaIni": 8,
+          "horaFin": 14
+        },
+        {
+          "idAsig": "PROP1",
+          "horaIni": 10,
+          "horaFin": 16
         }
       ]
     },
@@ -51,8 +83,13 @@
       "nombre": "franjaNivel",
       "niveles": [
         {
-          "idNivel": "N1",
-          "horaIni": 10,
+          "idNivel": "N3",
+          "horaIni": 8,
+          "horaFin": 14
+        },
+        {
+          "idNivel": "N4",
+          "horaIni": 14,
           "horaFin": 20
         }
       ]

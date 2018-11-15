@@ -132,7 +132,6 @@ public class CtrlHorario {
         //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
             Clase clase = clases.get(i);
-            clases.remove(i);
             ReturnSet franja = getFranjaClase(clase, this.limitacionesHorario);
             //out.println("CP 3");
             for (int dia = 1; dia <= 7; ++dia) {
@@ -144,7 +143,7 @@ public class CtrlHorario {
                         //out.println("CP 6");
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
                             Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
-                            ReturnSet returnSet = this.generarAsignaciones(asignacion, clases, new Ocupaciones(ocupaciones));
+                            ReturnSet returnSet = this.generarAsignaciones(asignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
                             if (returnSet.getValidez()) {
                                 horario.setOcupaciones(returnSet.getOcupaciones());
                                 return (new ReturnSet(true, horario));
@@ -182,8 +181,6 @@ public class CtrlHorario {
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
 
         for (int i = 0; i < clases.size(); ++i) {
-            Clase clase = clases.get(i);
-            clases.remove(i);
             ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);
             if ((clases.size() % 2) == 0) {
                 for (int dia = 1; dia <= 7; ++dia) {
