@@ -19,17 +19,6 @@ public class Dia {
 
     /**Atributos*/
 
-    /**Niveles de los que se da Clase ese en Dia.*/
-    private Map<String, Nivel> niveles;
-    /**Asignaturas de las que se da Clase ese en Dia.*/
-    private Map<String, Asignatura> asignaturas;
-    /**Aulas en las que se da Clase ese en Dia.*/
-    private Map<String, Aula> aulas;
-    /**Grupos que dan Clase ese en Dia.*/
-    private Map<String, Grupo> grupos;
-    /**SubGrupos que dan Clase ese en Dia.*/
-    private Map<String, SubGrupo> subGrupos;
-    //private ArrayList<Restriccion> restricciones;
     /**Horas que pertenecen al Dia*/
     private Hora[] horas;
 
@@ -37,11 +26,6 @@ public class Dia {
 
     /**Constructora básica de la clase Dia.*/
     public Dia() {
-        this.niveles = new HashMap<String, Nivel>();
-        this.asignaturas = new HashMap<String, Asignatura>();
-        this.aulas = new HashMap<String, Aula>();
-        this.grupos = new HashMap<String, Grupo>();
-        this.subGrupos = new HashMap<String, SubGrupo>();
         //this.restricciones = new ArrayList<Restriccion>();
         this.horas = new Hora[24];
         Arrays.fill(this.horas, new Hora());
@@ -52,16 +36,6 @@ public class Dia {
      * @param oldDia    Dia del cual se copian los datos.
      */
     public Dia(Dia oldDia) {
-        this.niveles = new HashMap<String, Nivel>();
-        this.niveles.putAll(oldDia.niveles);
-        this.asignaturas = new HashMap<String, Asignatura>();
-        this.asignaturas.putAll(oldDia.asignaturas);
-        this.aulas = new HashMap<String, Aula>();
-        this.aulas.putAll(oldDia.aulas);
-        this.grupos = new HashMap<String, Grupo>();
-        this.grupos.putAll(oldDia.grupos);
-        this.subGrupos = new HashMap<String, SubGrupo>();
-        this.subGrupos.putAll(oldDia.subGrupos);
         //this.restricciones = new ArrayList<Restriccion>();
         //this.restricciones.addAll(oldDia.restricciones);
         this.horas = new Hora[24];
@@ -71,162 +45,6 @@ public class Dia {
     }
 
     /**Metodos publicos*/
-
-    /**
-     * Asigna un nuevo conjunto de Niveles a un Dia.
-     * @param niveles   Nuevo conjunto de Niveles que se asigna a Dia.
-     */
-    public void setNiveles(Map<String, Nivel> niveles) {
-        this.niveles = niveles;
-    }
-
-    /**
-     * Añade un Nivel a los niveles de Dia.
-     * @param nivel Nivel que se quiere añadir a Dia.
-     */
-    public void addNivel(Nivel nivel) {
-        this.niveles.putIfAbsent(nivel.getNombre(), nivel);
-    }
-
-    //public void replaceNivel(Nivel nivel) {
-    //  this.niveles.replace(nivel.getNombre(), nivel);
-    //}
-
-    /**
-     * Elimina un Nivel con el nombre introducido de Dia.
-     * @param nombre    nombre del nivel que se quiere eliminar.
-     */
-    public void eliminarNivel(String nombre) {
-        this.niveles.remove(nombre);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Asignaturas a un Dia.
-     * @param asignaturas   Nuevo conjunto de Asignaturas que se asigna a Dia.
-     */
-    public void setAsignaturas(Map<String, Asignatura> asignaturas) {
-        this.asignaturas = asignaturas;
-    }
-
-    /**
-     * Añade una Asignatura a las Asignaturas de Dia.
-     * @param asignatura    Asignatura que se quiere añadir a Dia.
-     */
-    public void addAsignatura(Asignatura asignatura) {
-        this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
-    }
-
-    //public void replaceAsignatura(Asignatura asignatura) {
-    //  this.asignaturas.replace(asignatura.getId(), asignatura);
-    //}
-
-    /**
-     * Se elimina la Asignatura con la id dada del conjunto de Asignaturas de Dia.
-     * @param id    id de la Asignatura que se quiere eliminar.
-     */
-    public void eliminarAsignatura(String id) {
-        this.asignaturas.remove(id);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Aulas a un Dia.
-     * @param aulas Nuevo conjunto de Aulas que se asigna a Dia.
-     */
-    public void setAulas(Map<String, Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    /**
-     * Añade una Aula al conjunto de Aulas de un Dia.
-     * @param aula  Aula que se quiere añadir a Dia.
-     */
-    public void addAula(Aula aula) {
-        this.aulas.putIfAbsent(aula.getId(), aula);
-    }
-
-    //public void replaceAula(Aula aula) {
-    //  this.aulas.replace(aula.getId(), aula);
-    //}
-
-    /**
-     * Elimina un Aula del conjunto de Aulas de Dia a partir de su id.
-     * @param id    id del Aula que se quiere eliminar de Dia.
-     */
-    public void eliminarAula(String id) {
-        this.aulas.remove(id);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Grupos a un Dia.
-     * @param grupos    Nuevo conjunto de Grupos que se asigna a Dia.
-     */
-    public void setGrupos(Map<String, Grupo> grupos) {
-        this.grupos = grupos;
-    }
-
-    /**
-     * Añade un Grupo al conjunto de Grupos de Dia.
-     * @param grupo Grupo que se quiere añadir a Dia.
-     */
-    public void addGrupo(Grupo grupo) {
-        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    }
-
-    //public void replaceGrupo(Grupo grupo) {
-    //  this.grupos.replace(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    //}
-
-    /**
-     * Elimina un Grupo de Dia a partir de su key.
-     * @param key   key del Grupo que se quiere eliminar.
-     */
-    public void eliminarGrupo(String key) {
-        this.grupos.remove(key);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Subgrupos a un Dia.
-     * @param subGrupos Nuevo conjunto de SubGrupos que se asigna a Dia.
-     */
-    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
-        this.subGrupos = subGrupos;
-    }
-
-    /**
-     * Añade un SubGrupo al conjunto de SubGrupos de Dia.
-     * @param subGrupo  SubGrupo que se quiere añadir a Dia.
-     */
-    public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo()), subGrupo);
-    }
-
-    //public void replaceSubGrupo(SubGrupo subGrupo) {
-    //  this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
-    //}
-
-    /**
-     * Dada una key elimina un SubGrupo de Dia.
-     * @param key   key del SubGrupo que se quiere eliminar.
-     */
-    public void eliminarSubGrupo(String key) {
-        this.subGrupos.remove(key);
-    }
-
-    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        //this.restricciones = restricciones;
-    //}
-
-    //public void addRestriccion(Restriccion restriccion) {
-    //    this.restricciones.add(restriccion);
-    //}
-
-    //public void addRestricciones(ArrayList<Restriccion> restricciones) {
-      //  this.restricciones.addAll(restricciones);
-    //}
-
-    //public void eliminarRestriccion(Integer posicion) {
-      //  this.restricciones.remove(posicion);
-    //}
 
     /**
      * Asigna un Array de Horas a Dia.
@@ -252,6 +70,10 @@ public class Dia {
      * @return  ArrayList con los Niveles de Dia.
      */
     public Map<String, Nivel> getNiveles() {
+        Map<String, Nivel> niveles = this.horas[0].getNiveles();
+        for (int i = 1; i < 24; ++i) {
+            niveles.putAll(this.horas[i].getNiveles());
+        }
         return niveles;
     }
 
@@ -261,7 +83,7 @@ public class Dia {
      * @return      true si dia tiene nivel, false en caso contrario.
      */
     public Boolean tieneNivel(Nivel nivel) {
-        return (this.niveles.get(nivel.getNombre()) != null);
+        return (this.getNiveles().get(nivel.getNombre()) != null);
     }
 
     /**
@@ -270,7 +92,7 @@ public class Dia {
      * @return          Devuelve el Nivel con el nombre indicado.
      */
     public Nivel getNivel(String nombre) {
-        return this.niveles.get(nombre);
+        return this.getNiveles().get(nombre);
     }
 
     /**
@@ -278,6 +100,10 @@ public class Dia {
      * @return  ArrayList de Asignaturas que tiene Dia.
      */
     public Map<String, Asignatura> getAsignaturas() {
+        Map<String, Asignatura> asignaturas = this.horas[0].getAsignaturas();
+        for (int i = 1; i < 24; ++i) {
+            asignaturas.putAll(this.horas[i].getAsignaturas());
+        }
         return asignaturas;
     }
 
@@ -287,7 +113,7 @@ public class Dia {
      * @return          Devuelve la Asignatura con le nombre indicado.
      */
     public Asignatura getAsignatura(String nombre) {
-        return this.asignaturas.get(nombre);
+        return this.getAsignaturas().get(nombre);
     }
 
     /**
@@ -296,7 +122,7 @@ public class Dia {
      * @return              true si asignatura se encuentra en Dia, false en caso contrario.
      */
     public Boolean tieneAsignatura(Asignatura asignatura) {
-        return (this.asignaturas.get(asignatura.getId()) != null);
+        return (this.getAsignaturas().get(asignatura.getId()) != null);
     }
 
     /**
@@ -304,6 +130,10 @@ public class Dia {
      * @return  ArrayList con las Aulas de Dia.
      */
     public Map<String, Aula> getAulas() {
+        Map<String, Aula> aulas = this.horas[0].getAulas();
+        for (int i = 1; i < 24; ++i) {
+            aulas.putAll(this.horas[i].getAulas());
+        }
         return aulas;
     }
 
@@ -313,7 +143,7 @@ public class Dia {
      * @return      Aula de Dia con id igual al id dado.
      */
     public Aula getAula(String id) {
-        return this.aulas.get(id);
+        return this.getAulas().get(id);
     }
 
     /**
@@ -322,7 +152,7 @@ public class Dia {
      * @return      true si aula se encuentra entre las Aulas de Dia, false en caso contrario.
      */
     public Boolean tieneAula(Aula aula) {
-        return (this.aulas.get(aula.getId()) != null);
+        return (this.getAulas().get(aula.getId()) != null);
     }
 
     /**
@@ -330,6 +160,10 @@ public class Dia {
      * @return  ArrayList que contiene los Grupos de Dia.
      */
     public Map<String, Grupo> getGrupos() {
+        Map<String, Grupo> grupos = this.horas[0].getGrupos();
+        for (int i = 1; i < 24; ++i) {
+            grupos.putAll(this.horas[i].getGrupos());
+        }
         return grupos;
     }
 
@@ -339,7 +173,7 @@ public class Dia {
      * @return      true si grupo se encuentra entre los grupos de Dia, false en caso contrario.
      */
     public Boolean tieneGrupo(Grupo grupo) {
-        return (this.grupos.get(grupo.getId() + grupo.getAsignatura().getId()) != null);
+        return (this.getGrupos().get(grupo.getId() + grupo.getAsignatura().getId()) != null);
     }
 
     /**
@@ -347,6 +181,10 @@ public class Dia {
      * @return  ArrayList que contiene los SubGrupos de Dia.
      */
     public Map<String, SubGrupo> getSubGrupos() {
+        Map<String, SubGrupo> subGrupos = this.horas[0].getSubGrupos();
+        for (int i = 1; i < 24; ++i) {
+            subGrupos.putAll(this.horas[i].getSubGrupos());
+        }
         return subGrupos;
     }
 
@@ -356,7 +194,7 @@ public class Dia {
      * @return          true si subGrupo se encuentra entre los subGrupos de Dia, false en caso contrario.
      */
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
+        return (this.getSubGrupos().get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
     }
 
     //public ArrayList<Restriccion> getRestricciones() {

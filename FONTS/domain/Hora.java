@@ -17,16 +17,6 @@ public class Hora {
 
     /**Atributos*/
 
-    /**Niveles de los que se da Clase ese en Hora.*/
-    private Map<String, Nivel> niveles;
-    /**Asignaturas de las que se da Clase ese en Hora.*/
-    private Map<String, Asignatura> asignaturas;
-    /**Aulas en las que se da Clase ese en Hora.*/
-    private Map<String, Aula> aulas;
-    /**Grupos que dan Clase ese en Hora.*/
-    private Map<String, Grupo> grupos;
-    /**SubGrupos que dan Clase ese en Hora.*/
-    private Map<String, SubGrupo> subGrupos;
     /**Asignaciones que transcurren en Hora.*/
     private Map<String, Asignacion> asignaciones;
     //private ArrayList<Restriccion> restricciones;
@@ -35,11 +25,6 @@ public class Hora {
 
     /**Constructora básica de la clase Hora.*/
     public Hora() {
-        this.niveles = new HashMap<String, Nivel>();
-        this.asignaturas = new HashMap<String, Asignatura>();
-        this.aulas = new HashMap<String, Aula>();
-        this.grupos = new HashMap<String, Grupo>();
-        this.subGrupos = new HashMap<String, SubGrupo>();
         this.asignaciones = new HashMap<String, Asignacion>();
         //this.restricciones = new ArrayList<Restriccion>();
     }
@@ -49,16 +34,6 @@ public class Hora {
      * @param oldHora   Hora de la cual se copian los datos.
      */
     public Hora(Hora oldHora) {
-        this.niveles = new HashMap<String, Nivel>();
-        this.niveles.putAll(oldHora.niveles);
-        this.asignaturas = new HashMap<String, Asignatura>();
-        this.asignaturas.putAll(oldHora.asignaturas);
-        this.aulas = new HashMap<String, Aula>();
-        this.aulas.putAll(oldHora.aulas);
-        this.grupos = new HashMap<String, Grupo>();
-        this.grupos.putAll(oldHora.grupos);
-        this.subGrupos = new HashMap<String, SubGrupo>();
-        this.subGrupos.putAll(oldHora.subGrupos);
         this.asignaciones = new HashMap<String, Asignacion>();
         this.asignaciones.putAll(oldHora.asignaciones);
         //this.restricciones = new ArrayList<Restriccion>();
@@ -66,146 +41,6 @@ public class Hora {
     }
 
     /**Metodos publicos*/
-
-    /**
-     * Asigna un nuevo conjunto de Niveles a una Hora.
-     * @param niveles   Nuevo conjunto de Niveles que se asigna a Hora.
-     */
-    public void setNiveles(Map<String, Nivel> niveles) {
-        this.niveles = niveles;
-    }
-
-    /**
-     * Añade un Nivel a los niveles de Hora.
-     * @param nivel Nivel que se quiere añadir a Hora.
-     */
-    public void addNivel(Nivel nivel) {
-        this.niveles.putIfAbsent(nivel.getNombre(), nivel);
-    }
-
-    //public void replaceNivel(Nivel nivel) {
-    //    this.niveles.replace(nivel.getNombre(), nivel);
-    //}
-
-    /**
-     * Elimina un Nivel con el nombre introducido de Hora.
-     * @param nombre    nombre del nivel que se quiere eliminar.
-     */
-    public void eliminarNivel(String nombre) {
-        this.niveles.remove(nombre);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Asignaturas a una Hora.
-     * @param asignaturas   Nuevo conjunto de Asignaturas que se asigna a Hora.
-     */
-    public void setAsignaturas(Map<String, Asignatura> asignaturas) {
-        this.asignaturas = asignaturas;
-    }
-
-    /**
-     * Añade una Asignatura a las Asignaturas de Hora.
-     * @param asignatura    Asignatura que se quiere añadir a Hora.
-     */
-    public void addAsignatura(Asignatura asignatura) {
-        this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
-    }
-
-    //public void replaceAsignatura(Asignatura asignatura) {
-    //  this.asignaturas.replace(asignatura.getId(), asignatura);
-    //}
-
-    /**
-     * Se elimina la Asignatura con la id dada del conjunto de Asignaturas de Hora.
-     * @param id    id de la Asignatura que se quiere eliminar.
-     */
-    public void eliminarAsignatura(String id) {
-        this.asignaturas.remove(id);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Aulas a una Hora.
-     * @param aulas Nuevo conjunto de Aulas que se asigna a Hora.
-     */
-    public void setAulas(Map<String, Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    /**
-     * Añade una Aula al conjunto de Aulas de un Hora.
-     * @param aula  Aula que se quiere añadir a Hora.
-     */
-    public void addAula(Aula aula) {
-        this.aulas.putIfAbsent(aula.getId(), aula);
-    }
-
-    //public void replaceAula(Aula aula) {
-    //    this.aulas.replace(aula.getId(), aula);
-    //}
-
-    /**
-     * Elimina un Aula del conjunto de Aulas de Hora a partir de su id.
-     * @param id    id del Aula que se quiere eliminar de Hora.
-     */
-    public void eliminarAula(String id) {
-        this.aulas.remove(id);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Grupos a una Hora.
-     * @param grupos    Nuevo conjunto de Grupos que se asigna a Hora.
-     */
-    public void setGrupos(Map<String, Grupo> grupos) {
-        this.grupos = grupos;
-    }
-
-    /**
-     * Añade un Grupo al conjunto de Grupos de Hora.
-     * @param grupo Grupo que se quiere añadir a Hora.
-     */
-    public void addGrupo(Grupo grupo) {
-        this.grupos.putIfAbsent(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    }
-
-    //public void replaceGrupo(Grupo grupo) {
-    //    this.grupos.replace(grupo.getId() + grupo.getAsignatura().getId(), grupo);
-    //}
-
-    /**
-     * Elimina un Grupo de Hora a partir de su key.
-     * @param key   key del Grupo que se quiere eliminar.
-     */
-    public void eliminarGrupo(String key) {
-        this.grupos.remove(key);
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Subgrupos a una Hora.
-     * @param subGrupos Nuevo conjunto de SubGrupos que se asigna a Hora.
-     */
-    public void setSubGrupos(Map<String, SubGrupo> subGrupos) {
-        this.subGrupos = subGrupos;
-    }
-
-    /**
-     * Añade un SubGrupo al conjunto de SubGrupos de Hora.
-     * @param subGrupo  SubGrupo que se quiere añadir a Hora.
-     */
-    public void addSubGrupo(SubGrupo subGrupo) {
-        this.subGrupos.putIfAbsent(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo()), subGrupo);
-    }
-
-    //public void replaceSubGrupo(SubGrupo subGrupo) {
-    //   this.subGrupos.replace(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()), subGrupo);
-    //}
-
-    /**
-     * Dada una key elimina un SubGrupo de Hora.
-     * @param key   key del SubGrupo que se quiere eliminar.
-     */
-    public void eliminarSubGrupo(String key) {
-        this.subGrupos.remove(key);
-    }
 
     /**
      * Asigna un nuevo conjunto de Asignaciones a una Hora.
@@ -258,6 +93,10 @@ public class Hora {
      * @return  ArrayList con los Niveles de Hora.
      */
     public Map<String, Nivel> getNiveles() {
+        Map<String, Nivel> niveles = new HashMap<String, Nivel>();
+        for (Map.Entry<String, Asignacion> entry : this.asignaciones.entrySet()) {
+            if (entry.getValue().tieneNivel()) niveles.putIfAbsent(entry.getValue().getNivel().getNombre(), entry.getValue().getNivel());
+        }
         return niveles;
     }
 
@@ -267,7 +106,7 @@ public class Hora {
      * @return          Nivel de Hora con el nombre indicado.
      */
     public Nivel getNivel(String nombre) {
-        return this.niveles.get(nombre);
+        return this.getNiveles().get(nombre);
     }
 
     /**
@@ -276,7 +115,7 @@ public class Hora {
      * @return      true si dia tiene nivel, false en caso contrario.
      */
     public Boolean tieneNivel(Nivel nivel) {
-        return (this.niveles.get(nivel.getNombre()) != null);
+        return (this.getNiveles().get(nivel.getNombre()) != null);
     }
 
     /**
@@ -284,16 +123,20 @@ public class Hora {
      * @return  ArrayList de Asignaturas que tiene Hora.
      */
     public Map<String, Asignatura> getAsignaturas() {
+        Map<String, Asignatura> asignaturas = new HashMap<String, Asignatura>();
+        for (Map.Entry<String, Asignacion> entry : this.asignaciones.entrySet()) {
+            asignaturas.putIfAbsent(entry.getValue().getAsignatura().getId(), entry.getValue().getAsignatura());
+        }
         return asignaturas;
     }
 
     /**
      * Devuelve una Asignatura con el nombre indicado.
-     * @param nombre    nombre de la Asignatura que se quiere obtener.
+     * @param id    nombre de la Asignatura que se quiere obtener.
      * @return          Devuelve la Asignatura con le nombre indicado.
      */
-    public Asignatura getAsignatura(String nombre) {
-        return this.asignaturas.get(nombre);
+    public Asignatura getAsignatura(String id) {
+        return this.getAsignaturas().get(id);
     }
 
     /**
@@ -302,7 +145,7 @@ public class Hora {
      * @return              true si asignatura se encuentra en Hora, false en caso contrario.
      */
     public Boolean tieneAsignatura(Asignatura asignatura) {
-        return (this.asignaturas.get(asignatura.getId()) != null);
+        return (this.getAsignaturas().get(asignatura.getId()) != null);
     }
 
     /**
@@ -310,6 +153,10 @@ public class Hora {
      * @return  ArrayList con las Aulas de Hora.
      */
     public Map<String, Aula> getAulas() {
+        Map<String, Aula> aulas = new HashMap<String, Aula>();
+        for (Map.Entry<String, Asignacion> entry : this.asignaciones.entrySet()) {
+            aulas.putIfAbsent(entry.getValue().getAula().getId(), entry.getValue().getAula());
+        }
         return aulas;
     }
 
@@ -319,7 +166,7 @@ public class Hora {
      * @return      Aula de Hora con id igual al id dado.
      */
     public Aula getAula(String id) {
-        return this.aulas.get(id);
+        return this.getAulas().get(id);
     }
 
     /**
@@ -328,7 +175,7 @@ public class Hora {
      * @return      true si aula se encuentra entre las Aulas de Hora, false en caso contrario.
      */
     public Boolean tieneAula(Aula aula) {
-        return (this.aulas.get(aula.getId()) != null);
+        return (this.getAulas().get(aula.getId()) != null);
     }
 
     /**
@@ -336,6 +183,10 @@ public class Hora {
      * @return  ArrayList que contiene los Grupos de Hora.
      */
     public Map<String, Grupo> getGrupos() {
+        Map<String, Grupo> grupos = new HashMap<String, Grupo>();
+        for (Map.Entry<String, Asignacion> entry : this.asignaciones.entrySet()) {
+            grupos.putIfAbsent(entry.getValue().getGrupo().getId() + entry.getValue().getGrupo().getAsignatura().getId(), entry.getValue().getGrupo());
+        }
         return grupos;
     }
 
@@ -349,7 +200,7 @@ public class Hora {
      * @return      true si grupo se encuentra entre los grupos de Hora, false en caso contrario.
      */
     public Boolean tieneGrupo(Grupo grupo) {
-        return (this.grupos.get(grupo.getId() + grupo.getAsignatura().getId()) != null);
+        return (this.getGrupos().get(grupo.getId() + grupo.getAsignatura().getId()) != null);
     }
 
     /**
@@ -359,7 +210,7 @@ public class Hora {
      * @return              true si Hora tiene un grupo con la id de grupo de asignatura, false en caso contrario.
      */
     public Boolean tieneGrupo(Asignatura asignatura, Grupo grupo) {
-        return (this.grupos.get(grupo.getId() + asignatura.getId()) != null);
+        return (this.getGrupos().get(grupo.getId() + asignatura.getId()) != null);
     }
 
     /**
@@ -367,6 +218,10 @@ public class Hora {
      * @return  ArrayList que contiene los SubGrupos de Hora.
      */
     public Map<String, SubGrupo> getSubGrupos() {
+        Map<String, SubGrupo> subGrupos = new HashMap<String, SubGrupo>();
+        for (Map.Entry<String, Asignacion> entry : this.asignaciones.entrySet()) {
+            subGrupos.putIfAbsent(entry.getValue().getSubGrupo().getIdCompleta() + entry.getValue().getSubGrupo().getAsignatura().getId() + Aux.strTipo(entry.getValue().getSubGrupo().getTipo()), entry.getValue().getSubGrupo());
+        }
         return subGrupos;
     }
 
@@ -384,7 +239,7 @@ public class Hora {
      * @return          true si subGrupo se encuentra entre los subGrupos de Hora, false en caso contrario.
      */
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
-        return (this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
+        return (this.getSubGrupos().get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
     }
 
     /**
