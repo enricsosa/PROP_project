@@ -78,7 +78,7 @@ public class driverAsignacion {
     }
 
     public static void main (String argv[]) {
-        out.print("Driver clase Asignatura\n");
+        out.print("Driver clase Asignacion\n");
         Asignacion a = null;
         initValues();
         mostrarMenu();
@@ -196,7 +196,7 @@ public class driverAsignacion {
                         out.println("Asignacion b tiene valor null");
                         Asignacion b = null;
                         out.println("Asignacion a es la que tenemos ahora mismo");
-                        out.println("(Debería ser diferente de null para ver la efectividad de este método)");
+                        out.println("(a debería ser diferente de null para ver la efectividad de este método)");
                         out.println(a.toString());
                         out.println("Hacemos la copia");
                         b = new Asignacion(a);
