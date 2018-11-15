@@ -15,8 +15,8 @@
     {
       "nombre": "nivelHora",
       "niveles": [
-        "S1",
-        "S2"
+        "N1",
+        "N2"
       ]
     },
     {
@@ -51,7 +51,7 @@
       "nombre": "franjaNivel",
       "niveles": [
         {
-          "idNivel": "S1",
+          "idNivel": "N1",
           "horaIni": 10,
           "horaFin": 20
         }

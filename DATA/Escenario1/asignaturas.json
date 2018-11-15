@@ -3,7 +3,7 @@
     {
       "id": "F",
       "nombre": "Fisica",
-      "nivel": "S1",
+      "nivel": "N1",
       "sesiones": [
         {
           "horas": 2,
@@ -12,10 +12,6 @@
         {
           "horas": 2,
           "TipoClase": "Laboratorio"
-        },
-        {
-          "horas": 2,
-          "TipoClase": "Problemas"
         }
       ],
       "grupos": [
@@ -33,19 +29,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -53,19 +39,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -83,19 +59,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -103,19 +69,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -133,19 +89,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -153,19 +99,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         }
@@ -174,15 +110,11 @@
     {
       "id": "FM",
       "nombre": "Fonaments Matematics",
-      "nivel": "S1",
+      "nivel": "N1",
       "sesiones": [
         {
           "horas": 2,
           "TipoClase": "Teoria"
-        },
-        {
-          "horas": 2,
-          "TipoClase": "Laboratorio"
         },
         {
           "horas": 2,
@@ -201,17 +133,7 @@
             {
               "id": "1",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "1",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "2",
@@ -221,17 +143,7 @@
             {
               "id": "3",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "3",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "4",
@@ -251,17 +163,7 @@
             {
               "id": "1",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "1",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "2",
@@ -271,17 +173,7 @@
             {
               "id": "3",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "3",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "4",
@@ -301,17 +193,7 @@
             {
               "id": "1",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "1",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "2",
@@ -321,17 +203,7 @@
             {
               "id": "3",
               "plazas": 10,
-              "tipo": "Laboratorio"
-            },
-            {
-              "id": "3",
-              "plazas": 10,
               "tipo": "Problemas"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Laboratorio"
             },
             {
               "id": "4",
@@ -345,7 +217,7 @@
     {
       "id": "IC",
       "nombre": "Introduccio als Computadors",
-      "nivel": "S1",
+      "nivel": "N1",
       "sesiones": [
         {
           "horas": 2,
@@ -354,10 +226,6 @@
         {
           "horas": 2,
           "TipoClase": "Laboratorio"
-        },
-        {
-          "horas": 2,
-          "TipoClase": "Problemas"
         }
       ],
       "grupos": [
@@ -375,19 +243,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -395,19 +253,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -425,19 +273,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -445,19 +283,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -475,19 +303,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -495,19 +313,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         }
@@ -516,7 +324,7 @@
     {
       "id": "PRO1",
       "nombre": "Programacio I",
-      "nivel": "S1",
+      "nivel": "N1",
       "sesiones": [
         {
           "horas": 2,
@@ -525,10 +333,6 @@
         {
           "horas": 2,
           "TipoClase": "Laboratorio"
-        },
-        {
-          "horas": 2,
-          "TipoClase": "Problemas"
         }
       ],
       "grupos": [
@@ -546,19 +350,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -566,19 +360,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -596,19 +380,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -616,19 +390,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -646,19 +410,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -666,19 +420,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         }
@@ -696,10 +440,6 @@
         {
           "horas": 2,
           "TipoClase": "Laboratorio"
-        },
-        {
-          "horas": 2,
-          "TipoClase": "Problemas"
         }
       ],
       "grupos": [
@@ -717,19 +457,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -737,19 +467,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -767,19 +487,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -787,19 +497,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         },
@@ -817,19 +517,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "1",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "2",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "2",
-              "plazas": 10,
-              "tipo": "Problemas"
             },
             {
               "id": "3",
@@ -837,19 +527,9 @@
               "tipo": "Laboratorio"
             },
             {
-              "id": "3",
-              "plazas": 10,
-              "tipo": "Problemas"
-            },
-            {
               "id": "4",
               "plazas": 10,
               "tipo": "Laboratorio"
-            },
-            {
-              "id": "4",
-              "plazas": 10,
-              "tipo": "Problemas"
             }
           ]
         }
