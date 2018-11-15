@@ -119,28 +119,16 @@ public class CtrlHorario {
      * @return      ReturnSet con validez indicando si se ha podido generar un Horario. Si se ha podido ReturnSet también contiene el Horario.
      */
     public ReturnSet generarHorario(String id) {
-        //out.println(this.planEstudios);
-        //out.println("Se inicia generarHorario().\n");
         Horario horario = new Horario(id);
         Ocupaciones ocupaciones = new Ocupaciones();
         ArrayList<Clase> clases = this.getAllClases();
-        //out.println("CP 1");
-        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i).toStringResumido());
-        /////Collections.shuffle(clases);
         sortClases(clases, this.limitacionesHorario, false);
-        //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
-        //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
             Clase clase = clases.get(i);
             ReturnSet franja = getFranjaClase(clase, this.limitacionesHorario);
-            //out.println("CP 3");
             for (int dia = 1; dia <= 7; ++dia) {
-                //out.println(dia);
-                //out.println("CP 4");
                 if(!(this.limitacionesHorario.esDiaLibre(dia))) {
-                    //out.println("CP 5");
                     for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
-                        //out.println("CP 6");
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
                             Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
                             ReturnSet returnSet = this.generarAsignaciones(asignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
@@ -281,6 +269,8 @@ public class CtrlHorario {
 
                 ReturnSet rc2 = getFranjaClase(c2, lh);
                 int fc2 = rc2.getHoraFin() - rc2.getHoraIni();
+
+                if (fc1 == fc2) return c1.getRestricciones().size() - c2.getRestricciones().size();
 
                 return fc1 - fc2;
             }
