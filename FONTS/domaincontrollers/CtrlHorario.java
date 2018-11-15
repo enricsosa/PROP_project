@@ -131,18 +131,20 @@ public class CtrlHorario {
         //for(int i = 0; i < clases.size(); ++i) out.println(clases.get(i));
         //out.println("CP 2");
         for (int i = 0; i < clases.size(); ++i) {
-            ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);
+            Clase clase = clases.get(i);
+            clases.remove(i);
+            ReturnSet franja = getFranjaClase(clase, this.limitacionesHorario);
             //out.println("CP 3");
             for (int dia = 1; dia <= 7; ++dia) {
                 //out.println(dia);
                 //out.println("CP 4");
                 if(!(this.limitacionesHorario.esDiaLibre(dia))) {
                     //out.println("CP 5");
-                    for (int horaIni = franja.getHoraIni(); (horaIni + clases.get(i).getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
+                    for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
                         //out.println("CP 6");
-                        for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
-                            Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clases.get(i));
-                            ReturnSet returnSet = this.generarAsignaciones(asignacion, copyRemoveClases(clases, i), new Ocupaciones(ocupaciones));
+                        for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
+                            Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
+                            ReturnSet returnSet = this.generarAsignaciones(asignacion, clases, new Ocupaciones(ocupaciones));
                             if (returnSet.getValidez()) {
                                 horario.setOcupaciones(returnSet.getOcupaciones());
                                 return (new ReturnSet(true, horario));
@@ -151,6 +153,7 @@ public class CtrlHorario {
                     }
                 }
             }
+            clases.add(i, clase);
         }
         return new ReturnSet(false);
     }
@@ -171,14 +174,16 @@ public class CtrlHorario {
         //out.println(asignacion.toString() + "\n");
         //out.println(clases.size());
         //if (!(this.comprobarRestricciones(asignacion, ocupaciones))) {
-            //out.println("asignacion no valida");
-            //return new ReturnSet(false);
+        //out.println("asignacion no valida");
+        //return new ReturnSet(false);
         //}
         ocupaciones.addAsignacion(asignacion);
         //out.println("asignacion valida");
         if (clases.size() == 0) return new ReturnSet(true, ocupaciones);
 
         for (int i = 0; i < clases.size(); ++i) {
+            Clase clase = clases.get(i);
+            clases.remove(i);
             ReturnSet franja = getFranjaClase(clases.get(i), this.limitacionesHorario);
             if ((clases.size() % 2) == 0) {
                 for (int dia = 1; dia <= 7; ++dia) {
@@ -303,7 +308,7 @@ public class CtrlHorario {
     }
 
     //public Boolean comprobarRestricciones(Asignacion asignacion, Ocupaciones ocupaciones) {
-      //  return asignacion.comprobarRestricciones(ocupaciones);
+    //  return asignacion.comprobarRestricciones(ocupaciones);
     //}
 
     /**

@@ -45,9 +45,19 @@ public class Ocupaciones {
      * Añade una Asignación a Ocupaciones.
      * @param asignacion    Asignación que se quiere añadir a Ocupaciones
      */
-    public void addAsignacion (Asignacion asignacion) {
+    public void addAsignacion(Asignacion asignacion) {
         for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignacion(asignacion);
+        }
+    }
+
+    /**
+     * Elimina una Asignación de Ocupaciones.
+     * @param asignacion    Asignación que se quiere eliminar de Ocupaciones
+     */
+    public void eliminarAsignacion(Asignacion asignacion) {
+        for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
+            this.getDia(asignacion.getDiaSemana()).getHora(hora).eliminarAsignacion(asignacion.generateKey());
         }
     }
 
