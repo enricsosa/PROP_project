@@ -1,0 +1,146 @@
+Driver clase Grupo
+
+1- Grupo(String, Asignatura)
+HA FUNCIONADO CORRECTAMENTE
+(AVISO: Grupo vacío, sólo tiene un Id y una Asignatura)
+
+
+
+2- getId()
+GRUPO
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignatura()
+Asignatura: as1
+-Nombre: AS1
+-Nivel: n1
+-Sesiones:
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- setSubGrupos(Map<String, SubGrupo>)
+{1=Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T, 2=Subgrupo: 2
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: P}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getSubGrupos()
+{1=Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T, 2=Subgrupo: 2
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: P}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getSubGruposTeoria()
+{1=Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getSubGruposLaboratorio()
+{}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getSubGruposProblemas()
+{2=Subgrupo: 2
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: P}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- getSubGrupo(String)
+Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- tieneNivel()
+(La Asignatura as1 tiene un Nivel Asociado, la Asignatura as2 no)
+La Asignatura del Grupo tiene un Nivel Asociado
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getNivel()
+Nivel: n1
+-Asignaturas:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- setId(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getId()
+CACA
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- setAsignatura(Asignatura)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignatura()
+Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+15- eliminarSubGrupo(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+14- addSubGrupo(SubGrupo)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getSubGrupos()
+{2=Subgrupo: 2
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: P, 1Teoria=Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...
+

@@ -1,0 +1,188 @@
+Driver clase Asignacion
+
+1- Asignacion(Integer, Integer, Aula, Clase)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- Asignacion(Asignacion)
+as Dummy1 T [au1]
+as Dummy1 T [au1]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- noCabeSubGrupo()
+Cabe la Clase a su Aula de la Asignacion
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- generateKey()
+asDummy1au1
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getHoraIni()
+4
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getDiaSemana()
+5
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getHoraFin()
+6
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- getAula()
+Aula: au1
+-Plazas: 80
+-Tipos:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- getGrupo()
+Grupo: Dummy
+-Asignatura: as
+-SubGrupos:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getSubGrupo()
+Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- getClase()
+Clase:
+-Asignatura: as
+-Grupo: Dummy
+-SubGrupo: 1
+-Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- getRestricciones()
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- getRestriccion()
+Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+14- getAsignatura()
+Asignatura: as
+-Nombre: AS
+-Grupos:
+-Restricciones:
+-- Nivel hora: n1
+-- Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+15- tieneNivel()
+Su Asignatura asociada a su Grupo de la Clase NO tiene un Nivel asociado
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- getNivel()
+*** NullPointerException ***
+
+
+
+17- toStringCompleto()
+as Dummy1 T
+    Asignatura: AS
+    Grupo: Dummy1
+    Aula: au1Tipo: Teoria
+    HoraIni: 04:00
+    HoraFin: 06:00
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+18- setHoraIni(int)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getHoraIni()
+111
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+19- setDiaSemana(int)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getDiaSemana()
+5
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+20- setAula(Aula)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- getAula()
+Aula: au2
+-Plazas: 60
+-Tipos:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+21- setClase(Clase)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- getClase()
+Clase:
+-Asignatura: as
+-Grupo: Dummy
+-SubGrupo: 1
+-Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

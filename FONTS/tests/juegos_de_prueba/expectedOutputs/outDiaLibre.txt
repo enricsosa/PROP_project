@@ -1,0 +1,47 @@
+Driver clase DiaLibre
+
+1- DiaLibre(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getDia()
+6
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+1- DiaLibre(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getDia()
+5
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- (Abstracta)getTipoRestriccion()
+DiaLibre
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- (Abstracta)comprobarRestriccion()
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- setDia(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getDia()
+1
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

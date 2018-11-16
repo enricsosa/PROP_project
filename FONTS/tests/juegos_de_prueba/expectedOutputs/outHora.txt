@@ -1,0 +1,160 @@
+Driver clase Hora
+
+1- Hora()
+Hora vacía de asignaciones
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- Hora(Hora)
+domain.Hora@76ed5528
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+18- setAsignaciones(Map<String, Asignacion>)
+Se van a introducir las siguientes Asignaciones:
+{asign1=as Gr11 T [au1], asign2=as Gr22 P [au2]}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- getAsignaciones()
+{asign1=as Gr11 T [au1], asign2=as Gr22 P [au2]}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+17- getAsignacion(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+19- addAsignacion(Asignacion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- getAsignaciones()
+{asGr11au1=as Gr11 T [au1], asign1=as Gr11 T [au1], asign2=as Gr22 P [au2]}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+20- eliminarAsignacion(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- getAsignaciones()
+{asGr11au1=as Gr11 T [au1], asign2=as Gr22 P [au2]}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+19- addAsignacion(Asignacion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- getAsignaciones()
+{asGr11au1=as Gr11 T [au1], asign2=as Gr22 P [au2]}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getNiveles()
+{}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getNivel(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- tieneNivel(Nivel)
+*** NullPointerException ***
+
+
+
+6- getAsignaturas()
+{as=Asignatura: as
+-Nombre: AS
+-Grupos:
+-Restricciones:
+-- Nivel hora: n1
+-- Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getAsignatura(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- tieneAsignatura(Asignatura)
+*** NullPointerException ***
+
+
+
+9- getAulas()
+{au1=Aula: au1
+-Plazas: 80
+-Tipos:, au2=Aula: au2
+-Plazas: 60
+-Tipos:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getAula(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- tieneAula(Aula)
+Está el Nivel
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- getGrupos()
+{Gr2as=Grupo: Gr2
+-Asignatura: as
+-SubGrupos:, Gr1as=Grupo: Gr1
+-Asignatura: as
+-SubGrupos:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- tieneGrupo(Grupo)
+Está el Grupo
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+14- getSubGrupos()
+{Gr22asP=Subgrupo: 2
+-Asignatura: as
+-Grupo: Gr2
+-Tipo: P, Gr11asT=Subgrupo: 1
+-Asignatura: as
+-Grupo: Gr1
+-Tipo: T}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+15- tieneSubGrupo(SubGrupo)
+Está el SubGrupo
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

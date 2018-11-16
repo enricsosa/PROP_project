@@ -1,0 +1,98 @@
+Driver clase Dia
+
+1- Dia()
+Dia vacío de horas
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- Dia(Dia)
+domain.Dia@76ed5528
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+18- setHoras(Hora[])
+Se van a introducir las siguientes Horas:
+[Ldomain.Hora;@2c7b84de
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+19- setHora(Hora, int)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getNiveles()
+*** NullPointerException *** (Días vacíos)
+
+
+
+4- tieneNivel(Nivel)
+*** NullPointerException *** (Días vacíos)
+
+
+
+5- getNivel(String)
+*** NullPointerException *** (Días vacíos)
+
+
+
+7- getAsignatura(String)
+*** NullPointerException *** (Días vacíos)
+
+
+
+8- tieneAsignatura(Asignatura)
+*** NullPointerException *** (Días vacíos)
+
+
+
+9- getAulas()
+*** NullPointerException *** (Días vacíos)
+
+
+
+10- getAula(String)
+*** NullPointerException *** (Días vacíos)
+
+
+
+11- tieneAula(Aula)
+*** NullPointerException *** (Días vacíos)
+
+
+
+12- getGrupos()
+*** NullPointerException *** (Días vacíos)
+
+
+
+13- tieneGrupo(Grupo)
+*** NullPointerException *** (Días vacíos)
+
+
+
+14- getSubGrupos()
+*** NullPointerException *** (Días vacíos)
+
+
+
+15- tieneSubGrupo(SubGrupo)
+*** NullPointerException *** (Días vacíos)
+
+
+
+16- getHoras()
+[Ldomain.Hora;@2c7b84de
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+17- getHora(int)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

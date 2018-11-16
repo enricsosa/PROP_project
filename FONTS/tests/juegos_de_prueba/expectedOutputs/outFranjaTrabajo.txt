@@ -1,0 +1,53 @@
+Driver clase FranjaTrabajo
+
+1- FranjaTrabajo(Integer, Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getHoraIni()
+10
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getHoraFin()
+20
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getTipoRestriccion()
+FranjaTrabajo
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- comprobarRestriccion()
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- setHoraIni(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getHoraIni()
+12
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- setHoraFin(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getHoraFin()
+13
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

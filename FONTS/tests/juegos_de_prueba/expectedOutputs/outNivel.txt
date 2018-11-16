@@ -1,0 +1,149 @@
+Driver clase Nivel
+
+1- Nivel(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getNombre()
+NIVEEEEL
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignaturas()
+{}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- addAsignatura(Asignatura)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignaturas()
+{as1=Asignatura: as1
+-Nombre: AS1
+-Grupos:
+-Restricciones:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- addAsignatura(Asignatura)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignaturas()
+{as2=Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:, as1=Asignatura: as1
+-Nombre: AS1
+-Grupos:
+-Restricciones:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- eliminarAsignatura(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignaturas()
+{as2=Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- setNombre(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- getNombre()
+NIVEEEEEEEEEEL
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- getAsignaturas()
+{as2=Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getAsignatura(String)
+Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- tieneAsignatura(Asignatura)
+El Nivel NO tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- tieneAsignatura(Asignatura)
+El Nivel tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- setRestricciones(ArrayList<Restriccion>)
+Se van a introducir las siguientes Restricciones:
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getRestricciones()
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getRestriccion(int)
+Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- eliminarRestriccion(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- addRestriccion(Restriccion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getRestricciones()
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00, Nivel hora: n1]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

@@ -1,0 +1,237 @@
+Driver clase Asignatura
+
+1- Asignatura(String, String, PlanEstudios)
+(Introducido un Plan de Estudios vacío por defecto)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getId()
+pro1
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getNombre()
+Programacion1
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- Asignatura(String, String, PlanEstudios, Nivel)
+(Introducido un Plan de Estudios vacío por defecto)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- tieneNivel()
+La Asignatura tiene un Nivel Asociado
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- Asignatura(String, String, PlanEstudios, ArrayList<Sesion>, Map<String, Grupo>)
+(Introducido un Plan de Estudios vacío por defecto)
+(Introducido un Array de Sesiones por defecto)
+(Introducido un Map de Grupos por defecto)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getSesiones()
+[Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas, Sesion:
+-Asignatura: as2
+-Tipo: P
+-Duracion: 1 horas]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- Asignatura(String, String, PlanEstudios, Nivel, ArrayList<Sesion>, Map<String, Grupo>)
+(Introducido un Plan de Estudios vacío por defecto)
+(Introducido un Array de Sesiones por defecto)
+(Introducido un Map de Grupos por defecto)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- getGrupos()
+{Grupo2=Grupo: Grupo2
+-Asignatura: as2
+-SubGrupos:, Grupo1=Grupo: Grupo1
+-Asignatura: as1
+-SubGrupos:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getId()
+ic
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getNombre()
+IntroduccioComputadors
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getPlanEstudios()
+*** NullPointerException ***
+
+
+
+8- tieneNivel()
+La Asignatura tiene un Nivel Asociado
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- getNivel()
+Nivel: n2
+-Asignaturas:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getSesiones()
+[Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas, Sesion:
+-Asignatura: as2
+-Tipo: P
+-Duracion: 1 horas]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- getGrupos()
+{Grupo2=Grupo: Grupo2
+-Asignatura: as2
+-SubGrupos:, Grupo1=Grupo: Grupo1
+-Asignatura: as1
+-SubGrupos:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- getGrupo(String)
+*** NullPointerException ***
+
+
+
+13- getRestricciones()
+[]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+14- getAllClases()
+[]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+15- setId(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- setNombre(String)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+17- setPlanEstudios(PlanEstudios)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+18- setNivel(Nivel)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+19- setSesiones(ArrayList<Sesion>)
+Se van a introducir las siguientes Sesiones:
+[Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas, Sesion:
+-Asignatura: as2
+-Tipo: P
+-Duracion: 1 horas]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+21- eliminarSesion(int)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+20- addSesion(Sesion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+22- setGrupos(Map<String, Grupo>)
+Se van a introducir los siguientes Grupos:
+{Grupo2=Grupo: Grupo2
+-Asignatura: as2
+-SubGrupos:, Grupo1=Grupo: Grupo1
+-Asignatura: as1
+-SubGrupos:}
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+24- replaceGrupo(Grupo)
+
+
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+23- addGrupo(Grupo)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+26- setRestricciones(ArrayList<Restriccion>)
+Se van a introducir los siguientes Grupos:
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+28- eliminarRestriccion(Integer)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+27- addRestriccion(Restriccion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- getRestricciones()
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

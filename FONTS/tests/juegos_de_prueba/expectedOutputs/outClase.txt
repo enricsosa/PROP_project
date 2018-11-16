@@ -1,0 +1,131 @@
+Driver clase Clase
+
+1- Clase(SubGrupo, Sesion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+2- toStringResumido()
+Clase: as Dummy1 Teoria 2
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getSubGrupo()
+Subgrupo: 1
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: T
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getSesion()
+Sesion:
+-Asignatura: as1
+-Tipo: T
+-Duracion: 2 horas
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+6- getRestricciones()
+[Nivel hora: n1, Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00]
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+7- getRestriccion(int)
+Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+8- getPlazas()
+60
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+9- getGrupo()
+Grupo: Dummy
+-Asignatura: as
+-SubGrupos:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+10- getTipoSesion()
+Teoria
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+11- getAsignatura()
+Asignatura: as
+-Nombre: AS
+-Grupos:
+-Restricciones:
+-- Nivel hora: n1
+-- Franja Trabajo:
+-Hora inicio: 08:00
+-Hora fin: 20:00
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+12- tieneNivel()
+La Asignatura NO tiene un Nivel Asociado
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+13- getNivel()
+*** NullPointerException ***
+
+
+
+14- getDuracion()
+2
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+3- comprobarRestricciones(int, int, Ocupaciones)
+NO HA FUNCIONADO
+
+
+
+15- setSubGrupo(SubGrupo)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+16- setSesion(Sesion)
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+4- getSubGrupo()
+Subgrupo: 2
+-Asignatura: as
+-Grupo: Dummy
+-Tipo: P
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+5- getSesion()
+Sesion:
+-Asignatura: as2
+-Tipo: P
+-Duracion: 1 horas
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...

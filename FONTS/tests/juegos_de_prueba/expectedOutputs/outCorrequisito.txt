@@ -1,0 +1,86 @@
+Driver clase Correquisito
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Asignatura: as1
+-Nombre: AS1
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Asignatura: as2
+-Nombre: AS2
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+El correquisito tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+El correquisito tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+El correquisito NO tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+El correquisito NO tiene la Asignatura
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+PRECONDICIÓN: la Asignatura está en el Correquisito
+1- Asignatura1: as1
+2- Asignatura2: as2
+3- (Cancelar)
+El Index debe ser 2:
+2
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Correquisito
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Asignatura: as3
+-Nombre: AS3
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Asignatura: as4
+-Nombre: AS4
+-Grupos:
+-Restricciones:
+HA FUNCIONADO CORRECTAMENTE
+
+
+
+Saliendo...
