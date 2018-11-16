@@ -1,0 +1,120 @@
+{
+  "restricciones": [
+    {
+      "nombre": "diaLibre",
+      "dias": [
+        6,
+        7
+      ]
+    },
+    {
+      "nombre": "franjaTrabajo",
+      "horaIni": 10,
+      "horaFin": 20
+    },
+    {
+      "nombre": "nivelHora",
+      "niveles": [
+        "N1",
+        "N2",
+        "N3",
+        "N4"
+      ]
+    },
+    {
+      "nombre": "correquisitos",
+      "parAsigs": [
+        {
+          "idAsig1": "PRO1",
+          "idAsig2": "IC2"
+        },
+        {
+          "idAsig1": "PRO3",
+          "idAsig2": "PRO4"
+        },
+        {
+          "idAsig1": "PRO1",
+          "idAsig2": "PRO2"
+        },
+        {
+          "idAsig1": "PRO2",
+          "idAsig2": "PRO3"
+        },
+        {
+          "idAsig1": "IC2",
+          "idAsig2": "IC3"
+        },
+        {
+          "idAsig1": "IC1",
+          "idAsig2": "IC2"
+        },
+        {
+          "idAsig1": "F1",
+          "idAsig2": "F2"
+        },
+        {
+          "idAsig1": "F2",
+          "idAsig2": "F3"
+        },
+        {
+          "idAsig1": "F3",
+          "idAsig2": "F4"
+        }
+      ]
+    },
+    {
+      "nombre": "prerrequisitos",
+      "parAsigs": [
+        {
+          "idAsig": "IC1",
+          "idAsigPre": "PRO1"
+        }
+      ]
+    },
+    {
+      "nombre": "franjaAsignatura",
+      "asignaturas": [
+        {
+          "idAsig": "PRO1",
+          "horaIni": 10,
+          "horaFin": 16
+        },
+        {
+          "idAsig": "IC2",
+          "horaIni": 12,
+          "horaFin": 18
+        },
+        {
+          "idAsig": "F3",
+          "horaIni": 10,
+          "horaFin": 16
+        },
+        {
+          "idAsig": "F4",
+          "horaIni": 16,
+          "horaFin": 20
+        },
+        {
+          "idAsig": "PROP1",
+          "horaIni": 10,
+          "horaFin": 16
+        }
+      ]
+    },
+    {
+      "nombre": "franjaNivel",
+      "niveles": [
+        {
+          "idNivel": "N3",
+          "horaIni": 10,
+          "horaFin": 16
+        },
+        {
+          "idNivel": "N4",
+          "horaIni": 14,
+          "horaFin": 20
+        }
+      ]
+    }
+  ]
+}

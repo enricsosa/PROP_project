@@ -1,0 +1,1142 @@
+{
+  "asignaturas": [
+    {
+      "id": "F1",
+      "nombre": "Fisica1",
+      "nivel": "N1",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FM1",
+      "nombre": "Fonaments Matematics1",
+      "nivel": "N1",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Problemas"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "IC1",
+      "nombre": "Introduccio als Computadors1",
+      "nivel": "N1",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRO1",
+      "nombre": "Programacio1",
+      "nivel": "N1",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PROP1",
+      "nombre": "Projectes de Programació 1",
+      "nivel": "N1",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Problemas"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LP",
+      "nombre": "Llenguatges de Programació",
+      "nivel": "",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Problemas"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "nombre": "Fisica2",
+      "nivel": "N2",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FM2",
+      "nombre": "Fonaments Matematics2",
+      "nivel": "N2",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Problemas"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Problemas"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Problemas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "IC2",
+      "nombre": "Introduccio als Computadors2",
+      "nivel": "N2",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRO2",
+      "nombre": "Programacio2",
+      "nivel": "N2",
+      "sesiones": [
+        {
+          "horas": 2,
+          "TipoClase": "Teoria"
+        },
+        {
+          "horas": 2,
+          "TipoClase": "Laboratorio"
+        }
+      ],
+      "grupos": [
+        {
+          "id": "1",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "subGrupos": [
+            {
+              "id": "0",
+              "plazas": 40,
+              "tipo": "Teoria"
+            },
+            {
+              "id": "1",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "2",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "3",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            },
+            {
+              "id": "4",
+              "plazas": 10,
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

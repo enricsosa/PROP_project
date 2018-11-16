@@ -1,0 +1,163 @@
+{
+  "aulas": [
+    {
+      "id": "a1",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a2",
+      "plazas": 20,
+      "tipos": [
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a3",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a4",
+      "plazas": 20,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a5",
+      "plazas": 15,
+      "tipos": [
+        "Laboratorio"
+      ]
+    },
+    {
+      "id": "a6",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a7",
+      "plazas": 40,
+      "tipos": [
+        "Teoria"
+      ]
+    },
+    {
+      "id": "a8",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a9",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a10",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a11",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a12",
+      "plazas": 20,
+      "tipos": [
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a13",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a14",
+      "plazas": 20,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a15",
+      "plazas": 15,
+      "tipos": [
+        "Laboratorio",
+      ]
+    },
+    {
+      "id": "a16",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a17",
+      "plazas": 40,
+      "tipos": [
+        "Teoria"
+      ]
+    },
+    {
+      "id": "a18",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    },
+    {
+      "id": "a19",
+      "plazas": 40,
+      "tipos": [
+        "Teoria",
+        "Laboratorio",
+        "Problemas"
+      ]
+    }
+  ]
+}
