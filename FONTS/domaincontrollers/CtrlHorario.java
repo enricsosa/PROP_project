@@ -159,7 +159,6 @@ public class CtrlHorario {
      *                      las Asignaciones con las Clases de clases.
      */
     public ReturnSet generarAsignaciones(Asignacion asignacion, ArrayList<Clase> clases, Ocupaciones ocupaciones, Boolean[] placed, Integer step) {
-        out.println(step);
         ocupaciones.addAsignacion(asignacion);
         //out.println("asignacion valida");
         if (!(Arrays.asList(placed).contains(false))) return new ReturnSet(true, ocupaciones);
