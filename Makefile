@@ -2,6 +2,7 @@ build:
 		rm -r ./EXE
 		mkdir EXE
 		javac -cp ".:./LIBS/json-simple-1.1.1.jar:./LIBS/hamcrest-core-1.3.jar:./LIBS/junit-4.12.jar:" ./FONTS/Main.java ./FONTS/tests/*.java ./FONTS/domain/*.java ./FONTS/domaincontrollers/*.java ./FONTS/presentation/*.java ./FONTS/data/*.java ./FONTS/tests/driversAutomaticos/*.java -d EXE
+		mkdir DATA/Output
 
 asignacion:
 		java -cp ./EXE:./LIBS/json-simple-1.1.1.jar tests.driverAsignacion
