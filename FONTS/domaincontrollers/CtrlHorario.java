@@ -126,7 +126,7 @@ public class CtrlHorario {
             Clase clase = clases.get(i);
             ReturnSet franja = getFranjaClase(clase, this.limitacionesHorario);
             for (int dia = 1; dia <= 7; ++dia) {
-                if(!(this.limitacionesHorario.esDiaLibre(dia))) {
+                if (!(this.limitacionesHorario.esDiaLibre(dia))) {
                     for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
                             Asignacion asignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
@@ -141,7 +141,6 @@ public class CtrlHorario {
                     }
                 }
             }
-            clases.add(i, clase);
         }
         return new ReturnSet(false);
     }
