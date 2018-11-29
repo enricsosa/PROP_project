@@ -13,8 +13,8 @@ public class driverHorario {
     private static Scanner in = new Scanner(System.in);
 
     private static PlanEstudios peAS = null;
-    private static Ocupaciones ocu = new Ocupaciones();
-    private static Ocupaciones ocu2 = new Ocupaciones();
+    private static Horario ocu = new Horario("");
+    private static Horario ocu2 = new Horario("");
 
     private static int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;
@@ -75,8 +75,8 @@ public class driverHorario {
                     try {
                         out.println("Introduzca el nombre del Horario:");
                         String nom = in.next();
-                        out.println("Introduciendo Ocupaciones vacías por defecto...");
-                        h = new Horario(nom, ocu);
+                        out.println("Introduciendo Horario vacías por defecto...");
+                        h = new Horario(nom);
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -125,8 +125,8 @@ public class driverHorario {
                     break;
 
                 case 5:
-                    try {
-                        out.println(h.getOcupaciones().toString());
+                    /**try {
+                        out.println(h.getHorario().toString());
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -135,7 +135,7 @@ public class driverHorario {
                     } catch (Exception e) {
                         out.println("NO HA FUNCIONADO");
                         out.println("\n");
-                    }
+                    }*/
                     break;
 
                 case 6: //getDia(String)
@@ -244,9 +244,9 @@ public class driverHorario {
                     break;
 
                 case 9:
-                    try {
-                        out.println("Unas nuevas Ocupaciones vacías serán asignadas al Horario");
-                        h.setOcupaciones(ocu2);
+                    /**try {
+                        out.println("Unas nuevas Horario vacías serán asignadas al Horario");
+                        h.setHorario(ocu2);
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");
                     } catch (NullPointerException e) {
@@ -255,7 +255,7 @@ public class driverHorario {
                     } catch (Exception e) {
                         out.println("NO HA FUNCIONADO");
                         out.println("\n");
-                    }
+                    }*/
                     break;
 
                 case 10:
@@ -277,16 +277,16 @@ public class driverHorario {
         out.print("Opciones:\n");
         out.print("CONSTRUCTORAS:\n");
         out.print("1- Horario(String)\n");
-        out.print("2- Horario(String, Ocupaciones)\n");
+        out.print("2- Horario(String, Horario)\n");
         out.print("3- Horario(Horario)\n");
         out.print("CONSULTORAS:\n");
         out.print("4- getId()\n");
-        out.print("5- getOcupaciones()\n");
+        out.print("5- getHorario()\n");
         out.print("6- getDia(int)\n");
         out.print("7- getHora(int, int)\n");
         out.print("MODIFICADORAS:\n");
         out.print("8- setId(String)\n");
-        out.print("9- setOcupaciones(Ocupaciones)\n");
+        out.print("9- setHorario(Horario)\n");
         out.print("10- Salir\n");
         out.print("Tu opción: ");
     }

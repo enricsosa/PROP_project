@@ -4,9 +4,13 @@
 
 package domain;
 
+import java.util.Arrays;
+import java.util.Map;
+
 /**
- * Horario contiene unas Ocupaciones que contiene las Asignaciones que lo definen y una id que lo identifica.
- * @author Daniel Martín
+ * Horario contiene las Asignaciones que lo definen y una id que lo identifica.
+ * @author  Daniel Martín
+ * @see     Arrays
  */
 public class Horario {
 
@@ -14,103 +18,135 @@ public class Horario {
 
     /**Código identificador del Horario.*/
     private String id;
-    /**Ocupaciones que contiene las Asignaciones del Horario.*/
-    private Ocupaciones ocupaciones;
+    /**Conjunto de dias de una semana.*/
+    private Dia[] dias;
 
     /**Constructoras*/
 
     /**
      * Contructora básica de la clase Horario.
-     * @param id    id que se asignará al Horario.
+     * @param id id que se asignará al Horario.
      */
     public Horario(String id) {
         this.id = id;
-        this.ocupaciones = new Ocupaciones();
-    }
-
-    /**
-     * Constructora de la clase Horario con Ocupaciones.
-     * @param id            id que se asignará al Horario.
-     * @param ocupaciones   Ocupaciones que se asignará a Horario.
-     */
-    public Horario(String id, Ocupaciones ocupaciones) {
-        this.id = id;
-        this.ocupaciones = ocupaciones;
+        this.dias = new Dia[7];
+        for (int i = 0; i < 7; ++i) this.dias[i] = new Dia();
     }
 
     /**
      * Constructora de la clase Horario copia de otro Horario.
-     * @param oldHorario    Horario del que se copia la información del nuevo Horario.
+     * @param oldHorario Horario del que se copia la información del nuevo Horario.
      */
     public Horario(Horario oldHorario) {
         this.id = oldHorario.getId();
-        this.ocupaciones = new Ocupaciones(oldHorario.getOcupaciones());
+        this.dias = new Dia[7];
+        for (int i = 1; i <= 7; ++i) {
+            this.dias[i - 1] = new Dia(oldHorario.getDia(i));
+        }
     }
 
     /**Métodos públicos*/
 
     /**
+     * Añade una Asignación a Horario.
+     * @param asignacion    Asignación que se quiere añadir a Horario.
+     */
+    public void addAsignacion(Asignacion asignacion) {
+        //System.out.println(asignacion.getHoraIni());
+        //System.out.println(asignacion.getHoraFin());
+        for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
+            //System.out.println("Se añade a " +  Aux.getHoraCompleta(hora) + " de " + Aux.getNombreDia(asignacion.getDiaSemana()));
+
+            this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignacion(asignacion);
+        }
+    }
+
+    /**
+     * Elimina una Asignación de Horario.
+     * @param asignacion    Asignación que se quiere eliminar de Horario.
+     */
+    public void eliminarAsignacion(Asignacion asignacion) {
+        for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
+            this.getHora(asignacion.getDiaSemana(), hora).eliminarAsignacion(asignacion);
+        }
+    }
+
+    /**
      * Asigna una nueva id a Horario.
-     * @param id    Nueva id que se asignará a Horario.
+     * @param id Nueva id que se asignará a Horario.
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * Asigna una nueva Ocupaciones a Horario.
-     * @param ocupaciones   Ocupaciones que se asigna a Horario.
+     * Asigna una nuevos Dias a Horario.
+     * @param dias Dias que se asigna a Horario.
      */
-    public void setOcupaciones(Ocupaciones ocupaciones) {
-        this.ocupaciones = ocupaciones;
+    public void setDias(Dia[] dias) {
+        this.dias = dias;
     }
 
     /**Consultoras*/
 
     /**
      * Devuelve la id del Horario en forma de String.
-     * @return  id del Horario.
+     * @return id del Horario.
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * Devuelve Ocupaciones del Horario.
-     * @return  Ocupaciones de Horario.
+     * Devuelve Dias del Horario.¡
+     * @return Dias de Horario.
      */
-    public Ocupaciones getOcupaciones() {
-        return this.ocupaciones;
+    public Dia[] getDias() {
+        return this.dias;
     }
 
     /**
-     * Devuelve el Dia dia de ocupaciones.
-     * @param dia   Dia de ocupaciones que se quiere obtener.
-     * @return      Dia asociado al numero dia de ocupaciones
+     * Devuelve el Dia de Horario correspondiente al dia dado.¡
+     * @param dia Dia que se quiere obtener.
+     * @return Dia correspondiente al numero del dia dado.
      */
     public Dia getDia(int dia) {
-        return this.ocupaciones.getDia(dia);
+        return this.dias[dia - 1];
     }
 
     /**
-     * Devuelve la Hora hora deel Dia dia de ocupaciones.
-     * @param dia   Dia de ocupaciones de la Hora que se quiere obtener.
-     * @param hora  Hora de dia que se quiere obtener.
-     * @return      Hora asociada al Dia dia en la Hora hora.
+     * Devuelve la Hora hora del Dia dia de Horario.¡
+     * @param dia  Dia de la Hora que se quiere obtener.
+     * @param hora Hora que se quiere obtener.
+     * @return Hora hora del Dia dia de Horario.
      */
     public Hora getHora(int dia, int hora) {
-        return this.ocupaciones.getHora(dia, hora);
+        return (this.dias[dia - 1]).getHora(hora);
     }
 
     /**Métodos redefinidos*/
 
     /**
-     * Convierte Horario a un String que contiene toda su información.
-     * @return  String con la información de Horario.
+     * Convierte Horario a un String con la información que contiene.
+     * @return String con la información que contiene Horario.
      */
     @Override
     public String toString() {
-        return "Horario: " + this.id + "\n" + this.ocupaciones.toString();
+        String text = "Horario: " +this.id +"\n";
+        for (int dia = 1; dia <= 7; ++dia) {
+            if (this.getDia(dia).getAsignaturas().size() > 0) {
+                text += (Aux.spacer() + "\n" + Aux.spacer() + "\n" + Aux.getNombreDia(dia) + "\n");
+                for (int hora = 0; hora < 24; ++hora) {
+                    if (this.getHora(dia, hora).getAsignaciones().size() > 0) {
+                        text += (Aux.spacer() + "\n" + Aux.getHoraCompleta(hora) + "-" + Aux.getHoraCompleta(hora + 1) + "\n" + Aux.lspacer() + "\n");
+                        for (Map.Entry<String, Asignacion> entry : this.getHora(dia, hora).getAsignaciones().entrySet()) {
+                            text += (entry.getValue().toString() + "\n");
+                        }
+                    }
+                }
+            }
+        }
+        text += Aux.spacer();
+        return text;
     }
-
 }

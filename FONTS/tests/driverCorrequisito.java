@@ -315,7 +315,7 @@ public class driverCorrequisito {
                         Clase c = new Clase(sg1, s1);
                         int dia = 2;
                         int hi = 10;
-                        Ocupaciones ocu = null;
+                        Horario ocu = null;
                         cor.comprobarRestriccion(c,dia,hi,ocu);
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");

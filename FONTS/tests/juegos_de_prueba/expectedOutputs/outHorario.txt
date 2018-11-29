@@ -11,8 +11,8 @@ HA FUNCIONADO CORRECTAMENTE
 
 
 
-2- Horario(String, Ocupaciones)
-Introduciendo Ocupaciones vacías por defecto...
+2- Horario(String, Horario)
+Introduciendo Horario vacías por defecto...
 HA FUNCIONADO CORRECTAMENTE
 
 
@@ -32,7 +32,7 @@ HA FUNCIONADO CORRECTAMENTE
 
 
 
-5- getOcupaciones()
+5- getHorario()
 ----------------------------------------------------------------
 HA FUNCIONADO CORRECTAMENTE
 
@@ -79,13 +79,13 @@ HA FUNCIONADO CORRECTAMENTE
 
 
 
-9- setOcupaciones(Ocupaciones)
-Unas nuevas Ocupaciones vacías serán asignadas al Horario
+9- setHorario(Horario)
+Unas nuevas Horario vacías serán asignadas al Horario
 HA FUNCIONADO CORRECTAMENTE
 
 
 
-5- getOcupaciones()
+5- getHorario()
 ----------------------------------------------------------------
 HA FUNCIONADO CORRECTAMENTE
 

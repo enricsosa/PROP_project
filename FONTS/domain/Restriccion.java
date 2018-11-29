@@ -28,14 +28,14 @@ public abstract class Restriccion {
     public abstract TipoRestriccion getTipoRestriccion();
 
     /**
-     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y ocupaciones.
+     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y horario.
      * @param clase         Clase de la que se comprueba la Retriccion.
      * @param dia           dia en que se comprueba la Restriccion.
      * @param horaIni       horaIni con la que se comprueba la Restriccion.
-     * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
+     * @param horario       Horario respecto a las cuales se comprueba la Restriccion.
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
-    public abstract Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones);
+    public abstract Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario);
 
     /**Métodos redefinidos*/
 

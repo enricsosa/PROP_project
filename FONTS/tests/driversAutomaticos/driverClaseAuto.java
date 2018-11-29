@@ -24,7 +24,7 @@ public class driverClaseAuto {
     private static ArrayList<Restriccion> restr = new ArrayList<Restriccion>();
     private static Restriccion re1 = new NivelHora(n1);
     private static Restriccion re2 = new FranjaTrabajo(8, 20);
-    private static Ocupaciones ocu = null;
+    private static Horario ocu = null;
 
     private static int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;
@@ -63,7 +63,7 @@ public class driverClaseAuto {
         sg2 = new SubGrupo("2", 30, TipoClase.valueOf("Problemas"), g);
         s1 = new Sesion(2, TipoClase.valueOf("Teoria"), as1);
         s2 = new Sesion(1, TipoClase.valueOf("Problemas"), as2);
-        ocu = new Ocupaciones();
+        ocu = new Horario("");
     }
 
     private static void initFiles() throws FileNotFoundException {
@@ -148,7 +148,7 @@ public class driverClaseAuto {
 
                 case 3: //comprobarRestricciones
                     try {
-                        out.print("3- comprobarRestricciones(int, int, Ocupaciones)\n");
+                        out.print("3- comprobarRestricciones(int, int, Horario)\n");
 
                         out.println(c.comprobarRestricciones(0, 8, ocu).toString());
                         out.println("HA FUNCIONADO CORRECTAMENTE");
@@ -441,7 +441,7 @@ public class driverClaseAuto {
         out.print("1- Clase(SubGrupo, Sesion)\n");
         out.print("CONSULTORAS:\n");
         out.print("2- toStringResumido()\n");
-        out.print("3- comprobarRestricciones(int, int, Ocupaciones)\n");
+        out.print("3- comprobarRestricciones(int, int, Horario)\n");
         out.print("4- getSubGrupo()\n");
         out.print("5- getSesion()\n");
         out.print("6- getRestricciones()\n");

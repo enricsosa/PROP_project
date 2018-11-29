@@ -5,13 +5,11 @@
 package domaincontrollers;
 
 import domain.Horario;
-import domain.Ocupaciones;
 
 /**
  * ReturnSet es una clase que se usa para devolver más de un valor de manera cómoda.
  * @author  Daniel Martín
  * @see     Horario
- * @see     Ocupaciones
  */
 public class ReturnSet {
 
@@ -19,8 +17,6 @@ public class ReturnSet {
 
     /**Indica si el retorno contiene datos válidos.*/
     private Boolean validez;
-    /**Ocupaciones de un Horario.*/
-    private Ocupaciones ocupaciones;
     /**Horario de un PlanEstudios.*/
     private Horario horario;
     /**horaIni de una franja horaria.*/
@@ -40,23 +36,11 @@ public class ReturnSet {
 
     /**
      * Constructora de la clase ReturnSet con validez.
-     * @param validez       validez que se asigna a ReturnSet.
-     * @param ocupaciones   Ocupaciones que se asigna a ReturnSet.
-     */
-    public ReturnSet(Boolean validez, Ocupaciones ocupaciones) {
-        this.validez = validez;
-        this.ocupaciones = ocupaciones;
-        this.horario = null;
-    }
-
-    /**
-     * Constructora de la clase ReturnSet con validez.
      * @param validez   validez que se asigna a ReturnSet.
      * @param horario   Horario que se asigna a ReturnSet.
      */
     public ReturnSet(Boolean validez, Horario horario) {
         this.validez = validez;
-        this.ocupaciones = null;
         this.horario = horario;
     }
 
@@ -80,14 +64,6 @@ public class ReturnSet {
      */
     public Boolean getValidez() {
         return this.validez;
-    }
-
-    /**
-     * Devuelve el valor de ocupaciones.
-     * @return  Valor de ocupaciones.
-     */
-    public Ocupaciones getOcupaciones() {
-        return this.ocupaciones;
     }
 
     /**

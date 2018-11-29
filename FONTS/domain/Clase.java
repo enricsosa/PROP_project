@@ -90,16 +90,16 @@ public class Clase {
     }
 
     /**
-     * Comprueva que todas las restricciones de una Clase se cumplen dadas unas Ocupaciones, dia y horaIni.
+     * Comprueva que todas las restricciones de una Clase se cumplen dadas un Horario, dia y horaIni.
      * @param dia           dia en el cual se evaluan las Restricciones.
      * @param horaIni       horaIni con la cual se evauan las restricciones.
-     * @param ocupaciones   Ocupaciones en función de las cuales se evaluan la restricciones.
+     * @param horario       Horario en función del cual se evaluan la restricciones.
      * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
-    public Boolean comprobarRestricciones(int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestricciones(int dia, int horaIni, Horario horario) {
         ArrayList<Restriccion> restricciones = this.getRestricciones();
         for (int i = 0; i < restricciones.size(); ++i) {
-            if (!(restricciones.get(i).comprobarRestriccion(this, dia, horaIni, ocupaciones))) return false;
+            if (!(restricciones.get(i).comprobarRestriccion(this, dia, horaIni, horario))) return false;
         }
         return true;
     }

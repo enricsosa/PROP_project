@@ -70,6 +70,14 @@ public class Hora {
         this.asignaciones.remove(key);
     }
 
+    /**
+     * Elimina una Asignacion de Hora.
+     * @param asignacion    Asignacion que se quiere eliminar.
+     */
+    public void eliminarAsignacion(Asignacion asignacion) {
+        this.asignaciones.remove(asignacion.generateKey());
+    }
+
     //public void setRestricciones(ArrayList<Restriccion> restricciones) {
       //  this.restricciones = restricciones;
     //}

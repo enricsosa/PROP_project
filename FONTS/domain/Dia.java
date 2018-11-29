@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Dia contiene la información de lo que sucede un dia dentro de Ocupaciones.
+ * Dia contiene la información de lo que sucede un dia dentro de Horario.
  * @author  Daniel Martín
  * @see     Arrays
  * @see     HashMap
@@ -28,7 +28,9 @@ public class Dia {
     public Dia() {
         //this.restricciones = new ArrayList<Restriccion>();
         this.horas = new Hora[24];
-        Arrays.fill(this.horas, new Hora());
+        for (int i = 0; i < 24; ++i) {
+            this.horas[i] = new Hora();
+        }
     }
 
     /**

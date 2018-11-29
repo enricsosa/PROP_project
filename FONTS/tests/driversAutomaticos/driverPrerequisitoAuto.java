@@ -192,7 +192,7 @@ public class driverPrerequisitoAuto {
                         Clase c = null;
                         int dia = 2;
                         int hi = 10;
-                        Ocupaciones ocu = null;
+                        Horario ocu = null;
                         pre.comprobarRestriccion(c,dia,hi,ocu);
                         out.println("HA FUNCIONADO CORRECTAMENTE");
                         out.println("\n");

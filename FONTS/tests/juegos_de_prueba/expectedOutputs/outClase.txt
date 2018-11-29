@@ -95,7 +95,7 @@ HA FUNCIONADO CORRECTAMENTE
 
 
 
-3- comprobarRestricciones(int, int, Ocupaciones)
+3- comprobarRestricciones(int, int, Horario)
 NO HA FUNCIONADO
 
 

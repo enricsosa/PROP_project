@@ -124,12 +124,12 @@ public class Asignacion {
     //}
 
     /**
-     * Comprueva que todas las restricciones de una Asignacion se cumplen dadas unas Ocupaciones.
-     * @param ocupaciones   Ocupaciones en función de las cuales se evaluan la restricciones.
-     * @return              Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
+     * Comprueva que todas las restricciones de una Asignacion se cumplen dado un Horario.
+     * @param horario    Horario en función de las cuales se evaluan la restricciones.
+     * @return           Devuelve true si se cumplen todas las Restricciones, false en caso contrario.
      */
-    public Boolean comprobarRestricciones(Ocupaciones ocupaciones) {
-        return this.clase.comprobarRestricciones(this.diaSemana, this.horaIni, ocupaciones);
+    public Boolean comprobarRestricciones(Horario horario) {
+        return this.clase.comprobarRestricciones(this.diaSemana, this.horaIni, horario);
     }
 
     /**
@@ -145,7 +145,7 @@ public class Asignacion {
      * @return  Devuelve un String con la clave única de la Asignación.
      */
     public String generateKey() {
-        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId());
+        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId())+Aux.strTipo(this.clase.getTipoSesion());
     }
 
     /**Consultoras*/

@@ -90,21 +90,24 @@ public class Correquisito extends Restriccion {
     }
 
     /**
-     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y ocupaciones.
+     * Comprueva que clase cumple la restricción respecto a un dia, horaIni y horario.
      * @param clase         Clase de la que se comprueba la Retriccion.
      * @param dia           dia en que se comprueba la Restriccion.
      * @param horaIni       horaIni con la que se comprueba la Restriccion.
-     * @param ocupaciones   Ocupaciones respecto a las cuales se comprueba la Restriccion.
+     * @param horario       Horario respecto a las cuales se comprueba la Restriccion.
      * @return              true si se cumple la Restriccion con las condiciones dadas, false en caso contrario.
      */
     @Override
-    public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Ocupaciones ocupaciones) {
+    public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
         if (!(this.tieneAsignatura(clase.getAsignatura()))) return true;
         Asignatura target;
         if (this.getIndex(clase.getAsignatura()) == 1) target = asignatura2;
         else target = asignatura1;
         for (int hora = horaIni; hora < horaIni + clase.getDuracion(); ++hora) {
-            if (ocupaciones.getDia(dia).getHora(hora).tieneGrupo(target, clase.getGrupo())) return false;
+            if (horario.getHora(dia, hora).tieneGrupo(target, clase.getGrupo())) {
+                //System.out.println("Falla Correquisito");
+                return false;
+            }
         }
         return true;
     }
