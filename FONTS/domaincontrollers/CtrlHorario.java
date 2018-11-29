@@ -132,12 +132,7 @@ public class CtrlHorario {
             ReturnSet franja = franjas.get(i);
 
             for (int dia = 1; dia <= 7; ++dia) {
-<<<<<<< HEAD
-                if(!(this.limitacionesHorario.esDiaLibre(dia))) {
-
-=======
                 if (!(this.limitacionesHorario.esDiaLibre(dia))) {
->>>>>>> dd750fcf0d072fcdac6c19abfde00ef08705c9c8
                     for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
 
                         for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
