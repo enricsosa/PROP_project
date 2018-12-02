@@ -1,0 +1,36 @@
+.root {
+    -fx-background-color: #E5EFFF;
+    -fx-font-size: 11pt;
+}
+
+.label {
+    -fx-text-fill: #f0f8ff;
+}
+
+.button {
+    -fx-background-color: linear-gradient(#dc9656, #ab4642);
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 6;
+}
+
+.button-blue {
+    -fx-background-color: linear-gradient(#21618C, #2E86C1);
+    -fx-text-fill: #FFEEDD;
+    -fx-background-radius: 6;
+}
+
+#bold-label {
+    -fx-font-weight: bold;
+}
+
+.button-main-menu {
+    -fx-background-color: linear-gradient(#21618C, #2E86C1);
+    -fx-text-fill: #FFEEDD;
+    -fx-background-radius: 6;
+}
+
+.button-main-out {
+    -fx-background-color: linear-gradient(#dc9656, #ab4642);
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 6;
+}

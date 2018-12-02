@@ -24,11 +24,14 @@ import domaincontrollers.CtrlDomain;
 public class CtrlPresentacion {
 
     /**CtrlDomain del programa.*/
-    private CtrlDomain CD = new CtrlDomain();
+    private CtrlDomain CD;
     /**Controlador de Presentacion que gestiona generación de Horarios.*/
     private CtrlPresentacionGenHorario CPgh;
     /**Controlador de Presentacion que gestiona las vistas de los menús.*/
     private VistaMantHorario Vmh;
+
+    private ArrayList<String> Escenarios;
+    private TestFX CPesc;
 
     /**
      * Constructora de la clase CtrlPresentacion.
@@ -36,7 +39,19 @@ public class CtrlPresentacion {
      * @throws IOException
      * @throws ParseException
      */
-    public CtrlPresentacion() throws FileNotFoundException, IOException, ParseException {}
+    private static CtrlPresentacion CP;
+
+    /**Constructoras*/
+
+    private CtrlPresentacion() {
+    }
+
+    public static CtrlPresentacion getInstance() {
+        if (CP == null)
+            CP = new CtrlPresentacion() {
+            };
+        return CP;
+    }
 
     /**
      * Inicializa un CtrlPresentacion.
@@ -45,7 +60,8 @@ public class CtrlPresentacion {
      * @throws ParseException
      */
     public void initCtrlPresentacion() throws FileNotFoundException, IOException, ParseException {
-        this.CD.initCtrlDomain();
+        CD = new CtrlDomain();
+        CD.initCtrlDomain();
         Vmh = new VistaMantHorario();
     }
 
@@ -59,6 +75,14 @@ public class CtrlPresentacion {
         ArrayList<String> escenarios = this.CD.allEscenarios();
         CPgh = new CtrlPresentacionGenHorario(Vmh, escenarios, CD);
         CPgh.mantenimientoHorario();
+    }
+
+    public ArrayList<String> escenarios() {
+        return CD.allEscenarios();
+    }
+
+    public CtrlDomain getCD() {
+        return CD;
     }
 
 }

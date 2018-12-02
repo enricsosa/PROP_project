@@ -7,6 +7,21 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 
 import presentation.CtrlPresentacion;
+import presentation.TestFX;
+import presentation.test2;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+
+
+
 //import data.*;
 //import domaincontrollers.*;
 
@@ -27,11 +42,29 @@ public class Main {
      * @throws IOException
      * @throws ParseException
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException  {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+        /*
         System.out.println("Generador de horarios PROP 2017/18 Q2\n");
         CtrlPresentacion viz = new CtrlPresentacion();
         viz.initCtrlPresentacion();
         viz.initMantenimientoHorario();
+        */
+
+        /*
+        System.out.println("Generador de horarios PROP 2017/18 Q2\n");
+        CtrlPresentacion viz;
+        viz = CtrlPresentacion.getInstance();
+        viz.initCtrlPresentacion();
+
+        Application.launch(TestFX.class, args);
+
+        */
+        System.out.println("Generador de horarios PROP 2017/18 Q2\n");
+        CtrlPresentacion viz;
+        viz = CtrlPresentacion.getInstance();
+        viz.initCtrlPresentacion();
+
+        Application.launch(test2.class, args);
 
         //CtrlDomain ctrl = new CtrlDomain();
         //CtrlEscenariosDir ctrl;

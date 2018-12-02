@@ -46,6 +46,7 @@ public class CtrlEscenariosDir {
      * @throws NullPointerException
      */
     public void escanearAllEscenarios() throws NullPointerException {
+        nomEscenarios = new ArrayList<>();
         File dir = new File("DATA/");
         File[] listEsc = dir.listFiles();
         if (listEsc != null) {

@@ -6,6 +6,7 @@ package domaincontrollers;
 
 import java.io.IOException;
 //import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 //import org.json.simple.JSONArray;
@@ -322,6 +323,159 @@ public class CtrlDomain {
             planEstudios.getNivel(idNi).addRestriccion(fn);
             this.addRestriccion(fn);
         }
+    }
+
+    public HashMap<String, ArrayList<Object>> subirAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
+        HashMap<String, ArrayList<Object>> asigs = new HashMap<>();
+
+        for (JSONObject assig : asignaturasData) {
+            ArrayList<Object> asigProperties = new ArrayList<>();
+            asigProperties.add((String)assig.get("nombre"));
+            asigProperties.add((String)assig.get("nivel"));
+
+            ArrayList<Object> sesiones = new ArrayList<>();
+            for (JSONObject ses : (List<JSONObject>)assig.get("sesiones")) {
+                ArrayList<Object> sesProperties = new ArrayList<>();
+                sesProperties.add(((Long)ses.get("horas")).intValue());
+                sesProperties.add(TipoClase.valueOf((String)ses.get("TipoClase")));
+                sesiones.add(sesProperties);
+            }
+            asigProperties.add(sesiones);
+
+            ArrayList<Object> grupos = new ArrayList<>();
+            for (JSONObject gr : (List<JSONObject>)assig.get("grupos")) {
+                ArrayList<Object> grProperties = new ArrayList<>();
+                grProperties.add((String)gr.get("id"));
+
+                ArrayList<Object> subgrupos = new ArrayList<>();
+                for (JSONObject subgr : (List<JSONObject>)gr.get("subGrupos")) {
+                    ArrayList<Object> subgrProperties = new ArrayList<>();
+                    subgrProperties.add((String)subgr.get("id"));
+                    subgrProperties.add(((Long)subgr.get("plazas")).intValue());
+                    subgrProperties.add(TipoClase.valueOf((String)subgr.get("tipo")));
+                    subgrupos.add(subgrProperties);
+                }
+                grProperties.add(subgrupos);
+
+                grupos.add(grProperties);
+            }
+            asigProperties.add(grupos);
+
+            asigs.put((String)assig.get("id"), asigProperties);
+        }
+
+        return asigs;
+    }
+
+    public HashMap<String, ArrayList<Object>> subirAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
+        HashMap<String, ArrayList<Object>> aulas = new HashMap<>();
+
+        for (JSONObject au : aulasData) {
+            ArrayList<Object> auProperties = new ArrayList<>();
+            auProperties.add(((Long)au.get("plazas")).intValue());
+
+            ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
+            for (String tipo : (List<String>)au.get("tipos")) {
+                tipos.add(TipoClase.valueOf(tipo));
+            }
+            auProperties.add(tipos);
+
+            aulas.put((String)au.get("id"), auProperties);
+        }
+        return aulas;
+    }
+
+    public HashMap<String, ArrayList<Object>> subirRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
+        List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
+        HashMap<String, ArrayList<Object>> restricciones = new HashMap<>();
+
+        //R: diaLibre
+        JSONObject diaLibre = restriccionesData.get(0);
+        ArrayList<Object> dlProperties = new ArrayList<>();
+        for (Long dia : (List<Long>)diaLibre.get("dias")) {
+            dlProperties.add(dia.intValue());
+        }
+        restricciones.put(diaLibre.get("nombre").toString(), dlProperties);
+
+
+        //R: franjaTrabajo
+        JSONObject franjaTrabajo = restriccionesData.get(1);
+        ArrayList<Object> ftProperties = new ArrayList<>();
+        ftProperties.add(((Long)franjaTrabajo.get("horaIni")).intValue());
+        ftProperties.add(((Long)franjaTrabajo.get("horaFin")).intValue());
+        restricciones.put(franjaTrabajo.get("nombre").toString(), ftProperties);
+
+        //R: nivelHora
+        JSONObject nivelHora = restriccionesData.get(2);
+        ArrayList<Object> nhProperties = new ArrayList<>();
+        for (String nivel : (List<String>)nivelHora.get("niveles")) {
+            nhProperties.add(nivel);
+        }
+        restricciones.put(nivelHora.get("nombre").toString(), nhProperties);
+
+        //R: correquisitos
+        JSONObject correquisitos = restriccionesData.get(3);
+        ArrayList<Object> coProperties = new ArrayList<>();
+        for (JSONObject as : (List<JSONObject>)correquisitos.get("parAsigs")) {
+            ArrayList<String> co = new ArrayList<>();
+            co.add((String)as.get("idAsig1"));
+            co.add((String)as.get("idAsig2"));
+            coProperties.add(co);
+        }
+        restricciones.put(correquisitos.get("nombre").toString(), coProperties);
+
+        //R: prerrequisitos
+        JSONObject prerrequisitos = restriccionesData.get(4);
+        ArrayList<Object> prProperties = new ArrayList<>();
+        for (JSONObject as : (List<JSONObject>)prerrequisitos.get("parAsigs")) {
+            ArrayList<String> pr = new ArrayList<>();
+            pr.add((String)as.get("idAsig"));
+            pr.add((String)as.get("idAsigPre"));
+            prProperties.add(pr);
+        }
+        restricciones.put(prerrequisitos.get("nombre").toString(), prProperties);
+
+        //R: franjaAsignatura
+        JSONObject franjaAsignatura = restriccionesData.get(5);
+        ArrayList<Object> faProperties = new ArrayList<>();
+        for (JSONObject as : (List<JSONObject>)franjaAsignatura.get("asignaturas")) {
+            ArrayList<Object> fa = new ArrayList<>();
+            fa.add((String)as.get("idAsig"));
+            fa.add(((Long)as.get("horaIni")).intValue());
+            fa.add(((Long)as.get("horaFin")).intValue());
+            faProperties.add(fa);
+        }
+        restricciones.put(franjaAsignatura.get("nombre").toString(), faProperties);
+
+        //R: franjaNivel
+        JSONObject franjaNivel = restriccionesData.get(6);
+        ArrayList<Object> fnProperties = new ArrayList<>();
+        for (JSONObject as : (List<JSONObject>)franjaNivel.get("niveles")) {
+            ArrayList<Object> fn = new ArrayList<>();
+            fn.add((String)as.get("idNivel"));
+            fn.add(((Long)as.get("horaIni")).intValue());
+            fn.add(((Long)as.get("horaFin")).intValue());
+            fnProperties.add(fn);
+        }
+        restricciones.put(franjaNivel.get("nombre").toString(), fnProperties);
+
+        return restricciones;
+    }
+
+    public ArrayList<String> subirPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
+        JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
+        ArrayList<String> pE = new ArrayList<>();
+        pE.add((String)planEstudiosData.get("nombre"));
+        String niveles = planEstudiosData.get("niveles").toString();
+
+        String s;
+        for (int i = 0; i < niveles.length()-1; i+=5) {
+            s = niveles.substring(niveles.indexOf("\"", i) + 1, niveles.indexOf("\"", i) + 3);
+            pE.add(s);
+        }
+        return pE;
     }
 
     public String generarHorario(String id) {
