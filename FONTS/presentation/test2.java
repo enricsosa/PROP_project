@@ -34,6 +34,7 @@ public class test2 extends Application {
         sc.activate("prova1");
 
 
+
         window.setScene(sc.current());
         window.show();
     }

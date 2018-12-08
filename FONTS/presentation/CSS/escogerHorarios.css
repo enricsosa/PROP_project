@@ -1,0 +1,7 @@
+#ses-btn {
+    -fx-background-color: linear-gradient(#dc9656, #ab4642);
+    -fx-pref-height: 15;
+    -fx-max-height: 15;
+    -fx-min-height: 15;
+    -fx-font-size: 9px;
+}

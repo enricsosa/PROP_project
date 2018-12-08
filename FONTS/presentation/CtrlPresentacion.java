@@ -81,6 +81,10 @@ public class CtrlPresentacion {
         return CD.allEscenarios();
     }
 
+    public ArrayList<String> horarios() {
+        return CD.allHorarios();
+    }
+
     public CtrlDomain getCD() {
         return CD;
     }

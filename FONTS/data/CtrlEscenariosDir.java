@@ -6,6 +6,7 @@ package data;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 //import java.util.LinkedList;
 //import java.util.List;
 //import org.json.simple.JSONArray;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class CtrlEscenariosDir {
     private static CtrlEscenariosDir escenarios;
     private static ArrayList<String> nomEscenarios;
+    private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
 
     /**Constructoras*/
 
@@ -73,6 +75,162 @@ public class CtrlEscenariosDir {
             }
         }
         return horarios;
+    }
+
+    private boolean checkDia(String dia) {
+        boolean verify = false;
+        if (dia != null) {
+            switch (dia) {
+                case "Lunes":
+                    verify = true;
+                    break;
+                case "Martes":
+                    verify = true;
+                    break;
+                case "Miercoles":
+                    verify = true;
+                    break;
+                case "Jueves":
+                    verify = true;
+                    break;
+                case "Viernes":
+                    verify = true;
+                    break;
+                case "Sabado":
+                    verify = true;
+                    break;
+                case "Domingo":
+                    verify = true;
+                    break;
+                default:
+                    verify = false;
+                    break;
+            }
+        }
+        return verify;
+    }
+
+    private boolean checkHora(String hora) {
+        int num = (int) (hora.charAt(0) - '0');
+        return (num >= 0 && num <= 9);
+    }
+
+    private int horaToInt(String hora) {
+        int num = 0;
+        String h = hora.substring(0, hora.indexOf(':'));
+        for (int i = 0; i < h.length(); ++i) {
+            num *= 10;
+            num += (int)(h.charAt(i) - '0');
+        }
+        return num;
+    }
+
+    private int diaToInt(String dia) {
+        int num = 0;
+        if (dia != null) {
+            switch (dia) {
+                case "Lunes":
+                    num = 1;
+                    break;
+                case "Martes":
+                    num = 2;
+                    break;
+                case "Miercoles":
+                    num = 3;
+                    break;
+                case "Jueves":
+                    num = 4;
+                    break;
+                case "Viernes":
+                    num = 5;
+                    break;
+                case "Sabado":
+                    num = 6;
+                    break;
+                case "Domingo":
+                    num = 7;
+                    break;
+                default:
+                    num = 0;
+                    System.out.println("ERROR: Dia erróneo");
+                    break;
+            }
+        }
+        return num;
+    }
+
+    public HashMap<Integer, ArrayList<String>> getDia(int dia) {
+        return horario.get(dia);
+    }
+
+    public ArrayList<String> getHora(int dia, int hora) {
+        return horario.get(dia).get(hora);
+    }
+
+    public String getSesio(int dia, int hora, String sesion) {
+        ArrayList<String> h = horario.get(dia).get(hora);
+        return h.get(h.indexOf(sesion));
+    }
+
+    public void addSesio(int dia, int hora, String sesion) {
+        horario.get(dia).get(hora).add(sesion);
+    }
+
+    private HashMap<Integer, ArrayList<String>> initHorasDia() {
+        HashMap<Integer, ArrayList<String>> dia = new HashMap<>();
+
+        for (int i = 8; i < 20; ++i) {
+            ArrayList<String> hora = new ArrayList<>();
+            dia.put(i, hora);
+        }
+
+        return dia;
+    }
+
+    private void initHorario() {
+        for (int i = 1; i <= 5; ++i)
+            horario.put(i, initHorasDia());
+    }
+
+    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
+        horario = new HashMap<Integer, HashMap<Integer, ArrayList<String>>>();
+        initHorario();
+        //File htxt = new File("DATA/Output/" + h);
+        File htxt = new File("DATA/Output/exemple.txt");
+        BufferedReader br = new BufferedReader(new FileReader(htxt));
+
+        String line;
+        int dia, hora;
+
+        line = br.readLine();
+        while (line != null) {
+            if (checkDia(line) && line != null) {
+                dia = diaToInt(line);
+                line = br.readLine();
+                while (!checkDia(line) && line != null) {
+                    if (checkHora(line) && line != null) {
+                        hora = horaToInt(line);
+                        line = br.readLine();
+                        boolean pointLine = true;
+                        while (line.charAt(0) != '-' && line != null) {
+                            if (pointLine) {
+                                line = br.readLine();
+                                pointLine = false;
+                            }
+                            addSesio(dia, hora, line);
+                            line = br.readLine();
+                        }
+                        pointLine = true;
+                    } else {
+                        line = br.readLine();
+                    }
+                }
+
+            } else {
+                line = br.readLine();
+            }
+        }
+        return horario;
     }
 
     /**

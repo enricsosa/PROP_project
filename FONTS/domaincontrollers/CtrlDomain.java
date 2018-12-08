@@ -136,6 +136,10 @@ public class CtrlDomain {
         return controladorEscenarios.escanearAllHorarios();
     }
 
+    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
+        return controladorEscenarios.escaneaHorario(h);
+    }
+
     /**
      * Escribe un Horario por consola.
      * @param horario   String con los datos de Horario.

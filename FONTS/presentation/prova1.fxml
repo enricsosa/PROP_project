@@ -17,7 +17,7 @@
                 <Insets bottom="16.0" left="80.0" right="80.0" top="16.0" />
             </padding>
         </Button>
-        <Button fx:id="consultHorarios" mnemonicParsing="false" styleClass="button-main-menu" text="Consultar horarios">
+        <Button fx:id="consultHorarios" mnemonicParsing="false" onAction="#setEscogHor" styleClass="button-main-menu" text="Consultar horarios">
             <VBox.margin>
                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
             </VBox.margin>
