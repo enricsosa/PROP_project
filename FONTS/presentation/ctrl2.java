@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
@@ -25,6 +26,7 @@ public class ctrl2 {
     private SceneController sc;
     private CtrlPresentacion cp;
     private CtrlDomain cd;
+    private String currentEscenario;
 
     @FXML
     public Label escenario_label;
@@ -270,10 +272,21 @@ public class ctrl2 {
     }
 
     public void escenarioSeleccionado(String s) {
+        currentEscenario = s;
         escenario_label.setText(s);
         TreeView<String> tree = createTreeEscenario(s);
         BorderPane bP = (BorderPane)sc.getPane("prova2");
         bP.setCenter(tree);
+    }
+
+    public void generarHorario() {
+        try {
+            cd.cargarEscenario(currentEscenario);
+        } catch (Exception e) {
+            System.out.println("ERROR: LECTURA DEL ESCENARIO FALLIDA");
+        }
+        setRestricciones sR = setRestricciones.getInstance();
+        sR.display(currentEscenario);
     }
 
 

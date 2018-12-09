@@ -170,7 +170,7 @@ public class CtrlPresentacionGenHorario {
     private void mostrarHorario(boolean saveHorario) throws FileNotFoundException, IOException, ParseException {
         System.out.println(this.horario);
         if (saveHorario) {
-            CD.writeHorario(this.horario, this.idHorario);
+            CD.writeHorario(this.horario, this.idHorario.toString());
             ++idHorario;
         }
     }

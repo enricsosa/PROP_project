@@ -195,8 +195,9 @@ public class CtrlEscenariosDir {
     public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
         horario = new HashMap<Integer, HashMap<Integer, ArrayList<String>>>();
         initHorario();
-        //File htxt = new File("DATA/Output/" + h);
-        File htxt = new File("DATA/Output/exemple.txt");
+        System.out.println(h);
+        File htxt = new File("DATA/Output/" + h + ".txt");
+        //File htxt = new File("DATA/Output/exemple.txt");
         BufferedReader br = new BufferedReader(new FileReader(htxt));
 
         String line;
@@ -239,8 +240,8 @@ public class CtrlEscenariosDir {
      * @param idHorario     Código identificador del Horario.
      * @throws IOException
      */
-    public void writeHorario(String horario, Integer idHorario) throws IOException {
-        PrintWriter writer = new PrintWriter("DATA/Output/"+"Horario#" + idHorario.toString(), "UTF-8");
+    public void writeHorario(String horario, String idHorario) throws IOException {
+        PrintWriter writer = new PrintWriter("DATA/Output/" + idHorario + ".txt", "UTF-8");
         writer.println(horario);
         writer.close();
     }

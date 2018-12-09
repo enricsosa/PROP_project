@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CtrlRestricciones">
+   <children>
+      <Label fx:id="escSel" text="Escenario seleccionado: ">
+         <VBox.margin>
+            <Insets left="8.0" top="8.0" />
+         </VBox.margin>
+      </Label>
+      <HBox fx:id="nomHorario" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="400.0">
+         <children>
+            <Label text="Nombre del horario:" />
+            <TextField fx:id="nomH" />
+            <Label text=".txt" />
+         </children>
+         <VBox.margin>
+            <Insets left="8.0" />
+         </VBox.margin>
+      </HBox>
+      <Label text="Restricciones:">
+         <VBox.margin>
+            <Insets left="8.0" top="10.0" />
+         </VBox.margin>
+      </Label>
+      <FlowPane prefHeight="150.0" prefWidth="392.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Dia libre">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Franja trabajo">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Nivel hora">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Correquisitos">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Prerrequisitos">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Franja asignatura">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Franja nivel">
+               <FlowPane.margin>
+                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
+               </FlowPane.margin>
+            </RadioButton>
+         </children>
+         <VBox.margin>
+            <Insets left="8.0" />
+         </VBox.margin>
+      </FlowPane>
+      <HBox fx:id="botButtons" alignment="CENTER" prefHeight="73.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="cancelB" mnemonicParsing="false" onAction="#cancelButton" text="Cancelar">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Region prefHeight="40.0" prefWidth="214.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="confirmB" mnemonicParsing="false" text="Confirmar">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -137,6 +137,7 @@ public class CtrlDomain {
     }
 
     public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
+        //System.out.println(h);
         return controladorEscenarios.escaneaHorario(h);
     }
 
@@ -146,7 +147,7 @@ public class CtrlDomain {
      * @param idHorario id del Horarioque se escribe.
      * @throws IOException
      */
-    public void writeHorario(String horario, Integer idHorario) throws IOException {
+    public void writeHorario(String horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
     }
 
