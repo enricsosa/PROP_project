@@ -71,7 +71,8 @@ public class CtrlEscenariosDir {
         File[] listHor = dir.listFiles();
         if (listHor != null) {
             for (File file : listHor) {
-                horarios.add(file.getName());
+                String nomH = file.getName();
+                horarios.add(nomH.substring(0, nomH.length() - 4));
             }
         }
         return horarios;

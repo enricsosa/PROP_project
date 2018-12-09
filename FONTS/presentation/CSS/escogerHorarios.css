@@ -5,3 +5,8 @@
     -fx-min-height: 15;
     -fx-font-size: 9px;
 }
+
+#esc-btn {
+    -fx-min-width: 96;
+    -fx-max-width: 96;
+}

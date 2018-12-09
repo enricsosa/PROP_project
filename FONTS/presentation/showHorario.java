@@ -63,7 +63,7 @@ public class showHorario {
         cd = CtrlPresentacion.getInstance().getCD();
 
         Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
+        //window.initModality(Modality.APPLICATION_MODAL);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("showHorario.fxml"));
         //cR = loader.getController();
@@ -83,8 +83,15 @@ public class showHorario {
             nomHor.setText(s);
 
             //Grid Pane
-            GridPane gP = (GridPane) vb.lookup("#gridPane");
+            GridPane gP = (GridPane)vb.lookup("#gridPane");
             setHorario(gP);
+
+            //Grid Pane
+            HBox hB = (HBox)vb.lookup("#botButton");
+            Button acceptB = (Button)vb.lookup("#acceptB");
+            acceptB.setOnAction(event -> {
+                window.close();
+            });
 
             window.setScene(new Scene(vb));
             window.showAndWait();
