@@ -65,12 +65,13 @@ public class showHorario {
         Stage window = new Stage();
         //window.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("showHorario.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("showHorario2.fxml"));
         //cR = loader.getController();
         Parent root = null;
         try {
             root = loader.load();
-            VBox vb = (VBox)root;
+            BorderPane bP = (BorderPane)root;
+            bP.getStylesheets().add("presentation/CSS/escogerHorarios.css");
 
             try {
                 horario = cd.escaneaHorario(s);
@@ -79,24 +80,25 @@ public class showHorario {
             }
 
             //Label titol
-            Label nomHor = (Label)vb.lookup("#titulo");
+            Label nomHor = (Label)bP.getTop();
             nomHor.setText(s);
 
             //Grid Pane
-            GridPane gP = (GridPane)vb.lookup("#gridPane");
+            GridPane gP = (GridPane)bP.getCenter();
             setHorario(gP);
 
-            //Grid Pane
-            HBox hB = (HBox)vb.lookup("#botButton");
-            Button acceptB = (Button)vb.lookup("#acceptB");
+            //AcceptButton
+            HBox hB = (HBox)bP.getBottom();
+            Button acceptB = (Button)hB.lookup("#acceptB");
             acceptB.setOnAction(event -> {
                 window.close();
             });
 
-            window.setScene(new Scene(vb));
+            window.setScene(new Scene(bP));
             window.showAndWait();
         } catch (Exception e) {
             System.out.println("ERROR");
+            System.out.println(e.toString());
         }
     }
 
