@@ -29,6 +29,7 @@ public class escogerHorario {
     @FXML
     public Label horario_label;
 
+
     public escogerHorario() {
         sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
@@ -72,6 +73,5 @@ public class escogerHorario {
 
     @FXML
     private void initialize() throws Exception {
-
     }
 }

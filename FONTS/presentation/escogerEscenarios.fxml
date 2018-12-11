@@ -28,7 +28,7 @@
                </HBox.margin>
             </Button>
             <Region prefHeight="37.0" prefWidth="346.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Generar horario">
+            <Button fx:id="genHor" mnemonicParsing="false" text="Generar horario">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>

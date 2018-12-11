@@ -77,15 +77,17 @@ public class setRestricciones {
             confirmB.setOnAction(event -> {
 
                 try {
-                    this.horarioStr = cd.generarHorario(escenario);
-                    cd.writeHorario(horarioStr, escenario);
-                    horario = cd.escaneaHorario(escenario);
+                    this.horarioStr = cd.generarHorario(nomH.getText());
+                    cd.writeHorario(horarioStr, nomH.getText());
+                    horario = cd.escaneaHorario(nomH.getText());
                 } catch (Exception e) {
                     System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
                 }
 
+
                 showHorario sR = showHorario.getInstance();
-                sR.display(escenario);
+                //sR.display(escenario);
+                sR.display(nomH.getText());
                 window.close();
             });
 

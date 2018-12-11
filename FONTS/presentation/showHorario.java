@@ -59,7 +59,7 @@ public class showHorario {
         }
     }
 
-    public void display(String s) {
+    public void display(String file) {
         cd = CtrlPresentacion.getInstance().getCD();
 
         Stage window = new Stage();
@@ -74,14 +74,14 @@ public class showHorario {
             bP.getStylesheets().add("presentation/CSS/escogerHorarios.css");
 
             try {
-                horario = cd.escaneaHorario(s);
+                horario = cd.escaneaHorario(file);
             } catch (Exception e) {
                 System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
             }
 
             //Label titol
             Label nomHor = (Label)bP.getTop();
-            nomHor.setText(s);
+            nomHor.setText(file);
 
             //Grid Pane
             GridPane gP = (GridPane)bP.getCenter();
