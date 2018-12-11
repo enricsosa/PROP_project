@@ -31,6 +31,9 @@ public class ctrl2 {
     @FXML
     public Label escenario_label;
 
+    @FXML
+    public Button genHor;
+
     private TreeItem<String> doBranch(String title, TreeItem<String> parent) {
         TreeItem<String> item = new TreeItem<>(title);
         item.setExpanded(false);
@@ -272,6 +275,7 @@ public class ctrl2 {
     }
 
     public void escenarioSeleccionado(String s) {
+        genHor.setDisable(false);
         currentEscenario = s;
         escenario_label.setText(s);
         TreeView<String> tree = createTreeEscenario(s);
@@ -302,5 +306,6 @@ public class ctrl2 {
 
     @FXML
     private void initialize() {
+        genHor.setDisable(true);
     }
 }
