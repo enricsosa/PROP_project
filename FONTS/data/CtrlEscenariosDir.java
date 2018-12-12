@@ -5,8 +5,7 @@
 package data;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 //import java.util.LinkedList;
 //import java.util.List;
 //import org.json.simple.JSONArray;
@@ -196,9 +195,7 @@ public class CtrlEscenariosDir {
     public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
         horario = new HashMap<Integer, HashMap<Integer, ArrayList<String>>>();
         initHorario();
-        System.out.println(h);
         File htxt = new File("DATA/Output/" + h + ".txt");
-        //File htxt = new File("DATA/Output/exemple.txt");
         BufferedReader br = new BufferedReader(new FileReader(htxt));
 
         String line;
@@ -233,6 +230,86 @@ public class CtrlEscenariosDir {
             }
         }
         return horario;
+    }
+
+    private String stringToDiaSemana(String num) {
+        String dia;
+        switch (num) {
+            case "1":
+                dia = "Lunes";
+                break;
+            case "2":
+                dia = "Martes";
+                break;
+            case "3":
+                dia = "Miercoles";
+                break;
+            case "4":
+                dia = "Jueves";
+                break;
+            case "5":
+                dia = "Viernes";
+                break;
+            case "6":
+                dia = "Sabado";
+                break;
+            case "7":
+                dia = "Domingo";
+                break;
+            default:
+                dia = "ERROR EN HORARIO";
+                break;
+        }
+        return dia;
+    }
+
+    public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> h, String idHorario) {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("DATA/Output/" + idHorario + ".txt", "UTF-8");
+        } catch (Exception e) {
+            System.out.println("ERROR EN ESCRIBIR EL HORARIO: PATH NO ENCONTRADO");
+        }
+
+        String hStr = "Horario: " + idHorario + '\n';
+        hStr += "";
+
+        for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) { //Horari
+            hStr += "----------------------------------------------------------------\n";
+            hStr += "----------------------------------------------------------------\n";
+            hStr += (stringToDiaSemana(dia.getKey().toString()) + '\n'); //dia
+
+            Map<Integer, ArrayList<String>> hs = new TreeMap<>(dia.getValue());
+            Set s = hs.entrySet();
+            Iterator it = s.iterator();
+            while (it.hasNext()) {
+                Map.Entry hora = (Map.Entry) it.next();
+                ArrayList<String> aux = new ArrayList<String>(hs.get(hora.getKey()));
+                if (!aux.isEmpty()) {
+                    hStr += "----------------------------------------------------------------\n";
+                    Integer horaAux = (Integer) hora.getKey();
+                    Integer auxh = horaAux+1;
+                    String sAux = "";
+                    if (horaAux < 9) {
+                        sAux = ("0" + horaAux.toString() + ":00-0" + auxh.toString() + ":00\n");
+                    } else if (horaAux == 9) {
+                        sAux = ("0" + horaAux.toString() + ":00-" + auxh.toString() + ":00\n");
+                    } else {
+                        sAux = (horaAux.toString() + ":00-" + auxh.toString() + ":00\n");
+                    }
+
+                    hStr += sAux; //hora
+                    hStr += "................................................................\n";
+
+                    for (String sesion : aux) { //Hora
+                        hStr += (sesion + '\n'); //sessio
+                    }
+                }
+            }
+        }
+        hStr += "----------------------------------------------------------------";
+        writer.println(hStr);
+        writer.close();
     }
 
     /**

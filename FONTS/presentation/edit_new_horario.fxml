@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox alignment="CENTER" maxHeight="110.0" maxWidth="400.0" minHeight="110.0" minWidth="400.0" prefHeight="110.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="El horario va a ser modificado. ¿Qué hacer?" />
+      <HBox fx:id="botButtons" alignment="BOTTOM_CENTER" prefHeight="71.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="editBtn" mnemonicParsing="false" text="Editar-lo">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Region prefHeight="100.0" prefWidth="101.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="newBtn" mnemonicParsing="false" text="Crear uno nuevo...">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -151,6 +151,10 @@ public class CtrlDomain {
         controladorEscenarios.writeHorario(horario, idHorario);
     }
 
+    public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario, String idHorario) throws IOException {
+        controladorEscenarios.writeHorarioFromMap(horario, idHorario);
+    }
+
     /**
      * Lee un horario guardado préviamente.
      * @param horario                   Nombre del Horario que se quiere leer.

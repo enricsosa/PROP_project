@@ -21,12 +21,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import sun.security.x509.DeltaCRLIndicatorExtension;
+import java.lang.Object;
+
 
 public class showHorario {
 
     private static showHorario sH;
     private CtrlDomain cd;
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
+
+    private int id = 0;
 
     /**Constructoras*/
 
@@ -42,12 +55,16 @@ public class showHorario {
     }
 
     private void setHorario(GridPane gp) {
+
         for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
                 ScrollPane sp = new ScrollPane();
                 VBox vB = new VBox();
                 for (String sesion : hora.getValue()) {
                     Button b = new Button(sesion);
+
+
+
                     b.setId("ses-btn");
                     vB.getChildren().add(b);
                 }
