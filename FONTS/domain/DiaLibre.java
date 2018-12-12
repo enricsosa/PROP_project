@@ -67,7 +67,7 @@ public class DiaLibre extends Restriccion {
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
         if (this.dia != dia) return true;
-        System.out.println("Falla DiaLibre");
+        //System.out.println("Falla DiaLibre");
         return false;
     }
 

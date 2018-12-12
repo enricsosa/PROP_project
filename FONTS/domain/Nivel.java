@@ -92,6 +92,23 @@ public class Nivel {
         this.restricciones.remove(posicion);
     }
 
+    /**
+     * Elimina una FranjaNivel del Nivel.
+     * @param horaIni   hora de inicio de la franja.
+     * @param horaFin   hora de fin de la franja.
+     */
+    public void eliminarFranjaNivel(int horaIni, int horaFin) {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel) {
+                if ((((FranjaNivel)this.restricciones.get(i)).getHoraIni().equals(horaIni))
+                        && (((FranjaNivel)this.restricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
     /**Consultoras*/
 
     /**

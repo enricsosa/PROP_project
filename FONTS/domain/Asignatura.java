@@ -214,8 +214,59 @@ public class Asignatura {
      * ELimina una Restriccion en funcion de su posicion dentro de las Restricciones de la Asignatura.
      * @param posicion  posicion de la Restriccion que se quiere eliminar dentro de las Restricciones de la Asignatura.
      */
-    public void eliminarRestriccion(Integer posicion) {
+    public void eliminarRestriccion(int posicion) {
         this.restricciones.remove(posicion);
+    }
+
+    /**
+     * Elimina una FranjaAsignatura de la Asignatura.
+     * @param horaIni   hora de inicio de la franja.
+     * @param horaFin   hora de fin de la franja.
+     */
+    public void eliminarFranjaAsignatura(int horaIni, int horaFin) {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaAsignatura) {
+                if ((((FranjaAsignatura)this.restricciones.get(i)).getHoraIni().equals(horaIni))
+                    && (((FranjaAsignatura)this.restricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina un Correquisito de la Asignatura.
+     * @param idAsignatura1 id de una Asignatura del Correquisito.
+     * @param idAsignatura2 id de una Asignatura del Correquisito.
+     */
+    public void eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
+        for (int i = 0; (i < this.restricciones.size()); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.Correquisito) {
+                if (((((Correquisito)this.restricciones.get(i)).getAsignatura1().getId().equals(idAsignatura1))
+                        && (((Correquisito)this.restricciones.get(i)).getAsignatura2().getId().equals(idAsignatura2)))
+                    || ((((Correquisito)this.restricciones.get(i)).getAsignatura2().getId().equals(idAsignatura1))
+                        && (((Correquisito)this.restricciones.get(i)).getAsignatura1().getId().equals(idAsignatura2)))) {
+                    restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina un Prerrequisito de la Asignatura.
+     * @param idPrerrequisito   id de la Asignatura prerrequisito.
+     */
+    public void eliminarPrerrequisito(String idPrerrequisito) {
+        for (int i = 0; (i < this.restricciones.size()); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.Prerrequisito) {
+                if (((Prerrequisito)this.restricciones.get(i)).getPrerrequisito().getId().equals(idPrerrequisito)) {
+                    restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
     }
 
     /**Consultoras*/

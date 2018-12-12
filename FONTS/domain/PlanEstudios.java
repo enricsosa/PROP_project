@@ -32,6 +32,8 @@ public class PlanEstudios {
     //private Horario horarioGeneral;
     /**Restricciones que afectan al PlanEstudios.*/
     private ArrayList<Restriccion> restricciones;
+    /**Todas las restricciones de PlanEstudios y los elementos que contiene.*/
+    private ArrayList<Restriccion> allRestricciones;
 
     /**Constructoras*/
 
@@ -45,6 +47,7 @@ public class PlanEstudios {
         this.asignaturas = new HashMap<String, Asignatura>();
         this.aulas = new HashMap<String, Aula>();
         this.restricciones = new ArrayList<Restriccion>();
+        this.allRestricciones = new ArrayList<Restriccion>();
     }
 
     /**Métodos públicos*/
@@ -63,7 +66,7 @@ public class PlanEstudios {
 
     /**
      * Asigna un nuevo nombre a PlanEstudios.
-     * @param nombre    Nuevo nombre que se asignará a PlanEstudios.
+     * @param   nombre    Nuevo nombre que se asignará a PlanEstudios.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -71,15 +74,23 @@ public class PlanEstudios {
 
     /**
      * Asigna un conjunto de Restricciones a PlanEstudios.
-     * @param restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
+     * @param   restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
      */
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
     }
 
     /**
+     * Asigna un nuevo conjunto de Restricciones a allRestricciones.
+     * @param   restricciones Conjunto de Restricciones que se asignan a allRestricciones.
+     */
+    public void setAllRestricciones(ArrayList<Restriccion> restricciones) {
+        this.allRestricciones = allRestricciones;
+    }
+
+    /**
      * Añade un Nivel a PlanEstudios.
-     * @param nivel Nivel que se añade a PlanEstudios.
+     * @param   nivel Nivel que se añade a PlanEstudios.
      */
     public void addNivel(Nivel nivel) {
         this.niveles.putIfAbsent(nivel.getNombre(), nivel);
@@ -98,11 +109,29 @@ public class PlanEstudios {
     }
 
     /**
+     * Comprueba si planEstudios tiene un Nivel con el nombre indicado.
+     * @param   nombre nombre del nivel que se quiere comprobar.
+     * @return  true si tiene el Nivel, false en caso contrario.
+     */
+    public Boolean tieneNivel(String nombre) {
+        return this.niveles.containsKey(nombre);
+    }
+
+    /**
      * Añade una Asignatura a PlanEstudios.
      * @param asignatura    Asignatura que se añade a PlanEstudios.
      */
     public void addAsignatura(Asignatura asignatura) {
         this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
+    }
+
+    /**
+     * Comprueba si planEstudios tiene una Aula con la id dada.
+     * @param   id id del Aula que se quiere comprobar.
+     * @return  true si tiene el Aula, false en caso contrario.
+     */
+    public Boolean tieneAula(String id) {
+        return this.aulas.containsKey(id);
     }
 
     //public void replaceAsignatura(Asignatura asignatura) {
@@ -115,6 +144,15 @@ public class PlanEstudios {
      */
     public void eliminarAsignatura(String id) {
         this.asignaturas.remove(id);
+    }
+
+    /**
+     * Comprueba si planEstudios tiene una Asignatura con la id indicada.
+     * @param   id id de la Asignatura que se quiere comprobar.
+     * @return  true si tiene la Asignatura, false en caso contrario.
+     */
+    public Boolean tieneAsignatura(String id) {
+        return this.asignaturas.containsKey(id);
     }
 
     /**
@@ -150,11 +188,150 @@ public class PlanEstudios {
     }
 
     /**
-     * Elimina la Restrricion del conjunto de Restricciones de PlanEstudios que se encuentra en la posicion indicada.
+     * Elimina la Restricion del conjunto de Restricciones de PlanEstudios que se encuentra en la posicion indicada.
      * @param posicion  posicion de la Restriccion que se quiere eliminar.
      */
     public void eliminarRestriccion(Integer posicion) {
         this.restricciones.remove(posicion);
+    }
+
+    /**
+     * Añade una Restriccion a allRestricciones.
+     * @param restriccion   Restriccion que se quiere añadir a allRestricciones.
+     */
+    public void addAllRestriccion(Restriccion restriccion) {
+        this.allRestricciones.add(restriccion);
+    }
+
+    /**
+     * Elimina la Restricion del conjunto de Restricciones de allRestricciones que se encuentra en la posicion indicada.
+     * @param posicion  posicion de la Restriccion que se quiere eliminar.
+     */
+    public void eliminarAllRestriccion(Integer posicion) {
+        this.allRestricciones.remove(posicion);
+    }
+
+    /**
+     * Elimina una FranjaAsignatura del PlanEstudios.
+     * @param idAsignatura  id de la Asignatura afectada.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     */
+    public void eliminarFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaAsignatura) {
+                if ((((FranjaAsignatura)this.allRestricciones.get(i)).getAsignatura().getId().equals(idAsignatura))
+                        && (((FranjaAsignatura)this.allRestricciones.get(i)).getHoraIni().equals(horaIni))
+                        && (((FranjaAsignatura)this.allRestricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina una FranjaNivel del PlanEstudios.
+     * @param nombreNivel   id del Nivel afectada.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     */
+    public void eliminarFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel) {
+                if ((((FranjaNivel)this.allRestricciones.get(i)).getNivel().getNombre().equals(nombreNivel))
+                        && (((FranjaNivel)this.allRestricciones.get(i)).getHoraIni().equals(horaIni))
+                        && (((FranjaNivel)this.allRestricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina una FranjaTrabajo del PlanEstudios.
+     * @param horaIni   hora de inicio de la franja.
+     * @param horaFin   hora de fin de la franja.
+     */
+    public void eliminarFranjaTrabajo(int horaIni, int horaFin) {
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaTrabajo) {
+                if ((((FranjaTrabajo)this.allRestricciones.get(i)).getHoraIni().equals(horaIni))
+                        && (((FranjaTrabajo)this.allRestricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaTrabajo) {
+                if ((((FranjaTrabajo)this.restricciones.get(i)).getHoraIni().equals(horaIni))
+                        && (((FranjaTrabajo)this.restricciones.get(i)).getHoraFin().equals(horaFin))) {
+                    this.restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina un Correquisito del PlanEstudios.
+     * @param   idAsignatura1 id de una Asignatura del Correquisito.
+     * @param   idAsignatura2 id de una Asignatura del Correquisito.
+     */
+    public void eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
+        for (int i = 0; (i < this.allRestricciones.size()); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.Correquisito) {
+                if (((((Correquisito)this.allRestricciones.get(i)).getAsignatura1().getId().equals(idAsignatura1))
+                        && (((Correquisito)this.allRestricciones.get(i)).getAsignatura2().getId().equals(idAsignatura2)))
+                        || ((((Correquisito)this.allRestricciones.get(i)).getAsignatura2().getId().equals(idAsignatura1))
+                        && (((Correquisito)this.allRestricciones.get(i)).getAsignatura1().getId().equals(idAsignatura2)))) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina un Prerrequisito del PlanEstudios.
+     * @param   idAsignatura id de la Asignatura que tiene el Prerrequisito.
+     * @param   idPrerrequisito id de la Asignatura prerrequisito.
+     */
+    public void eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
+        for (int i = 0; (i < this.allRestricciones.size()); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.Prerrequisito) {
+                if ((((Prerrequisito)this.allRestricciones.get(i)).getAsignatura().getId().equals(idAsignatura))
+                        && (((Prerrequisito)this.allRestricciones.get(i)).getPrerrequisito().getId().equals(idPrerrequisito))) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
+     * Elimina un DiaLibre de PlanEstudios.
+     * @param   diaSemana diaSemana del DiaLibre que se quiere eliminar.
+     */
+    public void eliminarDiaLibre(int diaSemana) {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.DiaLibre) {
+                if (((DiaLibre)this.restricciones.get(i)).getDia() == diaSemana) {
+                    this.restricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.DiaLibre) {
+                if (((DiaLibre)this.allRestricciones.get(i)).getDia() == diaSemana) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
     }
 
     /**Consultoras*/
@@ -267,10 +444,27 @@ public class PlanEstudios {
     /**
      * Dada su posicion en el conjunto de Restricciones de PlanEstudios devuelve una Restriccion.
      * @param posicion  posicion en el conjunto de Restricciones de PlanEstudios de la Restriccion que se quiere obtener.
-     * @return          Restrcccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de PlanEstudios.
+     * @return          Restriccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de PlanEstudios.
      */
     public Restriccion getRestriccion(int posicion) {
         return this.restricciones.get(posicion);
+    }
+
+    /**
+     * Devuelve el conjunto de Restricciones de allRestricciones.
+     * @return  ArrayList con las Restricciones de allRestricciones.
+     */
+    public ArrayList<Restriccion> getAllRestricciones() {
+        return this.allRestricciones;
+    }
+
+    /**
+     * Dada su posicion en el conjunto de Restricciones de allRestricciones devuelve una Restriccion.
+     * @param posicion  posicion en el conjunto de Restricciones de allRestricciones de la Restriccion que se quiere obtener.
+     * @return          Restriccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de allRestricciones.
+     */
+    public Restriccion getAllRestriccion(int posicion) {
+        return this.allRestricciones.get(posicion);
     }
 
     /**Métodos redefinidos*/

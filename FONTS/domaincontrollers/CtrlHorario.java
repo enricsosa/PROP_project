@@ -39,8 +39,6 @@ public class CtrlHorario {
 
     /**PlanEstudios del escenario del que se genera el Horario.*/
     private PlanEstudios planEstudios;
-    /**Restricciones del escenario del que se genera el Horario.*/
-    private ArrayList<Restriccion> restricciones;
     /**FranjaTrabajo y diasLibres del escenario del que se genera el Horario.*/
     private LimitacionesHorario limitacionesHorario;
 
@@ -49,11 +47,9 @@ public class CtrlHorario {
     /**
      * Constructora de la clase CtrlHorario.
      * @param planEstudios  PlanEstudios con el que se generan los Horarios.
-     * @param restricciones Restricciones con las que se generan los Horarios.
      */
-    CtrlHorario(PlanEstudios planEstudios, ArrayList restricciones) {
+    CtrlHorario(PlanEstudios planEstudios) {
         this.planEstudios = planEstudios;
-        this.restricciones = restricciones;
         this.limitacionesHorario = new LimitacionesHorario();
         this.loadLimitacionesHorario();
     }
@@ -66,14 +62,6 @@ public class CtrlHorario {
      */
     public void setPlanEstudios(PlanEstudios planEstudios) {
         this.planEstudios = planEstudios;
-    }
-
-    /**
-     * Asigna un nuevo conjunto de Restricciones a CtrlHorario.
-     * @param restricciones Nuevo conjunto de Restricciones que se asigna a CrtlHorario.
-     */
-    public void setRestricciones(ArrayList<Restriccion> restricciones) {
-        this.restricciones = restricciones;
     }
 
     /**
@@ -208,8 +196,8 @@ public class CtrlHorario {
                             if (this.comprobarRestricciones(clase, dia, horaIni, horario)) {
 
                                 //System.out.println("Cumple restrcciones de hora.");
-                                for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clases.get(i)).entrySet()) {
-                                    if (!(aulaOcupada(clases.get(i), dia, horaIni, entry.getValue(), horario))) {
+                                for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
+                                    if (!(aulaOcupada(clase, dia, horaIni, entry.getValue(), horario))) {
                                         //System.out.println("Se ha encontrado aula adequada.");
                                         Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
                                         placed[i] = true;
@@ -304,7 +292,7 @@ public class CtrlHorario {
      * @param horario       Horario al que se pretende añadir una Asignacion candidata.
      * @return              true si el Aula está ocupada durante la Asignacion candidata, false en caso contrario.
      */
-    public Boolean aulaOcupada(Clase clase, int dia, int horaIni,  Aula aula,  Horario horario) {
+    public static Boolean aulaOcupada(Clase clase, int dia, int horaIni,  Aula aula,  Horario horario) {
         for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {
             if (horario.getHora(dia, hora).tieneAula(aula)) return true;
         }
@@ -324,7 +312,7 @@ public class CtrlHorario {
      * @param horario       horario al que se pretende añadir una Asignacion candidata.
      * @return              true si no se incumple ninguna Restriccion, false en caso contrario.
      */
-    public Boolean comprobarRestricciones(Clase clase, int dia, int horaIni, Horario horario) {
+    public static Boolean comprobarRestricciones(Clase clase, int dia, int horaIni, Horario horario) {
         return clase.comprobarRestricciones(dia, horaIni, horario);
     }
 
@@ -336,7 +324,7 @@ public class CtrlHorario {
      * @param horario       horario al que se pretende añadir una Asignacion candidata.
      * @return              true si no se incumple ninguna Restriccion, false en caso contrario.
      */
-    public Boolean comprovarSubGrupoDia(Clase clase, int dia, Horario horario) {
+    public static Boolean comprovarSubGrupoDia(Clase clase, int dia, Horario horario) {
         return horario.getDia(dia).tieneSubGrupo(clase.getSubGrupo());
     }
 
@@ -350,7 +338,7 @@ public class CtrlHorario {
      * @return              true si algun SubGrupo de del Grupo de Clase participa ya en una Asignacion con un SubGrupo
      *                      de diferente TipoClase en el dia indicado, false en caso contrario.
      */
-    public Boolean comprovarGrupoDia(Clase clase, int dia, Horario horario) {
+    public static Boolean comprovarGrupoDia(Clase clase, int dia, Horario horario) {
         if (!(horario.getDia(dia).tieneGrupo(clase.getGrupo()))) return false;
         for (Map.Entry<String, SubGrupo> entry : clase.getGrupo().getSubGrupos().entrySet()) {
             if (clase.getSubGrupo() != entry.getValue()) {
@@ -404,23 +392,6 @@ public class CtrlHorario {
      */
     public PlanEstudios getPlanEstudios() {
         return planEstudios;
-    }
-
-    /**
-     * Devuelve las Restricciones de CtrlHorario.
-     * @return  Restricciones de CtrlHorario.
-     */
-    public ArrayList<Restriccion> getRestricciones() {
-        return restricciones;
-    }
-
-    /**
-     * Devuelve la Restrccion del conjunto de Restricciones de CtrlHorario que se encuentra en la posicion indicada.
-     * @param posicion  posicion de la Restriccion que se quiere obtener.
-     * @return          Restrccion del conjunto de Restricciones de CtrlHorario que se encuentra en la posicion indicada.
-     */
-    public Restriccion getRestriccion(int posicion) {
-        return this.restricciones.get(posicion);
     }
 
     /**
