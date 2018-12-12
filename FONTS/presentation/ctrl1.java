@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ctrl1 {
@@ -49,6 +50,7 @@ public class ctrl1 {
 
     private VBox leftPaneHoarios() throws Exception {
         VBox updatedPane = new VBox();
+        updatedPane.setId("leftVB");
         CtrlPresentacion CP = CtrlPresentacion.getInstance();
 
         ArrayList<String> horarios = CP.horarios();
@@ -114,7 +116,7 @@ public class ctrl1 {
             sc.setStyleSheet("escogerHorario", "presentation/CSS/escogerHorarios.css");
 
         } catch (Exception e) {
-            System.out.println("CAGADA");
+            System.out.println("ERROR EN LOS LOADERS INICIALES");
         }
     }
 }

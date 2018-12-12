@@ -41,48 +41,6 @@ public class ctrl2 {
         return item;
     }
 
-    private TreeItem<Button> doBranch2(String title, TreeItem<Button> parent){
-        Button b = new Button(title);
-        TreeItem<Button> item = new TreeItem<Button>(b);
-        item.setExpanded(false);
-        parent.getChildren().add(item);
-        return item;
-    }
-
-    private TreeView<Button> prova() {
-        VBox vb = new VBox();
-        TreeView<String> tv = new TreeView<>();
-        vb.clipProperty();
-        System.out.println(vb.clipProperty());
-        System.out.println(vb.getClip());
-        System.out.println(tv.clipProperty());
-        System.out.println(tv.getClip());
-        TreeView<Button> tree;
-        TreeItem<Button> root, planEstudios, asignaturas, aulas, restricciones;
-        root = new TreeItem<>();
-        root.setExpanded(true);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-        doBranch2("Plan Estudios", root);doBranch2("Plan Estudios", root);
-
-        //doBranch2("planEstudios", planEstudios);
-
-        tree = new TreeView<>(root);
-        tree.setShowRoot(false);
-
-
-
-        return tree;
-    }
-
     private String stringToDiaSemana(String num) {
         String dia;
         switch (num) {
