@@ -337,6 +337,14 @@ public class Asignatura {
     }
 
     /**
+     * Indica si la Asignatura tiene un Grupo.
+     * @return  Devuelve true si la Asignatura tiene un Grupo, false en caso contrario.
+     */
+    public Boolean tieneGrupo(String id) {
+        return this.grupos.containsKey(id);
+    }
+
+    /**
      * Devuelve el conjunto de Restricciones de la Asignatura.
      * @return  Devuelve las Restricciones de la Asignatura.
      */

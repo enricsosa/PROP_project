@@ -127,6 +127,15 @@ public class Grupo {
     }
 
     /**
+     * Comprueba si Grupo tiene un SubGrupo.
+     * @param id    id del SubGrupo.
+     * @return      true si tiene el SubGrupo, false en caso contrario.
+     */
+    public Boolean tieneSubGrupo(String id) {
+        return this.subGrupos.containsKey(id);
+    }
+
+    /**
      * Devuelve todos los Subgrupos de Teoria del Grupo
      * @return  Map con los SubGrupos de Teoria del Grupo.
      */

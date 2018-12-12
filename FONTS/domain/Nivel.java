@@ -109,6 +109,18 @@ public class Nivel {
         }
     }
 
+    /**
+     * Elimina una NivelHora del Nivel.
+     */
+    public void eliminarNivelHora() {
+        for (int i = 0; i < this.restricciones.size(); ++i) {
+            if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.NivelHora) {
+                this.restricciones.remove(i);
+                --i;
+            }
+        }
+    }
+
     /**Consultoras*/
 
     /**

@@ -213,7 +213,7 @@ public class PlanEstudios {
 
     /**
      * Elimina una FranjaAsignatura del PlanEstudios.
-     * @param idAsignatura  id de la Asignatura afectada.
+     * @param idAsignatura  id de la Asignatura afectado.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      */
@@ -231,8 +231,23 @@ public class PlanEstudios {
     }
 
     /**
+     * Elimina una NivelHora del PlanEstudios.
+     * @param nombreNivel   id del Nivel afectado.
+     */
+    public void eliminarNivelHora(String nombreNivel) {
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            if (this.allRestricciones.get(i).getTipoRestriccion() == TipoRestriccion.NivelHora) {
+                if (((NivelHora)this.allRestricciones.get(i)).getNivel().getNombre().equals(nombreNivel)) {
+                    this.allRestricciones.remove(i);
+                    --i;
+                }
+            }
+        }
+    }
+
+    /**
      * Elimina una FranjaNivel del PlanEstudios.
-     * @param nombreNivel   id del Nivel afectada.
+     * @param nombreNivel   id del Nivel afectado.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      */
