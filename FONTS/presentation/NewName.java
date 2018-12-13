@@ -1,5 +1,6 @@
 package presentation;
 
+import presentation.FXMLControllers.*;
 import domaincontrollers.CtrlDomain;
 import javafx.event.ActionEvent;
 import javafx.event.Event;

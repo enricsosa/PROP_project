@@ -1,5 +1,6 @@
 package presentation;
 
+import presentation.FXMLControllers.*;
 import domaincontrollers.CtrlDomain;
 import javafx.application.Application;
 import javafx.application.Platform;

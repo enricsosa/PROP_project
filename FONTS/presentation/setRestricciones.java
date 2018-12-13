@@ -1,5 +1,6 @@
 package presentation;
 
+import presentation.FXMLControllers.*;
 import domain.Correquisito;
 import domaincontrollers.CtrlDomain;
 import javafx.application.Application;
@@ -65,8 +66,6 @@ public class setRestricciones {
             nomH.setText(escenario);
 
             //Radiobuttons
-            FlowPane radioButtons = (FlowPane) vb.lookup("#radioButtons");
-            RadioButton RBdiaLibre = (RadioButton)radioButtons.lookup("#RBdiaLibre");
 
             //Boton Cancelar
             HBox botButtons = (HBox) vb.lookup("#botButtons");

@@ -1,5 +1,6 @@
-package presentation;
+package presentation.FXMLControllers;
 
+import presentation.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 

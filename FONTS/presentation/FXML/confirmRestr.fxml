@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CtrlRestricciones">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="740.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.FXMLControllers.CtrlRestricciones">
    <children>
       <Label fx:id="escSel" text="Escenario seleccionado: ">
          <VBox.margin>
@@ -25,51 +25,104 @@
       </HBox>
       <Label text="Restricciones:">
          <VBox.margin>
-            <Insets left="8.0" top="10.0" />
+            <Insets bottom="5.0" left="8.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <FlowPane fx:id="radioButtons" prefHeight="150.0" prefWidth="392.0">
+      <HBox alignment="CENTER" prefHeight="303.0" prefWidth="600.0" spacing="2.0">
          <children>
-            <RadioButton fx:id="RBdiaLibre" mnemonicParsing="false" text="Dia libre">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBfranjaTrabajo" mnemonicParsing="false" text="Franja trabajo">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBnivelHora" mnemonicParsing="false" text="Nivel hora">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBcorrequisitos" mnemonicParsing="false" text="Correquisitos">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBprerrequisitos" mnemonicParsing="false" text="Prerrequisitos">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBfranjaAsignatura" mnemonicParsing="false" text="Franja asignatura">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="RBfranjaNivel" mnemonicParsing="false" text="Franja nivel">
-               <FlowPane.margin>
-                  <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
-               </FlowPane.margin>
-            </RadioButton>
+            <VBox fx:id="VBdiaLibre" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Dia Libre">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBfranjaTrabajo" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Franja Trabajo">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBnivelHora" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Nivel Hora">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBcorrequisitos" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Correquisitos">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBprerrequisitos" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Prerrequisitos">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBfranjaAsignatura" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Franja Asignatura">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox fx:id="VBfranjaNivel" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Franja Nivel">
+                     <VBox.margin>
+                        <Insets bottom="2.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <ListView prefHeight="265.0" prefWidth="100.0" />
+               </children>
+            </VBox>
          </children>
-         <VBox.margin>
-            <Insets left="8.0" />
-         </VBox.margin>
-      </FlowPane>
+      </HBox>
       <HBox fx:id="botButtons" alignment="CENTER" prefHeight="73.0" prefWidth="400.0">
          <children>
             <Button fx:id="cancelB" mnemonicParsing="false" onAction="#cancelButton" text="Cancelar">

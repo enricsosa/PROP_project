@@ -1,5 +1,6 @@
-package presentation;
+package presentation.FXMLControllers;
 
+import presentation.*;
 import domaincontrollers.CtrlDomain;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -92,14 +93,14 @@ public class ctrl1 {
         cd = cp.getCD();
         try {
             //Escoger escenario
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/prova2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/prova2.fxml"));
             Parent root = loader.load();
             c2 = loader.getController();
             sc.addScene("prova2", (BorderPane)root);
             sc.setStyleSheet("prova2", "presentation/CSS/escogerEscenarios.css");
 
             //Escoger horario
-            loader = new FXMLLoader(getClass().getResource("FXML/escogerHorario.fxml"));
+            loader = new FXMLLoader(getClass().getResource("../FXML/escogerHorario.fxml"));
             root = loader.load();
             eH = loader.getController();
             sc.addScene("escogerHorario", (BorderPane)root);
@@ -107,6 +108,7 @@ public class ctrl1 {
 
         } catch (Exception e) {
             System.out.println("ERROR EN LOS LOADERS INICIALES");
+            System.out.println(e.toString());
         }
     }
 }
