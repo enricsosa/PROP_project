@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CtrlRestricciones">
    <children>
       <Label fx:id="escSel" text="Escenario seleccionado: ">
@@ -29,39 +28,39 @@
             <Insets left="8.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <FlowPane prefHeight="150.0" prefWidth="392.0">
+      <FlowPane fx:id="radioButtons" prefHeight="150.0" prefWidth="392.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Dia libre">
+            <RadioButton fx:id="RBdiaLibre" mnemonicParsing="false" text="Dia libre">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Franja trabajo">
+            <RadioButton fx:id="RBfranjaTrabajo" mnemonicParsing="false" text="Franja trabajo">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Nivel hora">
+            <RadioButton fx:id="RBnivelHora" mnemonicParsing="false" text="Nivel hora">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Correquisitos">
+            <RadioButton fx:id="RBcorrequisitos" mnemonicParsing="false" text="Correquisitos">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Prerrequisitos">
+            <RadioButton fx:id="RBprerrequisitos" mnemonicParsing="false" text="Prerrequisitos">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Franja asignatura">
+            <RadioButton fx:id="RBfranjaAsignatura" mnemonicParsing="false" text="Franja asignatura">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Franja nivel">
+            <RadioButton fx:id="RBfranjaNivel" mnemonicParsing="false" text="Franja nivel">
                <FlowPane.margin>
                   <Insets bottom="2.0" left="3.0" right="7.0" top="2.0" />
                </FlowPane.margin>

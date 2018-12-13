@@ -1,9 +1,6 @@
 package presentation;
 
-import domain.Correquisito;
 import domaincontrollers.CtrlDomain;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -15,8 +12,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +43,7 @@ public class NewName {
         window.setResizable(false);
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("h_new_name.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/h_new_name.fxml"));
         Parent root = null;
         try {
             root = loader.load();

@@ -28,7 +28,6 @@ public class setRestricciones {
     private CtrlRestricciones cR;
     private CtrlDomain cd;
     private String horarioStr;
-    private Integer idHorario = 1;
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
 
     /**Constructoras*/
@@ -47,14 +46,14 @@ public class setRestricciones {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
+        window.setResizable(false);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("confirmRestr.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/confirmRestr.fxml"));
         cR = loader.getController();
         Parent root = null;
         try {
             root = loader.load();
             VBox vb = (VBox)root;
-
 
             //Label Escenario seleccionado
             Label escSel = (Label) vb.lookup("#escSel");
@@ -64,6 +63,10 @@ public class setRestricciones {
             HBox nomHorario = (HBox) vb.lookup("#nomHorario");
             TextField nomH = (TextField)nomHorario.lookup("#nomH");
             nomH.setText(escenario);
+
+            //Radiobuttons
+            FlowPane radioButtons = (FlowPane) vb.lookup("#radioButtons");
+            RadioButton RBdiaLibre = (RadioButton)radioButtons.lookup("#RBdiaLibre");
 
             //Boton Cancelar
             HBox botButtons = (HBox) vb.lookup("#botButtons");
@@ -84,13 +87,10 @@ public class setRestricciones {
                     System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
                 }
 
-
                 showHorario sR = showHorario.getInstance();
-                //sR.display(escenario);
                 sR.display(nomH.getText());
                 window.close();
             });
-
 
             window.setScene(new Scene(vb));
             window.showAndWait();

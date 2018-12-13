@@ -2,8 +2,6 @@ package presentation;
 
 import domain.Correquisito;
 import domaincontrollers.CtrlDomain;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -15,8 +13,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +49,7 @@ public class edit_new_horario {
         window.setResizable(false);
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("edit_new_horario.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/edit_new_horario.fxml"));
         Parent root = null;
         try {
             root = loader.load();

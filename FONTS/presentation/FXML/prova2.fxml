@@ -21,13 +21,18 @@
             <children>
                 <Button fx:id="atras_MMenu" mnemonicParsing="false" onAction="#setMainMenu" text="Atrás">
                     <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="15.0" />
                     </HBox.margin>
                 </Button>
-                <Region prefHeight="37.0" prefWidth="346.0" HBox.hgrow="ALWAYS" />
+                <Region prefHeight="37.0" prefWidth="187.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="editEsc" mnemonicParsing="false" text="Editar escenario">
+               <HBox.margin>
+                  <Insets right="4.0" />
+               </HBox.margin>
+            </Button>
                 <Button fx:id="genHor" mnemonicParsing="false" onAction="#generarHorario" text="Generar horario">
                     <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="4.0" right="15.0" />
                     </HBox.margin>
                 </Button>
             </children>

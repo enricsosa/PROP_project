@@ -1,45 +1,23 @@
 package presentation;
 
-import domain.Correquisito;
 import domaincontrollers.CtrlDomain;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import sun.security.x509.DeltaCRLIndicatorExtension;
-import java.lang.Object;
-
 
 public class showHorario {
 
     private static showHorario sH;
     private CtrlDomain cd;
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
-
-    private int id = 0;
 
     /**Constructoras*/
 
@@ -62,9 +40,6 @@ public class showHorario {
                 VBox vB = new VBox();
                 for (String sesion : hora.getValue()) {
                     Button b = new Button(sesion);
-
-
-
                     b.setId("ses-btn");
                     vB.getChildren().add(b);
                 }
@@ -78,12 +53,9 @@ public class showHorario {
 
     public void display(String file) {
         cd = CtrlPresentacion.getInstance().getCD();
-
         Stage window = new Stage();
-        //window.initModality(Modality.APPLICATION_MODAL);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("showHorario2.fxml"));
-        //cR = loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/showHorario2.fxml"));
         Parent root = null;
         try {
             root = loader.load();

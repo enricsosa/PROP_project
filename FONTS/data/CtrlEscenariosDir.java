@@ -38,7 +38,7 @@ public class CtrlEscenariosDir {
         if (escenarios == null)
             escenarios = new CtrlEscenariosDir() {
             };
-        nomEscenarios = new ArrayList<String>();
+        //nomEscenarios = new ArrayList<String>();
         return escenarios;
     }
 

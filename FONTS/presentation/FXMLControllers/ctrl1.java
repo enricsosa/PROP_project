@@ -1,21 +1,11 @@
 package presentation;
 
 import domaincontrollers.CtrlDomain;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ctrl1 {
@@ -102,14 +92,14 @@ public class ctrl1 {
         cd = cp.getCD();
         try {
             //Escoger escenario
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("prova2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/prova2.fxml"));
             Parent root = loader.load();
             c2 = loader.getController();
             sc.addScene("prova2", (BorderPane)root);
             sc.setStyleSheet("prova2", "presentation/CSS/escogerEscenarios.css");
 
             //Escoger horario
-            loader = new FXMLLoader(getClass().getResource("escogerHorario.fxml"));
+            loader = new FXMLLoader(getClass().getResource("FXML/escogerHorario.fxml"));
             root = loader.load();
             eH = loader.getController();
             sc.addScene("escogerHorario", (BorderPane)root);
