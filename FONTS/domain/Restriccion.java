@@ -12,14 +12,33 @@ public abstract class Restriccion {
 
     /**Atributos*/
 
+    /**Indica si la Restricción está activada*/
+    private Boolean activa;
+
     /**Constructoras*/
 
-    /**Constructora de la clase Restriccion.*/
-    public Restriccion() {}
+    ///**Constructora de la clase Restriccion.*/
+    //public Restriccion() {}
 
     /**Métodos públicos*/
 
+    /**
+     * Asigna un valor a activa.
+     * @param activa    valor que se asigna a activa.
+     */
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
+    }
+
     /**Consultoras*/
+
+    /**
+     * Indica si la Restricción está activa.
+     * @return  true si la Restriccion está activa, false en caso contrario.
+     */
+    public Boolean getActiva() {
+        return activa;
+    }
 
     /**
      * Devuelve el TipoRestriccion correspondiente.

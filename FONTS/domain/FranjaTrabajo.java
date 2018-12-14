@@ -28,6 +28,7 @@ public class FranjaTrabajo extends Restriccion {
     public FranjaTrabajo(Integer horaIni, Integer horaFin) {
         this.horaIni = horaIni;
         this.horaFin = horaFin;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/
@@ -87,7 +88,10 @@ public class FranjaTrabajo extends Restriccion {
      */
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
-        return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
+        if (this.getActiva()) {
+            return ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin));
+        }
+        return true;
     }
 
     /**

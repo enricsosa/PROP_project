@@ -32,6 +32,7 @@ public class FranjaNivel extends Restriccion {
         this.nivel = nivel;
         this.horaIni = horaIni;
         this.horaFin = horaFin;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/
@@ -107,11 +108,14 @@ public class FranjaNivel extends Restriccion {
      */
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
-        if (!(clase.tieneNivel())) return true;
-        if ((clase.getNivel() != this.nivel)) return true;
-        if ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin)) return true;
-        //System.out.println("Falla FranjaNivel");
-        return false;
+        if (this.getActiva()) {
+            if (!(clase.tieneNivel())) return true;
+            if ((clase.getNivel() != this.nivel)) return true;
+            if ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin)) return true;
+            //System.out.println("Falla FranjaNivel");
+            return false;
+        }
+        return true;
     }
 
     /**

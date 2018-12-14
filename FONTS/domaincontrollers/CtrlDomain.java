@@ -117,11 +117,11 @@ public class CtrlDomain {
      * @param dia                   dia donde se encuentra la Asignacion que se quiere mover.
      * @param hora                  hora donde se encuentra la Asignacion que se quiere mover.
      * @param nuevoDia              dia la que se quiere mover la Asignacion.
-     * @param nuevaHora             hora la que se quiere mover la Asignacion.
+     * @param nuevaHoraIni          hora la que se quiere mover la Asignacion.
      * @return                      Devuelve un ReturnSet con un Boolean y un mensaje informando de si se ha podido mover
      *                              la Asignacion, y si se ha podido, el Horario resultante.
      */
-    public ReturnSet moverAsignacion(String idAsignatura, String idSubGrupoCompleta, int dia, int hora, int nuevoDia, int nuevaHora) {
+    public ReturnSet moverAsignacion(String idAsignatura, String idSubGrupoCompleta, int dia, int hora, int nuevoDia, int nuevaHoraIni) {
         if (this.horarioActivo == null) return new ReturnSet(false, "No hay ningún Horario seleccionado.");
         Hora h = this.horarioActivo.getHora(dia, hora);
         boolean found = false;
@@ -140,29 +140,90 @@ public class CtrlDomain {
             || CtrlHorario.comprovarGrupoDia(clase, nuevoDia, nuevoHorario)) {
             return new ReturnSet(false, "No se puede mover la Asignacion al dia indicado.");
         }
-        if (CtrlHorario.aulaOcupada(clase, nuevoDia, nuevaHora, asignacion.getAula(), nuevoHorario)) {
+        if (CtrlHorario.aulaOcupada(clase, nuevoDia, nuevaHoraIni, asignacion.getAula(), nuevoHorario)) {
             return new ReturnSet(false, "No se puede mover la Asignacion a la hora indicada.");
         }
-        if (!(CtrlHorario.comprobarRestricciones(clase, nuevoDia, nuevaHora, nuevoHorario))) {
+        if (!(CtrlHorario.comprobarRestricciones(clase, nuevoDia, nuevaHoraIni, nuevoHorario))) {
             return new ReturnSet(false, "No se puede mover la Asignacion a la hora indicada.");
         }
-        Asignacion nuevaAsignacion = new Asignacion(nuevaHora, nuevoDia, asignacion.getAula(), clase);
+        Asignacion nuevaAsignacion = new Asignacion(nuevaHoraIni, nuevoDia, asignacion.getAula(), clase);
         nuevoHorario.addAsignacion(nuevaAsignacion);
         this.horarioActivo = nuevoHorario;
         return new ReturnSet(true, "Se ha podido mover la Asignacion", nuevoHorario);
     }
 
     /**
+     * Indica si una operación se ha ejecutado exitosamente a partir de su código de resultado.
+     * @param codigoResultado   Código de resultado de la operación de la que se quiere conocer su validez.
+     * @return                  true si la operación se ha ejecutado exitosamente, false en caso contrario.
+     */
+    public static Boolean getValidezOperacion(int codigoResultado) {
+        return codigoResultado >= 0;
+    }
+
+    /**
+     * Devuelve el mensaje correspondiente al resultado de ejecutar una operación.
+     * @param codigoResultado   Código de resultado de la operación de la que se quiere conocer su mensaje.
+     * @return                  String con el mensaje correspondiente al resultado de ejecutar una operación.
+     */
+    public static String getMensageOperacion(int codigoResultado) {
+        switch (codigoResultado) {
+            case -15:   return "Ya existe Aula con la id dada.";
+            case -14:   return "No existe Aula con el nombre dado.";
+            case -13:   return "No existe SubGrupo con la id dada en el Grupo indicado.";
+            case -12:   return "No existe Grupo con la id dada en la Asignatura indicado.";
+            case -11:   return "Ya existe SubGrupo con la id dada en el Grupo indicado.";
+            case -10:   return "Ya existe Grupo con la id dada en la Asignatura indicado.";
+            case -9:    return "Ya existe Asignatura con la id dada.";
+            case -8:    return "Ya existe Nivel con el nombre dado.";
+            case -7:    return "No existe Asignatura con la id dada (Prerrequisito).";
+            case -6:    return "No existe Asignatura con la id dada (Asignatura que tiene Prerrequisito).";
+            case -5:    return "El diaSemana introducido no es válido.";
+            case -4:    return "La franja horaria introducida no es válida.";
+            case -3:    return "No existe el TipoClase dado.";
+            case -2:    return "No existe Asignatura con la id dada.";
+            case -1:    return "No existe Nivel con el nombre dado.";
+            case 0:     return "Se ha añadido NivelHora correctamente.";
+            case 1:     return "Se ha eliminado NivelHora correctamente.";
+            case 2:     return "Se ha añadido Sesion correctamente.";
+            case 3:     return "Se ha eliminado Sesion correctamente.";
+            case 4:     return "Se ha añadido FranjaAsignatura correctamente.";
+            case 5:     return "Se ha eliminado FranjaAsignatura correctamente.";
+            case 6:     return "Se ha añadido FranjaNivel correctamente.";
+            case 7:     return "Se ha eliminado FranjaNivel correctamente.";
+            case 8:     return "Se ha añadido FranjaTrabajo correctamente.";
+            case 9:     return "Se ha eliminado FranjaTrabajo correctamente.";
+            case 10:    return "Se ha añadido DiaLibre correctamente.";
+            case 11:    return "Se ha eliminado DiaLibre correctamente.";
+            case 12:    return "Se ha añadido Prerrequisito correctamente.";
+            case 13:    return "Se ha eliminado Prerrequisito correctamente.";
+            case 14:    return "Se ha añadido Correquisito correctamente.";
+            case 15:    return "Se ha eliminado Correquisito correctamente.";
+            case 16:    return "Se ha añadido Nivel correctamente.";
+            case 17:    return "Se ha eliminado Nivel correctamente.";
+            case 18:    return "Se ha añadido Grupo correctamente.";
+            case 19:    return "Se ha eliminado Grupo correctamente.";
+            case 20:    return "Se ha añadido SubGrupo correctamente.";
+            case 21:    return "Se ha eliminado SubGrupo correctamente.";
+            case 22:    return "Se ha añadido Asignatura correctamente.";
+            case 23:    return "Se ha eliminado Asignatura correctamente.";
+            case 24:    return "Se ha añadido Aula correctamente.";
+            case 25:    return "Se ha eliminado Aula correctamente.";
+            default:    return "codigoResultado no válido.";
+        }
+    }
+
+    /**
      * Añade una NivelHora a planEstudios.
      * @param nombreNivel   nombre del Nivel involucrado.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addNivelHora(String nombreNivel) {
+    public int addNivelHora(String nombreNivel) {
         if (!(this.planEstudios.tieneNivel(nombreNivel))) {
-            return new ReturnSet(false, "No existe Nivel con el nombre dado.");
+            return -1;
         }
         this.addNivelHora(new NivelHora(this.planEstudios.getNivel(nombreNivel)));
-        return new ReturnSet(true, "Se ha añadido NivelHora correctamente.");
+        return 0;
     }
 
     /**
@@ -177,15 +238,15 @@ public class CtrlDomain {
     /**
      * Elimina un NivelHora.
      * @param nombreNivel   nombre del Nivel involucrado.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarNivelHora(String nombreNivel) {
+    public int eliminarNivelHora(String nombreNivel) {
         if (!(this.planEstudios.tieneNivel(nombreNivel))) {
-            return new ReturnSet(false, "No existe Nivel con el nombre dado.");
+            return -1;
         }
         this.planEstudios.eliminarNivelHora(nombreNivel);
         this.planEstudios.getNivel(nombreNivel).eliminarNivelHora();
-        return new ReturnSet(true, "NivelHora eliminado correctamente.");
+        return 1;
     }
 
     /**
@@ -193,17 +254,17 @@ public class CtrlDomain {
      * @param duracion      horas que dura la Sesion.
      * @param tipo          TipoClase de la Sesion.
      * @param idAsignatura  id de la Asignatura de la Sesion.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addSesion(int duracion, String tipo, String idAsignatura) {
+    public int addSesion(int duracion, String tipo, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura con la id dada.");
+            return -2;
         }
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
-            return new ReturnSet(false, "El tipo dado no es válido.");
+            return -3;
         }
         this.planEstudios.getAsignatura(idAsignatura).addSesion(new Sesion(duracion, TipoClase.valueOf(tipo), this.planEstudios.getAsignatura(idAsignatura)));
-        return new ReturnSet(true, "Se ha añadido la Sesion correctamente.");
+        return 2;
     }
 
     /**
@@ -211,14 +272,14 @@ public class CtrlDomain {
      * @param duracion      horas que dura la Sesion.
      * @param tipo          TipoClase de la Sesion.
      * @param idAsignatura  id de la Asignatura de la Sesion.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarSesion(int duracion, String tipo, String idAsignatura) {
+    public int eliminarSesion(int duracion, String tipo, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura con la id dada.");
+            return -2;
         }
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
-            return new ReturnSet(false, "El tipo dado no es válido.");
+            return -3;
         }
         ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
         boolean found = false;
@@ -228,30 +289,30 @@ public class CtrlDomain {
                 sesiones.remove(i);
             }
         }
-        return new ReturnSet(true, "Se ha eliminado la Sesion correctamente.");
+        return 3;
     }
 
     /**
      * Añade una FranjaAsignatura a planEstudios.
-     * @param   idAsignatura id de la Asignatura afectada.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura  id de la Asignatura afectada.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
+    public int addFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura dada.");
+            return -2;
         }
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.addFranjaAsignatura(new FranjaAsignatura(this.planEstudios.getAsignatura(idAsignatura), horaIni, horaFin));
-        return new ReturnSet(true, "Se ha añadido FranjaAsignatura correctamente.");
+        return 4;
     }
 
     /**
      * Añade una FranjaAsignatura a planEstudios.
-     * @param   franjaAsignatura FranjaAsignatura que se quiere añadir.
+     * @param franjaAsignatura  FranjaAsignatura que se quiere añadir.
      */
     private void addFranjaAsignatura(FranjaAsignatura franjaAsignatura) {
         this.planEstudios.addAllRestriccion(franjaAsignatura);
@@ -260,44 +321,44 @@ public class CtrlDomain {
 
     /**
      * Elimina una FranjaAsignatura de planEstudios.
-     * @param   idAsignatura id de la Asignatura afectada.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura  id de la Asignatura afectada.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
+    public int eliminarFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura dada.");
+            return -2;
         }
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.planEstudios.eliminarFranjaAsignatura(idAsignatura, horaIni, horaFin);
         this.planEstudios.getAsignatura(idAsignatura).eliminarFranjaAsignatura(horaIni, horaFin);
-        return new ReturnSet(true, "Se ha eliminado FranjaAsignatura.");
+        return 5;
     }
 
     /**
      * Añade una FranjaNivel a planEstudios.
-     * @param   nombreNivel nombre del Nivel afectado.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param nombreNivel   nombre del Nivel afectado.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
+    public int addFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
         if (!(this.planEstudios.tieneNivel(nombreNivel))) {
-            return new ReturnSet(false, "No existe el Nivel dado.");
+            return -1;
         }
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.addFranjaNivel(new FranjaNivel(this.planEstudios.getNivel(nombreNivel), horaIni, horaFin));
-        return new ReturnSet(true, "Se ha añadido FranjaNivel correctamente.");
+        return 6;
     }
 
     /**
      * Añade una FranjaNivel a planEstudios.
-     * @param   franjaNivel FranjaNivel que se quiere añadir.
+     * @param franjaNivel   FranjaNivel que se quiere añadir.
      */
     private void addFranjaNivel(FranjaNivel franjaNivel) {
         this.planEstudios.addAllRestriccion(franjaNivel);
@@ -306,40 +367,40 @@ public class CtrlDomain {
 
     /**
      * Elimina una FranjaNivel de planEstudios.
-     * @param   nombreNivel nombre del Nivel afectado.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param nombreNivel   nombre del Nivel afectado.
+     * @param horaIni       hora de inicio de la franja.
+     * @param horaFin       hora de fin de la franja.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
+    public int eliminarFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
         if (!(this.planEstudios.tieneNivel(nombreNivel))) {
-            return new ReturnSet(false, "No existe el Nivel dado.");
+            return -1;
         }
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.planEstudios.eliminarFranjaNivel(nombreNivel, horaIni, horaFin);
         this.planEstudios.getNivel(nombreNivel).eliminarFranjaNivel(horaIni, horaFin);
-        return new ReturnSet(true, "Se ha eliminado FranjaNivel.");
+        return 7;
     }
 
     /**
      * Añade una FranjaTrabajo a planEstudios.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param horaIni   hora de inicio de la franja.
+     * @param horaFin   hora de fin de la franja.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet addFranjaTrabajo(int horaIni, int horaFin) {
+    public int addFranjaTrabajo(int horaIni, int horaFin) {
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.addFranjaTrabajo(new FranjaTrabajo(horaIni, horaFin));
-        return new ReturnSet(true, "Se ha añadido FranjaTrabajo correctamente.");
+        return 8;
     }
 
     /**
      * Añade una FranjaTrabajo a planEstudios.
-     * @param   franjaTrabajo FranjaTrabajo que se quiere añadir.
+     * @param franjaTrabajo FranjaTrabajo que se quiere añadir.
      */
     private void addFranjaTrabajo(FranjaTrabajo franjaTrabajo) {
         this.planEstudios.addAllRestriccion(franjaTrabajo);
@@ -348,31 +409,34 @@ public class CtrlDomain {
 
     /**
      * Elimina una FranjaTrabajo de planEstudios.
-     * @param   horaIni hora de inicio de la franja.
-     * @param   horaFin hora de fin de la franja.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param horaIni   hora de inicio de la franja.
+     * @param horaFin   hora de fin de la franja.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet eliminarFranjaTrabajo(int horaIni, int horaFin) {
+    public int eliminarFranjaTrabajo(int horaIni, int horaFin) {
         if (horaIni < 0 || horaFin > 24) {
-            return new ReturnSet(false, "La franja horaria introducida no es válida.");
+            return -4;
         }
         this.planEstudios.eliminarFranjaTrabajo(horaIni, horaFin);
-        return new ReturnSet(true, "Se ha eliminado FranjaTrabajo.");
+        return 9;
     }
 
     /**
      * Añade un DiaLibre a planEstudios.
-     * @param   diaSemana dia de la semana del DiaLibre que se quiere añadir.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param diaSemana dia de la semana del DiaLibre que se quiere añadir.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet addDiaLibre(int diaSemana) {
+    public int addDiaLibre(int diaSemana) {
+        if (diaSemana < 1 || diaSemana > 7) {
+            return -5;
+        }
         this.addDiaLibre(new DiaLibre(diaSemana));
-        return new ReturnSet(true, "Se ha añadido el diaLibre correctamente.");
+        return 10;
     }
 
     /**
      * Añade un DiaLibre a planEstudios.
-     * @param   diaLibre DiaLibre que se quiere añadir.
+     * @param diaLibre  DiaLibre que se quiere añadir.
      */
     private void addDiaLibre(DiaLibre diaLibre) {
         this.planEstudios.addRestriccion(diaLibre);
@@ -381,30 +445,33 @@ public class CtrlDomain {
 
     /**
      * Elimina un DiaLibre de planEstudios.
-     * @param   diaSemana diaSemana del DiaLibre que se quiere eliminar.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param diaSemana diaSemana del DiaLibre que se quiere eliminar.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet eliminarDiaLibre(int diaSemana) {
+    public int eliminarDiaLibre(int diaSemana) {
+        if (diaSemana < 1 || diaSemana > 7) {
+            return -5;
+        }
         this.planEstudios.eliminarDiaLibre(diaSemana);
-        return new ReturnSet(true, "Se ha eliminado el diaLibre correctamente.");
+        return 11;
     }
 
     /**
      * Añade un Prerrequisito a planEstudios.
-     * @param   idAsignatura id de Asignatura de que tiene el Correquisito.
-     * @param   idPrerrequisito id de Asignatura que es Prerrequisito.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura      id de Asignatura de que tiene el Correquisito.
+     * @param idPrerrequisito   id de Asignatura que es Prerrequisito.
+     * @return                  codigoResultado de la operación.
      */
-    public ReturnSet addPrerrequisito(String idAsignatura, String idPrerrequisito) {
+    public int addPrerrequisito(String idAsignatura, String idPrerrequisito) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura + '.');
+            return -6;
         }
         if (!(this.planEstudios.tieneAsignatura(idPrerrequisito))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idPrerrequisito + '.');
+            return -7;
         }
         Prerrequisito prerrequisito = new Prerrequisito(this.planEstudios.getAsignatura(idAsignatura), this.planEstudios.getAsignatura(idPrerrequisito));
         this.addPrerrequisito(prerrequisito);
-        return new ReturnSet(true, "Prerrequisito añadido correctamente.");
+        return 12;
     }
 
     /**
@@ -418,38 +485,38 @@ public class CtrlDomain {
 
     /**
      * Elimina un Prerrequisito de planEstudios.
-     * @param   idAsignatura id de Asignatura de que tiene el Correquisito.
-     * @param   idPrerrequisito id de Asignatura que es Prerrequisito.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura      id de Asignatura de que tiene el Correquisito.
+     * @param idPrerrequisito   id de Asignatura que es Prerrequisito.
+     * @return                  codigoResultado de la operación.
      */
-    public ReturnSet eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
+    public int eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura + '.');
+            return -6;
         }
         if (!(this.planEstudios.tieneAsignatura(idPrerrequisito))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idPrerrequisito + '.');
+            return -7;
         }
         this.planEstudios.eliminarPrerrequisito(idAsignatura, idPrerrequisito);
         this.planEstudios.getAsignatura(idAsignatura).eliminarPrerrequisito(idPrerrequisito);
-        return new ReturnSet(true, "Se ha eliminado el Prerrequisito.");
+        return 13;
     }
 
     /**
      * Añade un Correquisito a planEstudios.
-     * @param   idAsignatura1 id de Asignatura de Correquisito.
-     * @param   idAsignatura2 id de Asignatura de Correquisito.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura1 id de Asignatura de Correquisito.
+     * @param idAsignatura2 id de Asignatura de Correquisito.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addCorrequisito(String idAsignatura1, String idAsignatura2) {
+    public int addCorrequisito(String idAsignatura1, String idAsignatura2) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura1))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura1 + '.');
+            return -2;
         }
         if (!(this.planEstudios.tieneAsignatura(idAsignatura2))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura2 + '.');
+            return -2;
         }
         Correquisito correquisito = new Correquisito(this.planEstudios.getAsignatura(idAsignatura1), this.planEstudios.getAsignatura(idAsignatura2));
         this.addCorrequisito(correquisito);
-        return new ReturnSet(true, "Correquisito añadido correctamente.");
+        return 14;
     }
 
     /**
@@ -464,167 +531,131 @@ public class CtrlDomain {
 
     /**
      * Elimina un Correquisito de planEstudios.
-     * @param   idAsignatura1 id de Asignatura de Correquisito.
-     * @param   idAsignatura2 id de Asignatura de Correquisito.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param idAsignatura1 id de Asignatura de Correquisito.
+     * @param idAsignatura2 id de Asignatura de Correquisito.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
+    public int eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura1))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura1 + '.');
+            return -2;
         }
         if (!(this.planEstudios.tieneAsignatura(idAsignatura2))) {
-            return new ReturnSet(false, "No existe la Asignatura con id " + idAsignatura2 + '.');
+            return -2;
         }
         this.planEstudios.getAsignatura(idAsignatura1).eliminarCorrequisito(idAsignatura1, idAsignatura2);
         this.planEstudios.getAsignatura(idAsignatura2).eliminarCorrequisito(idAsignatura1, idAsignatura2);
         this.planEstudios.eliminarCorrequisito(idAsignatura1, idAsignatura2);
-        return new ReturnSet(true, "Se ha eliminado el Correquisito.");
+        return 15;
     }
 
     /**
      * Añade un Nivel a planEstudios.
-     * @param   nombre nombre que se quiere dar al Nivel añadido.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param nombre    nombre que se quiere dar al Nivel añadido.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet addNivel(String nombre) {
+    public int addNivel(String nombre) {
         if (this.planEstudios.tieneNivel(nombre)) {
-            return new ReturnSet(false, "Ya existe un Nivel con el nombre dado.");
+            return -8;
         }
         this.planEstudios.addNivel(new Nivel(nombre));
-        return new ReturnSet(true, "Se ha añadido el Nivel");
+        return 16;
     }
 
     /**
      * Elimina un Nivel de planEstudios.
-     * @param   nombre Nombre del Nivel a eliminar.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param nombre    Nombre del Nivel a eliminar.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet eliminarNivel(String nombre) {
+    public int eliminarNivel(String nombre) {
         if (!(this.planEstudios.tieneNivel(nombre))) {
-            return new ReturnSet(false, "No existe el Nivel que se quiere eliminar.");
+            return -1;
         }
         for (Map.Entry<String, Asignatura> entry : this.planEstudios.getNivel(nombre).getAsignaturas().entrySet()) {
             entry.getValue().setNivel(null);
         }
         this.planEstudios.eliminarNivel(nombre);
-        return new ReturnSet(true, "Se ha eliminado el Nivel.");
-    }
-
-    /**Devuelve una ArrayList con los nombres de todos los Niveles.
-     * @return  nombres de todos los Niveles.
-     */
-    public ArrayList<String> getAllNombresNivel() {
-        ArrayList<String> nombres = new ArrayList<String>();
-        Map<String, Nivel> niveles = this.planEstudios.getNiveles();
-        for (Map.Entry<String, Nivel> entry : niveles.entrySet()) {
-            nombres.add(entry.getValue().getNombre());
-        }
-        return nombres;
+        return 17;
     }
 
     /**
      * Añade una Asignatura a planEstudios.
-     * @param   id id que se quiere dar a la Asignatura añadida.
-     * @param   nombre nombre que se quiere dar a la Asignatura añadida.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id        id que se quiere dar a la Asignatura añadida.
+     * @param nombre    nombre que se quiere dar a la Asignatura añadida.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet addAsignatura(String id, String nombre) {
+    public int addAsignatura(String id, String nombre) {
         if (this.planEstudios.tieneAsignatura(id)) {
-            return new ReturnSet(false, "Ya existe una Asignatura con la id dada.");
+            return -9;
         }
         this.planEstudios.addAsignatura(new Asignatura(id, nombre, this.planEstudios));
-        return new ReturnSet(true, "Se ha añadido la Asignatura");
+        return 22;
     }
 
     /**
      * Añade una Asignatura a planEstudios y la asocia a un Nivel existente.
-     * @param   id id que se quiere dar a la Asignatura añadida.
-     * @param   nombre nombre que se quiere dar a la Asignatura añadida.
-     * @param   nombreNivel nombre del nivel al que se quiere asociar la Asignatura.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id            id que se quiere dar a la Asignatura añadida.
+     * @param nombre        nombre que se quiere dar a la Asignatura añadida.
+     * @param nombreNivel   nombre del nivel al que se quiere asociar la Asignatura.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addAsignatura(String id, String nombre, String nombreNivel) {
+    public int addAsignatura(String id, String nombre, String nombreNivel) {
         if (this.planEstudios.tieneAsignatura(id)) {
-            return new ReturnSet(false, "Ya existe una Asignatura con la id dada.");
+            return -9;
         }
         if (!(this.planEstudios.tieneNivel(nombreNivel))) {
-            return new ReturnSet(false, "No existe un Nivel con el nombre dado.");
+            return -1;
         }
         this.planEstudios.addAsignatura(new Asignatura(id, nombre, this.planEstudios, this.planEstudios.getNivel(nombreNivel)));
-        return new ReturnSet(true, "Se ha añadido la Asignatura");
+        return 22;
     }
 
     /**
      * Elimina una Asignatura de planEstudios.
-     * @param   id id dela Asignatura a eliminar.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id    id dela Asignatura a eliminar.
+     * @return      codigoResultado de la operación.
      */
-    public ReturnSet eliminarAsignatura(String id) {
+    public int eliminarAsignatura(String id) {
         if (!(this.planEstudios.tieneAsignatura(id))) {
-            return new ReturnSet(false, "No existe la Asignatura que se quiere eliminar.");
+            return -2;
         }
         this.planEstudios.eliminarAsignatura(id);
         if (this.planEstudios.getAsignatura(id).tieneNivel()) {
             this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
         }
-        return new ReturnSet(true, "Se ha eliminado la Asignatura.");
-    }
-
-    /**Devuelve una ArrayList con los nombres de todas las Asignaturas.
-     * @return  nombres de todas las Asignaturas.
-     */
-    public ArrayList<String> getAllNombresAsignatura() {
-        ArrayList<String> nombres = new ArrayList<String>();
-        Map<String, Asignatura> asignaturas = this.planEstudios.getAsignaturas();
-        for (Map.Entry<String, Asignatura> entry : asignaturas.entrySet()) {
-            nombres.add(entry.getValue().getNombre());
-        }
-        return nombres;
-    }
-
-    /**Devuelve una ArrayList con las id de todas las Asignaturas.
-     * @return  id de todas las Asignaturas.
-     */
-    public ArrayList<String> getAllIdsAsignatura() {
-        ArrayList<String> ids = new ArrayList<String>();
-        Map<String, Asignatura> asignaturas = this.planEstudios.getAsignaturas();
-        for (Map.Entry<String, Asignatura> entry : asignaturas.entrySet()) {
-            ids.add(entry.getValue().getId());
-        }
-        return ids;
+        return 23;
     }
 
     /**
      * Añade un Grupo a una Asignatura de planEstudios.
-     * @param   id id que se quiere dar al Grupo añadido.
-     * @param   idAsignatura id de la Asignatura a la que se quiere asociar el Grupo.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id            id que se quiere dar al Grupo añadido.
+     * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addGrupo(String id, String idAsignatura) {
+    public int addGrupo(String id, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe una Asignatura con la id dada.");
+            return -2;
         }
         if (this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id)) {
-            return new ReturnSet(false, idAsignatura + "ya tiene un Grupo con el nombre dado.");
+            return -10;
         }
         this.planEstudios.getAsignatura(idAsignatura).addGrupo(new Grupo(id, this.planEstudios.getAsignatura(idAsignatura)));
-        return new ReturnSet(true, "Se ha añadido el Grupo");
+        return 18;
     }
 
     /**
      * Elimina un Grupo de planEstudios.
-     * @param   id id del Grupo a eliminar.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id    id del Grupo a eliminar.
+     * @return      codigoResultado de la operación.
      */
-    public ReturnSet eliminarGrupo(String id, String idAsignatura) {
+    public int eliminarGrupo(String id, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe una Asignatura con la id dada.");
+            return -2;
         }
         if (!(this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id))) {
-            return new ReturnSet(false, idAsignatura + "no tiene un Grupo con el nombre dado.");
+            return -12;
         }
         this.planEstudios.getAsignatura(idAsignatura).eliminarGrupo(id);
-        return new ReturnSet(true, "Se ha eliminado el Grupo.");
+        return 19;
     }
 
     /**
@@ -634,23 +665,23 @@ public class CtrlDomain {
      * @param tipo          TipoClase del SubGrupo.
      * @param idGrupo       id del Grupo al que se quiere asociar el SubGrupo.
      * @param idAsignatura  id de la Asignatura a la que se quiere asociar el SubGrupo.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet addSubGrupo(String id, int plazas, String tipo, String idGrupo, String idAsignatura) {
+    public int addSubGrupo(String id, int plazas, String tipo, String idGrupo, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe una Asignatura con la id dada.");
+            return -2;
         }
         if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo)) {
-            return new ReturnSet(false, idAsignatura + "No tiene un Grupo con el nombre dado.");
+            return -12;
         }
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
-            return new ReturnSet(false, "El tipo no es válido.");
+            return -3;
         }
         if (this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id)) {
-            return new ReturnSet(false, "Ya hay un SubGrupo con la id dada.");
+            return -11;
         }
         this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).addSubGrupo(new SubGrupo(id, plazas, TipoClase.Laboratorio.valueOf(tipo), this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo)));
-        return new ReturnSet(true, "Se ha añadido el SubGrupo");
+        return 20;
     }
 
     /**
@@ -658,35 +689,35 @@ public class CtrlDomain {
      * @param id            id del SubGrupo a eliminar.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @param idGrupo       id del Grupo del SubGrupo.
-     * @return              ReturnSet informando de lo que se ha hecho.
+     * @return              codigoResultado de la operación.
      */
-    public ReturnSet eliminarSubGrupo(String id, String tipo, String idGrupo, String idAsignatura) {
+    public int eliminarSubGrupo(String id, String tipo, String idGrupo, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
-            return new ReturnSet(false, "No existe una Asignatura con la id dada.");
+            return -2;
         }
         if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo)) {
-            return new ReturnSet(false, idAsignatura + "No tiene un Grupo con el nombre dado.");
+            return -12;
         }
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
-            return new ReturnSet(false, "El tipo no es válido.");
+            return -3;
         }
         if (!(this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id))) {
-            return new ReturnSet(false, "No hay un SubGrupo con la id dada.");
+            return -13;
         }
         this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).eliminarSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString());
-        return new ReturnSet(true, "Se ha eliminado el SubGrupo.");
+        return 21;
     }
 
     /**
      * Añade un Aula de planEstudios.
-     * @param   id id que se quiere dar a la Aula añadida.
-     * @param   plazas número de plazas que tendrá el Aula añadida.
-     * @param   tipos TiposClase con los que es compatible el Aula añadida.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id        id que se quiere dar a la Aula añadida.
+     * @param plazas    número de plazas que tendrá el Aula añadida.
+     * @param tipos     TiposClase con los que es compatible el Aula añadida.
+     * @return          codigoResultado de la operación.
      */
-    public ReturnSet addAula(String id, int plazas, String[] tipos) {
+    public int addAula(String id, int plazas, String[] tipos) {
         if (this.planEstudios.tieneAula(id)) {
-            return new ReturnSet(false, "Ya existe un Aula con el id dado.");
+            return -15;
         }
         ArrayList<TipoClase> t = new ArrayList<TipoClase>();
         for (int i = 0; i < tipos.length; ++i) {
@@ -700,36 +731,24 @@ public class CtrlDomain {
                 t.add(TipoClase.Problemas);
             }
             else {
-                return new ReturnSet(false, "Se ha intentado añadir un tipo no válido.");
+                return -3;
             }
         }
         this.planEstudios.addAula(new Aula(id, plazas, t));
-        return new ReturnSet(true, "Se ha añadido el Aula");
+        return 24;
     }
 
     /**
      * Elimina un Aula de planEstudios.
-     * @param   id id del Aula a eliminar.
-     * @return  ReturnSet informando de lo que se ha hecho.
+     * @param id    id del Aula a eliminar.
+     * @return      codigoResultado de la operación.
      */
-    public ReturnSet eliminarAula(String id) {
+    public int eliminarAula(String id) {
         if (!(this.planEstudios.tieneAula(id))) {
-            return new ReturnSet(false, "No existe el Aula que se quiere eliminar.");
+            return -14;
         }
         this.planEstudios.eliminarAula(id);
-        return new ReturnSet(true, "Se ha eliminado el Aula.");
-    }
-
-    /**Devuelve una ArrayList con los nombres de todas las Aulas.
-     * @return  nombres de todas las Aulas.
-     */
-    public ArrayList<String> getAllIdsAula() {
-        ArrayList<String> ids = new ArrayList<String>();
-        Map<String, Aula> aulas = this.planEstudios.getAulas();
-        for (Map.Entry<String, Aula> entry : aulas.entrySet()) {
-            ids.add(entry.getValue().getId());
-        }
-        return ids;
+        return 25;
     }
 
     /**

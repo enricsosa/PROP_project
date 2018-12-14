@@ -27,6 +27,7 @@ public class Prerrequisito extends Restriccion {
     public Prerrequisito(Asignatura asignatura, Asignatura prerrequisito) {
         this.asignatura = asignatura;
         this.prerrequisito = prerrequisito;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/

@@ -23,6 +23,7 @@ public class DiaLibre extends Restriccion {
      */
     public DiaLibre(Integer dia) {
         this.dia = dia;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/
@@ -66,9 +67,12 @@ public class DiaLibre extends Restriccion {
      */
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
-        if (this.dia != dia) return true;
-        //System.out.println("Falla DiaLibre");
-        return false;
+        if (this.getActiva()) {
+            if (this.dia != dia) return true;
+            //System.out.println("Falla DiaLibre");
+            return false;
+        }
+        return true;
     }
 
     /**

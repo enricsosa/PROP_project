@@ -27,6 +27,7 @@ public class NivelHora extends Restriccion {
      */
     public NivelHora(Nivel nivel) {
         this.nivel = nivel;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/
@@ -70,17 +71,20 @@ public class NivelHora extends Restriccion {
      */
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
-        for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {
-            for (Map.Entry<String, Grupo> entry : horario.getHora(dia,hora).getGrupos().entrySet()) {
-                if (entry.getValue().getId().equals(clase.getGrupo().getId())) {
-                    if (entry.getValue().tieneNivel()) {
-                        if ((entry.getValue().getNivel() == clase.getNivel()) && (entry.getValue().getAsignatura() != clase.getAsignatura())) {
-                            //System.out.println("Falla NivelHora");
-                            return false;
+        if (this.getActiva()) {
+            for (int hora = horaIni; hora < (horaIni + clase.getDuracion()); ++hora) {
+                for (Map.Entry<String, Grupo> entry : horario.getHora(dia, hora).getGrupos().entrySet()) {
+                    if (entry.getValue().getId().equals(clase.getGrupo().getId())) {
+                        if (entry.getValue().tieneNivel()) {
+                            if ((entry.getValue().getNivel() == clase.getNivel()) && (entry.getValue().getAsignatura() != clase.getAsignatura())) {
+                                //System.out.println("Falla NivelHora");
+                                return false;
+                            }
                         }
                     }
                 }
             }
+            return true;
         }
         return true;
     }

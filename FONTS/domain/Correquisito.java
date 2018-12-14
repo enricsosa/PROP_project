@@ -27,6 +27,7 @@ public class Correquisito extends Restriccion {
     public Correquisito(Asignatura asignatura1, Asignatura asignatura2) {
         this.asignatura1 = asignatura1;
         this.asignatura2 = asignatura2;
+        this.setActiva(true);
     }
 
     /**Métodos públicos*/
@@ -99,15 +100,18 @@ public class Correquisito extends Restriccion {
      */
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
-        if (!(this.tieneAsignatura(clase.getAsignatura()))) return true;
-        Asignatura target;
-        if (this.getIndex(clase.getAsignatura()) == 1) target = asignatura2;
-        else target = asignatura1;
-        for (int hora = horaIni; hora < horaIni + clase.getDuracion(); ++hora) {
-            if (horario.getHora(dia, hora).tieneGrupo(target, clase.getGrupo())) {
-                //System.out.println("Falla Correquisito");
-                return false;
+        if (this.getActiva()) {
+            if (!(this.tieneAsignatura(clase.getAsignatura()))) return true;
+            Asignatura target;
+            if (this.getIndex(clase.getAsignatura()) == 1) target = asignatura2;
+            else target = asignatura1;
+            for (int hora = horaIni; hora < horaIni + clase.getDuracion(); ++hora) {
+                if (horario.getHora(dia, hora).tieneGrupo(target, clase.getGrupo())) {
+                    //System.out.println("Falla Correquisito");
+                    return false;
+                }
             }
+            return true;
         }
         return true;
     }
