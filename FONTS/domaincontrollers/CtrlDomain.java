@@ -1212,12 +1212,12 @@ public class CtrlDomain {
             franjaNivels.get(i).setActiva(fNBooleans.get(i));
         }
         ArrayList<Restriccion> correquisitos = allRestricciones.get(TipoRestriccion.Correquisito);
-        ArrayList<Boolean> cBooleans = restricciones.get("correquisito");
+        ArrayList<Boolean> cBooleans = restricciones.get("correquisitos");
         for (int i = 0; i < correquisitos.size(); ++i) {
             correquisitos.get(i).setActiva(cBooleans.get(i));
         }
         ArrayList<Restriccion> prerrequisitos = allRestricciones.get(TipoRestriccion.Prerrequisito);
-        ArrayList<Boolean> pBooleans = restricciones.get("prerrequisito");
+        ArrayList<Boolean> pBooleans = restricciones.get("prerrequisitos");
         for (int i = 0; i < prerrequisitos.size(); ++i) {
             prerrequisitos.get(i).setActiva(pBooleans.get(i));
         }
