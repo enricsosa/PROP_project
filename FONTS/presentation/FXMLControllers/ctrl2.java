@@ -16,6 +16,14 @@ public class ctrl2 {
     private CtrlDomain cd;
     private String currentEscenario;
 
+    private ArrayList<String> restrDL;
+    private ArrayList<String> restrFT;
+    private ArrayList<String> restrNH;
+    private ArrayList<String> restrCO;
+    private ArrayList<String> restrPRE;
+    private ArrayList<String> restrFA;
+    private ArrayList<String> restrFN;
+
     @FXML
     public Label escenario_label;
 
@@ -64,6 +72,14 @@ public class ctrl2 {
     }
 
     private TreeView<String> createTreeEscenario(String s) {
+        restrDL = new ArrayList<>();
+        restrFT = new ArrayList<>();
+        restrNH = new ArrayList<>();
+        restrCO = new ArrayList<>();
+        restrPRE = new ArrayList<>();
+        restrFA = new ArrayList<>();
+        restrFN = new ArrayList<>();
+
         TreeView<String> tree;
         TreeItem<String> root, planEstudios, asignaturas, aulas, restricciones;
         root = new TreeItem<>();
@@ -157,41 +173,45 @@ public class ctrl2 {
         ArrayList<Object> dLs = (ArrayList<Object>)restriccionesCD.get("diaLibre");
         for (Object dl : dLs) {
             doBranch(stringToDiaSemana(dl.toString()), diaLibre);
+            restrDL.add(dl.toString());
         }
 
         franjaTrabajo = doBranch("franjaTrabajo", restricciones);
         ArrayList<Object> horasTrabajo = (ArrayList<Object>)restriccionesCD.get("franjaTrabajo");
         doBranch("Hora inicial: " + horasTrabajo.get(0).toString() + "h", franjaTrabajo);
+        restrFT.add(horasTrabajo.get(0).toString());
         doBranch("Hora final: " + horasTrabajo.get(1).toString() + "h", franjaTrabajo);
+        restrFT.add(horasTrabajo.get(1).toString());
 
 
         nivelHora = doBranch("nivelHora", restricciones);
         ArrayList<Object> nHs = (ArrayList<Object>)restriccionesCD.get("nivelHora");
         for (Object nh : nHs) {
             doBranch(nh.toString(), nivelHora);
+            restrNH.add(nh.toString());
         }
-
 
         correquisitos = doBranch("correquisitos", restricciones);
         ArrayList<Object> corres = (ArrayList<Object>)restriccionesCD.get("correquisitos");
         for (Object co : corres) {
             doBranch(co.toString(), correquisitos);
+            restrCO.add(co.toString());
         }
-
 
         prerrequisitos = doBranch("prerrequisitos", restricciones);
         ArrayList<Object> pres = (ArrayList<Object>)restriccionesCD.get("prerrequisitos");
         for (Object pr : pres) {
             String strPre = pr.toString();
+            restrPRE.add(pr.toString());
             strPre = strPre.replace(",", ", Prerrequisito: ");
             doBranch(strPre, prerrequisitos);
         }
-
 
         franjaAsignatura = doBranch("franjaAsignatura", restricciones);
         ArrayList<Object> frAsigs = (ArrayList<Object>)restriccionesCD.get("franjaAsignatura");
         for (Object fa : frAsigs) {
             String faS = fa.toString();
+            restrFA.add(faS);
             String id = faS.substring(faS.indexOf("[")+1, faS.indexOf(","));
             TreeItem<String> idAsig = doBranch(id, franjaAsignatura);
 
@@ -207,6 +227,7 @@ public class ctrl2 {
         ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesCD.get("franjaNivel");
         for (Object fn : frNiveles) {
             String fnS = fn.toString();
+            restrFN.add(fnS);
             String id = fnS.substring(fnS.indexOf("[")+1, fnS.indexOf(","));
             TreeItem<String> idNivel = doBranch(id, franjaNivel);
 
@@ -240,6 +261,7 @@ public class ctrl2 {
             System.out.println("ERROR: LECTURA DEL ESCENARIO FALLIDA");
         }
         setRestricciones sR = setRestricciones.getInstance();
+        sR.setAllRestricciones(restrDL, restrFT, restrNH, restrCO, restrPRE, restrFA, restrFN);
         sR.display(currentEscenario);
     }
 

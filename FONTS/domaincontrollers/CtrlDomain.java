@@ -1161,6 +1161,12 @@ public class CtrlDomain {
         else return "false";
     }
 
+    public String genHorarioDynamicRestrictions (String id, HashMap<String, ArrayList<Boolean>> restricciones) {
+        //...
+        System.out.println(restricciones);
+        return "";
+    }
+
     /**
      * Genera una instancia de CtrlHorario con los datos de CtrlDominio.
      * @return  Instancia de CtrlHorario con los datos de CtrlDominio.
