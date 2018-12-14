@@ -1188,7 +1188,7 @@ public class CtrlDomain {
      * Activa o desactiva las Restricciones del escenario en función de un HashMap<String, ArrayList<Boolean>>.
      * @param restricciones Valores que se asignan al atributo activa de cada Restriccion.
      */
-    public void habilitarRestricciones (HashMap<String, ArrayList<Boolean>> restricciones) {
+    public void habilitarRestricciones(HashMap<String, ArrayList<Boolean>> restricciones) {
         Map<TipoRestriccion, ArrayList<Restriccion>> allRestricciones = this.planEstudios.getAllRestriccionesCategorizadas();
         System.out.println(restricciones);
         ArrayList<Restriccion> diaLibres = allRestricciones.get(TipoRestriccion.DiaLibre);

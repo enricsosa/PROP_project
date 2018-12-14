@@ -77,10 +77,10 @@ public class CtrlHorario {
         Integer horaIni = 0;
         Integer horaFin = 24;
         for (int i = 0; i < this.planEstudios.getRestricciones().size(); ++i) {
-            if (this.planEstudios.getRestriccion(i).getTipoRestriccion() == TipoRestriccion.DiaLibre) {
+            if (this.planEstudios.getRestriccion(i).getTipoRestriccion() == TipoRestriccion.DiaLibre && this.planEstudios.getRestriccion(i).getActiva()) {
                 this.limitacionesHorario.setDiaLibre(((DiaLibre)(this.planEstudios.getRestriccion(i))).getDia(), true);
             }
-            else if (this.planEstudios.getRestriccion(i).getTipoRestriccion() == TipoRestriccion.FranjaTrabajo) {
+            else if (this.planEstudios.getRestriccion(i).getTipoRestriccion() == TipoRestriccion.FranjaTrabajo && this.planEstudios.getRestriccion(i).getActiva()) {
                 this.limitacionesHorario.setHoraIni(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraIni());
                 this.limitacionesHorario.setHoraFin(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraFin());
             }
@@ -236,7 +236,7 @@ public class CtrlHorario {
             ArrayList<Restriccion> restricciones = clase.getNivel().getRestricciones();
             Boolean found = false;
             for (int i = 0; (i < restricciones.size()) && (!found); ++i) {
-                if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel) {
+                if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel && restricciones.get(i).getActiva()) {
                     found = true;
                     horaIni = Aux.max(horaIni, ((FranjaNivel)(restricciones.get(i))).getHoraIni());
                     horaFin = Aux.min(horaFin, ((FranjaNivel)(restricciones.get(i))).getHoraFin());
@@ -246,7 +246,7 @@ public class CtrlHorario {
         ArrayList<Restriccion> restricciones = clase.getAsignatura().getRestricciones();
         boolean found = false;
         for (int i = 0; (i < restricciones.size()) && (!found); ++i) {
-            if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaAsignatura) {
+            if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaAsignatura && restricciones.get(i).getActiva()) {
                 found = true;
                 horaIni = Aux.max(horaIni, ((FranjaAsignatura)(restricciones.get(i))).getHoraIni());
                 horaFin = Aux.min(horaFin, ((FranjaAsignatura)(restricciones.get(i))).getHoraFin());
