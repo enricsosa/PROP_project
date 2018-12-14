@@ -276,7 +276,7 @@ public class setRestricciones {
                         LVfranjaAsignatura.getSelectionModel().getSelectedItems(),
                         LVfranjaNivel.getSelectionModel().getSelectedItems());
                 try {
-                    String debug = cd.genHorarioDynamicRestrictions(nomH.getText(), restrCtrlD);
+                    cd.habilitarRestricciones(restrCtrlD);
 
                     this.horarioStr = cd.generarHorario(nomH.getText());
                     cd.writeHorario(horarioStr, nomH.getText());

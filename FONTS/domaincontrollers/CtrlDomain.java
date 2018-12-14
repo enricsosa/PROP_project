@@ -111,18 +111,17 @@ public class CtrlDomain {
     }
 
     /**
-     * Mueve una Asignacion de un Horario.
+     * Mueve una Asignacion de horarioActivo.
      * @param idAsignatura          id de la Asignatura de la Asignacion que se quiere mover.
      * @param idSubGrupoCompleta    idCompleta del SubGrupo de la Asignatura de la Asignacion que se quiere mover.
      * @param dia                   dia donde se encuentra la Asignacion que se quiere mover.
      * @param hora                  hora donde se encuentra la Asignacion que se quiere mover.
      * @param nuevoDia              dia la que se quiere mover la Asignacion.
      * @param nuevaHoraIni          hora la que se quiere mover la Asignacion.
-     * @return                      Devuelve un ReturnSet con un Boolean y un mensaje informando de si se ha podido mover
-     *                              la Asignacion, y si se ha podido, el Horario resultante.
+     * @return                      codigoResultado de la operación.
      */
-    public ReturnSet moverAsignacion(String idAsignatura, String idSubGrupoCompleta, int dia, int hora, int nuevoDia, int nuevaHoraIni) {
-        if (this.horarioActivo == null) return new ReturnSet(false, "No hay ningún Horario seleccionado.");
+    public int moverAsignacion(String idAsignatura, String idSubGrupoCompleta, int dia, int hora, int nuevoDia, int nuevaHoraIni) {
+        if (this.horarioActivo == null) return -20;
         Hora h = this.horarioActivo.getHora(dia, hora);
         boolean found = false;
         Asignacion asignacion = null;
@@ -132,24 +131,24 @@ public class CtrlDomain {
                 asignacion = entry.getValue();
             }
         }
-        if (!(found)) return new ReturnSet(false, "No se ha podido encontrar la Asignacion a mover.");
+        if (!(found)) return -19;
         Horario nuevoHorario = new Horario(this.horarioActivo);
         nuevoHorario.eliminarAsignacion(asignacion);
         Clase clase = asignacion.getClase();
         if (CtrlHorario.comprovarSubGrupoDia(clase, nuevoDia, nuevoHorario)
             || CtrlHorario.comprovarGrupoDia(clase, nuevoDia, nuevoHorario)) {
-            return new ReturnSet(false, "No se puede mover la Asignacion al dia indicado.");
+            return -18;
         }
         if (CtrlHorario.aulaOcupada(clase, nuevoDia, nuevaHoraIni, asignacion.getAula(), nuevoHorario)) {
-            return new ReturnSet(false, "No se puede mover la Asignacion a la hora indicada.");
+            return -18;
         }
         if (!(CtrlHorario.comprobarRestricciones(clase, nuevoDia, nuevaHoraIni, nuevoHorario))) {
-            return new ReturnSet(false, "No se puede mover la Asignacion a la hora indicada.");
+            return -17;
         }
         Asignacion nuevaAsignacion = new Asignacion(nuevaHoraIni, nuevoDia, asignacion.getAula(), clase);
         nuevoHorario.addAsignacion(nuevaAsignacion);
         this.horarioActivo = nuevoHorario;
-        return new ReturnSet(true, "Se ha podido mover la Asignacion", nuevoHorario);
+        return 26;
     }
 
     /**
@@ -168,7 +167,11 @@ public class CtrlDomain {
      */
     public static String getMensageOperacion(int codigoResultado) {
         switch (codigoResultado) {
-            case -15:   return "Ya existe Aula con la id dada.";
+            case -20:   return "No hay ningún Horario seleccionado.";
+            case -19:   return "No se ha podido encontrar la Asignacion a mover.";
+            case -18:   return "No se puede mover la Asignacion al dia indicado.";
+            case -17:   return "No se puede mover la Asignacion a la hora indicada.";
+            case -16:   return "Ya existe Aula con la id dada.";
             case -14:   return "No existe Aula con el nombre dado.";
             case -13:   return "No existe SubGrupo con la id dada en el Grupo indicado.";
             case -12:   return "No existe Grupo con la id dada en la Asignatura indicado.";
@@ -209,6 +212,7 @@ public class CtrlDomain {
             case 23:    return "Se ha eliminado Asignatura correctamente.";
             case 24:    return "Se ha añadido Aula correctamente.";
             case 25:    return "Se ha eliminado Aula correctamente.";
+            case 26:    return "Se ha podido mover la Asignacion correctamente.";
             default:    return "codigoResultado no válido.";
         }
     }
@@ -1180,10 +1184,48 @@ public class CtrlDomain {
         else return "false";
     }
 
-    public String genHorarioDynamicRestrictions (String id, HashMap<String, ArrayList<Boolean>> restricciones) {
-        //...
+    /**
+     * Activa o desactiva las Restricciones del escenario en función de un HashMap<String, ArrayList<Boolean>>.
+     * @param restricciones Valores que se asignan al atributo activa de cada Restriccion.
+     */
+    public void habilitarRestricciones (HashMap<String, ArrayList<Boolean>> restricciones) {
+        Map<TipoRestriccion, ArrayList<Restriccion>> allRestricciones = this.planEstudios.getAllRestriccionesCategorizadas();
         System.out.println(restricciones);
-        return "";
+        ArrayList<Restriccion> diaLibres = allRestricciones.get(TipoRestriccion.DiaLibre);
+        ArrayList<Boolean> dLBooleans = restricciones.get("diaLibre");
+        for (int i = 0; i < diaLibres.size(); ++i) {
+            diaLibres.get(i).setActiva(dLBooleans.get(i));
+        }
+        ArrayList<Restriccion> franjaTrabajos = allRestricciones.get(TipoRestriccion.FranjaTrabajo);
+        ArrayList<Boolean> fTBooleans = restricciones.get("franjaTrabajo");
+        for (int i = 0; i < franjaTrabajos.size(); ++i) {
+            franjaTrabajos.get(i).setActiva(fTBooleans.get(i));
+        }
+        ArrayList<Restriccion> franjaAsignaturas = allRestricciones.get(TipoRestriccion.FranjaAsignatura);
+        ArrayList<Boolean> fABooleans = restricciones.get("franjaAsignatura");
+        for (int i = 0; i < franjaAsignaturas.size(); ++i) {
+            franjaAsignaturas.get(i).setActiva(fABooleans.get(i));
+        }
+        ArrayList<Restriccion> franjaNivels = allRestricciones.get(TipoRestriccion.FranjaNivel);
+        ArrayList<Boolean> fNBooleans = restricciones.get("franjaNivel");
+        for (int i = 0; i < franjaNivels.size(); ++i) {
+            franjaNivels.get(i).setActiva(fNBooleans.get(i));
+        }
+        ArrayList<Restriccion> correquisitos = allRestricciones.get(TipoRestriccion.Correquisito);
+        ArrayList<Boolean> cBooleans = restricciones.get("correquisito");
+        for (int i = 0; i < correquisitos.size(); ++i) {
+            correquisitos.get(i).setActiva(cBooleans.get(i));
+        }
+        ArrayList<Restriccion> prerrequisitos = allRestricciones.get(TipoRestriccion.Prerrequisito);
+        ArrayList<Boolean> pBooleans = restricciones.get("prerrequisito");
+        for (int i = 0; i < prerrequisitos.size(); ++i) {
+            prerrequisitos.get(i).setActiva(pBooleans.get(i));
+        }
+        ArrayList<Restriccion> nivelHoras = allRestricciones.get(TipoRestriccion.NivelHora);
+        ArrayList<Boolean> nHBooleans = restricciones.get("nivelHora");
+        for (int i = 0; i < nivelHoras.size(); ++i) {
+            nivelHoras.get(i).setActiva(nHBooleans.get(i));
+        }
     }
 
     /**

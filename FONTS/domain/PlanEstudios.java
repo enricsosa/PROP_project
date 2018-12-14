@@ -474,6 +474,26 @@ public class PlanEstudios {
     }
 
     /**
+     * Devuelve un Map con todas las Restricciones clasificadas por TipoRestriccion.
+     * @return  Map con todas las Restricciones clasificadas por TipoRestriccion.
+     */
+    public Map<TipoRestriccion, ArrayList<Restriccion>> getAllRestriccionesCategorizadas() {
+        Map<TipoRestriccion, ArrayList<Restriccion>> allRestriccionesCategorizadas = new HashMap<TipoRestriccion, ArrayList<Restriccion>>();
+        allRestriccionesCategorizadas.put(TipoRestriccion.DiaLibre, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.FranjaAsignatura, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.FranjaNivel, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.FranjaTrabajo, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.Correquisito, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.NivelHora, new ArrayList<Restriccion>());
+        allRestriccionesCategorizadas.put(TipoRestriccion.Prerrequisito, new ArrayList<Restriccion>());
+        for (int i = 0; i < this.allRestricciones.size(); ++i) {
+            Restriccion restriccion = this.allRestricciones.get(i);
+            allRestriccionesCategorizadas.get(restriccion.getTipoRestriccion()).add(restriccion);
+        }
+        return allRestriccionesCategorizadas;
+    }
+
+    /**
      * Dada su posicion en el conjunto de Restricciones de allRestricciones devuelve una Restriccion.
      * @param posicion  posicion en el conjunto de Restricciones de allRestricciones de la Restriccion que se quiere obtener.
      * @return          Restriccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de allRestricciones.
