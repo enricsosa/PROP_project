@@ -123,7 +123,10 @@ public class FranjaAsignatura extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Franja Asignatura:\n-Asignatura: " + this.asignatura.getId() + "\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni)
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return ("Franja Asignatura (" + activo + "):\n-Asignatura: " + this.asignatura.getId() + "\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni)
                 + "\n-Hora fin: " + Aux.getHoraCompleta(this.horaFin));
     }
 }

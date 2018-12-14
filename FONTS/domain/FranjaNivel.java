@@ -124,7 +124,10 @@ public class FranjaNivel extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Franja Nivel:\n-Nivel: " + this.nivel.getNombre() + "\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni)
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return ("Franja Nivel (" + activo + "):\n-Nivel: " + this.nivel.getNombre() + "\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni)
                 + "\n-Hora fin: " + Aux.getHoraCompleta(this.horaFin));
     }
 }

@@ -81,7 +81,10 @@ public class DiaLibre extends Restriccion {
      */
     @Override
     public String toString() {
-        return "Dia Libre: " + Aux.getNombreDia(this.dia);
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return "Dia Libre (" + activo + "): " + Aux.getNombreDia(this.dia);
     }
 
 }

@@ -95,7 +95,10 @@ public class NivelHora extends Restriccion {
      */
     @Override
     public String toString() {
-        return "Nivel hora: " + this.nivel.getNombre();
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return "Nivel hora (" + activo + "): " + this.nivel.getNombre();
     }
 
 }

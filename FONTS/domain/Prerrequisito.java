@@ -96,6 +96,9 @@ public class Prerrequisito extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Prerequisito:\n-Asignatura: " + this.asignatura.getId() + "\n-Prerrequisito: " + this.prerrequisito.getId());
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return ("Prerequisito (" + activo + "):\n-Asignatura: " + this.asignatura.getId() + "\n-Prerrequisito: " + this.prerrequisito.getId());
     }
 }

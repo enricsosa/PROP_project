@@ -1226,6 +1226,7 @@ public class CtrlDomain {
         for (int i = 0; i < nivelHoras.size(); ++i) {
             nivelHoras.get(i).setActiva(nHBooleans.get(i));
         }
+        System.out.println(this.planEstudios.getAllRestricciones());
     }
 
     /**

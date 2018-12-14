@@ -100,6 +100,9 @@ public class FranjaTrabajo extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Franja Trabajo:\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni) + "\n-Hora fin: " + Aux.getHoraCompleta(this.horaFin));
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return ("Franja Trabajo (" + activo + "):\n-Hora inicio: " + Aux.getHoraCompleta(this.horaIni) + "\n-Hora fin: " + Aux.getHoraCompleta(this.horaFin));
     }
 }

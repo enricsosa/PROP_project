@@ -122,6 +122,9 @@ public class Correquisito extends Restriccion {
      */
     @Override
     public String toString() {
-        return ("Correquisito:\n- " + this.asignatura1.getId() + "\n- " + this.asignatura2.getId());
+        String activo;
+        if (this.getActiva()) activo = "Activa";
+        else activo = "No activa";
+        return ("Correquisito (" + activo + "):\n- " + this.asignatura1.getId() + "\n- " + this.asignatura2.getId());
     }
 }
