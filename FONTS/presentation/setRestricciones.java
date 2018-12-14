@@ -281,6 +281,7 @@ public class setRestricciones {
                     this.horarioStr = cd.generarHorario(nomH.getText());
                     cd.writeHorario(horarioStr, nomH.getText());
                     horario = cd.escaneaHorario(nomH.getText());
+
                 } catch (Exception e) {
                     System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
                 }
