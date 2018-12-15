@@ -1,8 +1,9 @@
+/**edit_new_horario*/
+
+/**Imports*/
+
 package presentation;
 
-import presentation.FXMLControllers.*;
-import domain.Correquisito;
-import domaincontrollers.CtrlDomain;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -18,20 +19,49 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import presentation.FXMLControllers.*;
+import domain.Correquisito;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * edit_new_horario
+ * @author  Enric Sosa
+ * @see     Scene
+ * @see     Parent
+ * @see     Button
+ * @see     VBox
+ * @see     Modality
+ * @see     Stage
+ * @see     FXMLLoader
+ * @see     CtrlDomain
+ */
 public class edit_new_horario {
 
+    /**Instacia de edit_new_horario.*/
     private static edit_new_horario snh;
+    /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
+    /**edit*/
     private boolean edit;
+    /**Nuevo nombre del horario.*/
     private String newName;
 
+    /**Creadora de la clase edit_new_horario.*/
     private edit_new_horario() {
     }
 
+    /**
+     * Devuelve el atributo edit.
+     * @return  edit.
+     */
     public boolean getEdit() {
         return edit;
     }
 
+    /**
+     * Instanciadora de la clase edit_new_horario.
+     * @return  Instancia de edit_new_horario.
+     */
     public static edit_new_horario getInstance() {
         if (snh == null)
             snh = new edit_new_horario() {
@@ -39,10 +69,15 @@ public class edit_new_horario {
         return snh;
     }
 
+    /**
+     * Obtiene el atributo newName.
+     * @return newName.
+     */
     public String getNewName() {
         return newName;
     }
 
+    /**Muestra la pantalla edit_new_horario.*/
     public void display() {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();

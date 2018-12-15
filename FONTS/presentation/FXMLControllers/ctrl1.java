@@ -1,7 +1,9 @@
+/**crtl1*/
+
+/**Imports*/
+
 package presentation.FXMLControllers;
 
-import presentation.*;
-import domaincontrollers.CtrlDomain;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -9,11 +11,31 @@ import javafx.scene.layout.*;
 import javafx.fxml.FXMLLoader;
 import java.util.ArrayList;
 
+import presentation.*;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * ctrl1
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     Parent
+ * @see     Button
+ * @see     BorderPane
+ * @see     FXMLLoader
+ * @see     ArrayList
+ * @see     CtrlDomain
+ * @see     CtrlPresentacion
+ * @see     SceneController
+ */
 public class ctrl1 {
 
-    public ctrl2 c2;
-    public escogerHorario eH;
+    /**ctrl2 que se usa.*/
+    private ctrl2 c2;
+    /**escogerHorario que se usa.*/
+    private escogerHorario eH;
+    /**CtrlPresentacion que lo gestiona.*/
     private CtrlPresentacion cp;
+    /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
 
     public ctrl1() {
@@ -39,7 +61,7 @@ public class ctrl1 {
         return updatedPane;
     }
 
-    private VBox leftPaneHoarios() throws Exception {
+    private VBox leftPaneHorarios() throws Exception {
         VBox updatedPane = new VBox();
         updatedPane.setId("leftVB");
         CtrlPresentacion CP = CtrlPresentacion.getInstance();
@@ -75,7 +97,7 @@ public class ctrl1 {
         SceneController sc = SceneController.getInstance();
 
         BorderPane bP = (BorderPane)sc.getPane("escogerHorario");
-        VBox lP = leftPaneHoarios();
+        VBox lP = leftPaneHorarios();
         bP.setLeft(lP);
         sc.replacePane("escogerHorario", bP);
 
@@ -86,6 +108,10 @@ public class ctrl1 {
         System.exit(0);
     }
 
+    /**
+     * Inicializa ctrl1.
+     * @throws Exception    Ha habido un error en la inicialización.
+     */
     @FXML
     private void initialize() throws Exception {
         SceneController sc = SceneController.getInstance();

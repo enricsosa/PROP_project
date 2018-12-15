@@ -29,19 +29,18 @@ public class CtrlPresentacion {
 
     private ArrayList<String> Escenarios;
 
-    /**
-     * Constructora de la clase CtrlPresentacion.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
-     */
     private static CtrlPresentacion CP;
 
     /**Constructoras*/
 
+    /**Constructora de la clase CtrlPresentacion.*/
     private CtrlPresentacion() {
     }
 
+    /**
+     * Instanciadora de CtrlPresentacion.
+     * @return  instancia de CtrlPresentacion.
+     */
     public static CtrlPresentacion getInstance() {
         if (CP == null)
             CP = new CtrlPresentacion() {
@@ -51,9 +50,9 @@ public class CtrlPresentacion {
 
     /**
      * Inicializa un CtrlPresentacion.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initCtrlPresentacion() throws FileNotFoundException, IOException, ParseException {
         CD = new CtrlDomain();
@@ -63,22 +62,34 @@ public class CtrlPresentacion {
 
     /**
      * Inicializa VistaMantHorario.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initMantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
         ArrayList<String> escenarios = this.CD.allEscenarios();
     }
 
+    /**
+     * Devuelve los escenarios disponibles.
+     * @return  Escenarios disponibles.
+     */
     public ArrayList<String> escenarios() {
         return CD.allEscenarios();
     }
 
+    /**
+     * Devuelve los horarios disponibles.
+     * @return  Horarios disponibles.
+     */
     public ArrayList<String> horarios() {
         return CD.allHorarios();
     }
 
+    /**
+     * Devuelve CrtlDomain.
+     * @return  CtrlDomain.
+     */
     public CtrlDomain getCD() {
         return CD;
     }

@@ -109,8 +109,7 @@ public class FranjaAsignatura extends Restriccion {
     @Override
     public Boolean comprobarRestriccion(Clase clase, int dia, int horaIni, Horario horario) {
         if (this.getActiva()) {
-            if (clase.getAsignatura() != this.asignatura) return true;
-            if ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin)) return true;
+            if ((clase.getAsignatura() != this.asignatura) || ((horaIni >= this.horaIni) && ((horaIni + clase.getDuracion()) <= this.horaFin))) return true;
             //System.out.println("Falla FranjaAsignatura");
             return false;
         }

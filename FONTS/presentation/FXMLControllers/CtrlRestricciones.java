@@ -1,9 +1,20 @@
+/**CtrlRestricciones*/
+
+/**Imports*/
+
 package presentation.FXMLControllers;
 
-import presentation.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import presentation.*;
+
+/**
+ * CtrlRestricciones
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     Label
+ */
 public class CtrlRestricciones {
 
     @FXML

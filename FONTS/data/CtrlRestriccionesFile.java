@@ -56,14 +56,14 @@ public class CtrlRestriccionesFile {
 
     /**Consultoras*/
 
-    /**
+    /*/**
      * Extrae toda la información de Restricciones del archivo JSON.
      * @return  Devuelve la información de las Restricciones en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
+    /*public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> restricciones = new LinkedList<JSONObject>();
 
         JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/restricciones.json"));
@@ -75,15 +75,15 @@ public class CtrlRestriccionesFile {
         }
 
         return restricciones;
-    }
+    }*/
 
     /**
      * Extrae toda la información de Restricciones del archivo JSON de un escenario.
      * @param escenario Nombre del escenario del que se quiere extraer la información.
      * @return          Devuelve la información de las Restricciones de un escenario en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> restricciones = new LinkedList<JSONObject>();

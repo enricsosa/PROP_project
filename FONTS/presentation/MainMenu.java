@@ -1,7 +1,9 @@
+/**MainMenu*/
+
+/**Imports*/
+
 package presentation;
 
-import presentation.FXMLControllers.*;
-import domaincontrollers.CtrlDomain;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -25,17 +27,35 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import presentation.FXMLControllers.*;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * MainMenu
+ * @author  Enric Sosa
+ * @see     Application
+ * @see     Stage
+ * @see     FXMLLoader
+ * @see     CtrlDomain
+ */
 public class MainMenu extends Application {
 
+    /**CtrlDomain que usa.*/
     private CtrlDomain CD;
+    /**CtrlPresentacion que usa.*/
     private CtrlPresentacion CP;
+    /**Ventana del MainMenu.*/
     private Stage window;
 
 
+    /**
+     * Lanza el MainMenu.
+     * @param primaryStage
+     * @throws Exception    Indica que algo salió mal en start.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -53,7 +73,10 @@ public class MainMenu extends Application {
     }
 
 
-
+    /**
+     * main de MainMenu.
+     * @param args  Argumentos que se pasan al main.
+     */
     public static void main(String[] args)
     {
         launch(args);

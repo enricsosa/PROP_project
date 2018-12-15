@@ -77,9 +77,9 @@ public class CtrlDomain {
 
     /**
      * Creadora de la clase CtrlDomain.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public CtrlDomain()throws FileNotFoundException, IOException, ParseException  {
         this.initCtrlDomain();
@@ -87,9 +87,9 @@ public class CtrlDomain {
 
     /**
      * Ejecuta las acciones necesarias para la inicialización de CtrlDomain.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initCtrlDomain() throws FileNotFoundException, IOException, ParseException {
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
@@ -758,9 +758,9 @@ public class CtrlDomain {
     /**
      * Carga en CtrlDominio el escenario con el nombre indicado.
      * @param escenario                 Nombre del escenario que se quiere cargar.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         this.cargarPlanEstudios(escenario);
@@ -795,7 +795,7 @@ public class CtrlDomain {
      * Escribe un Horario por consola.
      * @param horario   String con los datos de Horario.
      * @param idHorario id del Horarioque se escribe.
-     * @throws IOException
+     * @throws IOException              Ha fallado una operación IO.
      */
     public void writeHorario(String horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
@@ -809,8 +809,8 @@ public class CtrlDomain {
      * Lee un horario guardado préviamente.
      * @param horario                   Nombre del Horario que se quiere leer.
      * @return                          String con los datos del Horario indicado.
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
      */
     public String readHorario(String horario) throws FileNotFoundException, IOException {
         return controladorEscenarios.readHorario(horario);
@@ -819,9 +819,9 @@ public class CtrlDomain {
     /**
      * Carga el PlanEstudios del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
         JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
@@ -839,9 +839,9 @@ public class CtrlDomain {
     /**
      * Carga los datos de las Asignaturas del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarAllAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
@@ -880,9 +880,9 @@ public class CtrlDomain {
     /**
      * Carga los datos de las Aulas del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarAllAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
@@ -904,9 +904,9 @@ public class CtrlDomain {
     /**
      * Carga las Restricciones del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarAllRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
         this.planEstudios.setAllRestricciones(new ArrayList<Restriccion>());
@@ -988,9 +988,9 @@ public class CtrlDomain {
      * Sube Asignaturas.
      * @param   escenario String con el escenario indicado.
      * @return  ArrayList con la informacion deseada.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public HashMap<String, ArrayList<Object>> subirAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
@@ -1039,9 +1039,9 @@ public class CtrlDomain {
      * Sube Aulas.
      * @param   escenario String con el escenario indicado.
      * @return  ArrayList con la informacion deseada.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public HashMap<String, ArrayList<Object>> subirAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
@@ -1066,9 +1066,9 @@ public class CtrlDomain {
      * Sube las Restricciones.
      * @param   escenario String con el escenario indicado.
      * @return  HashMap con la informacion deseada.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public HashMap<String, ArrayList<Object>> subirRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
@@ -1151,9 +1151,9 @@ public class CtrlDomain {
      * Sube planEstudios.
      * @param   escenario String con el escenario indicado.
      * @return  ArrayList con la informacion deseada.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public ArrayList<String> subirPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
         JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);

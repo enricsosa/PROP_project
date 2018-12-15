@@ -1,7 +1,9 @@
+/**escogerHorario*/
+
+/**Import*/
+
 package presentation.FXMLControllers;
 
-import presentation.*;
-import domaincontrollers.CtrlDomain;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,21 +23,47 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import presentation.*;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * EscogerHorario
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     Node
+ * @see     Button
+ * @see     ClipboardContent
+ * @see     DataFormat
+ * @see     Dragboard
+ * @see     TransferMode
+ * @see     BorderPane
+ * @see     FXMLLoader
+ * @see     ScrollBarPolicy
+ * @see     ArrayList
+ * @see     HashMap
+ * @see     Map
+ */
 public class escogerHorario {
 
+    /**SceneControler que se usa.*/
     private SceneController sc;
+    /**CtrlPresentacion de ctrl2.*/
     private CtrlPresentacion cp;
+    /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
+    /**Horario*/
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
-
+    /**buttonFormat*/
     private final DataFormat buttonFormat = new DataFormat("hola");
+    /**draggingButton*/
     private Button draggingButton;
+    /**editing*/
     private boolean editing = false;
+    /**disableSaveButton*/
     private boolean disSaveBtn = true;
 
 
@@ -51,6 +79,10 @@ public class escogerHorario {
     @FXML
     public VBox leftVB;
 
+    /**
+     * Escribe un Horario.
+     * @param idH   id que se da al Horario escrito.
+     */
     public void escribirHorario(String idH) {
         try {
             cd.writeHorarioFromMap(horario, idH);
@@ -60,12 +92,14 @@ public class escogerHorario {
     }
 
 
+    /**Escoge un Horario.*/
     public escogerHorario() {
         sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
         cd = cp.getCD();
     }
 
+    /**Asigna un mainMenu.*/
     public void setMainMenu() throws Exception {
         sc.activate("prova1");
     }
@@ -151,6 +185,7 @@ public class escogerHorario {
         });
     }
 
+    /**Guarda un Horario.*/
     public void saveHorario() {
         try {
             cd.writeHorarioFromMap(horario, horario_label.getText());
@@ -167,6 +202,7 @@ public class escogerHorario {
         }
     }
 
+    /**Asigna un Horario.*/
     private void setHorario(GridPane gp) {
         for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
@@ -189,6 +225,10 @@ public class escogerHorario {
         }
     }
 
+    /**
+     * Escanea un Horario y lo asigna.
+     * @param s Horario a escanear.
+     */
     public void horarioSeleccionado(String s) {
         horario_label.setText(s);
         try {
@@ -202,6 +242,10 @@ public class escogerHorario {
         bP.setCenter(gP);
     }
 
+    /**
+     * Incializa escogerHorario.
+     * @throws Exception    Algo ha ido mal en la incialización.
+     */
     @FXML
     private void initialize() throws Exception {
         saveButton.setDisable(true);

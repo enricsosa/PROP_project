@@ -1,9 +1,10 @@
+/**setRestricciones*/
+
+/**Imports*/
+
 package presentation;
 
 import javafx.collections.ObservableList;
-import presentation.FXMLControllers.*;
-import domain.Correquisito;
-import domaincontrollers.CtrlDomain;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,33 +18,68 @@ import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
 import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 import java.lang.reflect.Array;
 
+import presentation.FXMLControllers.*;
+import domain.Correquisito;
+import domaincontrollers.CtrlDomain;
 
+/**
+ * setRestricciones
+ * @author  Enric Sosa
+ * @see     ObservableList
+ * @see     Scene
+ * @see     Parent
+ * @see     Button
+ * @see     VBox
+ * @see     Modality
+ * @see     Stage
+ * @see     FXMLLoader
+ * @see     ArrayList
+ * @see     Map
+ * @see     HashMap
+ */
 public class setRestricciones {
 
+    /**Instacia de setRestricciones.*/
     private static setRestricciones sR;
+    /**CtrlRestricciones que se usa.*/
     private CtrlRestricciones cR;
+    /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
+    /**Horario en forma de String.*/
     private String horarioStr;
+    /**Horario*/
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
+    /**Restricciones DiaLibre.*/
     private ArrayList<String> restrDL;
+    /**Restricciones FranjaTrabajo.*/
     private ArrayList<String> restrFT;
+    /**Restricciones NivelHora.*/
     private ArrayList<String> restrNH;
+    /**Restricciones Correquisito.*/
     private ArrayList<String> restrCO;
+    /**Restricciones Prerrequisito.*/
     private ArrayList<String> restrPRE;
+    /**Restricciones FranjaAsignatura.*/
     private ArrayList<String> restrFA;
+    /**Restricciones FranjaNivel.*/
     private ArrayList<String> restrFN;
+    /**Indica que restricciones estan habilitadas.*/
     HashMap<String, ArrayList<Boolean>> restrCtrlD = new HashMap<>();
 
     /**Constructoras*/
 
+    /**Contructora de la clase setRestricciones.*/
     private setRestricciones() {
     }
 
+    /**
+     * Instanciadora de la clase setRestricciones.
+     * @return  Instancia de setRestricciones.
+     */
     public static setRestricciones getInstance() {
         if (sR == null)
             sR = new setRestricciones() {
@@ -51,6 +87,16 @@ public class setRestricciones {
         return sR;
     }
 
+    /**
+     * Asigna nuevos valores a las restricciones.
+     * @param restrDL   DiaLibre
+     * @param restrFT   FranjaTrabajo
+     * @param restrNH   NivelHora
+     * @param restrCO   Correquisito
+     * @param restrPRE  Prerrequisito
+     * @param restrFA   FranjaAsignatura
+     * @param restrFN   FranjaNivel
+     */
     public void setAllRestricciones(ArrayList<String> restrDL, ArrayList<String> restrFT,
                                      ArrayList<String> restrNH, ArrayList<String> restrCO,
                                      ArrayList<String> restrPRE, ArrayList<String> restrFA,
@@ -64,6 +110,16 @@ public class setRestricciones {
         this.restrFN = restrFN;
     }
 
+    /**
+     * Procesa las Restrcciones.
+     * @param restrDL   DiaLibre
+     * @param restrFT   FranjaTrabajo
+     * @param restrNH   NivelHora
+     * @param restrCO   Correquisito
+     * @param restrPRE  Prerrequisito
+     * @param restrFA   FranjaAsignatura
+     * @param restrFN   FranjaNivel
+     */
     private void processRestricciones(ObservableList<String> restrDL, ObservableList<String> restrFT,
                                       ObservableList<String> restrNH, ObservableList<String> restrCO,
                                       ObservableList<String> restrPRE, ObservableList<String> restrFA,
@@ -172,6 +228,10 @@ public class setRestricciones {
         restrCtrlD.put("franjaNivel", boolRestFN);
     }
 
+    /**
+     * Muestra setRestricciones.
+     * @param escenario escenario que se aplica.
+     */
     public void display(String escenario) {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();

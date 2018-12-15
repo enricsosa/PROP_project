@@ -23,8 +23,6 @@ public class ReturnSet {
     private int horaIni;
     /**horaFin de una franja horaria.*/
     private int horaFin;
-    /**mensaje*/
-    private String mensaje;
 
     /**Constructoras*/
 
@@ -54,28 +52,6 @@ public class ReturnSet {
     public ReturnSet(int horaIni, int horaFin) {
         this.horaIni = horaIni;
         this.horaFin = horaFin;
-    }
-
-    /**
-     * Constructora de la clase ReturnSet con validez, mensaje y horario.
-     * @param validez   validez que se asigna a ReturnSet.
-     * @param mensaje   mensaje que se asigna a ReturnSet.
-     * @param horario   Horario que se asigna a ReturnSet.
-     */
-    public ReturnSet(Boolean validez, String mensaje, Horario horario) {
-        this.validez = validez;
-        this.mensaje = mensaje;
-        this.horario = horario;
-    }
-
-    /**
-     * Constructora de la clase ReturnSet con validez y mensaje.
-     * @param validez   validez que se asigna a ReturnSet.
-     * @param mensaje   mensaje que se asigna a ReturnSet.
-     */
-    public ReturnSet(Boolean validez, String mensaje) {
-        this.validez = validez;
-        this.mensaje = mensaje;
     }
 
     /**Metodos públicos*/
@@ -112,14 +88,6 @@ public class ReturnSet {
      */
     public int getHoraFin() {
         return this.horaFin;
-    }
-
-    /**
-     * Devuelve el mensaje de ReturnSet.
-     * @return  mensaje.
-     */
-    public String getMensaje() {
-        return this.mensaje;
     }
 
     /** Métodos redefinidos **/

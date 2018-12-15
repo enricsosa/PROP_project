@@ -52,14 +52,14 @@ public class CtrlAulasFile {
 
     /**Consultoras*/
 
-    /**
+    /*/**
      * Extrae toda la información de Aulas del archivo JSON.
      * @return  Devuelve la información de las Aulas en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
+    /*public List<JSONObject> getAll() throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> aulas = new LinkedList<JSONObject>();
 
         JSONObject obj = (JSONObject)new JSONParser().parse(new FileReader("DATA/aulas.json"));
@@ -71,15 +71,15 @@ public class CtrlAulasFile {
         }
 
         return aulas;
-    }
+    }*/
 
     /**
      * Extrae toda la información de Aulas del archivo JSON de un escenario.
      * @param escenario Nombre del escenario del que se quiere extraer la información.
      * @return          Devuelve la información de las Aulas de un escenario en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public List<JSONObject> getByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         LinkedList<JSONObject> aulas = new LinkedList<JSONObject>();

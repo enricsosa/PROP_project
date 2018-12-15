@@ -1,7 +1,9 @@
+/**NewName*/
+
+/**Import*/
+
 package presentation;
 
-import presentation.FXMLControllers.*;
-import domaincontrollers.CtrlDomain;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,19 +19,45 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import presentation.FXMLControllers.*;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * NewName
+ * @author  Enric Sosa
+ * @see     Scene
+ * @see     Parent
+ * @see     Button
+ * @see     VBox
+ * @see     Modality
+ * @see     Stage
+ * @see     FXMLLoader
+ * @see     CtrlDomain
+ */
 public class NewName {
 
+    /**String que contiene el nuevo nombre*/
     private static NewName nn;
+    /**CtrlDomain que usa.*/
     private CtrlDomain cd;
+    /**Nombre del horario.*/
     private String nameH;
 
+    /**Constructora de la clase NewName.*/
     private NewName() {
     }
 
+    /**
+     * Obtiene el atributo nameH.
+     * @return  nameH*/
     public String getNameH() {
         return nameH;
     }
 
+    /**
+     * Instanciadora de la clase NewName.
+     * @return  Instancia de NewName.
+     */
     public static NewName getInstance() {
         if (nn == null)
             nn = new NewName() {
@@ -37,6 +65,7 @@ public class NewName {
         return nn;
     }
 
+    /**Muestra NewName.*/
     public void display() {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();

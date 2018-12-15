@@ -85,7 +85,7 @@ public class PlanEstudios {
      * @param   restricciones Conjunto de Restricciones que se asignan a allRestricciones.
      */
     public void setAllRestricciones(ArrayList<Restriccion> restricciones) {
-        this.allRestricciones = allRestricciones;
+        this.allRestricciones = restricciones;
     }
 
     /**

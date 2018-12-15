@@ -105,7 +105,7 @@ public class CtrlHorario {
         Horario horario = new Horario(id);
 
         ArrayList<Clase> clases = this.getAllClases();
-        sortClases(clases, this.limitacionesHorario, false);
+        sortClases(clases, this.limitacionesHorario);
 
         ArrayList<ReturnSet> franjas = new ArrayList<ReturnSet>();
         for (int i = 0; i < clases.size(); ++i) {
@@ -164,7 +164,7 @@ public class CtrlHorario {
 
         for (int i = 0; i < clases.size(); ++i) {
             //System.out.println("clase:" + i);
-            if (placed[i] == false) {
+            if (!placed[i]) {
 
                 //System.out.println("clase aun por colocar.");
 
@@ -193,7 +193,7 @@ public class CtrlHorario {
                         //System.out.println("Cumple restricciones de dia.");
 
                         for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
-                            if (this.comprobarRestricciones(clase, dia, horaIni, horario)) {
+                            if (comprobarRestricciones(clase, dia, horaIni, horario)) {
 
                                 //System.out.println("Cumple restrcciones de hora.");
                                 for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
@@ -234,7 +234,7 @@ public class CtrlHorario {
         int horaFin = limitacionesHorario.getHoraFin();
         if (clase.tieneNivel()) {
             ArrayList<Restriccion> restricciones = clase.getNivel().getRestricciones();
-            Boolean found = false;
+            boolean found = false;
             for (int i = 0; (i < restricciones.size()) && (!found); ++i) {
                 if (restricciones.get(i).getTipoRestriccion() == TipoRestriccion.FranjaNivel && restricciones.get(i).getActiva()) {
                     found = true;
@@ -260,11 +260,8 @@ public class CtrlHorario {
      * manera ascendente.
      * @param clases    Clases que se quiere ordenar.
      * @param lh        LimitacionesHorario del escenario cargado.
-     * @param random    Boolean que indica si se añade un factor de aleatoriedad para cuando 2 clases tienen franaj del
-     *                  mismo tamaño.
      */
-    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh, Boolean random) {
-        if (random) Collections.shuffle(clases);
+    static void sortClases(ArrayList<Clase> clases, LimitacionesHorario lh) {
         Collections.sort(clases, new Comparator<Clase>() {
             @Override
             public int compare(Clase c1, Clase c2)

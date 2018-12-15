@@ -56,9 +56,9 @@ public class CtrlPlanEstudiosFile {
     /**
      * Extrae toda la información de PlanEstudios del archivo JSON.
      * @return  Devuelve la información de las PlanEstudios en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public JSONObject getPlanEstudios() throws FileNotFoundException, IOException, ParseException {
         JSONObject plaEstudis = new JSONObject();
@@ -71,9 +71,9 @@ public class CtrlPlanEstudiosFile {
      * Extrae toda la información de PlanEstudios del archivo JSON de un escenario.
      * @param escenario Nombre del escenario del que se quiere extraer la información.
      * @return          Devuelve la información de las PlanEstudios de un escenario en forma de JSON object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public JSONObject getPlanEstudiosByEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
         JSONObject plaEstudis = new JSONObject();

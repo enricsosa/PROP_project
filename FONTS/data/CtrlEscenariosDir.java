@@ -44,7 +44,7 @@ public class CtrlEscenariosDir {
 
     /**
      * Escanea los escenarios que hay disponibles.
-     * @throws NullPointerException
+     * @throws NullPointerException Se ha intentado usar null donde se requiere un objeto.
      */
     public void escanearAllEscenarios() throws NullPointerException {
         nomEscenarios = new ArrayList<>();
@@ -61,8 +61,8 @@ public class CtrlEscenariosDir {
 
     /**
      * Escanea en busca de Horarios y los devuelve en forma de ArrayList de Strings.
-     * @return  ArrayList de String con los Horarios guardados.
-     * @throws NullPointerException
+     * @return                      ArrayList de String con los Horarios guardados.
+     * @throws NullPointerException Se ha intentado usar null donde se requiere un objeto.
      */
     public ArrayList<String> escanearAllHorarios() throws NullPointerException {
         ArrayList<String> horarios = new ArrayList<String>();
@@ -77,6 +77,11 @@ public class CtrlEscenariosDir {
         return horarios;
     }
 
+    /**
+     * Compueba que un String corresponde a un dia de la semana.
+     * @param dia   String con el nombre que se quiere verificar.
+     * @return      true si el String corresponde a un dia de la semana, false en caso contrario.
+     */
     private boolean checkDia(String dia) {
         boolean verify = false;
         if (dia != null) {
@@ -110,11 +115,21 @@ public class CtrlEscenariosDir {
         return verify;
     }
 
+    /**
+     * Compueba que un String corresponde a una hora.
+     * @param hora  String con la hora que se quiere verificar.
+     * @return      true si el String corresponde a una hora, false en caso contrario.
+     */
     private boolean checkHora(String hora) {
         int num = (int) (hora.charAt(0) - '0');
         return (num >= 0 && num <= 9);
     }
 
+    /**
+     * Convierte un String con una hora a un int.
+     * @param hora  String con una hora.
+     * @return      int con el valor correspondiente a hora.
+     */
     private int horaToInt(String hora) {
         int num = 0;
         String h = hora.substring(0, hora.indexOf(':'));
@@ -125,6 +140,11 @@ public class CtrlEscenariosDir {
         return num;
     }
 
+    /**
+     * Convierte un String con un dia de la semana a un int.
+     * @param dia   String con un dia.
+     * @return      int con el valor correspondiente a dia.
+     */
     private int diaToInt(String dia) {
         int num = 0;
         if (dia != null) {
@@ -159,23 +179,51 @@ public class CtrlEscenariosDir {
         return num;
     }
 
+    /**
+     * Obtiene un Dia de horario.
+     * @param dia   Dia que se quiere obtener.
+     * @return      Dia en forma de HashMap<Integer, ArrayList<String>>.
+     */
     public HashMap<Integer, ArrayList<String>> getDia(int dia) {
         return horario.get(dia);
     }
 
+    /**
+     * Obtiene una Hora de horario.
+     * @param dia   Dia de la Hora que se quiere obtener.
+     * @param hora  Hora que se quiere obtener.
+     * @return      Hora en forma de ArrayList<String>.
+     */
     public ArrayList<String> getHora(int dia, int hora) {
         return horario.get(dia).get(hora);
     }
 
+    /**
+     * Obtiene una Sesion de horario.
+     * @param dia       Dia de la Hora de la Sesion que se quiere obtener.
+     * @param hora      Hora de la Sesion que se quiere obtener.
+     * @param sesion    Sesion que se quiere obtener.
+     * @return          Sesion en forma de String.
+     */
     public String getSesio(int dia, int hora, String sesion) {
         ArrayList<String> h = horario.get(dia).get(hora);
         return h.get(h.indexOf(sesion));
     }
 
+    /**
+     * Añade una Sesion a horario.
+     * @param dia       Dia de la Hora donde se quiere añadir sesion.
+     * @param hora      Hora donde se quiere añadir sesion.
+     * @param sesion    Sesion que se quiere añadir.
+     */
     public void addSesio(int dia, int hora, String sesion) {
         horario.get(dia).get(hora).add(sesion);
     }
 
+    /**
+     * Inicializa las Horas de un Dia.
+     * @return  Horas del dia inicializadas.
+     */
     private HashMap<Integer, ArrayList<String>> initHorasDia() {
         HashMap<Integer, ArrayList<String>> dia = new HashMap<>();
 
@@ -187,11 +235,18 @@ public class CtrlEscenariosDir {
         return dia;
     }
 
+    /** Inicializa horario.*/
     private void initHorario() {
         for (int i = 1; i <= 5; ++i)
             horario.put(i, initHorasDia());
     }
 
+    /**
+     * Escanea un Horario.
+     * @param h             Horario en forma de String.
+     * @return              Horario escaneado.
+     * @throws Exception    Algo ha fallado al escanear el Horario.
+     */
     public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
         horario = new HashMap<Integer, HashMap<Integer, ArrayList<String>>>();
         initHorario();
@@ -232,6 +287,11 @@ public class CtrlEscenariosDir {
         return horario;
     }
 
+    /**
+     * Convierte un dia de la semana a un String que contiene su nombre.
+     * @param num   dia de la semana.
+     * @return      tring que contiene el nombre del dia de la semana.
+     */
     private String stringToDiaSemana(String num) {
         String dia;
         switch (num) {
@@ -263,6 +323,11 @@ public class CtrlEscenariosDir {
         return dia;
     }
 
+    /**
+     * Escribe un Horario.
+     * @param h         Horario a escribir.
+     * @param idHorario id que se da al Horario.
+     */
     public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> h, String idHorario) {
         PrintWriter writer = null;
         try {
@@ -316,7 +381,7 @@ public class CtrlEscenariosDir {
      * Guarda un Horario en un archivo txt.
      * @param horario       String con la información de un Horario.
      * @param idHorario     Código identificador del Horario.
-     * @throws IOException
+     * @throws IOException              Ha fallado una operación IO.
      */
     public void writeHorario(String horario, String idHorario) throws IOException {
         PrintWriter writer = new PrintWriter("DATA/Output/" + idHorario + ".txt", "UTF-8");
@@ -328,8 +393,8 @@ public class CtrlEscenariosDir {
      * Lee un Horario de un archivo txt.
      * @param horario                  Nombre del horario que se quiere cargar.
      * @return String con los datos de un Horario.
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
      */
     public String readHorario(String horario) throws FileNotFoundException, IOException {
         File file = new File("DATA/Output/" + horario);

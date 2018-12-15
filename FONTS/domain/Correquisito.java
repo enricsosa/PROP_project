@@ -64,8 +64,7 @@ public class Correquisito extends Restriccion {
      * @return              true si asigantura forma parte del Correquisito, false en caso contrario.
      */
     public Boolean tieneAsignatura(Asignatura asignatura) {
-        if (asignatura == asignatura1) return true;
-        if (asignatura == asignatura2) return true;
+        if (asignatura == asignatura1 || asignatura == asignatura2) return true;
         return false;
     }
 

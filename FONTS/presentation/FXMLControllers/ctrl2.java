@@ -1,7 +1,9 @@
+/**ctrl2*/
+
+/**Imports*/
+
 package presentation.FXMLControllers;
 
-import presentation.*;
-import domaincontrollers.CtrlDomain;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -9,19 +11,45 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import presentation.*;
+import domaincontrollers.CtrlDomain;
+
+/**
+ * ctrl2
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     Button
+ * @see     BorderPane
+ * @see     ArrayList
+ * @see     CtrlDomain
+ * @see     CtrlPresentacion
+ * @see     SceneController
+ * @see     HashMap
+ * @see     Map
+ */
 public class ctrl2 {
 
+    /**SceneControler que se usa.*/
     private SceneController sc;
+    /**CtrlPresentacion de ctrl2.*/
     private CtrlPresentacion cp;
+    /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
+    /**Datos del escenario actual.*/
     private String currentEscenario;
-
+    /**Restricciones DiaLibre.*/
     private ArrayList<String> restrDL;
+    /**Restricciones FranjaTrabajo.*/
     private ArrayList<String> restrFT;
+    /**Restricciones NivelHora.*/
     private ArrayList<String> restrNH;
+    /**Restricciones Correquisito.*/
     private ArrayList<String> restrCO;
+    /**Restricciones Prerrequisito.*/
     private ArrayList<String> restrPRE;
+    /**Restricciones FranjaAsignatura.*/
     private ArrayList<String> restrFA;
+    /**Restricciones FranjaNivel.*/
     private ArrayList<String> restrFN;
 
     @FXML
@@ -40,6 +68,11 @@ public class ctrl2 {
         return item;
     }
 
+    /**
+     * Convierte un numero que representa un dia de la semana en su nombre.
+     * @param num   dia de la semana.
+     * @return      Nombre del dia de la semana.
+     */
     private String stringToDiaSemana(String num) {
         String dia;
         switch (num) {
@@ -254,6 +287,7 @@ public class ctrl2 {
         bP.setCenter(tree);
     }
 
+    /**Abre la pantalla de generarHorario.*/
     public void generarHorario() {
         try {
             cd.cargarEscenario(currentEscenario);
@@ -265,17 +299,19 @@ public class ctrl2 {
         sR.display(currentEscenario);
     }
 
-
+    /**Constructora de la clase ctrl2.*/
     public ctrl2() {
         sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
         cd = cp.getCD();
     }
 
+    /**Asigna un mainMenu.*/
     public void setMainMenu() throws Exception {
         sc.activate("prova1");
     }
 
+    /**Inicializa ctrl2.*/
     @FXML
     private void initialize() {
         editEsc.setDisable(true);
