@@ -108,13 +108,6 @@ public class setRestricciones {
         this.restrPRE = restrPRE;
         this.restrFA = restrFA;
         this.restrFN = restrFN;
-        System.out.println(restrDL);
-        System.out.println(restrFT);
-        System.out.println(restrNH);
-        System.out.println(restrCO);
-        System.out.println(restrPRE);
-        System.out.println(restrFA);
-        System.out.println(restrFN);
     }
 
     /**
@@ -155,14 +148,12 @@ public class setRestricciones {
         ArrayList<String> arrayRestrFT = new ArrayList<>();
         for (String s: restrFT)
             arrayRestrFT.add(s);
-        if (this.restrFT.equals(arrayRestrFT)) {
-            Collections.fill(boolRestFT, true);
+        if (arrayRestrFT.size() == 0) {
+            Collections.fill(boolRestFT, Boolean.FALSE);
+        } else if (this.restrFT.toString().equals(arrayRestrFT.get(0))) {
+            Collections.fill(boolRestFT, Boolean.TRUE);
         } else {
-            if (restrFT.contains(this.restrFT.get(0))) {
-                boolRestFT.set(0, true);
-            } else if (restrFT.contains(this.restrFT.get(1))) {
-                boolRestFT.set(1, true);
-            }
+            Collections.fill(boolRestFT, Boolean.FALSE);
         }
 
         ArrayList<String> arrayRestrNH = new ArrayList<>();
@@ -273,9 +264,12 @@ public class setRestricciones {
             VBox VBfranjaTrabajo = (VBox)HBRestricciones.lookup("#VBfranjaTrabajo");
             ListView<String> LVfranjaTrabajo = (ListView<String>)VBfranjaTrabajo.lookup("#LVfranjaTrabajo");
             LVfranjaTrabajo.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            LVfranjaTrabajo.getItems().add(restrFT.toString());
+            /*
             for (String s : restrFT) {
                 LVfranjaTrabajo.getItems().add(s);
             }
+            */
 
             VBox VBnivelHora = (VBox)HBRestricciones.lookup("#VBnivelHora");
             ListView<String> LVnivelHora = (ListView<String>)VBnivelHora.lookup("#LVnivelHora");
