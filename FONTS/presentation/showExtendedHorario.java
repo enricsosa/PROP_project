@@ -14,20 +14,20 @@ import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
-public class showHorario {
+public class showExtendedHorario {
 
-    private static showHorario sH;
+    private static showExtendedHorario sH;
     private CtrlDomain cd;
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
 
     /**Constructoras*/
 
-    private showHorario() {
+    private showExtendedHorario() {
     }
 
-    public static showHorario getInstance() {
+    public static showExtendedHorario getInstance() {
         if (sH == null) {
-            sH = new showHorario() {
+            sH = new showExtendedHorario() {
             };
         }
         return sH;
@@ -38,6 +38,8 @@ public class showHorario {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
                 ScrollPane sp = new ScrollPane();
                 VBox vB = new VBox();
+                vB.prefHeightProperty().bind(sp.heightProperty());
+                vB.prefWidthProperty().bind(sp.widthProperty());
                 for (String sesion : hora.getValue()) {
                     Button b = new Button(sesion);
                     b.setId("ses-btn");
@@ -45,8 +47,9 @@ public class showHorario {
                 }
                 sp.setContent(vB);
                 sp.setPannable(true);
+                sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-                gp.add(sp, dia.getKey(), hora.getKey() - 7);
+                gp.add(sp, dia.getKey(), hora.getKey()+1);
             }
         }
     }
@@ -55,35 +58,25 @@ public class showHorario {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/showHorario2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/showExtendedHorario.fxml"));
         Parent root = null;
         try {
             root = loader.load();
-            BorderPane bP = (BorderPane)root;
-            bP.getStylesheets().add("presentation/CSS/escogerHorarios.css");
+            ScrollPane sP = (ScrollPane)root;
+            sP.getStylesheets().add("presentation/CSS/escogerHorarios.css");
 
             try {
-                horario = cd.escaneaHorario(file, false);
+                horario = cd.escaneaHorario(file, true);
             } catch (Exception e) {
                 System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
             }
 
-            //Label titol
-            Label nomHor = (Label)bP.getTop();
-            nomHor.setText(file);
-
             //Grid Pane
-            GridPane gP = (GridPane)bP.getCenter();
+            GridPane gP = (GridPane)sP.getContent();
+            gP.prefWidthProperty().bind(sP.widthProperty());
             setHorario(gP);
 
-            //AcceptButton
-            HBox hB = (HBox)bP.getBottom();
-            Button acceptB = (Button)hB.lookup("#acceptB");
-            acceptB.setOnAction(event -> {
-                window.close();
-            });
-
-            window.setScene(new Scene(bP));
+            window.setScene(new Scene(sP));
             window.showAndWait();
         } catch (Exception e) {
             System.out.println("ERROR");

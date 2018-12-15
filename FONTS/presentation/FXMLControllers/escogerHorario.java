@@ -232,7 +232,7 @@ public class escogerHorario {
     public void horarioSeleccionado(String s) {
         horario_label.setText(s);
         try {
-            horario = cd.escaneaHorario(s);
+            horario = cd.escaneaHorario(s, false);
         } catch (Exception e) {
             System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
         }

@@ -242,14 +242,38 @@ public class CtrlEscenariosDir {
     }
 
     /**
+     * Inicializa las Horas de un Dia.
+     * @return  Horas del dia inicializadas.
+     */
+    private HashMap<Integer, ArrayList<String>> initExtendedHorasDia() {
+        HashMap<Integer, ArrayList<String>> dia = new HashMap<>();
+
+        for (int i = 0; i < 24; ++i) {
+            ArrayList<String> hora = new ArrayList<>();
+            dia.put(i, hora);
+        }
+
+        return dia;
+    }
+
+    /** Inicializa horario.*/
+    private void initExtendedHorario() {
+        for (int i = 1; i <= 7; ++i)
+            horario.put(i, initExtendedHorasDia());
+    }
+
+    /**
      * Escanea un Horario.
      * @param h             Horario en forma de String.
      * @return              Horario escaneado.
      * @throws Exception    Algo ha fallado al escanear el Horario.
      */
-    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
+    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h, Boolean extended) throws Exception {
         horario = new HashMap<Integer, HashMap<Integer, ArrayList<String>>>();
-        initHorario();
+        if (extended)
+            initExtendedHorario();
+        else
+            initHorario();
         File htxt = new File("DATA/Output/" + h + ".txt");
         BufferedReader br = new BufferedReader(new FileReader(htxt));
 

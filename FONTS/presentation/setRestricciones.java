@@ -108,6 +108,13 @@ public class setRestricciones {
         this.restrPRE = restrPRE;
         this.restrFA = restrFA;
         this.restrFN = restrFN;
+        System.out.println(restrDL);
+        System.out.println(restrFT);
+        System.out.println(restrNH);
+        System.out.println(restrCO);
+        System.out.println(restrPRE);
+        System.out.println(restrFA);
+        System.out.println(restrFN);
     }
 
     /**
@@ -340,14 +347,50 @@ public class setRestricciones {
 
                     this.horarioStr = cd.generarHorario(nomH.getText());
                     cd.writeHorario(horarioStr, nomH.getText());
-                    horario = cd.escaneaHorario(nomH.getText());
 
                 } catch (Exception e) {
-                    System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
+                    System.out.println("ERROR: ESCRITURA A DISCO DEL HORARIO FALLIDA");
                 }
 
-                showHorario sR = showHorario.getInstance();
-                sR.display(nomH.getText());
+                boolean extend = false;
+                if (restrDL.size() >= 2 && restrFT.size() >= 2) {
+                    if (restrDL.contains("6") && restrDL.contains("7")) {
+                        Integer horaIni = Integer.parseInt(restrFT.get(0));
+                        Integer horaFin = Integer.parseInt(restrFT.get(1));
+                        if (horaIni >= 8 && horaFin <= 20) {
+                            //Las restricciones iniciales lo permiten, ahora hay que comprovar si están acitvas
+                            if (restrCtrlD.get("franjaTrabajo").get(0) &&
+                                restrCtrlD.get("franjaTrabajo").get(1) &&
+                                restrCtrlD.get("diaLibre").get(restrDL.indexOf("6")) &&
+                                restrCtrlD.get("diaLibre").get(restrDL.indexOf("7"))) {
+                                try {
+                                    horario = cd.escaneaHorario(nomH.getText(), false);
+                                } catch ( Exception e) {
+                                    System.out.println("ERROR: CREACION DEL HORARIO FALLIDA");
+                                }
+                                showHorario sR = showHorario.getInstance();
+                                sR.display(nomH.getText());
+                            } else {
+                                extend = true;
+                            }
+                        } else {
+                            extend = true;
+                        }
+                    } else {
+                        extend = true;
+                    }
+                } else {
+                    extend = true;
+                }
+                if (extend) {
+                    try {
+                        horario = cd.escaneaHorario(nomH.getText(), true);
+                    } catch ( Exception e) {
+                        System.out.println("ERROR: CREACION DEL HORARIO EXTENDIDO FALLIDA");
+                    }
+                    showExtendedHorario sER = showExtendedHorario.getInstance();
+                    sER.display(nomH.getText());
+                }
                 window.close();
             });
 

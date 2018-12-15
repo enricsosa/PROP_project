@@ -786,9 +786,8 @@ public class CtrlDomain {
         return controladorEscenarios.escanearAllHorarios();
     }
 
-    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h) throws Exception {
-        //System.out.println(h);
-        return controladorEscenarios.escaneaHorario(h);
+    public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h, Boolean extended) throws Exception {
+        return controladorEscenarios.escaneaHorario(h, extended);
     }
 
     /**
