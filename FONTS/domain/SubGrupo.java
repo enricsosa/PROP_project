@@ -1,10 +1,8 @@
 /**SubGrupo*/
 
-/** Imports **/
+/**Imports*/
 
 package domain;
-
-//import static java.lang.System.out;
 
 import domaincontrollers.Aux;
 
@@ -40,8 +38,6 @@ public class SubGrupo {
         this.plazas = plazas;
         this.tipo = tipo;
         this.grupo = grupo;
-        //out.println(tipo);
-        //out.println(this.toString());
     }
 
     /**Métodos públicos*/

@@ -17,9 +17,6 @@ public abstract class Restriccion {
 
     /**Constructoras*/
 
-    ///**Constructora de la clase Restriccion.*/
-    //public Restriccion() {}
-
     /**Métodos públicos*/
 
     /**

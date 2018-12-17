@@ -56,10 +56,6 @@ public class Nivel {
         this.asignaturas.putIfAbsent(asignatura.getId(), asignatura);
     }
 
-    //public void replaceAsignatura(Asignatura asignatura) {
-      //  this.asignaturas.replace(asignatura.getId(), asignatura);
-    //}
-
     /**
      * Elimina de Nivel la Asignatura con id indicada.
      * @param id    id de la Asignatura que se quiere eliminar.
@@ -109,9 +105,7 @@ public class Nivel {
         }
     }
 
-    /**
-     * Elimina una NivelHora del Nivel.
-     */
+    /**Elimina una NivelHora del Nivel.*/
     public void eliminarNivelHora() {
         for (int i = 0; i < this.restricciones.size(); ++i) {
             if (this.restricciones.get(i).getTipoRestriccion() == TipoRestriccion.NivelHora) {
@@ -140,15 +134,6 @@ public class Nivel {
     }
 
     /**
-     * Devuelve una Asignatura de Nivel dado su id.
-     * @param id    id de la Asignatura que se quiere obtener.
-     * @return      Asignatura con id indicado.
-     */
-    public Asignatura getAsignatura(String id) {
-        return this.asignaturas.get(id);
-    }
-
-    /**
      * Dada una Asignatura indica si forma parte del Nivel.
      * @param asignatura    Asignatura que se quiere saber si pertenece a Nivel.
      * @return              true si asignatura forma parte de Nivel, false en caso contrario.
@@ -157,10 +142,14 @@ public class Nivel {
         return (this.asignaturas.get(asignatura.getId()) != null);
     }
 
-    //public Boolean tieneAsignatura(String id) {
-    //    return (this.asignaturas.get(id) != null);
-    //}
-
+    /**
+     * Devuelve una Asignatura de Nivel dado su id.
+     * @param id    id de la Asignatura que se quiere obtener.
+     * @return      Asignatura con id indicado.
+     */
+    public Asignatura getAsignatura(String id) {
+        return this.asignaturas.get(id);
+    }
     /**
      * Devuelve las Restricciones asociadas al Nivel.
      * @return  Restricciones asociadas al Nivel.

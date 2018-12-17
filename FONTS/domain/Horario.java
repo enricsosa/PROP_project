@@ -54,10 +54,7 @@ public class Horario {
      * @param asignacion    Asignación que se quiere añadir a Horario.
      */
     public void addAsignacion(Asignacion asignacion) {
-        //System.out.println(asignacion.getHoraIni());
-        //System.out.println(asignacion.getHoraFin());
         for (int hora = asignacion.getHoraIni(); hora < asignacion.getHoraFin(); ++hora) {
-            //System.out.println("Se añade a " +  Aux.getHoraCompleta(hora) + " de " + Aux.getNombreDia(asignacion.getDiaSemana()));
 
             this.getDia(asignacion.getDiaSemana()).getHora(hora).addAsignacion(asignacion);
         }

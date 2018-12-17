@@ -4,7 +4,6 @@
 
 package domain;
 
-//import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -26,7 +25,6 @@ public class Grupo {
     private Asignatura asignatura;
     /**Conjunto de SubGrupos del Grupo*/
     private Map<String, SubGrupo> subGrupos;
-    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
@@ -39,7 +37,6 @@ public class Grupo {
         this.id = id;
         this.asignatura = asignatura;
         this.subGrupos = new HashMap<String, SubGrupo>();
-        //this.restricciones = new ArrayList<Restriccion>();
     }
 
     /**Métodos públicos*/
@@ -76,10 +73,6 @@ public class Grupo {
         this.subGrupos.putIfAbsent(subGrupo.getKey(), subGrupo);
     }
 
-    //public void replaceSubGrupo(SubGrupo subGrupo) {
-    //    this.subGrupos.replace(subGrupo.getKey(), subGrupo);
-    //}
-
     /**
      * Se elimina de los SubGrupos de Grupo el SubGrupo con la key indicada.
      * @param key   key identificadora del SubGrupo que se quiere eliminar del Grupo.
@@ -87,18 +80,6 @@ public class Grupo {
     public void eliminarSubGrupo(String key) {
         this.subGrupos.remove(key);
     }
-
-    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
-    //    this.restricciones = restricciones;
-    //}
-
-    //public void addRestriccion(Restriccion restriccion) {
-    //    this.restricciones.add(restriccion);
-    //}
-
-    //public void eliminarRestriccion(Integer posicion) {
-    //    this.restricciones.remove(posicion);
-    //}
 
     /**Consultoras*/
 
@@ -124,15 +105,6 @@ public class Grupo {
      */
     public Map<String, SubGrupo> getSubGrupos() {
         return this.subGrupos;
-    }
-
-    /**
-     * Comprueba si Grupo tiene un SubGrupo.
-     * @param id    id del SubGrupo.
-     * @return      true si tiene el SubGrupo, false en caso contrario.
-     */
-    public Boolean tieneSubGrupo(String id) {
-        return this.subGrupos.containsKey(id);
     }
 
     /**
@@ -166,6 +138,15 @@ public class Grupo {
     }
 
     /**
+     * Comprueba si Grupo tiene un SubGrupo.
+     * @param key   key del SubGrupo.
+     * @return      true si tiene el SubGrupo, false en caso contrario.
+     */
+    public Boolean tieneSubGrupo(String key) {
+        return this.subGrupos.containsKey(key);
+    }
+
+    /**
      * Devuelve el SubGrupo de Grupo con la key indicada.
      * @param key   key del SubGrupo que queremos obtener.
      * @return      SubGrupo de Grupo con la key indicada.
@@ -173,14 +154,6 @@ public class Grupo {
     public SubGrupo getSubGrupo(String key) {
         return this.subGrupos.get(key);
     }
-
-    //public SubGrupo getSubGrupo(SubGrupo subGrupo) {
-      //  return this.subGrupos.get(subGrupo.getKey());
-    //}
-
-    //public ArrayList<Restriccion> getRestricciones() {
-    //    return this.restricciones;
-    //}
 
     /**
      * Indica si la Asigantura a la que pertenece Grupo pertenece a un Nivel.
