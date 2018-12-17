@@ -138,6 +138,11 @@ public class Asignatura {
         this.nivel = nivel;
     }
 
+    /**Quita el Nivel de Asignatura.*/
+    public void quitarNivel() {
+        this.nivel = null;
+    }
+
     /**
      * Asigna un nuevo conjunto de Sesiones a Asignatura.
      * @param sesiones  Nuevo conjunto de Sesiones que se asignará a Asignatura.

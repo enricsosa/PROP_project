@@ -5,17 +5,13 @@
 package domaincontrollers;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-//import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.util.Map;
-//import static java.lang.System.out;
 
 import domain.*;
 
@@ -167,25 +163,29 @@ public class CtrlDomain {
      */
     public static String getMensageOperacion(int codigoResultado) {
         switch (codigoResultado) {
-            case -20:   return "No hay ningún Horario seleccionado.";
-            case -19:   return "No se ha podido encontrar la Asignacion a mover.";
-            case -18:   return "No se puede mover la Asignacion al dia indicado.";
-            case -17:   return "No se puede mover la Asignacion a la hora indicada.";
-            case -16:   return "Ya existe Aula con la id dada.";
-            case -14:   return "No existe Aula con el nombre dado.";
-            case -13:   return "No existe SubGrupo con la id dada en el Grupo indicado.";
-            case -12:   return "No existe Grupo con la id dada en la Asignatura indicado.";
-            case -11:   return "Ya existe SubGrupo con la id dada en el Grupo indicado.";
-            case -10:   return "Ya existe Grupo con la id dada en la Asignatura indicado.";
-            case -9:    return "Ya existe Asignatura con la id dada.";
-            case -8:    return "Ya existe Nivel con el nombre dado.";
-            case -7:    return "No existe Asignatura con la id dada (Prerrequisito).";
-            case -6:    return "No existe Asignatura con la id dada (Asignatura que tiene Prerrequisito).";
-            case -5:    return "El diaSemana introducido no es válido.";
-            case -4:    return "La franja horaria introducida no es válida.";
-            case -3:    return "No existe el TipoClase dado.";
-            case -2:    return "No existe Asignatura con la id dada.";
-            case -1:    return "No existe Nivel con el nombre dado.";
+            case -24:   return "ERROR: La Asignatura ya carecía de Nivel.";
+            case -23:   return "ERROR: Se busca una Sesion de duracion menor a 1.";
+            case -22:   return "ERROR: Se quiere dar una duracion menor a 1.";
+            case -21:   return "ERROR: No se ha encontrado la Sesion.";
+            case -20:   return "ERROR: No hay ningún Horario seleccionado.";
+            case -19:   return "ERROR: No se ha podido encontrar la Asignacion a mover.";
+            case -18:   return "ERROR: No se puede mover la Asignacion al dia indicado.";
+            case -17:   return "ERROR: No se puede mover la Asignacion a la hora indicada.";
+            case -16:   return "ERROR: Ya existe Aula con la id dada.";
+            case -14:   return "ERROR: No existe Aula con el nombre dado.";
+            case -13:   return "ERROR: No existe SubGrupo con la id dada en el Grupo indicado.";
+            case -12:   return "ERROR: No existe Grupo con la id dada en la Asignatura indicado.";
+            case -11:   return "ERROR: Ya existe SubGrupo con la id dada en el Grupo indicado.";
+            case -10:   return "ERROR: Ya existe Grupo con la id dada en la Asignatura indicado.";
+            case -9:    return "ERROR: Ya existe Asignatura con la id dada.";
+            case -8:    return "ERROR: Ya existe Nivel con el nombre dado.";
+            case -7:    return "ERROR: No existe Asignatura con la id dada (Prerrequisito).";
+            case -6:    return "ERROR: No existe Asignatura con la id dada (Asignatura que tiene Prerrequisito).";
+            case -5:    return "ERROR: El diaSemana introducido no es válido.";
+            case -4:    return "ERROR: La franja horaria introducida no es válida.";
+            case -3:    return "ERROR: No existe el TipoClase dado.";
+            case -2:    return "ERROR: No existe Asignatura con la id dada.";
+            case -1:    return "ERROR: No existe Nivel con el nombre dado.";
             case 0:     return "Se ha añadido NivelHora correctamente.";
             case 1:     return "Se ha eliminado NivelHora correctamente.";
             case 2:     return "Se ha añadido Sesion correctamente.";
@@ -213,6 +213,9 @@ public class CtrlDomain {
             case 24:    return "Se ha añadido Aula correctamente.";
             case 25:    return "Se ha eliminado Aula correctamente.";
             case 26:    return "Se ha podido mover la Asignacion correctamente.";
+            case 27:    return "Se ha editado Sesion correctamente.";
+            case 28:    return "Se ha editado Nivel correctamente.";
+            case 29:    return "Se ha editado Asignatura correctamente.";
             default:    return "codigoResultado no válido.";
         }
     }
@@ -264,11 +267,108 @@ public class CtrlDomain {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
             return -2;
         }
+        if (duracion < 1) {
+            return -22;
+        }
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
             return -3;
         }
         this.planEstudios.getAsignatura(idAsignatura).addSesion(new Sesion(duracion, TipoClase.valueOf(tipo), this.planEstudios.getAsignatura(idAsignatura)));
         return 2;
+    }
+
+    /**
+     * Edita la duracion de una Sesion.
+     * @param duracion      duracion actual de la Sesion.
+     * @param tipo          TipoClase de la Sesion.
+     * @param idAsignatura  id de la Asignatura de la Sesion.
+     * @param nuevaDuracion duracion que se asignará a Sesion.
+     * @return              codigoResultado de la operacion.
+     */
+    public int editarDuracionSesion(int duracion, String tipo, String idAsignatura, int nuevaDuracion) {
+        if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
+            return -2;
+        }
+        if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
+            return -3;
+        }
+        if (duracion < 1) {
+            return -23;
+        }
+        if (nuevaDuracion < 1) {
+            return -22;
+        }
+        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        for (int i = 0; i < sesiones.size(); ++i) {
+            if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
+                sesiones.get(i).setDuracion(nuevaDuracion);
+                return 27;
+            }
+        }
+        return -21;
+    }
+
+    /**
+     * Edita el tipo de una Sesion.
+     * @param duracion      duracion actual de la Sesion.
+     * @param tipo          TipoClase de la Sesion.
+     * @param idAsignatura  id de la Asignatura de la Sesion.
+     * @param nuevoTipo     TipoClase que se asignará a Sesion.
+     * @return              codigoResultado de la operacion.
+     */
+    public int editarTipoSesion(int duracion, String tipo, String idAsignatura, String nuevoTipo) {
+        if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
+            return -2;
+        }
+        if ((!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
+                || (!(nuevoTipo.equals("Teoria") || nuevoTipo.equals("Laboratorio") || nuevoTipo.equals("Problemas")))) {
+            return -3;
+        }
+        if (duracion < 1) {
+            return -23;
+        }
+        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        for (int i = 0; i < sesiones.size(); ++i) {
+            if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
+                sesiones.get(i).setTipo(TipoClase.valueOf(nuevoTipo));
+                return 27;
+            }
+        }
+        return -21;
+    }
+
+    /**
+     * Edita el tipo y la duracion de una Sesion.
+     * @param duracion      duracion actual de la Sesion.
+     * @param tipo          TipoClase de la Sesion.
+     * @param idAsignatura  id de la Asignatura de la Sesion.
+     * @param nuevaDuracion duracion que se asignará a Sesion.
+     * @param nuevoTipo     TipoClase que se asignará a Sesion.
+     * @return              codigoResultado de la operacion.
+     */
+    public int editarSesion(int duracion, String tipo, String idAsignatura, int nuevaDuracion, String nuevoTipo) {
+        if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
+            return -2;
+        }
+        if ((!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
+                || (!(nuevoTipo.equals("Teoria") || nuevoTipo.equals("Laboratorio") || nuevoTipo.equals("Problemas")))) {
+            return -3;
+        }
+        if (duracion < 1) {
+            return -23;
+        }
+        if (nuevaDuracion < 1) {
+            return -22;
+        }
+        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        for (int i = 0; i < sesiones.size(); ++i) {
+            if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
+                sesiones.get(i).setTipo(TipoClase.valueOf(nuevoTipo));
+                sesiones.get(i).setDuracion(nuevaDuracion);
+                return 27;
+            }
+        }
+        return -21;
     }
 
     /**
@@ -285,15 +385,17 @@ public class CtrlDomain {
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas"))) {
             return -3;
         }
+        if (duracion < 1) {
+            return  -23;
+        }
         ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
-        boolean found = false;
-        for (int i = 0; i < sesiones.size() && !found; ++i) {
+        for (int i = 0; i < sesiones.size(); ++i) {
             if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
-                found = true;
                 sesiones.remove(i);
+                return 3;
             }
         }
-        return 3;
+        return -21;
     }
 
     /**
@@ -566,6 +668,23 @@ public class CtrlDomain {
     }
 
     /**
+     * Asigna un nuevo nombre a un Nivel.
+     * @param nombre        nombre que se quiere dar al Nivel añadido.
+     * @param nuevoNombre   nuevo nombre que se asigna a Nivel.
+     * @return          codigoResultado de la operación.
+     */
+    public int editarNombreNivel(String nombre, String nuevoNombre) {
+        if (!(this.planEstudios.tieneNivel(nombre))) {
+            return -1;
+        }
+        if (this.planEstudios.tieneNivel(nuevoNombre)) {
+            return -8;
+        }
+        this.planEstudios.getNivel(nombre).setNombre(nuevoNombre);
+        return 17;
+    }
+
+    /**
      * Elimina un Nivel de planEstudios.
      * @param nombre    Nombre del Nivel a eliminar.
      * @return          codigoResultado de la operación.
@@ -614,6 +733,75 @@ public class CtrlDomain {
     }
 
     /**
+     * Cambia la id de una Asignatura.
+     * @param id        id actual de la Asignatura.
+     * @param nuevaId   id que se va a dar a Asignatura.
+     * @return          codigoResultado de la operación.
+     */
+    public int editarIdAsignatura(String id, String nuevaId) {
+        if (!(this.planEstudios.tieneAsignatura(id))) {
+            return -2;
+        }
+        if (this.planEstudios.tieneAsignatura(nuevaId)) {
+            return -9;
+        }
+        this.planEstudios.getAsignatura(id).setId(nuevaId);
+        return 29;
+    }
+
+    /**
+     * Cambia el nombre de una Asignatura.
+     * @param id            id actual de la Asignatura.
+     * @param nuevoNombre   nombre que se va a dar a Asignatura.
+     * @return              codigoResultado de la operación.
+     */
+    public int editarNombreAsignatura(String id, String nuevoNombre) {
+        if (!(this.planEstudios.tieneAsignatura(id))) {
+            return -2;
+        }
+        this.planEstudios.getAsignatura(id).setNombre(nuevoNombre);
+        return 29;
+    }
+
+    /**
+     * Cambia el Nivel de una Asignatura.
+     * @param id                id actual de la Asignatura.
+     * @param nombreNuevoNivel  nombre del nuevo Nivel que se asigna a Asignatura.
+     * @return                  codigoResultado de la operación.
+     */
+    public int editarNivelAsignatura(String id, String nombreNuevoNivel) {
+        if (!(this.planEstudios.tieneAsignatura(id))) {
+            return -2;
+        }
+        if (!(this.planEstudios.tieneNivel(nombreNuevoNivel))) {
+            return -1;
+        }
+        if (this.planEstudios.getAsignatura(id).tieneNivel()) {
+            this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
+        }
+        this.planEstudios.getAsignatura(id).setNivel(this.planEstudios.getNivel(nombreNuevoNivel));
+        this.planEstudios.getNivel(nombreNuevoNivel).addAsignatura(this.planEstudios.getAsignatura(id));
+        return 29;
+    }
+
+    /**
+     * Quita el Nivel de una Asignatura.
+     * @param id        id actual de la Asignatura.
+     * @return          codigoResultado de la operación.
+     */
+    public int quitarNivelAsignatura(String id) {
+        if (!(this.planEstudios.tieneAsignatura(id))) {
+            return -2;
+        }
+        if (!(this.planEstudios.getAsignatura(id).tieneNivel())) {
+            return -24;
+        }
+        this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
+        this.planEstudios.getAsignatura(id).quitarNivel();
+        return 29;
+    }
+
+    /**
      * Elimina una Asignatura de planEstudios.
      * @param id    id dela Asignatura a eliminar.
      * @return      codigoResultado de la operación.
@@ -647,9 +835,31 @@ public class CtrlDomain {
     }
 
     /**
+     * cambia la id de un Grupo de planEstudios.
+     * @param id            id del Grupo a eliminar.
+     * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
+     * @param nuevaId       id que se asignará al Grupo.
+     * @return              codigoResultado de la operación.
+     */
+    public int editarIdGrupo(String id, String idAsignatura, String nuevaId) {
+        if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
+            return -2;
+        }
+        if (!(this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id))) {
+            return -12;
+        }
+        if (this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(nuevaId)) {
+            return -10;
+        }
+        this.planEstudios.getAsignatura(idAsignatura).getGrupo(id).setId(nuevaId);
+        return 19;
+    }
+
+    /**
      * Elimina un Grupo de planEstudios.
-     * @param id    id del Grupo a eliminar.
-     * @return      codigoResultado de la operación.
+     * @param id            id del Grupo a eliminar.
+     * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
+     * @return              codigoResultado de la operación.
      */
     public int eliminarGrupo(String id, String idAsignatura) {
         if (!(this.planEstudios.tieneAsignatura(idAsignatura))) {
