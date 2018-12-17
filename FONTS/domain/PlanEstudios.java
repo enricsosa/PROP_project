@@ -66,7 +66,7 @@ public class PlanEstudios {
 
     /**
      * Asigna un nuevo nombre a PlanEstudios.
-     * @param   nombre    Nuevo nombre que se asignará a PlanEstudios.
+     * @param nombre    Nuevo nombre que se asignará a PlanEstudios.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -74,7 +74,7 @@ public class PlanEstudios {
 
     /**
      * Asigna un conjunto de Restricciones a PlanEstudios.
-     * @param   restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
+     * @param restricciones Conjunto de Restricciones que se asignan a PlanEstudios.
      */
     public void setRestricciones(ArrayList<Restriccion> restricciones) {
         this.restricciones = restricciones;
@@ -82,7 +82,7 @@ public class PlanEstudios {
 
     /**
      * Asigna un nuevo conjunto de Restricciones a allRestricciones.
-     * @param   restricciones Conjunto de Restricciones que se asignan a allRestricciones.
+     * @param restricciones Conjunto de Restricciones que se asignan a allRestricciones.
      */
     public void setAllRestricciones(ArrayList<Restriccion> restricciones) {
         this.allRestricciones = restricciones;
@@ -90,15 +90,11 @@ public class PlanEstudios {
 
     /**
      * Añade un Nivel a PlanEstudios.
-     * @param   nivel Nivel que se añade a PlanEstudios.
+     * @param nivel     Nivel que se añade a PlanEstudios.
      */
     public void addNivel(Nivel nivel) {
         this.niveles.putIfAbsent(nivel.getNombre(), nivel);
     }
-
-    //public void replaceNivel(Nivel nivel) {
-      //  this.niveles.replace(nivel.getNombre(), nivel);
-    //}
 
     /**
      * Elimina de PlanEstudios el Nivel con el nombre introducido.
@@ -106,15 +102,6 @@ public class PlanEstudios {
      */
     public void eliminarNivel(String nombre) {
         this.niveles.remove(nombre);
-    }
-
-    /**
-     * Comprueba si planEstudios tiene un Nivel con el nombre indicado.
-     * @param   nombre nombre del nivel que se quiere comprobar.
-     * @return  true si tiene el Nivel, false en caso contrario.
-     */
-    public Boolean tieneNivel(String nombre) {
-        return this.niveles.containsKey(nombre);
     }
 
     /**
@@ -126,33 +113,11 @@ public class PlanEstudios {
     }
 
     /**
-     * Comprueba si planEstudios tiene una Aula con la id dada.
-     * @param   id id del Aula que se quiere comprobar.
-     * @return  true si tiene el Aula, false en caso contrario.
-     */
-    public Boolean tieneAula(String id) {
-        return this.aulas.containsKey(id);
-    }
-
-    //public void replaceAsignatura(Asignatura asignatura) {
-       // this.asignaturas.replace(asignatura.getId(), asignatura);
-    //}
-
-    /**
      * Elimina de PlanEstudios la Asignatura con la id introducida.
      * @param id    id de la Asignatura que se quiere eliminar.
      */
     public void eliminarAsignatura(String id) {
         this.asignaturas.remove(id);
-    }
-
-    /**
-     * Comprueba si planEstudios tiene una Asignatura con la id indicada.
-     * @param   id id de la Asignatura que se quiere comprobar.
-     * @return  true si tiene la Asignatura, false en caso contrario.
-     */
-    public Boolean tieneAsignatura(String id) {
-        return this.asignaturas.containsKey(id);
     }
 
     /**
@@ -163,10 +128,6 @@ public class PlanEstudios {
         this.aulas.putIfAbsent(aula.getId(), aula);
     }
 
-    //public void replaceAula(Aula aula) {
-    //    this.aulas.replace(aula.getId(), aula);
-    //}
-
     /**
      * Elimina el Aula de PlanEstudios con la id indicada.
      * @param id    id del Aula que se quiere eliminar.
@@ -174,10 +135,6 @@ public class PlanEstudios {
     public void eliminarAula(String id) {
         this.aulas.remove(id);
     }
-
-    //public void setHorarioGeneral (Horario horarioGeneral) {
-      //  this.horarioGeneral = horarioGeneral;
-    //}
 
     /**
      * Añade una Restriccion a PlanEstudios.
@@ -292,8 +249,8 @@ public class PlanEstudios {
 
     /**
      * Elimina un Correquisito del PlanEstudios.
-     * @param   idAsignatura1 id de una Asignatura del Correquisito.
-     * @param   idAsignatura2 id de una Asignatura del Correquisito.
+     * @param idAsignatura1 id de una Asignatura del Correquisito.
+     * @param idAsignatura2 id de una Asignatura del Correquisito.
      */
     public void eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
         for (int i = 0; (i < this.allRestricciones.size()); ++i) {
@@ -311,8 +268,8 @@ public class PlanEstudios {
 
     /**
      * Elimina un Prerrequisito del PlanEstudios.
-     * @param   idAsignatura id de la Asignatura que tiene el Prerrequisito.
-     * @param   idPrerrequisito id de la Asignatura prerrequisito.
+     * @param idAsignatura      id de la Asignatura que tiene el Prerrequisito.
+     * @param idPrerrequisito   id de la Asignatura prerrequisito.
      */
     public void eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
         for (int i = 0; (i < this.allRestricciones.size()); ++i) {
@@ -328,7 +285,7 @@ public class PlanEstudios {
 
     /**
      * Elimina un DiaLibre de PlanEstudios.
-     * @param   diaSemana diaSemana del DiaLibre que se quiere eliminar.
+     * @param diaSemana diaSemana del DiaLibre que se quiere eliminar.
      */
     public void eliminarDiaLibre(int diaSemana) {
         for (int i = 0; i < this.restricciones.size(); ++i) {
@@ -368,6 +325,15 @@ public class PlanEstudios {
     }
 
     /**
+     * Comprueba si planEstudios tiene un Nivel con el nombre indicado.
+     * @param nombre    nombre del nivel que se quiere comprobar.
+     * @return          true si tiene el Nivel, false en caso contrario.
+     */
+    public Boolean tieneNivel(String nombre) {
+        return this.niveles.containsKey(nombre);
+    }
+
+    /**
      * Dado su nombre devuelve un Nivel de PlanEstudios.
      * @param nombre    Nombre del Nivel que se quiere obtener.
      * @return          niveld e PlanEstudios con el nombre dado.
@@ -385,6 +351,15 @@ public class PlanEstudios {
     }
 
     /**
+     * Comprueba si planEstudios tiene una Asignatura con la id indicada.
+     * @param id    id de la Asignatura que se quiere comprobar.
+     * @return      true si tiene la Asignatura, false en caso contrario.
+     */
+    public Boolean tieneAsignatura(String id) {
+        return this.asignaturas.containsKey(id);
+    }
+
+    /**
      * Dado su id devuelve una Asignatura de PlanEstudios.
      * @param id    id de la Asignatura que se quiere obtener.
      * @return      Asignatura de PlanEstudios con la id dada.
@@ -399,6 +374,24 @@ public class PlanEstudios {
      */
     public Map<String, Aula> getAulas() {
         return this.aulas;
+    }
+
+    /**
+     * Comprueba si planEstudios tiene una Aula con la id dada.
+     * @param id    id del Aula que se quiere comprobar.
+     * @return      true si tiene el Aula, false en caso contrario.
+     */
+    public Boolean tieneAula(String id) {
+        return this.aulas.containsKey(id);
+    }
+
+    /**
+     * Devuelve una Aula con la id dada.
+     * @param id    id del Aula.
+     * @return      Map con las Aulas de PlanEstudios.
+     */
+    public Aula getAula(String id) {
+        return this.aulas.get(id);
     }
 
     /**
@@ -432,23 +425,6 @@ public class PlanEstudios {
     }
 
     /**
-     * Devuelve el Aula de PlanEstudios con la id dada.
-     * @param id    id del Aula que se quiere obtener.
-     * @return      Aula de PlanEstudios con la id dada.
-     */
-    public Aula getAula(String id) {
-        return this.aulas.get(id);
-    }
-
-    //public Horario getHorarioGeneral() {
-      //  return this.horarioGeneral;
-    //}
-
-    //public Boolean tieneHorario() {
-      //  return this.horarioGeneral != null;
-    //}
-
-    /**
      * Devuelve el conjunto de Restricciones de PlanEstudios.
      * @return  ArrayList con las Restricciones de PlanEstudios.
      */
@@ -474,6 +450,15 @@ public class PlanEstudios {
     }
 
     /**
+     * Dada su posicion en el conjunto de Restricciones de allRestricciones devuelve una Restriccion.
+     * @param posicion  posicion en el conjunto de Restricciones de allRestricciones de la Restriccion que se quiere obtener.
+     * @return          Restriccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de allRestricciones.
+     */
+    public Restriccion getAllRestriccion(int posicion) {
+        return this.allRestricciones.get(posicion);
+    }
+
+    /**
      * Devuelve un Map con todas las Restricciones clasificadas por TipoRestriccion.
      * @return  Map con todas las Restricciones clasificadas por TipoRestriccion.
      */
@@ -491,15 +476,6 @@ public class PlanEstudios {
             allRestriccionesCategorizadas.get(restriccion.getTipoRestriccion()).add(restriccion);
         }
         return allRestriccionesCategorizadas;
-    }
-
-    /**
-     * Dada su posicion en el conjunto de Restricciones de allRestricciones devuelve una Restriccion.
-     * @param posicion  posicion en el conjunto de Restricciones de allRestricciones de la Restriccion que se quiere obtener.
-     * @return          Restriccion que se encuentra en la posicion dada dentro del conjunto de Restricciones de allRestricciones.
-     */
-    public Restriccion getAllRestriccion(int posicion) {
-        return this.allRestricciones.get(posicion);
     }
 
     /**Métodos redefinidos*/

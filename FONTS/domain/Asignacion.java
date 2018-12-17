@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 import java.util.ArrayList;
 
 /**
@@ -145,7 +147,7 @@ public class Asignacion {
      * @return  Devuelve un String con la clave única de la Asignación.
      */
     public String generateKey() {
-        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId())+Aux.strTipo(this.clase.getTipoSesion());
+        return (this.clase.getAsignatura().getId()+this.clase.getSubGrupo().getIdCompleta()+this.getAula().getId())+ Aux.strTipo(this.clase.getTipoSesion());
     }
 
     /**Consultoras*/

@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 /**
  * Sesion representa cada una de las sesiones semanales que realiza un alumno matricuylado en una Asignatura.
  * @author  Daniel Martín

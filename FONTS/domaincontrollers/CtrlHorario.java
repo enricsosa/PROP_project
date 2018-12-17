@@ -28,7 +28,7 @@ import domain.*;
  * @see     domain.TipoRestriccion
  * @see     domain.FranjaNivel
  * @see     domain.Asignatura
- * @see     domain.Aux
+ * @see     Aux
  * @see     domain.FranjaAsignatura
  * @see     domain.SubGrupo
  * @see     domain.Grupo

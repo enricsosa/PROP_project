@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 /**
  * DiaLibre contiene la información de una Restriccion que indica que no se pueden dar Clases en un dia de la semana.
  * @author  Daniel Martín

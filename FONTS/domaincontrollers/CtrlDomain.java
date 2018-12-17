@@ -47,7 +47,7 @@ import data.*;
  * @see     domain.Prerrequisito
  * @see     domain.FranjaAsignatura
  * @see     domain.FranjaNivel
- * @see     domain.Aux
+ * @see     Aux
  * @see     data.CtrlAsignaturasFile
  * @see     data.CtrlAulasFile
  * @see     data.CtrlPlanEstudiosFile

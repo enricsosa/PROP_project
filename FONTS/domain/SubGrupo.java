@@ -6,6 +6,8 @@ package domain;
 
 //import static java.lang.System.out;
 
+import domaincontrollers.Aux;
+
 /**
  * La clase SubGrupo contiene la información de una unidad compuesta por varios alumnos que realiza Clases de un TipoClase
  * concreto y que pertenece a un Grupo de una Asignatura.

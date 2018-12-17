@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

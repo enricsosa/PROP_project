@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 /**
  * FranjaTrabajo contiene la información de una Restriccion que indica que no se pueden dar Clases fuera de una franja
  * horaria.

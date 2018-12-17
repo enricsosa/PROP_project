@@ -2,7 +2,9 @@
 
 /**Imports*/
 
-package domain;
+package domaincontrollers;
+
+import domain.TipoClase;
 
 /**
  * Aux contiene funciones static usadas en varias clases del programa.

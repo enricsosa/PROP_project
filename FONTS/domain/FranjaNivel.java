@@ -4,6 +4,8 @@
 
 package domain;
 
+import domaincontrollers.Aux;
+
 /**
  * FranjaAsignatura contiene la información de una Restriccion que indica que no se pueden dar Clases de un Nivel fuera
  * de una franja horaria.

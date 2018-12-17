@@ -6,8 +6,6 @@ package domaincontrollers;
 
 import java.util.Arrays;
 
-import domain.Aux;
-
 /**
  * LimitacionesHorario mantiene información sobre la franja de trabajo y los dias que no se da Clase.
  * @author  Daniel Martín
