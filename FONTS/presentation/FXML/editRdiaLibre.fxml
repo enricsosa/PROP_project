@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.FXMLControllers.CtrlEditRdiaLibre">
+   <children>
+      <Label text="Dias Libres">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Dias libres antes de editar:">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="40.0" />
+               </VBox.margin>
+            </Label>
+            <FlowPane hgap="12.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0">
+               <children>
+                  <CheckBox fx:id="lunesAnt" mnemonicParsing="false" text="Lunes" />
+                  <CheckBox fx:id="martesAnt" mnemonicParsing="false" text="Martes" />
+                  <CheckBox fx:id="miercolesAnt" mnemonicParsing="false" text="Miércoles" />
+                  <CheckBox fx:id="juevesAnt" mnemonicParsing="false" text="Jueves" />
+                  <CheckBox fx:id="viernesAnt" mnemonicParsing="false" text="Viernes" />
+                  <CheckBox fx:id="sabadoAnt" mnemonicParsing="false" text="Sabado" />
+                  <CheckBox fx:id="domingoAnt" mnemonicParsing="false" text="Domingo" />
+               </children>
+            </FlowPane>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Actualizar dias libres:">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <FlowPane hgap="12.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0">
+               <children>
+                  <CheckBox fx:id="lunesPost" mnemonicParsing="false" text="Lunes" />
+                  <CheckBox fx:id="martesPost" mnemonicParsing="false" text="Martes" />
+                  <CheckBox fx:id="miercolesPost" mnemonicParsing="false" text="Miércoles" />
+                  <CheckBox fx:id="juevesPost" mnemonicParsing="false" text="Jueves" />
+                  <CheckBox fx:id="viernesPost" mnemonicParsing="false" text="Viernes" />
+                  <CheckBox fx:id="sabadoPost" mnemonicParsing="false" text="Sabado" />
+                  <CheckBox fx:id="domingoPost" mnemonicParsing="false" text="Domingo" />
+               </children>
+            </FlowPane>
+            <Button fx:id="updateBtn" mnemonicParsing="false" text="Actualizar">
+               <VBox.margin>
+                  <Insets bottom="9.0" />
+               </VBox.margin></Button>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets left="10.0" top="8.0" />
+   </padding>
+</VBox>

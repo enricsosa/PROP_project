@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="quitBtn" mnemonicParsing="false" text="Ignorar cambios y salir">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Region prefHeight="38.0" prefWidth="122.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="histBtn" mnemonicParsing="false" text="Historial">
+               <HBox.margin>
+                  <Insets right="3.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="savequitBtn" mnemonicParsing="false" text="Guadar y salir">
+               <HBox.margin>
+                  <Insets left="3.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <VBox alignment="CENTER" prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="title" text="Label">
+               <VBox.margin>
+                  <Insets bottom="8.0" />
+               </VBox.margin>
+            </Label>
+            <HBox fx:id="escItems" alignment="CENTER" prefHeight="29.0" prefWidth="600.0" spacing="12.0">
+               <children>
+                  <Button fx:id="peBtn" mnemonicParsing="false" text="Plan estudios" />
+                  <Button fx:id="asBtn" mnemonicParsing="false" text="Asignaturas" />
+                  <Button fx:id="auBtn" mnemonicParsing="false" text="Aulas" />
+                  <Button fx:id="reBtn" mnemonicParsing="false" text="Restricciones" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="396.0" prefWidth="527.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="itemTitle" text="Label">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="4.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <ListView prefHeight="396.0" prefWidth="130.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

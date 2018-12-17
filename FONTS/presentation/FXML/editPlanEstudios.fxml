@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.FXMLControllers.CtrlEditPlanEstudios">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Añadir Nivel">
+               <VBox.margin>
+                  <Insets bottom="4.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Atributos necesarios:">
+                     <VBox.margin>
+                        <Insets bottom="4.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Nombre: " />
+                        <TextField fx:id="textNomadd" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addBtnClicked" text="Añadir">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="3.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="6.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Editar Nivel">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nombre: " />
+                  <TextField fx:id="textNomedit" />
+               </children>
+            </HBox>
+            <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editBtnClicked" text="Editar">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="3.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="3.0" left="6.0" top="3.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Eliminar Nivel">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Propiedades:">
+                     <VBox.margin>
+                        <Insets bottom="3.0" top="3.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Nombre: " />
+                        <Label fx:id="labNomrm" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="rmBtn" mnemonicParsing="false" onAction="#removeBtnClicked" text="Eliminar">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="3.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="6.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

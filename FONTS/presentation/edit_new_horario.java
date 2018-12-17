@@ -84,7 +84,6 @@ public class edit_new_horario {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setResizable(false);
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/edit_new_horario.fxml"));
         Parent root = null;
         try {

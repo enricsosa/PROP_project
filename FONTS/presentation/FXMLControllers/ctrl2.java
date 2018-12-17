@@ -52,6 +52,11 @@ public class ctrl2 {
     /**Restricciones FranjaNivel.*/
     private ArrayList<String> restrFN;
 
+    private ArrayList<String> planEstudiosCD;
+    private HashMap<String, ArrayList<Object>> asignaturasCD;
+    private HashMap<String, ArrayList<Object>> aulasCD;
+    private HashMap<String, ArrayList<Object>> restriccionesCD;
+
     @FXML
     public Label escenario_label;
 
@@ -119,7 +124,7 @@ public class ctrl2 {
         root.setExpanded(true);
 
         //PlanEstudios
-        ArrayList<String> planEstudiosCD = new ArrayList<>();
+        planEstudiosCD = new ArrayList<>();
         try {
             planEstudiosCD = cd.subirPlanEstudios(s);
         } catch (Exception e) {
@@ -134,7 +139,7 @@ public class ctrl2 {
         }
 
         //Asignaturas
-        HashMap<String, ArrayList<Object>> asignaturasCD = new HashMap<>();
+        asignaturasCD = new HashMap<>();
         try {
             asignaturasCD = cd.subirAsignaturas(s);
         } catch (Exception e) {
@@ -172,7 +177,7 @@ public class ctrl2 {
         }
 
         //Aulas
-        HashMap<String, ArrayList<Object>> aulasCD = new HashMap<>();
+        aulasCD = new HashMap<>();
         try {
             aulasCD = cd.subirAulas(s);
         } catch (Exception e) {
@@ -192,7 +197,7 @@ public class ctrl2 {
         }
 
         //Restricciones
-        HashMap<String, ArrayList<Object>> restriccionesCD = new HashMap<>();
+        restriccionesCD = new HashMap<>();
         try {
             restriccionesCD = cd.subirRestricciones(s);
         } catch (Exception e) {
@@ -297,6 +302,11 @@ public class ctrl2 {
         setRestricciones sR = setRestricciones.getInstance();
         sR.setAllRestricciones(restrDL, restrFT, restrNH, restrCO, restrPRE, restrFA, restrFN);
         sR.display(currentEscenario);
+    }
+
+    public void editarEscenario() {
+        edit_new_escenario ene = edit_new_escenario.getInstance();
+        ene.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD);
     }
 
     /**Constructora de la clase ctrl2.*/
