@@ -414,6 +414,18 @@ public class CtrlEscenariosDir {
     }
 
     /**
+     * Guarda un Horario en un archivo txt.
+     * @param horario       String con la información de un Horario.
+     * @param idHorario     Código identificador del Horario.
+     * @throws IOException
+     */
+    public void writeHorario(String horario, Integer idHorario) throws IOException {
+        PrintWriter writer = new PrintWriter("DATA/Output/"+"Horario#" + idHorario.toString(), "UTF-8");
+        writer.println(horario);
+        writer.close();
+    }
+
+    /**
      * Lee un Horario de un archivo txt.
      * @param horario                  Nombre del horario que se quiere cargar.
      * @return String con los datos de un Horario.

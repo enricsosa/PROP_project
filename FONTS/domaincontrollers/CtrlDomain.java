@@ -791,15 +791,31 @@ public class CtrlDomain {
     }
 
     /**
-     * Escribe un Horario por consola.
+     * Escribe un Horario.
      * @param horario   String con los datos de Horario.
-     * @param idHorario id del Horarioque se escribe.
+     * @param idHorario id del Horario que se escribe.
      * @throws IOException              Ha fallado una operación IO.
      */
     public void writeHorario(String horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
     }
 
+    /**
+     * Escribe un Horario por consola.
+     * @param horario   String con los datos de Horario.
+     * @param idHorario id del Horario que se escribe.
+     * @throws IOException
+     */
+    public void writeHorario(String horario, Integer idHorario) throws IOException {
+        controladorEscenarios.writeHorario(horario, idHorario);
+    }
+
+    /**
+     * Escribe un horario a partir de un HashMap.
+     * @param horario   HashMap con los datos de Horario.
+     * @param idHorario id del horario que se escribe.
+     * @throws IOException
+     */
     public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorarioFromMap(horario, idHorario);
     }
