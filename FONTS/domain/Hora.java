@@ -21,14 +21,12 @@ public class Hora {
 
     /**Asignaciones que transcurren en Hora.*/
     private Map<String, Asignacion> asignaciones;
-    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
     /**Constructora básica de la clase Hora.*/
     public Hora() {
         this.asignaciones = new HashMap<String, Asignacion>();
-        //this.restricciones = new ArrayList<Restriccion>();
     }
 
     /**
@@ -38,8 +36,6 @@ public class Hora {
     public Hora(Hora oldHora) {
         this.asignaciones = new HashMap<String, Asignacion>();
         this.asignaciones.putAll(oldHora.asignaciones);
-        //this.restricciones = new ArrayList<Restriccion>();
-        //this.restricciones.addAll(oldHora.restricciones);
     }
 
     /**Metodos publicos*/
@@ -60,10 +56,6 @@ public class Hora {
         this.asignaciones.putIfAbsent(asignacion.generateKey(), asignacion);
     }
 
-    //public void replaceAsignacion(Asignacion asignacion) {
-    //    this.asignaciones.replace(asignacion.generateKey(), asignacion);
-    //}
-
     /**
      * Elimina una Asignacion de Hora a partir de su key.
      * @param key   key de la Asignacion que se quiere eliminar.
@@ -80,22 +72,6 @@ public class Hora {
         this.asignaciones.remove(asignacion.generateKey());
     }
 
-    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
-      //  this.restricciones = restricciones;
-    //}
-
-    //public void addRestriccion(Restriccion restriccion) {
-      //  this.restricciones.add(restriccion);
-    //}
-
-    //public void addRestricciones(ArrayList<Restriccion> restricciones) {
-      //  this.restricciones.addAll(restricciones);
-    //}
-
-    //public void eliminarRestriccion(Integer posicion) {
-      //  this.restricciones.remove(posicion);
-    //}
-
     /**Consultoras*/
 
     /**
@@ -111,21 +87,21 @@ public class Hora {
     }
 
     /**
-     * Devuelve un Nivel de Hora dado su nombre.
-     * @param nombre    nombre del nivel que se quiere obtener.
-     * @return          Nivel de Hora con el nombre indicado.
-     */
-    public Nivel getNivel(String nombre) {
-        return this.getNiveles().get(nombre);
-    }
-
-    /**
      * Indica si en Hora hay un Nivel.
      * @param nivel Nivel que queremos saber si tiene Hora.
      * @return      true si dia tiene nivel, false en caso contrario.
      */
     public Boolean tieneNivel(Nivel nivel) {
         return (this.getNiveles().get(nivel.getNombre()) != null);
+    }
+
+    /**
+     * Devuelve un Nivel de Hora dado su nombre.
+     * @param nombre    nombre del nivel que se quiere obtener.
+     * @return          Nivel de Hora con el nombre indicado.
+     */
+    public Nivel getNivel(String nombre) {
+        return this.getNiveles().get(nombre);
     }
 
     /**
@@ -171,21 +147,21 @@ public class Hora {
     }
 
     /**
-     * Devuelve un Aula de Hora a partir de la id de la misma.
-     * @param id    id del Aula que se quiere obtener.
-     * @return      Aula de Hora con id igual al id dado.
-     */
-    public Aula getAula(String id) {
-        return this.getAulas().get(id);
-    }
-
-    /**
      * Indica si una Aula se encuentra entre las Aulas de Hora.
      * @param aula  Aula de la que se quiere saber si está en Hora.
      * @return      true si aula se encuentra entre las Aulas de Hora, false en caso contrario.
      */
     public Boolean tieneAula(Aula aula) {
         return (this.getAulas().get(aula.getId()) != null);
+    }
+
+    /**
+     * Devuelve un Aula de Hora a partir de la id de la misma.
+     * @param id    id del Aula que se quiere obtener.
+     * @return      Aula de Hora con id igual al id dado.
+     */
+    public Aula getAula(String id) {
+        return this.getAulas().get(id);
     }
 
     /**
@@ -199,10 +175,6 @@ public class Hora {
         }
         return grupos;
     }
-
-    //public Grupo getGrupo(String id) {
-      //  return this.grupos.get(id);
-    //}
 
     /**
      * Indica si una Grupo se encuentra entre las Grupos de Hora.
@@ -234,14 +206,6 @@ public class Hora {
         }
         return subGrupos;
     }
-
-    //public SubGrupo getSubGrupo(String id) {
-    //    return this.subGrupos.get(id);
-    //}
-
-    //public SubGrupo getSubGrupo(SubGrupo subGrupo) {
-     //   return this.subGrupos.get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + strTipo(subGrupo.getTipo()));
-    //}
 
     /**
      * Indica si un SubGrupo se encuentra entre las SubGrupos de Hora.
@@ -277,14 +241,6 @@ public class Hora {
     public Boolean tieneAsignacion(Asignacion asignacion) {
         return (this.asignaciones.get(asignacion.generateKey()) != null);
     }
-
-    //public ArrayList<Restriccion> getRestricciones() {
-     //   return restricciones;
-    //}
-
-    //public Restriccion getRestriccion(int i) {
-      //  return this.restricciones.get(i);
-    //}
 
     /**Métodos redefinidos*/
 

@@ -28,7 +28,6 @@ import domain.*;
  * @see     domain.TipoRestriccion
  * @see     domain.FranjaNivel
  * @see     domain.Asignatura
- * @see     Aux
  * @see     domain.FranjaAsignatura
  * @see     domain.SubGrupo
  * @see     domain.Grupo
@@ -85,7 +84,6 @@ public class CtrlHorario {
                 this.limitacionesHorario.setHoraFin(((FranjaTrabajo)this.planEstudios.getRestriccion(i)).getHoraFin());
             }
         }
-        //out.println(limitacionesHorario.toString());
     }
 
     /**
@@ -154,19 +152,12 @@ public class CtrlHorario {
 
         horario.addAsignacion(asignacion);
 
-        //System.out.println("Step: " + step + Aux.spacer() + Aux.spacer());
-        //System.out.println(horario);
-
         if (!(Arrays.asList(placed).contains(false))) {
-            //System.out.println("No hay más clases por añadir.");
             return new ReturnSet(true, horario);
         }
 
         for (int i = 0; i < clases.size(); ++i) {
-            //System.out.println("clase:" + i);
             if (!placed[i]) {
-
-                //System.out.println("clase aun por colocar.");
 
                 Clase clase = clases.get(i);
                 ReturnSet franja = franjas.get(i);
@@ -190,15 +181,11 @@ public class CtrlHorario {
                             && (!(comprovarSubGrupoDia(clase, dia, horario)))
                             && (!(comprovarGrupoDia(clase, dia, horario)))) {
 
-                        //System.out.println("Cumple restricciones de dia.");
-
                         for (int horaIni = franja.getHoraIni(); (horaIni + clase.getDuracion()) <= (franja.getHoraFin()); ++horaIni) {
                             if (comprobarRestricciones(clase, dia, horaIni, horario)) {
 
-                                //System.out.println("Cumple restrcciones de hora.");
                                 for (Map.Entry<String, Aula> entry : this.getAulasAdecuadas(clase).entrySet()) {
                                     if (!(aulaOcupada(clase, dia, horaIni, entry.getValue(), horario))) {
-                                        //System.out.println("Se ha encontrado aula adequada.");
                                         Asignacion nextAsignacion = new Asignacion(horaIni, dia, entry.getValue(), clase);
                                         placed[i] = true;
                                         ReturnSet returnSet = this.generarAsignaciones(nextAsignacion, clases, horario, franjas, placed, step + 1);
@@ -207,15 +194,12 @@ public class CtrlHorario {
                                     }
                                 }
                             }
-                            //else System.out.println("No se cumplen las restricciones opcionales.");
                         }
                     }
                 }
 
             }
-            //System.out.println("Clase ya colocada.");
         }
-        //System.out.println("Se han probado todas las clases.");
         horario.eliminarAsignacion(asignacion);
         return new ReturnSet(false);
     }

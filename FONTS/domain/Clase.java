@@ -19,8 +19,6 @@ public class Clase {
     private SubGrupo subGrupo;
     /**Sesion que se realiza en la Clase*/
     private Sesion sesion;
-    //**Conjunto de Restricciones formado por las Restricciones de la Asignatura y el Nivel (si tiene) del Grupo.*/
-    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
@@ -32,10 +30,6 @@ public class Clase {
     public Clase(SubGrupo subGrupo, Sesion sesion) {
         this.subGrupo = subGrupo;
         this.sesion = sesion;
-        //this.restricciones = new ArrayList<Restriccion>();
-        //this.restricciones.addAll(subGrupo.getGrupo().getRestricciones());
-        //this.restricciones.addAll(subGrupo.getAsignatura().getRestricciones());
-        //if (subGrupo.getAsignatura().tieneNivel()) this.restricciones.addAll(subGrupo.getAsignatura().getNivel().getRestricciones());
     }
 
     /**Métodos públicos*/
@@ -55,30 +49,6 @@ public class Clase {
     public void setSesion(Sesion sesion) {
         this.sesion = sesion;
     }
-
-    //**
-    // * Asigna un nuevo conjunto de Restricciones a Clase.
-    // * @param restricciones Nuevo conjunto de Restricciones que se asignará a Clase.
-    // */
-    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
-    //    this.restricciones = restricciones;
-    //}
-
-    //**
-    // * Añade una Restriccion al conjunto de Restricciones de Clase.
-    // * @param restriccion   Restriccion que se añade a las Restricciones de la Clase.
-    // */
-    //public void addRestriccion(Restriccion restriccion) {
-    //    this.restricciones.add(restriccion);
-    //}
-
-    //**
-    // * ELimina una Restriccion en funcion de su posicion dentro de las Restricciones de la Clase.
-    // * @param posicion  posicion de la Restriccion que se quiere eliminar dentro de las Restricciones de la Clase.
-     //*/
-    //public void eliminarRestriccion(Integer posicion) {
-    //    this.restricciones.remove(posicion);
-    //}
 
     /**
      * Convierte la Clase a un String que contiene su información de forma resumida.

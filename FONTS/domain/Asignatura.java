@@ -179,14 +179,6 @@ public class Asignatura {
     }
 
     /**
-     * Reemplaza un Grupo del conjunto de Grupos de la Asignatura con la misma id.
-     * @param grupo Grupo con el cual se quiere reemplazar un Grupo existente.
-     */
-    public void replaceGrupo(Grupo grupo) {
-        this.grupos.replace(grupo.getId(), grupo);
-    }
-
-    /**
      * Elimina un Grupo del conjunto de Grupos de la Asignatura que tiene la id dada.
      * @param id    id del grupo que se quiere eliminar.
      */

@@ -28,7 +28,6 @@ public class Dia {
 
     /**Constructora básica de la clase Dia.*/
     public Dia() {
-        //this.restricciones = new ArrayList<Restriccion>();
         this.horas = new Hora[24];
         for (int i = 0; i < 24; ++i) {
             this.horas[i] = new Hora();
@@ -40,8 +39,6 @@ public class Dia {
      * @param oldDia    Dia del cual se copian los datos.
      */
     public Dia(Dia oldDia) {
-        //this.restricciones = new ArrayList<Restriccion>();
-        //this.restricciones.addAll(oldDia.restricciones);
         this.horas = new Hora[24];
         for (int i = 0; i < 24; ++i) {
             this.horas[i] = new Hora(oldDia.getHora(i));
@@ -60,11 +57,11 @@ public class Dia {
 
     /**
      * Asigna una Hora a la posicion i de un Array de Horas.
-     * @param hora  Hora que se quiere asignar a la posicion i.
-     * @param i     Posicion en el Array a la que se quiere asignar Hora.
+     * @param hora      Hora que se quiere asignar a la posicion i.
+     * @param posicion  Posicion en el Array a la que se quiere asignar Hora.
      */
-    public void setHora(Hora hora, int i) {
-        this.horas[i] = hora;
+    public void setHora(Hora hora, int posicion) {
+        this.horas[posicion] = hora;
     }
 
     /**Consultoras*/
@@ -200,14 +197,6 @@ public class Dia {
     public Boolean tieneSubGrupo(SubGrupo subGrupo) {
         return (this.getSubGrupos().get(subGrupo.getIdCompleta() + subGrupo.getAsignatura().getId() + Aux.strTipo(subGrupo.getTipo())) != null);
     }
-
-    //public ArrayList<Restriccion> getRestricciones() {
-      //  return restricciones;
-    //}
-
-    //public Restriccion getRestriccion(int i) {
-      //  return this.restricciones.get(i);
-    //}
 
     /**
      * Devuelve el Array de Horas que tiene Dia.

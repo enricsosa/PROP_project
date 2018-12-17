@@ -25,8 +25,6 @@ public class Asignacion {
     private Aula aula;
     /**Representa la Clase que se realiza en la Asignacion.*/
     private Clase clase;
-    //** Arraylist que contiene todas la restricciones de los actores involucrados en la Asignacion.*/
-    //private ArrayList<Restriccion> restricciones;
 
     /**Constructoras*/
 
@@ -42,8 +40,6 @@ public class Asignacion {
         this.diaSemana = diaSemana;
         this.aula = aula;
         this.clase = clase;
-        //this.restricciones = new ArrayList<Restriccion>();
-        //this.restricciones.addAll(clase.getRestricciones());
     }
 
     /**
@@ -55,8 +51,6 @@ public class Asignacion {
         this.diaSemana = oldAsignacion.getDiaSemana();
         this.aula = oldAsignacion.getAula();
         this.clase = oldAsignacion.getClase();
-        //this.restricciones = new ArrayList<Restriccion>();
-        //this.restricciones.addAll(oldAsignacion.getRestricciones());
     }
 
     /**Métodos públicos*/
@@ -92,38 +86,6 @@ public class Asignacion {
     public void setClase(Clase clase) {
         this.clase = clase;
     }
-
-    ///**
-     //* Asigna un nuevo conjunto de Restricciones a la Asignacion.
-     //* @param restricciones Conjunto de Restricciones que se asignará a la Asignación.
-    ////*/
-    //public void setRestricciones(ArrayList<Restriccion> restricciones) {
-      //  this.restricciones = restricciones;
-    //}
-
-    //**
-     //* Añade una Restriccion a las Restricciones de la Asignacion.
-     //* @param restriccion   Restriccion que se añade a la Asignacion.
-     //*/
-    //public void addRestriccion(Restriccion restriccion) {
-      //  this.restricciones.add(restriccion);
-    //}
-
-    //**
-     //* Añade un conjunto de Restricciones a las Restricciones de la Asignacion.
-     //* @param restricciones Conjunto de Restriccones que se añade a la Asignacion.
-     //*/
-    //public void addRestricciones(ArrayList<Restriccion> restricciones) {
-      //  this.restricciones.addAll(restricciones);
-    //}
-
-    ///**
-     //* Elimina una Restriccion de la Asignacion en función de su posición.
-    //* @param posicion  Posición de la Restrccion que se quiere eliminar.
-     //*/
-    //public void eliminarRestriccion(int posicion) {
-      //  this.restricciones.remove(posicion);
-    //}
 
     /**
      * Comprueva que todas las restricciones de una Asignacion se cumplen dado un Horario.
