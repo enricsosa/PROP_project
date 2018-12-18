@@ -43,7 +43,6 @@ import data.*;
  * @see     domain.Prerrequisito
  * @see     domain.FranjaAsignatura
  * @see     domain.FranjaNivel
- * @see     Aux
  * @see     data.CtrlAsignaturasFile
  * @see     data.CtrlAulasFile
  * @see     data.CtrlPlanEstudiosFile
@@ -64,10 +63,16 @@ public class CtrlDomain {
     private CtrlRestriccionesFile controladorRestricciones;
     /**Controlador para gestionar escenarios.*/
     private CtrlEscenariosDir controladorEscenarios;
+    /**Conjunto de PlanEstudios que estan disponibles.*/
+    private Map<String, PlanEstudios> planesEstudios;
+    /**Conjunto de Horarios que estan disponibles.*/
+    private Map<String, Horario> horarios;
     /**PlanEstudios con el que trabaja CtrlDominio.*/
-    private PlanEstudios planEstudios;
+    private PlanEstudios planEstudiosActivo;
     /**Horario con el que se trabaja.*/
     private Horario horarioActivo;
+    /**Referencia a sí mismo para implementar Singleton.*/
+    private static CtrlDomain ctrlDomain;
 
     /**Constructoras*/
 
@@ -77,8 +82,15 @@ public class CtrlDomain {
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public CtrlDomain()throws FileNotFoundException, IOException, ParseException  {
-        this.initCtrlDomain();
+    private CtrlDomain() throws FileNotFoundException, IOException, ParseException  {
+    }
+
+    public static CtrlDomain getInstance() throws FileNotFoundException, IOException, ParseException  {
+        if (ctrlDomain == null) {
+            ctrlDomain = new CtrlDomain();
+            ctrlDomain.initCtrlDomain();
+        }
+        return ctrlDomain;
     }
 
     /**
@@ -92,18 +104,35 @@ public class CtrlDomain {
         controladorAulas = CtrlAulasFile.getInstance();
         controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
         controladorRestricciones = CtrlRestriccionesFile.getInstance();
-        this.cargarPlanEstudios("Default");
-        this.cargarAllAsignaturas("Default");
-        this.cargarAllAulas("Default");
-        this.cargarAllRestricciones("Default");
         controladorEscenarios = CtrlEscenariosDir.getInstance();
+        this.cargarAllEscenarios();
+
     }
 
     /**Métodos públicos*/
 
-    /**Asigna un Horario a horarioActivo.*/
+    /**
+     * Asigna un Horario a horarioActivo.
+     * @param horarioActivo Horario que se asigna.
+     */
     public void setHorarioActivo(Horario horarioActivo) {
         this.horarioActivo = horarioActivo;
+    }
+
+    /**
+     * Asigna un PlanEstudios a planEstudiosActivo.
+     * @param planEstudiosActivo PlanEstudios que se asigna.
+     */
+    public void setPlanEstudiosActivo(PlanEstudios planEstudiosActivo) {
+        this.planEstudiosActivo = planEstudiosActivo;
+    }
+
+    /**
+     * Asigna un PlanEstudios a planEstudiosActivo.
+     * @param nombrePlanEstudiosActivo  nombre del PlanEstudios que se asigna.
+     */
+    public void setPlanEstudiosActivo(String nombrePlanEstudiosActivo) {
+        this.planEstudiosActivo = planesEstudios.get(nombrePlanEstudiosActivo);
     }
 
     /**
@@ -222,23 +251,23 @@ public class CtrlDomain {
     }
 
     /**
-     * Añade una NivelHora a planEstudios.
+     * Añade una NivelHora a planEstudiosActivo.
      * @param nombreNivel   nombre del Nivel involucrado.
      * @return              codigoResultado de la operación.
      */
     public int addNivelHora(String nombreNivel) {
-        if (!(this.planEstudios.tieneNivel(nombreNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNivel)))
             return -1;
-        this.addNivelHora(new NivelHora(this.planEstudios.getNivel(nombreNivel)));
+        this.addNivelHora(new NivelHora(this.planEstudiosActivo.getNivel(nombreNivel)));
         return 0;
     }
 
     /**
-     * Añade una NivelHora a planEstudios.
+     * Añade una NivelHora a planEstudiosActivo.
      * @param nivelHora nivelHora involucrado.
      */
     private void addNivelHora(NivelHora nivelHora) {
-        this.planEstudios.addAllRestriccion(nivelHora);
+        this.planEstudiosActivo.addAllRestriccion(nivelHora);
         nivelHora.getNivel().addRestriccion(nivelHora);
     }
 
@@ -248,10 +277,10 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int eliminarNivelHora(String nombreNivel) {
-        if (!(this.planEstudios.tieneNivel(nombreNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNivel)))
             return -1;
-        this.planEstudios.eliminarNivelHora(nombreNivel);
-        this.planEstudios.getNivel(nombreNivel).eliminarNivelHora();
+        this.planEstudiosActivo.eliminarNivelHora(nombreNivel);
+        this.planEstudiosActivo.getNivel(nombreNivel).eliminarNivelHora();
         return 1;
     }
 
@@ -263,13 +292,13 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int addSesion(int duracion, String tipo, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if (duracion < 1)
             return -22;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
-        this.planEstudios.getAsignatura(idAsignatura).addSesion(new Sesion(duracion, TipoClase.valueOf(tipo), this.planEstudios.getAsignatura(idAsignatura)));
+        this.planEstudiosActivo.getAsignatura(idAsignatura).addSesion(new Sesion(duracion, TipoClase.valueOf(tipo), this.planEstudiosActivo.getAsignatura(idAsignatura)));
         return 2;
     }
 
@@ -282,7 +311,7 @@ public class CtrlDomain {
      * @return              codigoResultado de la operacion.
      */
     public int editarDuracionSesion(int duracion, String tipo, String idAsignatura, int nuevaDuracion) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
@@ -290,7 +319,7 @@ public class CtrlDomain {
             return -23;
         if (nuevaDuracion < 1)
             return -22;
-        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        ArrayList<Sesion> sesiones = this.planEstudiosActivo.getAsignatura(idAsignatura).getSesiones();
         for (int i = 0; i < sesiones.size(); ++i) {
             if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
                 sesiones.get(i).setDuracion(nuevaDuracion);
@@ -309,14 +338,14 @@ public class CtrlDomain {
      * @return              codigoResultado de la operacion.
      */
     public int editarTipoSesion(int duracion, String tipo, String idAsignatura, String nuevoTipo) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if ((!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
                 || (!(nuevoTipo.equals("Teoria") || nuevoTipo.equals("Laboratorio") || nuevoTipo.equals("Problemas"))))
             return -3;
         if (duracion < 1)
             return -23;
-        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        ArrayList<Sesion> sesiones = this.planEstudiosActivo.getAsignatura(idAsignatura).getSesiones();
         for (int i = 0; i < sesiones.size(); ++i) {
             if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
                 sesiones.get(i).setTipo(TipoClase.valueOf(nuevoTipo));
@@ -336,7 +365,7 @@ public class CtrlDomain {
      * @return              codigoResultado de la operacion.
      */
     public int editarSesion(int duracion, String tipo, String idAsignatura, int nuevaDuracion, String nuevoTipo) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if ((!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
                 || (!(nuevoTipo.equals("Teoria") || nuevoTipo.equals("Laboratorio") || nuevoTipo.equals("Problemas"))))
@@ -345,7 +374,7 @@ public class CtrlDomain {
             return -23;
         if (nuevaDuracion < 1)
             return -22;
-        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        ArrayList<Sesion> sesiones = this.planEstudiosActivo.getAsignatura(idAsignatura).getSesiones();
         for (int i = 0; i < sesiones.size(); ++i) {
             if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
                 sesiones.get(i).setTipo(TipoClase.valueOf(nuevoTipo));
@@ -364,13 +393,13 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int eliminarSesion(int duracion, String tipo, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
         if (duracion < 1)
             return -23;
-        ArrayList<Sesion> sesiones = this.planEstudios.getAsignatura(idAsignatura).getSesiones();
+        ArrayList<Sesion> sesiones = this.planEstudiosActivo.getAsignatura(idAsignatura).getSesiones();
         for (int i = 0; i < sesiones.size(); ++i) {
             if (sesiones.get(i).getDuracion().equals(duracion) && sesiones.get(i).getTipo().equals(TipoClase.valueOf(tipo))) {
                 sesiones.remove(i);
@@ -381,91 +410,91 @@ public class CtrlDomain {
     }
 
     /**
-     * Añade una FranjaAsignatura a planEstudios.
+     * Añade una FranjaAsignatura a planEstudiosActivo.
      * @param idAsignatura  id de la Asignatura afectada.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      * @return              codigoResultado de la operación.
      */
     public int addFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if (horaIni < 0 || horaFin > 24)
             return -4;
-        this.addFranjaAsignatura(new FranjaAsignatura(this.planEstudios.getAsignatura(idAsignatura), horaIni, horaFin));
+        this.addFranjaAsignatura(new FranjaAsignatura(this.planEstudiosActivo.getAsignatura(idAsignatura), horaIni, horaFin));
         return 4;
     }
 
     /**
-     * Añade una FranjaAsignatura a planEstudios.
+     * Añade una FranjaAsignatura a planEstudiosActivo.
      * @param franjaAsignatura  FranjaAsignatura que se quiere añadir.
      */
     private void addFranjaAsignatura(FranjaAsignatura franjaAsignatura) {
-        this.planEstudios.addAllRestriccion(franjaAsignatura);
-        this.planEstudios.getAsignatura(franjaAsignatura.getAsignatura().getId()).addRestriccion(franjaAsignatura);
+        this.planEstudiosActivo.addAllRestriccion(franjaAsignatura);
+        this.planEstudiosActivo.getAsignatura(franjaAsignatura.getAsignatura().getId()).addRestriccion(franjaAsignatura);
     }
 
     /**
-     * Elimina una FranjaAsignatura de planEstudios.
+     * Elimina una FranjaAsignatura de planEstudiosActivo.
      * @param idAsignatura  id de la Asignatura afectada.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      * @return              codigoResultado de la operación.
      */
     public int eliminarFranjaAsignatura(String idAsignatura, int horaIni, int horaFin) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
         if (horaIni < 0 || horaFin > 24)
             return -4;
-        this.planEstudios.eliminarFranjaAsignatura(idAsignatura, horaIni, horaFin);
-        this.planEstudios.getAsignatura(idAsignatura).eliminarFranjaAsignatura(horaIni, horaFin);
+        this.planEstudiosActivo.eliminarFranjaAsignatura(idAsignatura, horaIni, horaFin);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).eliminarFranjaAsignatura(horaIni, horaFin);
         return 5;
     }
 
     /**
-     * Añade una FranjaNivel a planEstudios.
+     * Añade una FranjaNivel a planEstudiosActivo.
      * @param nombreNivel   nombre del Nivel afectado.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      * @return              codigoResultado de la operación.
      */
     public int addFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
-        if (!(this.planEstudios.tieneNivel(nombreNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNivel)))
             return -1;
         if (horaIni < 0 || horaFin > 24)
             return -4;
-        this.addFranjaNivel(new FranjaNivel(this.planEstudios.getNivel(nombreNivel), horaIni, horaFin));
+        this.addFranjaNivel(new FranjaNivel(this.planEstudiosActivo.getNivel(nombreNivel), horaIni, horaFin));
         return 6;
     }
 
     /**
-     * Añade una FranjaNivel a planEstudios.
+     * Añade una FranjaNivel a planEstudiosActivo.
      * @param franjaNivel   FranjaNivel que se quiere añadir.
      */
     private void addFranjaNivel(FranjaNivel franjaNivel) {
-        this.planEstudios.addAllRestriccion(franjaNivel);
-        this.planEstudios.getNivel(franjaNivel.getNivel().getNombre()).addRestriccion(franjaNivel);
+        this.planEstudiosActivo.addAllRestriccion(franjaNivel);
+        this.planEstudiosActivo.getNivel(franjaNivel.getNivel().getNombre()).addRestriccion(franjaNivel);
     }
 
     /**
-     * Elimina una FranjaNivel de planEstudios.
+     * Elimina una FranjaNivel de planEstudiosActivo.
      * @param nombreNivel   nombre del Nivel afectado.
      * @param horaIni       hora de inicio de la franja.
      * @param horaFin       hora de fin de la franja.
      * @return              codigoResultado de la operación.
      */
     public int eliminarFranjaNivel(String nombreNivel, int horaIni, int horaFin) {
-        if (!(this.planEstudios.tieneNivel(nombreNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNivel)))
             return -1;
         if (horaIni < 0 || horaFin > 24)
             return -4;
-        this.planEstudios.eliminarFranjaNivel(nombreNivel, horaIni, horaFin);
-        this.planEstudios.getNivel(nombreNivel).eliminarFranjaNivel(horaIni, horaFin);
+        this.planEstudiosActivo.eliminarFranjaNivel(nombreNivel, horaIni, horaFin);
+        this.planEstudiosActivo.getNivel(nombreNivel).eliminarFranjaNivel(horaIni, horaFin);
         return 7;
     }
 
     /**
-     * Añade una FranjaTrabajo a planEstudios.
+     * Añade una FranjaTrabajo a planEstudiosActivo.
      * @param horaIni   hora de inicio de la franja.
      * @param horaFin   hora de fin de la franja.
      * @return          codigoResultado de la operación.
@@ -478,16 +507,16 @@ public class CtrlDomain {
     }
 
     /**
-     * Añade una FranjaTrabajo a planEstudios.
+     * Añade una FranjaTrabajo a planEstudiosActivo.
      * @param franjaTrabajo FranjaTrabajo que se quiere añadir.
      */
     private void addFranjaTrabajo(FranjaTrabajo franjaTrabajo) {
-        this.planEstudios.addAllRestriccion(franjaTrabajo);
-        this.planEstudios.addRestriccion(franjaTrabajo);
+        this.planEstudiosActivo.addAllRestriccion(franjaTrabajo);
+        this.planEstudiosActivo.addRestriccion(franjaTrabajo);
     }
 
     /**
-     * Elimina una FranjaTrabajo de planEstudios.
+     * Elimina una FranjaTrabajo de planEstudiosActivo.
      * @param horaIni   hora de inicio de la franja.
      * @param horaFin   hora de fin de la franja.
      * @return          codigoResultado de la operación.
@@ -495,12 +524,12 @@ public class CtrlDomain {
     public int eliminarFranjaTrabajo(int horaIni, int horaFin) {
         if (horaIni < 0 || horaFin > 24)
             return -4;
-        this.planEstudios.eliminarFranjaTrabajo(horaIni, horaFin);
+        this.planEstudiosActivo.eliminarFranjaTrabajo(horaIni, horaFin);
         return 9;
     }
 
     /**
-     * Añade un DiaLibre a planEstudios.
+     * Añade un DiaLibre a planEstudiosActivo.
      * @param diaSemana dia de la semana del DiaLibre que se quiere añadir.
      * @return          codigoResultado de la operación.
      */
@@ -512,119 +541,119 @@ public class CtrlDomain {
     }
 
     /**
-     * Añade un DiaLibre a planEstudios.
+     * Añade un DiaLibre a planEstudiosActivo.
      * @param diaLibre  DiaLibre que se quiere añadir.
      */
     private void addDiaLibre(DiaLibre diaLibre) {
-        this.planEstudios.addRestriccion(diaLibre);
-        this.planEstudios.addAllRestriccion(diaLibre);
+        this.planEstudiosActivo.addRestriccion(diaLibre);
+        this.planEstudiosActivo.addAllRestriccion(diaLibre);
     }
 
     /**
-     * Elimina un DiaLibre de planEstudios.
+     * Elimina un DiaLibre de planEstudiosActivo.
      * @param diaSemana diaSemana del DiaLibre que se quiere eliminar.
      * @return          codigoResultado de la operación.
      */
     public int eliminarDiaLibre(int diaSemana) {
         if (diaSemana < 1 || diaSemana > 7)
             return -5;
-        this.planEstudios.eliminarDiaLibre(diaSemana);
+        this.planEstudiosActivo.eliminarDiaLibre(diaSemana);
         return 11;
     }
 
     /**
-     * Añade un Prerrequisito a planEstudios.
+     * Añade un Prerrequisito a planEstudiosActivo.
      * @param idAsignatura      id de Asignatura de que tiene el Correquisito.
      * @param idPrerrequisito   id de Asignatura que es Prerrequisito.
      * @return                  codigoResultado de la operación.
      */
     public int addPrerrequisito(String idAsignatura, String idPrerrequisito) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -6;
-        if (!(this.planEstudios.tieneAsignatura(idPrerrequisito)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idPrerrequisito)))
             return -7;
-        Prerrequisito prerrequisito = new Prerrequisito(this.planEstudios.getAsignatura(idAsignatura), this.planEstudios.getAsignatura(idPrerrequisito));
+        Prerrequisito prerrequisito = new Prerrequisito(this.planEstudiosActivo.getAsignatura(idAsignatura), this.planEstudiosActivo.getAsignatura(idPrerrequisito));
         this.addPrerrequisito(prerrequisito);
         return 12;
     }
 
     /**
-     * Añade un Prerrequisito a planEstudios
+     * Añade un Prerrequisito a planEstudiosActivo
      * @param prerrequisito Prerrequisito con asignaturas existentes que se quiere añadir.
      */
     private void addPrerrequisito(Prerrequisito prerrequisito) {
-        this.planEstudios.addAllRestriccion(prerrequisito);
+        this.planEstudiosActivo.addAllRestriccion(prerrequisito);
         prerrequisito.getAsignatura().addRestriccion(prerrequisito);
     }
 
     /**
-     * Elimina un Prerrequisito de planEstudios.
+     * Elimina un Prerrequisito de planEstudiosActivo.
      * @param idAsignatura      id de Asignatura de que tiene el Correquisito.
      * @param idPrerrequisito   id de Asignatura que es Prerrequisito.
      * @return                  codigoResultado de la operación.
      */
     public int eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -6;
-        if (!(this.planEstudios.tieneAsignatura(idPrerrequisito)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idPrerrequisito)))
             return -7;
-        this.planEstudios.eliminarPrerrequisito(idAsignatura, idPrerrequisito);
-        this.planEstudios.getAsignatura(idAsignatura).eliminarPrerrequisito(idPrerrequisito);
+        this.planEstudiosActivo.eliminarPrerrequisito(idAsignatura, idPrerrequisito);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).eliminarPrerrequisito(idPrerrequisito);
         return 13;
     }
 
     /**
-     * Añade un Correquisito a planEstudios.
+     * Añade un Correquisito a planEstudiosActivo.
      * @param idAsignatura1 id de Asignatura de Correquisito.
      * @param idAsignatura2 id de Asignatura de Correquisito.
      * @return              codigoResultado de la operación.
      */
     public int addCorrequisito(String idAsignatura1, String idAsignatura2) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura1)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura1)))
             return -2;
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura2)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura2)))
             return -2;
-        Correquisito correquisito = new Correquisito(this.planEstudios.getAsignatura(idAsignatura1), this.planEstudios.getAsignatura(idAsignatura2));
+        Correquisito correquisito = new Correquisito(this.planEstudiosActivo.getAsignatura(idAsignatura1), this.planEstudiosActivo.getAsignatura(idAsignatura2));
         this.addCorrequisito(correquisito);
         return 14;
     }
 
     /**
-     * Añade un Correquisito a planEstudios
+     * Añade un Correquisito a planEstudiosActivo
      * @param correquisito  Correqusito con asignaturas existentes que se quiere añadir.
      */
     private void addCorrequisito(Correquisito correquisito) {
-        this.planEstudios.addAllRestriccion(correquisito);
+        this.planEstudiosActivo.addAllRestriccion(correquisito);
         correquisito.getAsignatura1().addRestriccion(correquisito);
         correquisito.getAsignatura2().addRestriccion(correquisito);
     }
 
     /**
-     * Elimina un Correquisito de planEstudios.
+     * Elimina un Correquisito de planEstudiosActivo.
      * @param idAsignatura1 id de Asignatura de Correquisito.
      * @param idAsignatura2 id de Asignatura de Correquisito.
      * @return              codigoResultado de la operación.
      */
     public int eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura1)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura1)))
             return -2;
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura2)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura2)))
             return -2;
-        this.planEstudios.getAsignatura(idAsignatura1).eliminarCorrequisito(idAsignatura1, idAsignatura2);
-        this.planEstudios.getAsignatura(idAsignatura2).eliminarCorrequisito(idAsignatura1, idAsignatura2);
-        this.planEstudios.eliminarCorrequisito(idAsignatura1, idAsignatura2);
+        this.planEstudiosActivo.getAsignatura(idAsignatura1).eliminarCorrequisito(idAsignatura1, idAsignatura2);
+        this.planEstudiosActivo.getAsignatura(idAsignatura2).eliminarCorrequisito(idAsignatura1, idAsignatura2);
+        this.planEstudiosActivo.eliminarCorrequisito(idAsignatura1, idAsignatura2);
         return 15;
     }
 
     /**
-     * Añade un Nivel a planEstudios.
+     * Añade un Nivel a planEstudiosActivo.
      * @param nombre    nombre que se quiere dar al Nivel añadido.
      * @return          codigoResultado de la operación.
      */
     public int addNivel(String nombre) {
-        if (this.planEstudios.tieneNivel(nombre))
+        if (this.planEstudiosActivo.tieneNivel(nombre))
             return -8;
-        this.planEstudios.addNivel(new Nivel(nombre));
+        this.planEstudiosActivo.addNivel(new Nivel(nombre));
         return 16;
     }
 
@@ -635,54 +664,54 @@ public class CtrlDomain {
      * @return          codigoResultado de la operación.
      */
     public int editarNombreNivel(String nombre, String nuevoNombre) {
-        if (!(this.planEstudios.tieneNivel(nombre)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombre)))
             return -1;
-        if (this.planEstudios.tieneNivel(nuevoNombre))
+        if (this.planEstudiosActivo.tieneNivel(nuevoNombre))
             return -8;
-        this.planEstudios.getNivel(nombre).setNombre(nuevoNombre);
+        this.planEstudiosActivo.getNivel(nombre).setNombre(nuevoNombre);
         return 17;
     }
 
     /**
-     * Elimina un Nivel de planEstudios.
+     * Elimina un Nivel de planEstudiosActivo.
      * @param nombre    Nombre del Nivel a eliminar.
      * @return          codigoResultado de la operación.
      */
     public int eliminarNivel(String nombre) {
-        if (!(this.planEstudios.tieneNivel(nombre)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombre)))
             return -1;
-        for (Map.Entry<String, Asignatura> entry : this.planEstudios.getNivel(nombre).getAsignaturas().entrySet())
+        for (Map.Entry<String, Asignatura> entry : this.planEstudiosActivo.getNivel(nombre).getAsignaturas().entrySet())
             entry.getValue().setNivel(null);
-        this.planEstudios.eliminarNivel(nombre);
+        this.planEstudiosActivo.eliminarNivel(nombre);
         return 17;
     }
 
     /**
-     * Añade una Asignatura a planEstudios.
+     * Añade una Asignatura a planEstudiosActivo.
      * @param id        id que se quiere dar a la Asignatura añadida.
      * @param nombre    nombre que se quiere dar a la Asignatura añadida.
      * @return          codigoResultado de la operación.
      */
     public int addAsignatura(String id, String nombre) {
-        if (this.planEstudios.tieneAsignatura(id))
+        if (this.planEstudiosActivo.tieneAsignatura(id))
             return -9;
-        this.planEstudios.addAsignatura(new Asignatura(id, nombre, this.planEstudios));
+        this.planEstudiosActivo.addAsignatura(new Asignatura(id, nombre, this.planEstudiosActivo));
         return 22;
     }
 
     /**
-     * Añade una Asignatura a planEstudios y la asocia a un Nivel existente.
+     * Añade una Asignatura a planEstudiosActivo y la asocia a un Nivel existente.
      * @param id            id que se quiere dar a la Asignatura añadida.
      * @param nombre        nombre que se quiere dar a la Asignatura añadida.
      * @param nombreNivel   nombre del nivel al que se quiere asociar la Asignatura.
      * @return              codigoResultado de la operación.
      */
     public int addAsignatura(String id, String nombre, String nombreNivel) {
-        if (this.planEstudios.tieneAsignatura(id))
+        if (this.planEstudiosActivo.tieneAsignatura(id))
             return -9;
-        if (!(this.planEstudios.tieneNivel(nombreNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNivel)))
             return -1;
-        this.planEstudios.addAsignatura(new Asignatura(id, nombre, this.planEstudios, this.planEstudios.getNivel(nombreNivel)));
+        this.planEstudiosActivo.addAsignatura(new Asignatura(id, nombre, this.planEstudiosActivo, this.planEstudiosActivo.getNivel(nombreNivel)));
         return 22;
     }
 
@@ -693,11 +722,11 @@ public class CtrlDomain {
      * @return          codigoResultado de la operación.
      */
     public int editarIdAsignatura(String id, String nuevaId) {
-        if (!(this.planEstudios.tieneAsignatura(id)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(id)))
             return -2;
-        if (this.planEstudios.tieneAsignatura(nuevaId))
+        if (this.planEstudiosActivo.tieneAsignatura(nuevaId))
             return -9;
-        this.planEstudios.getAsignatura(id).setId(nuevaId);
+        this.planEstudiosActivo.getAsignatura(id).setId(nuevaId);
         return 29;
     }
 
@@ -708,9 +737,9 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int editarNombreAsignatura(String id, String nuevoNombre) {
-        if (!(this.planEstudios.tieneAsignatura(id)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(id)))
             return -2;
-        this.planEstudios.getAsignatura(id).setNombre(nuevoNombre);
+        this.planEstudiosActivo.getAsignatura(id).setNombre(nuevoNombre);
         return 29;
     }
 
@@ -721,14 +750,14 @@ public class CtrlDomain {
      * @return                  codigoResultado de la operación.
      */
     public int editarNivelAsignatura(String id, String nombreNuevoNivel) {
-        if (!(this.planEstudios.tieneAsignatura(id)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(id)))
             return -2;
-        if (!(this.planEstudios.tieneNivel(nombreNuevoNivel)))
+        if (!(this.planEstudiosActivo.tieneNivel(nombreNuevoNivel)))
             return -1;
-        if (this.planEstudios.getAsignatura(id).tieneNivel())
-            this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
-        this.planEstudios.getAsignatura(id).setNivel(this.planEstudios.getNivel(nombreNuevoNivel));
-        this.planEstudios.getNivel(nombreNuevoNivel).addAsignatura(this.planEstudios.getAsignatura(id));
+        if (this.planEstudiosActivo.getAsignatura(id).tieneNivel())
+            this.planEstudiosActivo.getAsignatura(id).getNivel().eliminarAsignatura(id);
+        this.planEstudiosActivo.getAsignatura(id).setNivel(this.planEstudiosActivo.getNivel(nombreNuevoNivel));
+        this.planEstudiosActivo.getNivel(nombreNuevoNivel).addAsignatura(this.planEstudiosActivo.getAsignatura(id));
         return 29;
     }
 
@@ -738,78 +767,78 @@ public class CtrlDomain {
      * @return          codigoResultado de la operación.
      */
     public int quitarNivelAsignatura(String id) {
-        if (!(this.planEstudios.tieneAsignatura(id)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(id)))
             return -2;
-        if (!(this.planEstudios.getAsignatura(id).tieneNivel()))
+        if (!(this.planEstudiosActivo.getAsignatura(id).tieneNivel()))
             return -24;
-        this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
-        this.planEstudios.getAsignatura(id).quitarNivel();
+        this.planEstudiosActivo.getAsignatura(id).getNivel().eliminarAsignatura(id);
+        this.planEstudiosActivo.getAsignatura(id).quitarNivel();
         return 29;
     }
 
     /**
-     * Elimina una Asignatura de planEstudios.
+     * Elimina una Asignatura de planEstudiosActivo.
      * @param id    id dela Asignatura a eliminar.
      * @return      codigoResultado de la operación.
      */
     public int eliminarAsignatura(String id) {
-        if (!(this.planEstudios.tieneAsignatura(id)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(id)))
             return -2;
-        this.planEstudios.eliminarAsignatura(id);
-        if (this.planEstudios.getAsignatura(id).tieneNivel()) this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
+        this.planEstudiosActivo.eliminarAsignatura(id);
+        if (this.planEstudiosActivo.getAsignatura(id).tieneNivel()) this.planEstudiosActivo.getAsignatura(id).getNivel().eliminarAsignatura(id);
         return 23;
     }
 
     /**
-     * Añade un Grupo a una Asignatura de planEstudios.
+     * Añade un Grupo a una Asignatura de planEstudiosActivo.
      * @param id            id que se quiere dar al Grupo añadido.
      * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
      * @return              codigoResultado de la operación.
      */
     public int addGrupo(String id, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id))
+        if (this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(id))
             return -10;
-        this.planEstudios.getAsignatura(idAsignatura).addGrupo(new Grupo(id, this.planEstudios.getAsignatura(idAsignatura)));
+        this.planEstudiosActivo.getAsignatura(idAsignatura).addGrupo(new Grupo(id, this.planEstudiosActivo.getAsignatura(idAsignatura)));
         return 18;
     }
 
     /**
-     * cambia la id de un Grupo de planEstudios.
+     * cambia la id de un Grupo de planEstudiosActivo.
      * @param id            id del Grupo a eliminar.
      * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
      * @param nuevaId       id que se asignará al Grupo.
      * @return              codigoResultado de la operación.
      */
     public int editarIdGrupo(String id, String idAsignatura, String nuevaId) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id)))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(id)))
             return -12;
-        if (this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(nuevaId))
+        if (this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(nuevaId))
             return -10;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(id).setId(nuevaId);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(id).setId(nuevaId);
         return 19;
     }
 
     /**
-     * Elimina un Grupo de planEstudios.
+     * Elimina un Grupo de planEstudiosActivo.
      * @param id            id del Grupo a eliminar.
      * @param idAsignatura  id de la Asignatura a la que se quiere asociar el Grupo.
      * @return              codigoResultado de la operación.
      */
     public int eliminarGrupo(String id, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(id)))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(id)))
             return -12;
-        this.planEstudios.getAsignatura(idAsignatura).eliminarGrupo(id);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).eliminarGrupo(id);
         return 19;
     }
 
     /**
-     * Añade un SubGrupo a un Grupo de una Asignatura de planEstudios.
+     * Añade un SubGrupo a un Grupo de una Asignatura de planEstudiosActivo.
      * @param id            id que se quiere dar al SubGrupo añadido.
      * @param plazas        plazas del SubGrupo.
      * @param tipo          TipoClase del SubGrupo.
@@ -818,22 +847,22 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int addSubGrupo(String id, int plazas, String tipo, String idGrupo, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
+        if (!this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
             return -12;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
         if (plazas < 1)
             return -25;
-        if (this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()))
+        if (this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()))
             return -11;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).addSubGrupo(new SubGrupo(id, plazas, TipoClase.Laboratorio.valueOf(tipo), this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo)));
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).addSubGrupo(new SubGrupo(id, plazas, TipoClase.Laboratorio.valueOf(tipo), this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo)));
         return 20;
     }
 
     /**
-     * Edita la id de un SubGrupo de planEstudios.
+     * Edita la id de un SubGrupo de planEstudiosActivo.
      * @param id            id del SubGrupo a editar.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
@@ -841,22 +870,22 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int editarIdSubGrupo(String id, String tipo, String idGrupo, String idAsignatura, String nuevaId) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
+        if (!this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
             return -12;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
             return -13;
-        if ((this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(nuevaId + TipoClase.Laboratorio.valueOf(tipo).toString())))
+        if ((this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(nuevaId + TipoClase.Laboratorio.valueOf(tipo).toString())))
             return -11;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setId(nuevaId);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setId(nuevaId);
         return 30;
     }
 
     /**
-     * Edita el tipo de un SubGrupo de planEstudios.
+     * Edita el tipo de un SubGrupo de planEstudiosActivo.
      * @param id            id del SubGrupo a editar.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
@@ -864,21 +893,21 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int editarTipoSubGrupo(String id, String tipo, String idGrupo, String idAsignatura, String nuevoTipo) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
+        if (!this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
             return -12;
         if ((!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
                 || (!(nuevoTipo.equals("Teoria") || nuevoTipo.equals("Laboratorio") || nuevoTipo.equals("Problemas"))))
             return -3;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
             return -13;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setTipo(TipoClase.valueOf(nuevoTipo));
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setTipo(TipoClase.valueOf(nuevoTipo));
         return 30;
     }
 
     /**
-     * Edita el número de plazas de un SubGrupo de planEstudios.
+     * Edita el número de plazas de un SubGrupo de planEstudiosActivo.
      * @param id            id del SubGrupo a editar.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
@@ -886,49 +915,49 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int editarPlazasSubGrupo(String id, String tipo, String idGrupo, String idAsignatura, int nuevaPlazas) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
+        if (!this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
             return -12;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
         if (nuevaPlazas < 1)
             return -25;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString())))
             return -13;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setPlazas(nuevaPlazas);
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).getSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString()).setPlazas(nuevaPlazas);
         return 30;
     }
 
     /**
-     * Elimina un SubGrupo de planEstudios.
+     * Elimina un SubGrupo de planEstudiosActivo.
      * @param id            id del SubGrupo a eliminar.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @return              codigoResultado de la operación.
      */
     public int eliminarSubGrupo(String id, String tipo, String idGrupo, String idAsignatura) {
-        if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
+        if (!(this.planEstudiosActivo.tieneAsignatura(idAsignatura)))
             return -2;
-        if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
+        if (!this.planEstudiosActivo.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
             return -12;
         if (!(tipo.equals("Teoria") || tipo.equals("Laboratorio") || tipo.equals("Problemas")))
             return -3;
-        if (!(this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id)))
+        if (!(this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).tieneSubGrupo(id)))
             return -13;
-        this.planEstudios.getAsignatura(idAsignatura).getGrupo(idGrupo).eliminarSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString());
+        this.planEstudiosActivo.getAsignatura(idAsignatura).getGrupo(idGrupo).eliminarSubGrupo(id + TipoClase.Laboratorio.valueOf(tipo).toString());
         return 21;
     }
 
     /**
-     * Añade un Aula de planEstudios.
+     * Añade un Aula de planEstudiosActivo.
      * @param id        id que se quiere dar a la Aula añadida.
      * @param plazas    número de plazas que tendrá el Aula añadida.
      * @param tipos     TiposClase con los que es compatible el Aula añadida.
      * @return          codigoResultado de la operación.
      */
     public int addAula(String id, int plazas, String[] tipos) {
-        if (this.planEstudios.tieneAula(id))
+        if (this.planEstudiosActivo.tieneAula(id))
             return -15;
         ArrayList<TipoClase> t = new ArrayList<TipoClase>();
         for (int i = 0; i < tipos.length; ++i) {
@@ -941,48 +970,48 @@ public class CtrlDomain {
             else
                 return -3;
         }
-        this.planEstudios.addAula(new Aula(id, plazas, t));
+        this.planEstudiosActivo.addAula(new Aula(id, plazas, t));
         return 24;
     }
 
     /**
-     * Edita la id de una Aula de planEstudios.
+     * Edita la id de una Aula de planEstudiosActivo.
      * @param id        id del Aula a editar.
      * @param nuevaId   Nueva id que se quiere asignar.
      * @return          codigoResultado de la operación.
      */
     public int editarIdAula(String id, String nuevaId) {
-        if (!(this.planEstudios.tieneAula(id)))
+        if (!(this.planEstudiosActivo.tieneAula(id)))
             return -14;
-        if (this.planEstudios.tieneAula(nuevaId))
+        if (this.planEstudiosActivo.tieneAula(nuevaId))
             return -15;
-        this.planEstudios.getAula(id).setId(nuevaId);
+        this.planEstudiosActivo.getAula(id).setId(nuevaId);
         return 25;
     }
 
     /**
-     * Edita las plazas de una Aula de planEstudios.
+     * Edita las plazas de una Aula de planEstudiosActivo.
      * @param id            id del Aula a editar.
      * @param nuevasPlazas  Nuevas plazas que se quiere asignar.
      * @return              codigoResultado de la operación.
      */
     public int editarIdAula(String id, int nuevasPlazas) {
-        if (!(this.planEstudios.tieneAula(id)))
+        if (!(this.planEstudiosActivo.tieneAula(id)))
             return -14;
         if (nuevasPlazas < 1)
             return -25;
-        this.planEstudios.getAula(id).setPlazas(nuevasPlazas);
+        this.planEstudiosActivo.getAula(id).setPlazas(nuevasPlazas);
         return 25;
     }
 
     /**
-     * Edita los tipos compatibles con un Aula de planEstudios.
+     * Edita los tipos compatibles con un Aula de planEstudiosActivo.
      * @param id            id del Aula que se quiere editar
      * @param nuevosTipos   nuevos TipoClase que se quiere asignar a Aula.
      * @return              codigoResultado de la operación.
      */
     public int editarTiposAula(String id, String[] nuevosTipos) {
-        if (!(this.planEstudios.tieneAula(id)))
+        if (!(this.planEstudiosActivo.tieneAula(id)))
             return -14;
         ArrayList<TipoClase> t = new ArrayList<TipoClase>();
         for (int i = 0; i < nuevosTipos.length; ++i) {
@@ -995,19 +1024,19 @@ public class CtrlDomain {
             else
                 return -3;
         }
-        this.planEstudios.getAula(id).setTipos(t);
+        this.planEstudiosActivo.getAula(id).setTipos(t);
         return 25;
     }
 
     /**
-     * Elimina un Aula de planEstudios.
+     * Elimina un Aula de planEstudiosActivo.
      * @param id    id del Aula a eliminar.
      * @return      codigoResultado de la operación.
      */
     public int eliminarAula(String id) {
-        if (!(this.planEstudios.tieneAula(id)))
+        if (!(this.planEstudiosActivo.tieneAula(id)))
             return -14;
-        this.planEstudios.eliminarAula(id);
+        this.planEstudiosActivo.eliminarAula(id);
         return 25;
     }
 
@@ -1018,11 +1047,27 @@ public class CtrlDomain {
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public void cargarEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
-        this.cargarPlanEstudios(escenario);
-        this.cargarAllAsignaturas(escenario);
-        this.cargarAllAulas(escenario);
-        this.cargarAllRestricciones(escenario);
+    public PlanEstudios cargarEscenario(String escenario) throws FileNotFoundException, IOException, ParseException {
+        PlanEstudios planEstudios = cargarPlanEstudios(escenario);
+        cargarAllAsignaturas(escenario, planEstudios);
+        cargarAllAulas(escenario, planEstudios);
+        cargarAllRestricciones(escenario, planEstudios);
+        return planEstudios;
+    }
+
+    /**
+     * Carga todos los escenarios disponibles en CtrlDominio.
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
+     */
+    public void cargarAllEscenarios() throws  FileNotFoundException, IOException, ParseException {
+        ArrayList<String> nombresEscenario = allEscenarios();
+        this.planesEstudios = new HashMap<String, PlanEstudios>();
+        for (int i = 0; i < nombresEscenario.size(); ++i) {
+            this.planesEstudios.put(nombresEscenario.get(i), cargarEscenario(nombresEscenario.get(i)));
+            if (i == 0) this.planEstudiosActivo = this.planesEstudios.get(nombresEscenario.get(i));
+        }
     }
 
     /**
@@ -1042,6 +1087,13 @@ public class CtrlDomain {
         return controladorEscenarios.escanearAllHorarios();
     }
 
+    /**
+     * Escanea un Horario a partir de un txt.
+     * @param h             Nombre de un Horario.
+     * @param extended      indica si es extendido.
+     * @return              Horario indicado.
+     * @throws Exception    Algo ha salido mal al escanear Horario.
+     */
     public HashMap<Integer, HashMap<Integer, ArrayList<String>>> escaneaHorario(String h, Boolean extended) throws Exception {
         return controladorEscenarios.escaneaHorario(h, extended);
     }
@@ -1058,9 +1110,9 @@ public class CtrlDomain {
 
     /**
      * Escribe un Horario por consola.
-     * @param horario   String con los datos de Horario.
-     * @param idHorario id del Horario que se escribe.
-     * @throws IOException
+     * @param horario       String con los datos de Horario.
+     * @param idHorario     id del Horario que se escribe.
+     * @throws IOException  Problema en IO.
      */
     public void writeHorario(String horario, Integer idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
@@ -1068,9 +1120,9 @@ public class CtrlDomain {
 
     /**
      * Escribe un horario a partir de un HashMap.
-     * @param horario   HashMap con los datos de Horario.
-     * @param idHorario id del horario que se escribe.
-     * @throws IOException
+     * @param horario       HashMap con los datos de Horario.
+     * @param idHorario     id del horario que se escribe.
+     * @throws IOException  Problema en IO.
      */
     public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorarioFromMap(horario, idHorario);
@@ -1088,15 +1140,16 @@ public class CtrlDomain {
     }
 
     /**
-     * Carga el PlanEstudios del escenario indicado.
+     * Carga el planEstudios del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
+     * @return                          PlanEstudios con el escenario cargado.
      * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public void cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
+    public PlanEstudios cargarPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
         JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
-        planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
+        PlanEstudios planEstudios = new PlanEstudios((String)planEstudiosData.get("nombre"));
         String niveles = planEstudiosData.get("niveles").toString();
 
         String s;
@@ -1105,27 +1158,29 @@ public class CtrlDomain {
             Nivel nivel = new Nivel(s);
             planEstudios.addNivel(nivel);
         }
+        return planEstudios;
     }
 
     /**
      * Carga los datos de las Asignaturas del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
+     * @param planEstudios              PlanEstudios en el que se cargan Asignaturas.
      * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public void cargarAllAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
+    public void cargarAllAsignaturas(String escenario, PlanEstudios planEstudios) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
 
         for (JSONObject assig : asignaturasData) {
             Asignatura asignatura;
 
             if (((String)assig.get("nivel")).length() != 0) {
-                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios, this.planEstudios.getNivel((String)assig.get("nivel")));
-                this.planEstudios.getNivel((String)assig.get("nivel")).addAsignatura(asignatura);
+                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), planEstudios, planEstudios.getNivel((String)assig.get("nivel")));
+                planEstudios.getNivel((String)assig.get("nivel")).addAsignatura(asignatura);
             }
             else {
-                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), this.planEstudios);
+                asignatura = new Asignatura((String)assig.get("id"), (String)assig.get("nombre"), planEstudios);
             }
 
             for (JSONObject ses : (List<JSONObject>)assig.get("sesiones")) {
@@ -1151,11 +1206,12 @@ public class CtrlDomain {
     /**
      * Carga los datos de las Aulas del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
+     * @param planEstudios              PlanEstudios en el que se cargan Aulas.
      * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public void cargarAllAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
+    public void cargarAllAulas(String escenario, PlanEstudios planEstudios) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
 
         for (JSONObject au : aulasData) {
@@ -1175,12 +1231,13 @@ public class CtrlDomain {
     /**
      * Carga las Restricciones del escenario indicado.
      * @param escenario                 Escenario que se quiere cargar.
+     * @param planEstudios              PlanEstudios en el que se cargan Aulas.
      * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public void cargarAllRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
-        this.planEstudios.setAllRestricciones(new ArrayList<Restriccion>());
+    public void cargarAllRestricciones(String escenario, PlanEstudios planEstudios) throws FileNotFoundException, IOException, ParseException {
+        planEstudios.setAllRestricciones(new ArrayList<Restriccion>());
 
         List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
         //System.out.println(restriccionesData);
@@ -1446,10 +1503,11 @@ public class CtrlDomain {
      * @return      Horario generado.
      */
     public String generarHorario(String id) {
-        CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios);
+        CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudiosActivo);
         ReturnSet horario = ctrlHorario.generarHorario(id);
         if (horario.getValidez()) {
             this.horarioActivo = horario.getHorario();
+            this.horarios.put(horario.getHorario().getId(), horario.getHorario());
             return horario.getHorario().toString();
         }
         else return "false";
@@ -1460,7 +1518,7 @@ public class CtrlDomain {
      * @param restricciones Valores que se asignan al atributo activa de cada Restriccion.
      */
     public void habilitarRestricciones(HashMap<String, ArrayList<Boolean>> restricciones) {
-        Map<TipoRestriccion, ArrayList<Restriccion>> allRestricciones = this.planEstudios.getAllRestriccionesCategorizadas();
+        Map<TipoRestriccion, ArrayList<Restriccion>> allRestricciones = this.planEstudiosActivo.getAllRestriccionesCategorizadas();
         System.out.println(restricciones);
         ArrayList<Restriccion> diaLibres = allRestricciones.get(TipoRestriccion.DiaLibre);
         ArrayList<Boolean> dLBooleans = restricciones.get("diaLibre");
@@ -1497,7 +1555,7 @@ public class CtrlDomain {
         for (int i = 0; i < nivelHoras.size(); ++i) {
             nivelHoras.get(i).setActiva(nHBooleans.get(i));
         }
-        System.out.println(this.planEstudios.getAllRestricciones());
+        //System.out.println(this.planEstudiosActivo.getAllRestricciones());
     }
 
     /**
@@ -1505,7 +1563,7 @@ public class CtrlDomain {
      * @return  Instancia de CtrlHorario con los datos de CtrlDominio.
      */
     public CtrlHorario getCtrlHorario() {
-        return new CtrlHorario(this.planEstudios);
+        return new CtrlHorario(this.planEstudiosActivo);
     }
 
     /**
@@ -1513,7 +1571,7 @@ public class CtrlDomain {
      * @param restriccion   Restriccion que se quiere añadir.
      */
     public void addAllRestriccion(Restriccion restriccion) {
-        this.planEstudios.addAllRestriccion(restriccion);
+        this.planEstudiosActivo.addAllRestriccion(restriccion);
     }
 
     /**Consultoras*/
@@ -1523,7 +1581,7 @@ public class CtrlDomain {
      * @return  Restricciones de planEstudios y los elementos que contiene.
      */
     public ArrayList<Restriccion> getAllRestricciones() {
-        return this.planEstudios.getAllRestricciones();
+        return this.planEstudiosActivo.getAllRestricciones();
     }
 
     /**
@@ -1532,7 +1590,57 @@ public class CtrlDomain {
      * @return  Restriccion de allRestricciones que se encuentra en la posicion indicada.
      */
     public Restriccion getAllRestricion(int posicion) {
-        return this.planEstudios.getAllRestriccion(posicion);
+        return this.planEstudiosActivo.getAllRestriccion(posicion);
+    }
+
+    /**
+     * Devuelve planEstudiosActivo.
+     * @return  planEstudiosActivo.
+     */
+    public PlanEstudios getPlanEstudiosActivo() {
+        return planEstudiosActivo;
+    }
+
+    /**
+     * Devuelve horarioActivo.
+     * @return  horarioActivo.
+     */
+    public Horario getHorarioActivo() {
+        return horarioActivo;
+    }
+
+    /**
+     * Devuelve horario.
+     * @return  horarios.
+     */
+    public Map<String, Horario> getHorarios() {
+        return horarios;
+    }
+
+    /**
+     * Devuelve planesEstudios.
+     * @return  planesEstudios.
+     */
+    public Map<String, PlanEstudios> getPlanesEstudios() {
+        return planesEstudios;
+    }
+
+    /**
+     * Devuelve un Horario de horarios a partir de su id.
+     * @param id    id del Horario.
+     * @return      Horario con la id dada.
+     */
+    public Horario getHorario(String id) {
+        return horarios.get(id);
+    }
+
+    /**
+     * Devuelve un PlanEstudios de planesEstudios dado su nombre
+     * @param nombre    nombre del PlanEstudios.
+     * @return          planestudios con el nombre dado.
+     */
+    public PlanEstudios getPlanEstudios(String nombre) {
+        return planesEstudios.get(nombre);
     }
 
     /**Métodos redefinidos*/
