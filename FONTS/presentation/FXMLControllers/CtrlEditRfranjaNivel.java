@@ -1,5 +1,6 @@
 package presentation.FXMLControllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -36,13 +37,232 @@ public class CtrlEditRfranjaNivel {
     private ArrayList<String> planEstudiosFinal;
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
-    private String currentId;
+    private ArrayList<Object> currentRestr = null;
+    private String currentId = null;
+    private String currenthI = null;
+    private String currenthF = null;
 
     public CtrlEditRfranjaNivel() {
         edEsc = EditEscenario.getInstance();
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
+    }
+
+    //ADD LAYOUT
+    @FXML
+    ChoiceBox addN;
+    @FXML
+    ChoiceBox addI;
+    @FXML
+    ChoiceBox addF;
+    @FXML
+    Button addBtn;
+
+    //EDIT LAYOUT
+    @FXML
+    ChoiceBox editN;
+    @FXML
+    ChoiceBox editI;
+    @FXML
+    ChoiceBox editF;
+    @FXML
+    Button editBtn;
+
+    //REMOVE LAYOUT
+    @FXML
+    Label removeN;
+    @FXML
+    Label removeI;
+    @FXML
+    Label removeF;
+    @FXML
+    Button removeBtn;
+
+    private void setLayout() {
+        ObservableList<String> niveles = FXCollections.observableArrayList();
+        for (int i = 1; i < planEstudiosFinal.size(); ++i) {
+            niveles.add(planEstudiosFinal.get(i));
+        }
+
+        //EDIT
+        editI.setItems(FXCollections.observableArrayList(
+                "00:00", "01:00", "02:00", "03:00",
+                "04:00", "05:00", "06:00", "07:00",
+                "08:00", "09:00", "10:00", "11:00",
+                "12:00", "13:00", "14:00", "15:00",
+                "16:00", "17:00", "18:00", "19:00",
+                "20:00", "21:00", "22:00"));
+
+        editF.setItems(FXCollections.observableArrayList(
+                "01:00", "02:00", "03:00",
+                "04:00", "05:00", "06:00", "07:00",
+                "08:00", "09:00", "10:00", "11:00",
+                "12:00", "13:00", "14:00", "15:00",
+                "16:00", "17:00", "18:00", "19:00",
+                "20:00", "21:00", "22:00", "23:00"));
+
+        editI.getSelectionModel().select(Integer.parseInt(currenthI));
+        editF.getSelectionModel().select(Integer.parseInt(currenthF)-1);
+
+
+        editN.setItems(niveles);
+        editN.getSelectionModel().select(currentId);
+
+        //REMOVE
+        removeN.setText(currentId);
+        removeI.setText(currenthI);
+        removeF.setText(currenthF);
+
+        editI.setOnAction(actionEvent -> {
+            ObservableList<String> aviableHoraFin = FXCollections.observableArrayList();
+            try {
+                String hiStr = editI.getSelectionModel().getSelectedItem().toString();
+                Integer minHour = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
+                for(Integer i = minHour+1; i < 24; ++i) {
+                    if (i.toString().length() == 1)
+                        aviableHoraFin.add("0" + i.toString() + ":00");
+                    else
+                        aviableHoraFin.add(i.toString() + ":00");
+                }
+                editF.setItems(aviableHoraFin);
+            } catch (Exception e) {
+
+            }
+        });
+    }
+
+    public void addBtnClicked() {
+        ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
+        currentRestr = new ArrayList<>();
+        try {
+            String hiStr = (String) addI.getValue();
+            String hfStr = (String) addF.getValue();
+            Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
+            Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
+            currentRestr.add(addN.getValue());
+            currentRestr.add(hI);
+            currentRestr.add(hF);
+            frNiveles.add(currentRestr);
+            restriccionesFinal.replace("franjaNivel", frNiveles);
+            edEsc.setRestriccionesFinal(restriccionesFinal);
+
+            listview.getItems().clear();
+            for (Object o : frNiveles) {
+                listview.getItems().add(o.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR EN ALGUNO DE LOS INPUTS");
+        }
+    }
+
+    public void editBtnClicked() {
+        ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
+        try {
+            String hiStr = (String) editI.getValue();
+            String hfStr = (String) editF.getValue();
+            Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
+            Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
+            frNiveles.remove(currentRestr);
+            currentRestr = new ArrayList<>();
+            currentRestr.add(editN.getValue());
+            currentRestr.add(hI);
+            currentRestr.add(hF);
+            frNiveles.add(currentRestr);
+            restriccionesFinal.replace("franjaNivel", frNiveles);
+            edEsc.setRestriccionesFinal(restriccionesFinal);
+
+            listview.getItems().clear();
+            for (Object o : frNiveles) {
+                listview.getItems().add(o.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR EN ALGUNO DE LOS INPUTS");
+        }
+    }
+
+    public void removeBtnClicked() {
+        ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
+        try {
+            frNiveles.remove(currentRestr);
+            restriccionesFinal.replace("franjaNivel", frNiveles);
+            edEsc.setRestriccionesFinal(restriccionesFinal);
+
+            listview.getItems().clear();
+            for (Object o : frNiveles) {
+                listview.getItems().add(o.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR EN ALGUNO DE LOS INPUTS");
+        }
+    }
+
+    @FXML
+    ListView listview;
+
+    ChangeListener<String> lvSelected = this::itemSelected;
+
+    private void itemSelected(ObservableValue<? extends String> observableValue, String s, String t1) {
+        if (!(t1 == null)) {
+            listview.getSelectionModel().selectedItemProperty().removeListener(lvSelected);
+            listview.getSelectionModel().selectedItemProperty().addListener(lvSelected);
+            currentId = t1.substring(t1.indexOf("[")+1, t1.indexOf(","));
+            currenthI = t1.substring(t1.indexOf(",")+2, t1.indexOf(",", t1.indexOf(",")+1));
+            currenthF = t1.substring(t1.indexOf(",", t1.indexOf(",")+1)+2, t1.indexOf("]"));
+            currentRestr = new ArrayList<>();
+            currentRestr.add(currentId);
+            currentRestr.add(Integer.parseInt(currenthI));
+            currentRestr.add(Integer.parseInt(currenthF));
+            setLayout();
+        }
+    }
+
+    public void setListview(ArrayList<Object> frNiveles) {
+        ObservableList<String> niveles = FXCollections.observableArrayList();
+        for (int i = 1; i < planEstudiosFinal.size(); ++i) {
+            niveles.add(planEstudiosFinal.get(i));
+        }
+        //ADD
+        addN.setItems(niveles);
+        addI.setItems(FXCollections.observableArrayList(
+                "00:00", "01:00", "02:00", "03:00",
+                "04:00", "05:00", "06:00", "07:00",
+                "08:00", "09:00", "10:00", "11:00",
+                "12:00", "13:00", "14:00", "15:00",
+                "16:00", "17:00", "18:00", "19:00",
+                "20:00", "21:00", "22:00"));
+
+        addF.setItems(FXCollections.observableArrayList(
+                "01:00", "02:00", "03:00",
+                "04:00", "05:00", "06:00", "07:00",
+                "08:00", "09:00", "10:00", "11:00",
+                "12:00", "13:00", "14:00", "15:00",
+                "16:00", "17:00", "18:00", "19:00",
+                "20:00", "21:00", "22:00", "23:00"));
+
+        addI.setOnAction(actionEvent -> {
+            ObservableList<String> aviableHoraFin = FXCollections.observableArrayList();
+            try {
+                String hiStr = addI.getSelectionModel().getSelectedItem().toString();
+                Integer minHour = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
+                for(Integer i = minHour+1; i < 24; ++i) {
+                    if (i.toString().length() == 1)
+                        aviableHoraFin.add("0" + i.toString() + ":00");
+                    else
+                        aviableHoraFin.add(i.toString() + ":00");
+                }
+                addF.setItems(aviableHoraFin);
+            } catch (Exception e) {
+
+            }
+        });
+
+        listview.getItems().clear();
+        for (Object o : frNiveles) {
+            listview.getItems().add(o.toString());
+        }
+        listview.getSelectionModel().selectedItemProperty().removeListener(lvSelected);
+        listview.getSelectionModel().selectedItemProperty().addListener(lvSelected);
     }
 
 }

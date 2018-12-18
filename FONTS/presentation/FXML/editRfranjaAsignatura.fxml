@@ -52,7 +52,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button fx:id="addBtn" mnemonicParsing="false" text="Añadir">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addBtnClicked" text="Añadir">
                      <VBox.margin>
                         <Insets bottom="5.0" left="3.0" />
                      </VBox.margin>
@@ -91,7 +91,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <Button fx:id="editBtn" mnemonicParsing="false" text="Editar">
+                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editBtnClicked" text="Editar">
                      <VBox.margin>
                         <Insets bottom="5.0" left="3.0" />
                      </VBox.margin>
@@ -139,7 +139,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button fx:id="removeBtn" mnemonicParsing="false" text="Eliminar">
+                  <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#removeBtnClicked" text="Eliminar">
                      <VBox.margin>
                         <Insets bottom="5.0" left="3.0" />
                      </VBox.margin>

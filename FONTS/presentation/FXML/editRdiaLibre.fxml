@@ -51,7 +51,7 @@
                   <CheckBox fx:id="domingoPost" mnemonicParsing="false" text="Domingo" />
                </children>
             </FlowPane>
-            <Button fx:id="updateBtn" mnemonicParsing="false" text="Actualizar">
+            <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#updateBtnClicked" text="Actualizar">
                <VBox.margin>
                   <Insets bottom="9.0" />
                </VBox.margin></Button>

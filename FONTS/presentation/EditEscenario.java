@@ -104,6 +104,16 @@ public class EditEscenario {
         showEdtingAulas(null, center);
     }
 
+    public void setRestriccionesFinal(HashMap<String, ArrayList<Object>> newRestricciones) {
+        restriccionesFinal = newRestricciones;
+        BorderPane lay = (BorderPane)window.getScene().getRoot();
+        ListView<String> left = (ListView<String>)lay.getLeft();
+        VBox center = (VBox)lay.getCenter();
+        Label itemTitle = (Label)center.lookup("#itemTitle");
+        showRestricciones(itemTitle, left);
+        showEdtingRestricciones(null, center);
+    }
+
     public void setPlanEstudiosFinal(ArrayList<String> newPlanEstudios) {
         planEstudiosFinal = newPlanEstudios;
         BorderPane lay = (BorderPane)window.getScene().getRoot();
@@ -179,42 +189,60 @@ public class EditEscenario {
                     HBox lay = (HBox)parentEdRcorrequisitos;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> correquisitos = (ArrayList<Object>)restriccionesFinal.get("correquisitos");
+                    ctrlEdRcorrequisitos.setListview(correquisitos);
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("prerrequisitos")) {
                     HBox lay = (HBox)parentEdRprerrequisitos;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> prerrequisitos = (ArrayList<Object>)restriccionesFinal.get("prerrequisitos");
+                    ctrlEdRprerrequisitos.setListview(prerrequisitos);
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("franjaAsignatura")) {
                     HBox lay = (HBox)parentEdRfranjaAsignatura;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> frAsigs = (ArrayList<Object>)restriccionesFinal.get("franjaAsignatura");
+                    ctrlEdRfranjaAsignatura.setListview(frAsigs);
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("franjaNivel")) {
                     HBox lay = (HBox)parentEdRfranjaNivel;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
+                    ctrlEdRfranjaNivel.setListview(frNiveles);
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("diaLibre")) {
                     VBox lay = (VBox)parentEdRdiaLibre;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> diasLibres = (ArrayList<Object>)restriccionesFinal.get("diaLibre");
+                    ctrlEdRdiaLibre.setLayout(diasLibres);
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("franjaTrabajo")) {
                     VBox lay = (VBox)parentEdRfranjaTrabajo;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<Object> horasTrabajo = (ArrayList<Object>)restriccionesFinal.get("franjaTrabajo");
+                    ctrlEdRfranjaTrabajo.setLayout(horasTrabajo.get(0).toString(), horasTrabajo.get(1).toString());
                     parent.getChildren().add(lay);
 
                 } else if (item.equals("nivelHora")) {
                     VBox lay = (VBox)parentEdRnivelHora;
                     if (parent.getChildren().size() == 2)
                         parent.getChildren().remove(1);
+                    ArrayList<String> allNiv = new ArrayList<>();
+                    for (int i = 1; i < planEstudiosFinal.size(); ++i) {
+                        allNiv.add(planEstudiosFinal.get(i));
+                    }
+                    ArrayList<Object> nHs = (ArrayList<Object>)restriccionesFinal.get("nivelHora");
+                    ctrlEdRnivelHora.setLayout(nHs, allNiv);
                     parent.getChildren().add(lay);
                 }
             } catch (Exception e) {
