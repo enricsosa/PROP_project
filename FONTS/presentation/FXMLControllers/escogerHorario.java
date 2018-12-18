@@ -99,7 +99,7 @@ public class escogerHorario {
         cd = cp.getCD();
     }
 
-    /**Asigna un mainMenu.*/
+    /**Asigna mainMenu.*/
     public void setMainMenu() throws Exception {
         sc.activate("prova1");
     }
