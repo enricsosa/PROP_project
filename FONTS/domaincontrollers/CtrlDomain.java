@@ -1373,20 +1373,17 @@ public class CtrlDomain {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public HashMap<String, ArrayList<Object>> subirAulas(String escenario) throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
+        //List<JSONObject> aulasData = controladorAulas.getByEscenario(escenario);
+        Map<String, Aula> auCD = this.planEstudiosMap.get(escenario).getAulas();
         HashMap<String, ArrayList<Object>> aulas = new HashMap<>();
 
-        for (JSONObject au : aulasData) {
+        for (Map.Entry<String, Aula> aula : auCD.entrySet()) {
             ArrayList<Object> auProperties = new ArrayList<>();
-            auProperties.add(((Long)au.get("plazas")).intValue());
+            auProperties.add(aula.getValue().getPlazas());
 
-            ArrayList<TipoClase> tipos = new ArrayList<TipoClase>();
-            for (String tipo : (List<String>)au.get("tipos")) {
-                tipos.add(TipoClase.valueOf(tipo));
-            }
-            auProperties.add(tipos);
+            auProperties.add(aula.getValue().getTipos());
 
-            aulas.put((String)au.get("id"), auProperties);
+            aulas.put(aula.getValue().getId(), auProperties);
         }
         return aulas;
     }
