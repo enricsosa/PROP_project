@@ -38,6 +38,7 @@ public class ctrl1 {
     /**CtrlDomain que se usa.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase ctrl1*/
     public ctrl1() {
     }
 
@@ -54,6 +55,7 @@ public class ctrl1 {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(ctrl2.class.getResource(""));
                 c2.escenarioSeleccionado(b.getText());
+                cd.seleccionarEscenario(b.getText());
             });
             updatedPane.getChildren().addAll(b);
         }
@@ -116,7 +118,7 @@ public class ctrl1 {
     private void initialize() throws Exception {
         SceneController sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
-        cd = cp.getCD();
+        cd = CtrlDomain.getInstance();
         try {
             //Escoger escenario
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/prova2.fxml"));

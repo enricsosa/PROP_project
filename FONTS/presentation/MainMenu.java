@@ -60,7 +60,7 @@ public class MainMenu extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         CP = CtrlPresentacion.getInstance();
-        CD = CP.getCD();
+        CD = CtrlDomain.getInstance();
         window = primaryStage;
         window.setTitle("Generador de Horarios");
         SceneController sc = SceneController.getInstance();

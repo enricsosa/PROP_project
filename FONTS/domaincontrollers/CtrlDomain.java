@@ -106,6 +106,7 @@ public class CtrlDomain {
      * @param nombreEscenario   nombre del escenario que se quiere guardar.
      */
     public void seleccionarEscenario(String nombreEscenario) {
+        System.out.println("Se ha selecionado el escenario: " + nombreEscenario);
         this.planEstudios = planEstudiosMap.get(nombreEscenario);
     }
 
