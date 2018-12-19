@@ -285,6 +285,7 @@ public class ctrl2 {
     public void escenarioSeleccionado(String s) {
         genHor.setDisable(false);
         editEsc.setDisable(false);
+        cd.seleccionarEscenario(s);
         currentEscenario = s;
         escenario_label.setText(s);
         TreeView<String> tree = createTreeEscenario(s);
@@ -294,11 +295,6 @@ public class ctrl2 {
 
     /**Abre la pantalla de generarHorario.*/
     public void generarHorario() {
-        try {
-            cd.cargarEscenario(currentEscenario);
-        } catch (Exception e) {
-            System.out.println("ERROR: LECTURA DEL ESCENARIO FALLIDA");
-        }
         setRestricciones sR = setRestricciones.getInstance();
         sR.setAllRestricciones(restrDL, restrFT, restrNH, restrCO, restrPRE, restrFA, restrFN);
         sR.display(currentEscenario);
@@ -310,10 +306,10 @@ public class ctrl2 {
     }
 
     /**Constructora de la clase ctrl2.*/
-    public ctrl2() {
+    public ctrl2() throws Exception{
         sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
-        cd = cp.getCD();
+        cd = CtrlDomain.getInstance();
     }
 
     /**Asigna un mainMenu.*/

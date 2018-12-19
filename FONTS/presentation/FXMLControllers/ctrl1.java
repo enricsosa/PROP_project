@@ -55,7 +55,6 @@ public class ctrl1 {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(ctrl2.class.getResource(""));
                 c2.escenarioSeleccionado(b.getText());
-                cd.seleccionarEscenario(b.getText());
             });
             updatedPane.getChildren().addAll(b);
         }
