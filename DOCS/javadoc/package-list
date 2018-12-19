@@ -3,3 +3,5 @@ data
 domain
 domaincontrollers
 presentation
+presentation.FXMLControllers
+test
