@@ -30,8 +30,7 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
         System.out.println("Generador de horarios PROP 2017/18 Q2\n");
-        CtrlPresentacion viz;
-        viz = CtrlPresentacion.getInstance();
+        CtrlPresentacion viz = CtrlPresentacion.getInstance();
         viz.initCtrlPresentacion();
         Application.launch(MainMenu.class, args);
     }

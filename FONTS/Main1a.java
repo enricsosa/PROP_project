@@ -25,7 +25,7 @@ public class Main1a {
      * @throws ParseException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException  {
-        System.out.println("Generador de horarios PROP 2017/18 Q2\n");
+        System.out.println("Generador de horarios PROP 2017/18 Q1\n");
         CtrlPresentacion1a viz = new CtrlPresentacion1a();
         viz.initCtrlPresentacion();
         viz.initMantenimientoHorario();

@@ -109,6 +109,12 @@ public class CtrlDomain {
         this.planEstudios = planEstudiosMap.get(nombreEscenario);
     }
 
+    /**
+     * Carga todos los escenarios en un Map.
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
+     */
     public void cargarAllEscenarios() throws FileNotFoundException, IOException, ParseException {
         ArrayList<String> nombresEscenario = this.allEscenarios();
         for (int i = 0; i < nombresEscenario.size(); ++i) {
