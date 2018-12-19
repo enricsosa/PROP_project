@@ -118,6 +118,11 @@ public class ctrl2 {
         return dia;
     }
 
+    /**
+     * Crea el arbol para mostrar el Escenario y actualiza la informacion que maneja presentacion.
+     * @param s Nombre del escenario.
+     * @return  Arbol con el escenario.
+     */
     private TreeView<String> createTreeEscenario(String s) {
         restrDL = new ArrayList<>();
         restrFT = new ArrayList<>();
@@ -291,6 +296,10 @@ public class ctrl2 {
         return tree;
     }
 
+    /**
+     * Función que se ejecuta al seleccionar escenario.
+     * @param s nombre del escenario.
+     */
     public void escenarioSeleccionado(String s) {
         genHor.setDisable(false);
         editEsc.setDisable(false);
@@ -309,6 +318,7 @@ public class ctrl2 {
         sR.display(currentEscenario);
     }
 
+    /**Abre la pantalla de editar escenario.*/
     public void editarEscenario() {
         edit_new_escenario ene = edit_new_escenario.getInstance();
         ene.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD);
