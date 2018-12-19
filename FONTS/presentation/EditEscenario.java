@@ -29,6 +29,8 @@ public class EditEscenario {
     private static EditEscenario edEsc;
     private Stage window;
 
+    private ctrl2 parent;
+
     private CtrlEditAulas ctrlEdAulas;
     private FXMLLoader loaderEdAulas;
     private Parent parentEdAulas;
@@ -350,8 +352,9 @@ public class EditEscenario {
     }
 
     public void display(String escenario, ArrayList<String> pE, HashMap<String, ArrayList<Object>> asigs,
-                        HashMap<String, ArrayList<Object>> aulas, HashMap<String, ArrayList<Object>> restrs) {
+                        HashMap<String, ArrayList<Object>> aulas, HashMap<String, ArrayList<Object>> restrs, ctrl2 parent) {
 
+        this.parent = parent;
         planEstudios = pE; planEstudiosFinal = pE;
         asignaturas = asigs; asignaturasFinal = asigs;
         this.aulas = aulas; this.aulasFinal = aulas;

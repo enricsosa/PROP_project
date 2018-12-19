@@ -15,7 +15,7 @@ import presentation.*;
 import domaincontrollers.CtrlDomain;
 
 /**
- * ctrl2
+ * ctrl2 que gestiona la pantalla de seleccion de escenarios.
  * @author  Enric Sosa
  * @see     FXML
  * @see     Button
@@ -321,7 +321,7 @@ public class ctrl2 {
     /**Abre la pantalla de editar escenario.*/
     public void editarEscenario() {
         EditEscenario edEsc = EditEscenario.getInstance();
-        edEsc.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD);
+        edEsc.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD, this);
     }
 
     /**Constructora de la clase ctrl2.*/

@@ -61,7 +61,7 @@ public class edit_new_escenario {
             Button editBtn = (Button)botButtons.lookup("#editBtn");
             editBtn.setOnAction(actionEvent -> {
                 EditEscenario edEsc = EditEscenario.getInstance();
-                edEsc.display(escenario, pE, asigs, aulas, restrs);
+                //edEsc.display(escenario, pE, asigs, aulas, restrs);
                 window.close();
             });
 

@@ -15,7 +15,7 @@ import presentation.*;
 import domaincontrollers.CtrlDomain;
 
 /**
- * ctrl1
+ * ctrl1 que maneja el menú principal.
  * @author  Enric Sosa
  * @see     FXML
  * @see     Parent
