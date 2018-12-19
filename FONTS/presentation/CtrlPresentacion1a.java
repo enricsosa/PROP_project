@@ -36,7 +36,7 @@ public class CtrlPresentacion1a {
      * @throws ParseException
      */
     public CtrlPresentacion1a() throws FileNotFoundException, IOException, ParseException {
-        CD = new CtrlDomain();
+        CD = CtrlDomain.getInstance();
     }
 
     /**

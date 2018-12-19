@@ -2,11 +2,8 @@
 
 /**Imports*/
 
-package domain.test;
+package domain;
 
-import domain.Asignacion;
-import domain.Dia;
-import domain.Hora;
 import domaincontrollers.Aux;
 
 import java.util.Arrays;
@@ -27,14 +24,6 @@ public class Horario {
     private Dia[] dias;
 
     /**Constructoras*/
-
-    /**
-     * Contructora para test.
-     */
-    public Horario() {
-        this.dias = new Dia[7];
-        for (int i = 0; i < 7; ++i) this.dias[i] = new Dia();
-    }
 
     /**
      * Contructora básica de la clase Horario.

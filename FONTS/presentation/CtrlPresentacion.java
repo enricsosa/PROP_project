@@ -55,7 +55,7 @@ public class CtrlPresentacion {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initCtrlPresentacion() throws FileNotFoundException, IOException, ParseException {
-        CD = new CtrlDomain();
+        CD = CtrlDomain.getInstance();
         //CD.initCtrlDomain();
         //Vmh = new VistaMantHorario();
     }

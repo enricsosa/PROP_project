@@ -64,10 +64,14 @@ public class CtrlDomain {
     private CtrlRestriccionesFile controladorRestricciones;
     /**Controlador para gestionar escenarios.*/
     private CtrlEscenariosDir controladorEscenarios;
+    /**Contiene información de todos los escenarios disponibles.*/
+    private Map<String, PlanEstudios> planEstudiosMap;
     /**PlanEstudios con el que trabaja CtrlDominio.*/
     private PlanEstudios planEstudios;
     /**Horario con el que se trabaja.*/
     private Horario horarioActivo;
+    /**Referencia a sí misma para Singleton.*/
+    private static CtrlDomain ctrlDomain;
 
     /**Constructoras*/
 
@@ -77,7 +81,7 @@ public class CtrlDomain {
      * @throws IOException              Ha fallado una operación IO.
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
-    public CtrlDomain()throws FileNotFoundException, IOException, ParseException  {
+    private CtrlDomain() throws FileNotFoundException, IOException, ParseException  {
         this.initCtrlDomain();
     }
 
@@ -88,15 +92,32 @@ public class CtrlDomain {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initCtrlDomain() throws FileNotFoundException, IOException, ParseException {
+        this.planEstudiosMap = new HashMap<String, PlanEstudios>();
         controladorAsignaturas = CtrlAsignaturasFile.getInstance();
         controladorAulas = CtrlAulasFile.getInstance();
         controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
         controladorRestricciones = CtrlRestriccionesFile.getInstance();
+        System.out.println(1);
+        //ArrayList<String> nombresEscenario = this.allEscenarios();
+        //System.out.println(nombresEscenario);
         this.cargarPlanEstudios("Default");
         this.cargarAllAsignaturas("Default");
         this.cargarAllAulas("Default");
         this.cargarAllRestricciones("Default");
         controladorEscenarios = CtrlEscenariosDir.getInstance();
+    }
+
+    /**
+     * Instanciadora de la clase CtrlDomain.
+     * @return                          Instancia de la clase CtrlDomain.
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
+     */
+    public static CtrlDomain getInstance() throws FileNotFoundException, IOException, ParseException {
+        if (ctrlDomain == null)
+            ctrlDomain = new CtrlDomain();
+        return ctrlDomain;
     }
 
     /**Métodos públicos*/
@@ -162,6 +183,7 @@ public class CtrlDomain {
      */
     public static String getMensageOperacion(int codigoResultado) {
         switch (codigoResultado) {
+            case -26:   return "ERROR: Una Asignatura no puede ser Correquisito o Prerrequsito de sí misma.";
             case -25:   return "ERROR: Número de plazas dado inferior a 1.";
             case -24:   return "ERROR: La Asignatura ya carecía de Nivel.";
             case -23:   return "ERROR: Se busca una Sesion de duracion menor a 1.";
@@ -539,6 +561,8 @@ public class CtrlDomain {
      * @return                  codigoResultado de la operación.
      */
     public int addPrerrequisito(String idAsignatura, String idPrerrequisito) {
+        if (idAsignatura.equals(idPrerrequisito))
+            return -26;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
             return -6;
         if (!(this.planEstudios.tieneAsignatura(idPrerrequisito)))
@@ -564,6 +588,8 @@ public class CtrlDomain {
      * @return                  codigoResultado de la operación.
      */
     public int eliminarPrerrequisito(String idAsignatura, String idPrerrequisito) {
+        if (idAsignatura.equals(idPrerrequisito))
+            return -26;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
             return -6;
         if (!(this.planEstudios.tieneAsignatura(idPrerrequisito)))
@@ -580,6 +606,8 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int addCorrequisito(String idAsignatura1, String idAsignatura2) {
+        if (idAsignatura1.equals(idAsignatura2))
+            return -26;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura1)))
             return -2;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura2)))
@@ -606,6 +634,8 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int eliminarCorrequisito(String idAsignatura1, String idAsignatura2) {
+        if (idAsignatura1.equals(idAsignatura2))
+            return -26;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura1)))
             return -2;
         if (!(this.planEstudios.tieneAsignatura(idAsignatura2)))
