@@ -38,9 +38,15 @@ public class CtrlEditPlanEstudios {
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     private String currentId;
+    private CtrlDomain cd;
 
     public CtrlEditPlanEstudios() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -60,6 +66,9 @@ public class CtrlEditPlanEstudios {
         } else {
             id = textNomadd.getText();
         }
+        //CTRLDOMAIN
+        cd.addNivel(id);
+
         planEstudiosFinal.add(id);
         edEsc.setPlanEstudiosFinal(planEstudiosFinal);
     }
@@ -83,6 +92,9 @@ public class CtrlEditPlanEstudios {
         } else {
             id = textNomedit.getText();
         }
+        //CTRLDOMAIN
+        cd.editarNombreNivel(currentId, id);
+
         planEstudiosFinal.remove(currentId);
         planEstudiosFinal.add(id);
         edEsc.setPlanEstudiosFinal(planEstudiosFinal);
@@ -100,6 +112,9 @@ public class CtrlEditPlanEstudios {
     }
 
     public void removeBtnClicked() {
+        //CTRLDOMAIN
+        cd.eliminarNivel(currentId);
+
         planEstudiosFinal.remove(currentId);
         edEsc.setPlanEstudiosFinal(planEstudiosFinal);
     }
