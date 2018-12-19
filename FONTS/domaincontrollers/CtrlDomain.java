@@ -97,14 +97,27 @@ public class CtrlDomain {
         controladorAulas = CtrlAulasFile.getInstance();
         controladorPlanEstudios = CtrlPlanEstudiosFile.getInstance();
         controladorRestricciones = CtrlRestriccionesFile.getInstance();
-        System.out.println(1);
-        //ArrayList<String> nombresEscenario = this.allEscenarios();
-        //System.out.println(nombresEscenario);
-        this.cargarPlanEstudios("Default");
-        this.cargarAllAsignaturas("Default");
-        this.cargarAllAulas("Default");
-        this.cargarAllRestricciones("Default");
         controladorEscenarios = CtrlEscenariosDir.getInstance();
+        this.cargarAllEscenarios();
+    }
+
+    /**
+     * Cambia de escenario con el que se trabaja.
+     * @param nombreEscenario   nombre del escenario que se quiere guardar.
+     */
+    public void seleccionarEscenario(String nombreEscenario) {
+        this.planEstudios = planEstudiosMap.get(nombreEscenario);
+    }
+
+    public void cargarAllEscenarios() throws FileNotFoundException, IOException, ParseException {
+        ArrayList<String> nombresEscenario = this.allEscenarios();
+        for (int i = 0; i < nombresEscenario.size(); ++i) {
+            this.cargarPlanEstudios(nombresEscenario.get(i));
+            this.cargarAllAsignaturas(nombresEscenario.get(i));
+            this.cargarAllAulas(nombresEscenario.get(i));
+            this.cargarAllRestricciones(nombresEscenario.get(i));
+            this.planEstudiosMap.put(nombresEscenario.get(i), this.planEstudios);
+        }
     }
 
     /**
