@@ -1,3 +1,7 @@
+/**CtrlEditAulas*/
+
+/**Imports*/
+
 package presentation.FXMLControllers;
 
 import javafx.fxml.FXML;
@@ -30,13 +34,27 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Se encarga de gestionar presentación de edición de Aulas.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ * @see     EditEscenario
+ * @see     CtrlDomain
+ */
 public class CtrlEditAulas {
 
+    /**Instancia de editEscenario.*/
     private EditEscenario edEsc;
+    /**Aulas después de la edición.*/
     private HashMap<String, ArrayList<Object>> aulasFinal;
+    /**Id del aula seleccionada.*/
     private String currentId;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditAulas.*/
     public CtrlEditAulas() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -62,6 +80,11 @@ public class CtrlEditAulas {
     @FXML
     Button addBtn;
 
+    /**
+     * Devuelve si un string representa un entero.
+     * @param num   string a evaluar
+     * @return      true si es entero, false en caso opuesto.
+     */
     private boolean isInt(String num) {
         boolean isInt;
         try {
@@ -73,6 +96,7 @@ public class CtrlEditAulas {
         return isInt;
     }
 
+    /**Accion ejecutada al pulsar el botón añadir.*/
     public void addBtnClicked() {
         String id;
         if (textIdadd.getText().equals("")) {
@@ -126,6 +150,11 @@ public class CtrlEditAulas {
     @FXML
     Button editBtn;
 
+    /**
+     * Asigan un Aula al edit layout.
+     * @param id    id del Aula.
+     * @param attr  atributos del Aula.
+     */
     public void setEditLayout(String id, ArrayList<Object> attr) {
         currentId = id;
         ArrayList<Object> tipos = (ArrayList<Object>)attr.get(1);
@@ -144,6 +173,7 @@ public class CtrlEditAulas {
         }
     }
 
+    /**Accion que se ejecuta al pulsar el botón editar.*/
     public void editBtnClicked() {
 
         String id;
@@ -185,7 +215,7 @@ public class CtrlEditAulas {
         edEsc.setAulasFinal(aulasFinal);
     }
 
-    //EDIT LAYOUT
+    //REMOVE LAYOUT
     @FXML
     Label labIdrm;
     @FXML
@@ -199,6 +229,11 @@ public class CtrlEditAulas {
     @FXML
     Button rmBtn;
 
+    /**
+     * Asigan un Aula al remove layout.
+     * @param id    id del Aula.
+     * @param attr  atributos del Aula.
+     */
     public void setRemoveLayout(String id, ArrayList<Object> attr) {
         currentId = id;
         ArrayList<Object> tipos = (ArrayList<Object>)attr.get(1);
@@ -220,6 +255,7 @@ public class CtrlEditAulas {
         chBtnPrm.setDisable(true);
     }
 
+    /**Accion que se ejecuta al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         //CTRLDOMAIN
         cd.eliminarAula(currentId);

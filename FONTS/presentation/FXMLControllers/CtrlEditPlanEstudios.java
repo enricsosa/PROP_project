@@ -30,16 +30,29 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
-
+/**
+ * Gestiona el menú de edicion de PlanEstudios.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditPlanEstudios {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Id del elemento seleccionado.*/
     private String currentId;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditPlanestudios.*/
     public CtrlEditPlanEstudios() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -58,6 +71,7 @@ public class CtrlEditPlanEstudios {
     @FXML
     Button addBtn;
 
+    /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void addBtnClicked() {
         String id;
         if (textNomadd.getText().equals("")) {
@@ -79,11 +93,16 @@ public class CtrlEditPlanEstudios {
     @FXML
     Button editBtn;
 
+    /**
+     * Asigna un nuevo Nivel a edit layout.
+     * @param id    nombre del Nivel.
+     */
     public void setEditLayout(String id) {
         currentId = id;
         textNomedit.setText(id);
     }
 
+    /**Accion que se ejecuta al pulsar el botón editar.*/
     public void editBtnClicked() {
         String id;
         if (textNomedit.getText().equals("")) {
@@ -106,11 +125,16 @@ public class CtrlEditPlanEstudios {
     @FXML
     Button rmBtn;
 
+    /**
+     * Asigna un nuevo Nivel a remove layout.
+     * @param id    nombre del Nivel.
+     */
     public void setRemoveLayout(String id) {
         currentId = id;
         labNomrm.setText(id);
     }
 
+    /**Accion que se ejecuta al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         //CTRLDOMAIN
         cd.eliminarNivel(currentId);

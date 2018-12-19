@@ -20,7 +20,7 @@ import data.*;
 /**
  * CtrlDominio es el controlador del Dominio que coordina todos los controladores de Dominio, las clases de Dominio y se comunica con las capas
  * de Presentacion y Datos.
- * @author  Enric Sosa
+ * @author  Enric Sosa i Daniel Martín
  * @see     IOException
  * @see     List
  * @see     ArrayList
