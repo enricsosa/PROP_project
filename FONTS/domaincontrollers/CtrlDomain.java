@@ -1398,77 +1398,80 @@ public class CtrlDomain {
      */
     public HashMap<String, ArrayList<Object>> subirRestricciones(String escenario) throws FileNotFoundException, IOException, ParseException {
         List<JSONObject> restriccionesData = controladorRestricciones.getByEscenario(escenario);
+        Map<TipoRestriccion, ArrayList<Restriccion>> rCD = this.planEstudiosMap.get(escenario).getAllRestriccionesCategorizadas();
         HashMap<String, ArrayList<Object>> restricciones = new HashMap<>();
 
         //R: diaLibre
-        JSONObject diaLibre = restriccionesData.get(0);
+        ArrayList<Restriccion> dLCD = rCD.get(TipoRestriccion.DiaLibre);
         ArrayList<Object> dlProperties = new ArrayList<>();
-        for (Long dia : (List<Long>)diaLibre.get("dias")) {
-            dlProperties.add(dia.intValue());
+        for (int i = 0; i < dLCD.size(); ++i) {
+            dlProperties.add(((DiaLibre)(dLCD.get(i))).getDia());
         }
-        restricciones.put(diaLibre.get("nombre").toString(), dlProperties);
-
+        restricciones.put("diaLibre", dlProperties);
 
         //R: franjaTrabajo
-        JSONObject franjaTrabajo = restriccionesData.get(1);
+        ArrayList<Restriccion> fTCD = rCD.get(TipoRestriccion.FranjaTrabajo);
         ArrayList<Object> ftProperties = new ArrayList<>();
-        ftProperties.add(((Long)franjaTrabajo.get("horaIni")).intValue());
-        ftProperties.add(((Long)franjaTrabajo.get("horaFin")).intValue());
-        restricciones.put(franjaTrabajo.get("nombre").toString(), ftProperties);
+        for (int i = 0; i < fTCD.size(); ++i) {
+            ftProperties = new ArrayList<>();
+            ftProperties.add(((FranjaTrabajo)(fTCD.get(i))).getHoraIni());
+            ftProperties.add(((FranjaTrabajo)(fTCD.get(i))).getHoraFin());
+        }
+        restricciones.put("franjaTrabajo", ftProperties);
 
         //R: nivelHora
-        JSONObject nivelHora = restriccionesData.get(2);
+        ArrayList<Restriccion> nHCD = rCD.get(TipoRestriccion.NivelHora);
         ArrayList<Object> nhProperties = new ArrayList<>();
-        for (String nivel : (List<String>)nivelHora.get("niveles")) {
-            nhProperties.add(nivel);
+        for (int i = 0; i < nHCD.size(); ++i) {
+            nhProperties.add(((NivelHora)(nHCD.get(i))).getNivel().getNombre());
         }
-        restricciones.put(nivelHora.get("nombre").toString(), nhProperties);
+        restricciones.put("nivelHora", nhProperties);
 
         //R: correquisitos
-        JSONObject correquisitos = restriccionesData.get(3);
+        ArrayList<Restriccion> cCD = rCD.get(TipoRestriccion.Correquisito);
         ArrayList<Object> coProperties = new ArrayList<>();
-        for (JSONObject as : (List<JSONObject>)correquisitos.get("parAsigs")) {
+        for (int i = 0; i < cCD.size(); ++i) {
             ArrayList<String> co = new ArrayList<>();
-            co.add((String)as.get("idAsig1"));
-            co.add((String)as.get("idAsig2"));
+            co.add(((Correquisito)(cCD.get(i))).getAsignatura1().getId());
+            co.add(((Correquisito)(cCD.get(i))).getAsignatura2().getId());
             coProperties.add(co);
         }
-        restricciones.put(correquisitos.get("nombre").toString(), coProperties);
+        restricciones.put("correquisitos", coProperties);
 
         //R: prerrequisitos
-        JSONObject prerrequisitos = restriccionesData.get(4);
+        ArrayList<Restriccion> pCD = rCD.get(TipoRestriccion.Prerrequisito);
         ArrayList<Object> prProperties = new ArrayList<>();
-        for (JSONObject as : (List<JSONObject>)prerrequisitos.get("parAsigs")) {
+        for (int i = 0; i < pCD.size(); ++i) {
             ArrayList<String> pr = new ArrayList<>();
-            pr.add((String)as.get("idAsig"));
-            pr.add((String)as.get("idAsigPre"));
+            pr.add(((Prerrequisito)(pCD.get(i))).getAsignatura().getId());
+            pr.add(((Prerrequisito)(pCD.get(i))).getPrerrequisito().getId());
             prProperties.add(pr);
         }
-        restricciones.put(prerrequisitos.get("nombre").toString(), prProperties);
+        restricciones.put("prerrequisitos", prProperties);
 
         //R: franjaAsignatura
-        JSONObject franjaAsignatura = restriccionesData.get(5);
+        ArrayList<Restriccion> fACD = rCD.get(TipoRestriccion.FranjaAsignatura);
         ArrayList<Object> faProperties = new ArrayList<>();
-        for (JSONObject as : (List<JSONObject>)franjaAsignatura.get("asignaturas")) {
+        for (int i = 0; i < fACD.size(); ++i) {
             ArrayList<Object> fa = new ArrayList<>();
-            fa.add((String)as.get("idAsig"));
-            fa.add(((Long)as.get("horaIni")).intValue());
-            fa.add(((Long)as.get("horaFin")).intValue());
+            fa.add(((FranjaAsignatura)(fACD.get(i))).getAsignatura().getId());
+            fa.add(((FranjaAsignatura)(fACD.get(i))).getHoraIni());
+            fa.add(((FranjaAsignatura)(fACD.get(i))).getHoraFin());
             faProperties.add(fa);
         }
-        restricciones.put(franjaAsignatura.get("nombre").toString(), faProperties);
+        restricciones.put("franjaAsignatura", faProperties);
 
         //R: franjaNivel
-        JSONObject franjaNivel = restriccionesData.get(6);
+        ArrayList<Restriccion> fNCD = rCD.get(TipoRestriccion.FranjaNivel);
         ArrayList<Object> fnProperties = new ArrayList<>();
-        for (JSONObject as : (List<JSONObject>)franjaNivel.get("niveles")) {
+        for (int i = 0; i < fNCD.size(); ++i) {
             ArrayList<Object> fn = new ArrayList<>();
-            fn.add((String)as.get("idNivel"));
-            fn.add(((Long)as.get("horaIni")).intValue());
-            fn.add(((Long)as.get("horaFin")).intValue());
+            fn.add(((FranjaNivel)(fNCD.get(i))).getNivel().getNombre());
+            fn.add(((FranjaNivel)(fNCD.get(i))).getHoraIni());
+            fn.add(((FranjaNivel)(fNCD.get(i))).getHoraFin());
             fnProperties.add(fn);
         }
-        restricciones.put(franjaNivel.get("nombre").toString(), fnProperties);
+        restricciones.put("franjaNivel", fnProperties);
 
         return restricciones;
     }
