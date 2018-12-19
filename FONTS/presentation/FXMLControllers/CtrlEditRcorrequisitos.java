@@ -40,9 +40,15 @@ public class CtrlEditRcorrequisitos {
     private ArrayList<Object> currentRestr = null;
     private String currentAs1 = null;
     private String currentAs2 = null;
+    private CtrlDomain cd;
 
     public CtrlEditRcorrequisitos() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -111,6 +117,9 @@ public class CtrlEditRcorrequisitos {
             currentRestr.add(add1.getValue());
             currentRestr.add(add2.getValue());
 
+            //CTRLDOMAIN
+            cd.addCorrequisito(add1.getValue().toString(), add2.getValue().toString());
+
             correquisitos.add(currentRestr);
             restriccionesFinal.replace("correquisitos", correquisitos);
             edEsc.setRestriccionesFinal(restriccionesFinal);
@@ -127,11 +136,17 @@ public class CtrlEditRcorrequisitos {
     public void editBtnClicked() {
         ArrayList<Object> correquisitos = (ArrayList<Object>)restriccionesFinal.get("correquisitos");
         try {
+            //CTRLDOMAIN
+            cd.eliminarCorrequisito(currentRestr.get(0).toString(), currentRestr.get(1).toString());
+
             correquisitos.remove(currentRestr);
 
             currentRestr = new ArrayList<>();
             currentRestr.add(edit1.getValue());
             currentRestr.add(edit2.getValue());
+
+            //CTRLDOMAIN
+            cd.addCorrequisito(edit1.getValue().toString(), edit2.getValue().toString());
 
             correquisitos.add(currentRestr);
             restriccionesFinal.replace("correquisitos", correquisitos);
@@ -149,6 +164,9 @@ public class CtrlEditRcorrequisitos {
     public void removeBtnClicked() {
         ArrayList<Object> correquisitos = (ArrayList<Object>)restriccionesFinal.get("correquisitos");
         try {
+            //CTRLDOMAIN
+            cd.eliminarCorrequisito(currentRestr.get(0).toString(), currentRestr.get(1).toString());
+
             correquisitos.remove(currentRestr);
             restriccionesFinal.replace("correquisitos", correquisitos);
             edEsc.setRestriccionesFinal(restriccionesFinal);

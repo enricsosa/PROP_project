@@ -39,9 +39,15 @@ public class CtrlEditRnivelHora {
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     private ArrayList<String> niveles;
     private String currentId;
+    private CtrlDomain cd;
 
     public CtrlEditRnivelHora() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -75,7 +81,10 @@ public class CtrlEditRnivelHora {
             CheckBox cb = (CheckBox)n;
             if (cb.isSelected()) {
                 newNivs.add(niveles.get(i));
+                cd.addNivelHora(niveles.get(i));
                 mainFPant.getChildren().add(new Label(niveles.get(i)));
+            } else {
+                cd.eliminarNivelHora(niveles.get(i));
             }
             ++i;
         }

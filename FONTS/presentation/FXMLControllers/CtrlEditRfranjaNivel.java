@@ -41,9 +41,15 @@ public class CtrlEditRfranjaNivel {
     private String currentId = null;
     private String currenthI = null;
     private String currenthF = null;
+    private CtrlDomain cd;
 
     public CtrlEditRfranjaNivel() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -140,6 +146,9 @@ public class CtrlEditRfranjaNivel {
             String hfStr = (String) addF.getValue();
             Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
             Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
+            //CTRLDOMAIN
+            cd.addFranjaNivel(addN.getValue().toString(), hI, hF);
+
             currentRestr.add(addN.getValue());
             currentRestr.add(hI);
             currentRestr.add(hF);
@@ -164,6 +173,11 @@ public class CtrlEditRfranjaNivel {
             Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
             Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
             frNiveles.remove(currentRestr);
+
+            //CTRLDOMAIN
+            cd.eliminarFranjaNivel(currentRestr.get(0).toString(), Integer.parseInt(currentRestr.get(1).toString()), Integer.parseInt(currentRestr.get(2).toString()));
+            cd.addFranjaNivel(editN.getValue().toString(), hI, hF);
+
             currentRestr = new ArrayList<>();
             currentRestr.add(editN.getValue());
             currentRestr.add(hI);
@@ -184,6 +198,9 @@ public class CtrlEditRfranjaNivel {
     public void removeBtnClicked() {
         ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
         try {
+            //CTRLDOMAIN
+            cd.eliminarFranjaNivel(currentRestr.get(0).toString(), Integer.parseInt(currentRestr.get(1).toString()), Integer.parseInt(currentRestr.get(2).toString()));
+
             frNiveles.remove(currentRestr);
             restriccionesFinal.replace("franjaNivel", frNiveles);
             edEsc.setRestriccionesFinal(restriccionesFinal);

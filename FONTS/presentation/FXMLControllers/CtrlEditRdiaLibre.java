@@ -33,18 +33,24 @@ import domaincontrollers.CtrlDomain;
 
 public class CtrlEditRdiaLibre {
 
-        private EditEscenario edEsc;
-        private ArrayList<String> planEstudiosFinal;
-        private HashMap<String, ArrayList<Object>> asignaturasFinal;
-        private HashMap<String, ArrayList<Object>> restriccionesFinal;
-        private String currentId;
+    private EditEscenario edEsc;
+    private ArrayList<String> planEstudiosFinal;
+    private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    private String currentId;
+    private CtrlDomain cd;
 
-        public CtrlEditRdiaLibre() {
-            edEsc = EditEscenario.getInstance();
-            planEstudiosFinal = edEsc.getPlanEstudiosFinal();
-            asignaturasFinal = edEsc.getAsignaturasFinal();
-            restriccionesFinal = edEsc.getRestriccionesFinal();
+    public CtrlEditRdiaLibre() {
+        edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
         }
+        planEstudiosFinal = edEsc.getPlanEstudiosFinal();
+        asignaturasFinal = edEsc.getAsignaturasFinal();
+        restriccionesFinal = edEsc.getRestriccionesFinal();
+    }
 
     @FXML
     CheckBox lunesAnt;
@@ -141,20 +147,55 @@ public class CtrlEditRdiaLibre {
         domingoAnt.setSelected(domingoPost.isSelected());
 
         ArrayList<Object> dLs = new ArrayList<>();
-        if (lunesPost.isSelected())
+        if (lunesPost.isSelected()) {
             dLs.add(1);
-        if (martesPost.isSelected())
+            cd.addDiaLibre(1);
+        } else {
+            cd.eliminarDiaLibre(1);
+        }
+
+        if (martesPost.isSelected()) {
             dLs.add(2);
-        if (miercolesPost.isSelected())
+            cd.addDiaLibre(2);
+        } else {
+            cd.eliminarDiaLibre(2);
+        }
+
+        if (miercolesPost.isSelected()) {
             dLs.add(3);
-        if (juevesPost.isSelected())
+            cd.addDiaLibre(3);
+        } else {
+            cd.eliminarDiaLibre(3);
+        }
+
+        if (juevesPost.isSelected()) {
             dLs.add(4);
-        if (viernesPost.isSelected())
+            cd.addDiaLibre(4);
+        } else {
+            cd.eliminarDiaLibre(4);
+        }
+
+        if (viernesPost.isSelected()) {
             dLs.add(5);
-        if (sabadoPost.isSelected())
+            cd.addDiaLibre(5);
+        } else {
+            cd.eliminarDiaLibre(5);
+        }
+
+        if (sabadoPost.isSelected()) {
             dLs.add(6);
-        if (domingoPost.isSelected())
+            cd.addDiaLibre(6);
+        } else {
+            cd.eliminarDiaLibre(6);
+        }
+
+        if (domingoPost.isSelected()) {
             dLs.add(7);
+            cd.addDiaLibre(7);
+        } else {
+            cd.eliminarDiaLibre(7);
+        }
+
         restriccionesFinal.replace("diaLibre", dLs);
         edEsc.setRestriccionesFinal(restriccionesFinal);
     }

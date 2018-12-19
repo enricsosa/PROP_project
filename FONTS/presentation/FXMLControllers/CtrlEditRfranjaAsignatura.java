@@ -41,9 +41,15 @@ public class CtrlEditRfranjaAsignatura {
     private String currentId = null;
     private String currenthI = null;
     private String currenthF = null;
+    private CtrlDomain cd;
 
     public CtrlEditRfranjaAsignatura() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -139,6 +145,9 @@ public class CtrlEditRfranjaAsignatura {
             String hfStr = (String) addF.getValue();
             Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
             Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
+            //CTRLDOMAIN
+            cd.addFranjaAsignatura(addA.getValue().toString(), hI, hF);
+
             currentRestr.add(addA.getValue());
             currentRestr.add(hI);
             currentRestr.add(hF);
@@ -163,6 +172,11 @@ public class CtrlEditRfranjaAsignatura {
             Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
             Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
             frAsignaturas.remove(currentRestr);
+
+            //CTRLDOMAIN
+            cd.eliminarFranjaAsignatura(currentRestr.get(0).toString(), Integer.parseInt(currentRestr.get(1).toString()), Integer.parseInt(currentRestr.get(2).toString()));
+            cd.addFranjaAsignatura(editA.getValue().toString(), hI, hF);
+
             currentRestr = new ArrayList<>();
             currentRestr.add(editA.getValue());
             currentRestr.add(hI);
@@ -183,6 +197,9 @@ public class CtrlEditRfranjaAsignatura {
     public void removeBtnClicked() {
         ArrayList<Object> frAsignaturas = (ArrayList<Object>)restriccionesFinal.get("franjaAsignatura");
         try {
+            //CTRLDOMAIN
+            cd.eliminarFranjaAsignatura(currentRestr.get(0).toString(), Integer.parseInt(currentRestr.get(1).toString()), Integer.parseInt(currentRestr.get(2).toString()));
+
             frAsignaturas.remove(currentRestr);
             restriccionesFinal.replace("franjaAsignatura", frAsignaturas);
             edEsc.setRestriccionesFinal(restriccionesFinal);

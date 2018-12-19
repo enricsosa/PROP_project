@@ -40,9 +40,15 @@ public class CtrlEditRfranjaTrabajo {
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     private String currentId;
+    private CtrlDomain cd;
 
     public CtrlEditRfranjaTrabajo() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
@@ -62,8 +68,6 @@ public class CtrlEditRfranjaTrabajo {
 
 
     public void setLayout(String hI, String hF) {
-        System.out.println(hI);
-        System.out.println(hF);
         int hi = Integer.parseInt(hI);
         int hf = Integer.parseInt(hF);
         horaIniAnt.setText(hI + "h");
@@ -117,8 +121,16 @@ public class CtrlEditRfranjaTrabajo {
             System.out.println("VALOR POR DEFECTO: 23h");
             hfStr = "23:00";
         }
+        //CTRLDOMAIN
+        Integer hourAntI = Integer.parseInt(restriccionesFinal.get("franjaTrabajo").get(0).toString());
+        Integer hourAntF = Integer.parseInt(restriccionesFinal.get("franjaTrabajo").get(1).toString());
+        cd.eliminarFranjaTrabajo(hourAntI, hourAntF);
+
         Integer hI = Integer.parseInt(hiStr.substring(0, hiStr.indexOf(":")));
         Integer hF = Integer.parseInt(hfStr.substring(0, hfStr.indexOf(":")));
+        //CTRLDOMAIN
+        cd.addFranjaTrabajo(hI, hF);
+
         horaIniAnt.setText(hI + "h");
         horaFinAnt.setText(hF + "h");
 
