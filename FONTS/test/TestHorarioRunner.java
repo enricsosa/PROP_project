@@ -10,7 +10,7 @@ public class TestHorarioRunner {
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
-        if (result.wasSuccessful()) System.out.println("El test a Ocupaciones ha funcionado corretamente.");
-        else System.out.println("El test a Ocupaciones no ha funcionado corretamente.");
+        if (result.wasSuccessful()) System.out.println("El test a Horario ha funcionado corretamente.");
+        else System.out.println("El test a Horario no ha funcionado corretamente.");
     }
 }
