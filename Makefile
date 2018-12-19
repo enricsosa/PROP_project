@@ -12,7 +12,10 @@ rebuild:
 		cp -r ./FONTS/presentation/FXML ./EXE/presentation/FXML
 
 run:
-		java -cp ".:./EXE:./LIBS/json-simple-1.1.1.jar:./LIBS/hamcrest-core-1.3.jar:./LIBS/junit-4.12.jar:./LIBS/jfxrt.jar:" Main
+		java -cp ".:./EXE:./LIBS/json-simple-1.1.1.jar:./LIBS/jfxrt.jar:" Main
+
+run1a:
+		java -cp ".:./EXE:./LIBS/json-simple-1.1.1.jar:" Main1a
 
 runTest:
 		java -cp ".:./EXE:./LIBS/hamcrest-core-1.3.jar:./LIBS/junit-4.12.jar:" test.TestHorarioRunner
