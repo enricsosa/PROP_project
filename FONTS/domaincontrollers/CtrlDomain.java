@@ -1496,7 +1496,7 @@ public class CtrlDomain {
     /**
      * Genera un Horario con los datos de CtrlDominio.
      * @param id    id del Horario que se generará.
-     * @return      Horario generado.
+     * @return      Horario generado con el PlanEstudios que se ha usado.
      */
     public String generarHorario(String id) {
         CtrlHorario ctrlHorario = new CtrlHorario(this.planEstudios);

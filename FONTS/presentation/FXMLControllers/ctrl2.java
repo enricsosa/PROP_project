@@ -320,8 +320,8 @@ public class ctrl2 {
 
     /**Abre la pantalla de editar escenario.*/
     public void editarEscenario() {
-        edit_new_escenario ene = edit_new_escenario.getInstance();
-        ene.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD);
+        EditEscenario edEsc = EditEscenario.getInstance();
+        edEsc.display(escenario_label.getText(), planEstudiosCD, asignaturasCD, aulasCD, restriccionesCD);
     }
 
     /**Constructora de la clase ctrl2.*/
