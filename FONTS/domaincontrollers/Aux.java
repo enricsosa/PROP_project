@@ -24,6 +24,17 @@ public class Aux {
     }
 
     /**
+     * Convierte un TipoClase a un String.
+     * @param tipo  TipoClase que se quiere convertir.
+     * @return  Devuelve un String con el TipoClase.
+     */
+    public static String strTipoCompleto(TipoClase tipo) {
+        if (tipo == TipoClase.Teoria) return "Teoria";
+        else if (tipo == TipoClase.Laboratorio) return "Laboratorio";
+        return "Problemas";
+    }
+
+    /**
      * Obtiene el String con el nombre del dia de la Semana que corresponde a un int representando un dia.
      * @param dia   dia de la semana del que se quiere obtener el nombre.
      * @return      String con el nombre de dia.

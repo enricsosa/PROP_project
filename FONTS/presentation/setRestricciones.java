@@ -231,7 +231,12 @@ public class setRestricciones {
      * @param escenario escenario que se aplica.
      */
     public void display(String escenario) {
-        cd = CtrlPresentacion.getInstance().getCD();
+        try {
+            cd = CtrlDomain.getInstance();
+        }
+        catch (Exception e) {
+            System.out.println("Error al obtener instancia de CtrlDomain.");
+        }
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setResizable(false);

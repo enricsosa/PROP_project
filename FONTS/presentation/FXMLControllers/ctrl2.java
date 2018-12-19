@@ -51,21 +51,30 @@ public class ctrl2 {
     private ArrayList<String> restrFA;
     /**Restricciones FranjaNivel.*/
     private ArrayList<String> restrFN;
-
+    /**PlanEstudios en CD.*/
     private ArrayList<String> planEstudiosCD;
+    /**Asignaturas en CD.*/
     private HashMap<String, ArrayList<Object>> asignaturasCD;
+    /**Aulas en CD.*/
     private HashMap<String, ArrayList<Object>> aulasCD;
+    /**Restricciones en CD.*/
     private HashMap<String, ArrayList<Object>> restriccionesCD;
-
+    /**Etiqueta con el nombre del escenario seleccionado.*/
     @FXML
     public Label escenario_label;
-
+    /**Boton de generarHorario.*/
     @FXML
     public Button genHor;
-
+    /**Boton de editarEscenario.*/
     @FXML
     public Button editEsc;
 
+    /**
+     * TreeItem para mostrar rama de un arbol de escenario.
+     * @param title     título del treeItem.
+     * @param parent    padre del treeItem.
+     * @return          TreeItem con padre y título indicados
+     */
     private TreeItem<String> doBranch(String title, TreeItem<String> parent) {
         TreeItem<String> item = new TreeItem<>(title);
         item.setExpanded(false);
@@ -306,10 +315,15 @@ public class ctrl2 {
     }
 
     /**Constructora de la clase ctrl2.*/
-    public ctrl2() throws Exception{
+    public ctrl2() {
         sc = SceneController.getInstance();
         cp = CtrlPresentacion.getInstance();
-        cd = CtrlDomain.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        }
+        catch (Exception e) {
+            System.out.println("Error al obtener instancia de CtrlDomain.");;
+        }
     }
 
     /**Asigna un mainMenu.*/

@@ -42,6 +42,11 @@ public class ctrl1 {
     public ctrl1() {
     }
 
+    /**
+     * Construye el panel izquierdo de escenarios.
+     * @return              Panel izquierdo de escenarios.
+     * @throws Exception    Ha habido un error al crear el panel.
+     */
     private VBox leftPaneEscenarios() throws Exception {
         VBox updatedPane = new VBox();
         CtrlPresentacion CP = CtrlPresentacion.getInstance();
@@ -62,6 +67,11 @@ public class ctrl1 {
         return updatedPane;
     }
 
+    /**
+     * Construye el panel izquierdo de Horarios.
+     * @return              Panel izquierdo de Horarios.
+     * @throws Exception    Ha habido un error al crear el panel.
+     */
     private VBox leftPaneHorarios() throws Exception {
         VBox updatedPane = new VBox();
         updatedPane.setId("leftVB");
@@ -83,6 +93,10 @@ public class ctrl1 {
         return updatedPane;
     }
 
+    /**
+     * Accion ejecutada al pulsar "Escoger Escenario".
+     * @throws Exception    Ha habido un error al ejecutar la accion.
+     */
     public void setEscogEsc() throws Exception {
         SceneController sc = SceneController.getInstance();
 
@@ -94,6 +108,10 @@ public class ctrl1 {
         sc.activate("prova2");
     }
 
+    /**
+     * Accion ejecutada al pulsar "Escoger Horario".
+     * @throws Exception    Ha habido un error al ejecutar la accion.
+     */
     public void setEscogHor() throws Exception {
         SceneController sc = SceneController.getInstance();
 
@@ -105,6 +123,10 @@ public class ctrl1 {
         sc.activate("escogerHorario");
     }
 
+    /**
+     * Accion ejecutada al pulsar "Salir".
+     * @throws Exception    Ha habido un error al ejecutar la accion.
+     */
     public void outButtonClicked() throws Exception {
         System.exit(0);
     }

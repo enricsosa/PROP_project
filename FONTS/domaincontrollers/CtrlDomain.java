@@ -1165,6 +1165,7 @@ public class CtrlDomain {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void cargarAllAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
+
         List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
 
         for (JSONObject assig : asignaturasData) {
@@ -1314,34 +1315,41 @@ public class CtrlDomain {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public HashMap<String, ArrayList<Object>> subirAsignaturas(String escenario) throws FileNotFoundException, IOException, ParseException {
-        List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
+        //List<JSONObject> asignaturasData = controladorAsignaturas.getByEscenario(escenario);
+        Map<String, Asignatura> aCD = this.planEstudiosMap.get(escenario).getAsignaturas();
         HashMap<String, ArrayList<Object>> asigs = new HashMap<>();
 
-        for (JSONObject assig : asignaturasData) {
+        for (Map.Entry<String, Asignatura> entry : aCD.entrySet()) {
             ArrayList<Object> asigProperties = new ArrayList<>();
-            asigProperties.add((String)assig.get("nombre"));
-            asigProperties.add((String)assig.get("nivel"));
+            asigProperties.add(entry.getValue().getNombre());
+            if (entry.getValue().tieneNivel())
+                asigProperties.add(entry.getValue().getNivel().getNombre());
+            else
+                asigProperties.add(""); //Texto que se pone en Asignatura sin Nivel.
 
+            ArrayList<Sesion> sACD = entry.getValue().getSesiones();
             ArrayList<Object> sesiones = new ArrayList<>();
-            for (JSONObject ses : (List<JSONObject>)assig.get("sesiones")) {
+            for (int i = 0; i < sACD.size(); ++i) {
                 ArrayList<Object> sesProperties = new ArrayList<>();
-                sesProperties.add(((Long)ses.get("horas")).intValue());
-                sesProperties.add(TipoClase.valueOf((String)ses.get("TipoClase")));
+                sesProperties.add(sACD.get(i).getDuracion());
+                sesProperties.add(Aux.strTipoCompleto(sACD.get(i).getTipo()));
                 sesiones.add(sesProperties);
             }
             asigProperties.add(sesiones);
 
+            Map<String, Grupo> gACD = entry.getValue().getGrupos();
             ArrayList<Object> grupos = new ArrayList<>();
-            for (JSONObject gr : (List<JSONObject>)assig.get("grupos")) {
+            for (Map.Entry<String, Grupo> grupo : gACD.entrySet()) {
                 ArrayList<Object> grProperties = new ArrayList<>();
-                grProperties.add((String)gr.get("id"));
+                grProperties.add(grupo.getValue().getId());
 
+                Map<String, SubGrupo> sGACD = grupo.getValue().getSubGrupos();
                 ArrayList<Object> subgrupos = new ArrayList<>();
-                for (JSONObject subgr : (List<JSONObject>)gr.get("subGrupos")) {
+                for (Map.Entry<String, SubGrupo> subGrupo : sGACD.entrySet()) {
                     ArrayList<Object> subgrProperties = new ArrayList<>();
-                    subgrProperties.add((String)subgr.get("id"));
-                    subgrProperties.add(((Long)subgr.get("plazas")).intValue());
-                    subgrProperties.add(TipoClase.valueOf((String)subgr.get("tipo")));
+                    subgrProperties.add(subGrupo.getValue().getId());
+                    subgrProperties.add(subGrupo.getValue().getPlazas());
+                    subgrProperties.add(subGrupo.getValue().getTipo());
                     subgrupos.add(subgrProperties);
                 }
                 grProperties.add(subgrupos);
@@ -1350,7 +1358,7 @@ public class CtrlDomain {
             }
             asigProperties.add(grupos);
 
-            asigs.put((String)assig.get("id"), asigProperties);
+            asigs.put(entry.getValue().getId(), asigProperties);
         }
 
         return asigs;
@@ -1477,16 +1485,11 @@ public class CtrlDomain {
      * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public ArrayList<String> subirPlanEstudios(String escenario) throws FileNotFoundException, IOException, ParseException {
-        JSONObject planEstudiosData = controladorPlanEstudios.getPlanEstudiosByEscenario(escenario);
+        PlanEstudios pECD = planEstudiosMap.get(escenario);
         ArrayList<String> pE = new ArrayList<>();
-        pE.add((String)planEstudiosData.get("nombre"));
-        String niveles = planEstudiosData.get("niveles").toString();
-
-        String s;
-        for (int i = 0; i < niveles.length()-1; i+=5) {
-            s = niveles.substring(niveles.indexOf("\"", i) + 1, niveles.indexOf("\"", i) + 3);
-            pE.add(s);
-        }
+        pE.add(pECD.getNombre());
+        for (Map.Entry<String, Nivel> entry : pECD.getNiveles().entrySet())
+            pE.add(entry.getValue().getNombre());
         return pE;
     }
 
