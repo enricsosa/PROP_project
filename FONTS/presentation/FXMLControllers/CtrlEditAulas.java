@@ -35,9 +35,15 @@ public class CtrlEditAulas {
     private EditEscenario edEsc;
     private HashMap<String, ArrayList<Object>> aulasFinal;
     private String currentId;
+    private CtrlDomain cd;
 
     public CtrlEditAulas() {
         edEsc = EditEscenario.getInstance();
+        try {
+            cd = CtrlDomain.getInstance();
+        } catch (Exception e) {
+            System.out.println("ERROR EN LA CARGA DEL CONTROLADOR DE DOMINIO");
+        }
         aulasFinal = edEsc.getAulasFinal();
     }
 
@@ -92,9 +98,16 @@ public class CtrlEditAulas {
         if (chBtnLadd.isSelected())
             tipos.add("Laboratorio");
 
+        String[] tiposArray = new String[tipos.size()];
+        tiposArray = tipos.toArray(tiposArray);
+
         ArrayList<Object> propiedades = new ArrayList<>();
         propiedades.add(plazas);
         propiedades.add(tipos);
+        //CTRLDOMAIN
+        if (cd.addAula(id, plazas, tiposArray) < 0) {
+            System.out.println("ERROR: EL AULA CON ID: \"" + id + "\" YA EXISTE EN EL PLAN DE ESTUDIOS");
+        }
         aulasFinal.put(id, propiedades);
         edEsc.setAulasFinal(aulasFinal);
     }
@@ -159,6 +172,14 @@ public class CtrlEditAulas {
         ArrayList<Object> propiedades = new ArrayList<>();
         propiedades.add(plazas);
         propiedades.add(tipos);
+
+        String[] tiposArray = new String[tipos.size()];
+        tiposArray = tipos.toArray(tiposArray);
+        //CTRLDOMAIN
+        cd.editarIdAula(currentId, id);
+        cd.editarIdAula(id, plazas);
+        cd.editarTiposAula(id, tiposArray);
+
         aulasFinal.remove(currentId);
         aulasFinal.put(id, propiedades);
         edEsc.setAulasFinal(aulasFinal);
@@ -200,6 +221,8 @@ public class CtrlEditAulas {
     }
 
     public void removeBtnClicked() {
+        //CTRLDOMAIN
+        cd.eliminarAula(currentId);
         aulasFinal.remove(currentId);
         edEsc.setAulasFinal(aulasFinal);
     }
