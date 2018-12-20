@@ -166,49 +166,49 @@ public class CtrlEditRdiaLibre {
         domingoAnt.setSelected(domingoPost.isSelected());
 
         ArrayList<Object> dLs = new ArrayList<>();
-        if (lunesPost.isSelected()) {
+        if (lunesPost.isSelected() && (!(lunesAnt.isSelected()))) {
             dLs.add(1);
             cd.addDiaLibre(1);
         } else {
             cd.eliminarDiaLibre(1);
         }
 
-        if (martesPost.isSelected()) {
+        if (martesPost.isSelected() && (!(martesAnt.isSelected()))) {
             dLs.add(2);
             cd.addDiaLibre(2);
         } else {
             cd.eliminarDiaLibre(2);
         }
 
-        if (miercolesPost.isSelected()) {
+        if (miercolesPost.isSelected() && (!(miercolesAnt.isSelected()))) {
             dLs.add(3);
             cd.addDiaLibre(3);
         } else {
             cd.eliminarDiaLibre(3);
         }
 
-        if (juevesPost.isSelected()) {
+        if (juevesPost.isSelected() && (!(juevesAnt.isSelected()))) {
             dLs.add(4);
             cd.addDiaLibre(4);
         } else {
             cd.eliminarDiaLibre(4);
         }
 
-        if (viernesPost.isSelected()) {
+        if (viernesPost.isSelected() && (!(viernesAnt.isSelected()))) {
             dLs.add(5);
             cd.addDiaLibre(5);
         } else {
             cd.eliminarDiaLibre(5);
         }
 
-        if (sabadoPost.isSelected()) {
+        if (sabadoPost.isSelected() && (!(sabadoAnt.isSelected()))) {
             dLs.add(6);
             cd.addDiaLibre(6);
         } else {
             cd.eliminarDiaLibre(6);
         }
 
-        if (domingoPost.isSelected()) {
+        if (domingoPost.isSelected() && (!(domingoAnt.isSelected()))) {
             dLs.add(7);
             cd.addDiaLibre(7);
         } else {

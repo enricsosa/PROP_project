@@ -313,6 +313,75 @@ public class ctrl2 {
 
     /**Abre la pantalla de generarHorario.*/
     public void generarHorario() {
+        planEstudiosCD = new ArrayList<>();
+        try {
+            planEstudiosCD = cd.subirPlanEstudios(currentEscenario);
+        } catch (Exception e) {
+            System.out.println("ERROR: CARGA DEL PLAN DE ESTUDIOS FALLIDA");
+        }
+        asignaturasCD = new HashMap<>();
+        try {
+            asignaturasCD = cd.subirAsignaturas(currentEscenario);
+        } catch (Exception e) {
+            System.out.println("ERROR: CARGA DE LAS ASIGNATURAS FALLIDA");
+        }
+        aulasCD = new HashMap<>();
+        try {
+            aulasCD = cd.subirAulas(currentEscenario);
+        } catch (Exception e) {
+            System.out.println("ERROR: CARGA DE LAS AULAS FALLIDA");
+        }
+        restriccionesCD = new HashMap<>();
+        try {
+            restriccionesCD = cd.subirRestricciones(currentEscenario);
+        } catch (Exception e) {
+            System.out.println("ERROR: CARGA DE LAS RESTRICCIONES FALLIDA");
+        }
+        restrDL = new ArrayList<>();
+        restrFT = new ArrayList<>();
+        restrNH = new ArrayList<>();
+        restrCO = new ArrayList<>();
+        restrPRE = new ArrayList<>();
+        restrFA = new ArrayList<>();
+        restrFN = new ArrayList<>();
+
+        ArrayList<Object> dLs = (ArrayList<Object>)restriccionesCD.get("diaLibre");
+        for (Object dl : dLs) {
+            restrDL.add(dl.toString());
+        }
+        ArrayList<Object> horasTrabajo = (ArrayList<Object>)restriccionesCD.get("franjaTrabajo");
+        restrFT.add(horasTrabajo.get(0).toString());
+        restrFT.add(horasTrabajo.get(1).toString());
+
+
+        ArrayList<Object> nHs = (ArrayList<Object>)restriccionesCD.get("nivelHora");
+        for (Object nh : nHs) {
+            restrNH.add(nh.toString());
+        }
+
+        ArrayList<Object> corres = (ArrayList<Object>)restriccionesCD.get("correquisitos");
+        for (Object co : corres) {
+            restrCO.add(co.toString());
+        }
+
+        ArrayList<Object> pres = (ArrayList<Object>)restriccionesCD.get("prerrequisitos");
+        for (Object pr : pres) {
+            restrPRE.add(pr.toString());
+        }
+
+        ArrayList<Object> frAsigs = (ArrayList<Object>)restriccionesCD.get("franjaAsignatura");
+        for (Object fa : frAsigs) {
+            String faS = fa.toString();
+            restrFA.add(faS);
+        }
+
+
+        ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesCD.get("franjaNivel");
+        for (Object fn : frNiveles) {
+            String fnS = fn.toString();
+            restrFN.add(fnS);
+        }
+
         setRestricciones sR = setRestricciones.getInstance();
         sR.setAllRestricciones(restrDL, restrFT, restrNH, restrCO, restrPRE, restrFA, restrFN);
         sR.display(currentEscenario);

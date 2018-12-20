@@ -102,6 +102,7 @@ public class CtrlEditRnivelHora {
             CheckBox cb = (CheckBox)n;
             if (cb.isSelected()) {
                 newNivs.add(niveles.get(i));
+                cd.eliminarNivelHora(niveles.get(i));
                 cd.addNivelHora(niveles.get(i));
                 mainFPant.getChildren().add(new Label(niveles.get(i)));
             } else {
