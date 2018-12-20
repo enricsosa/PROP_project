@@ -52,7 +52,7 @@ public class CtrlEditPlanEstudios {
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
-    /**Constructora de la clase CtrlEditPlanestudios.*/
+    /**Constructora de la clase CtrlEditRplanEstudios.*/
     public CtrlEditPlanEstudios() {
         edEsc = EditEscenario.getInstance();
         try {

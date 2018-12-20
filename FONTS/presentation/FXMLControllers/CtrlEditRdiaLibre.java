@@ -31,15 +31,29 @@ import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
 
+/**
+ * Gestiona la edición de Restricciones diaLibre.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRdiaLibre {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Id del elemento seleccionado.*/
     private String currentId;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Contructora de la clase CtrlEditRdiaLibre.*/
     public CtrlEditRdiaLibre() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -85,6 +99,10 @@ public class CtrlEditRdiaLibre {
     @FXML
     Button updateBtn;
 
+    /**
+     * Asigna un diaLibre a Layout.
+     * @param diasLibres    diasLibres que se asignan.
+     */
     public void setLayout(ArrayList<Object> diasLibres) {
         lunesAnt.setSelected(false);
         lunesPost.setSelected(false);
@@ -137,6 +155,7 @@ public class CtrlEditRdiaLibre {
         domingoAnt.setDisable(true);
     }
 
+    /**Acción que se ejecuta al pulsar el botón actualizar.*/
     public void updateBtnClicked() {
         lunesAnt.setSelected(lunesPost.isSelected());
         martesAnt.setSelected(martesPost.isSelected());

@@ -31,17 +31,33 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Gestiona la edición de Restricciones Prerrequisito.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRprerrequisitos {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Restriccion seleccionada.*/
     private ArrayList<Object> currentRestr = null;
+    /**idAsignatura1.*/
     private String currentAs1 = null;
+    /**idAsignatura2.*/
     private String currentAs2 = null;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditRprerrequisitos.*/
     public CtrlEditRprerrequisitos() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -78,10 +94,12 @@ public class CtrlEditRprerrequisitos {
     @FXML
     Button removeBtn;
 
+    /**Comprueba que no se añade un Preequsito de si mismo.*/
     private void checkSameAsigsAdd() {
         addBtn.setDisable(add1.getValue().equals(add2.getValue()));
     }
 
+    /**Comprueba que no se añade un Preequsito de si mismo.*/
     private void checkSameAsigsEdit() {
         try {
             editBtn.setDisable(edit1.getValue().equals(edit2.getValue()));
@@ -90,6 +108,7 @@ public class CtrlEditRprerrequisitos {
         }
     }
 
+    /**Prepara un layout.*/
     private void setLayout() {
         ObservableList<String> asignaturas = FXCollections.observableArrayList();
         for (Map.Entry<String, ArrayList<Object>> asig : asignaturasFinal.entrySet()) {
@@ -133,6 +152,7 @@ public class CtrlEditRprerrequisitos {
         }
     }
 
+    /**Accion al pulsar el botón editar.*/
     public void editBtnClicked() {
         ArrayList<Object> prerrequisitos = (ArrayList<Object>)restriccionesFinal.get("prerrequisitos");
         try {
@@ -161,6 +181,7 @@ public class CtrlEditRprerrequisitos {
         }
     }
 
+    /**Accion al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         ArrayList<Object> prerrequisitos = (ArrayList<Object>)restriccionesFinal.get("prerrequisitos");
         try {
@@ -185,6 +206,7 @@ public class CtrlEditRprerrequisitos {
 
     ChangeListener<String> preSelected = this::itemSelected;
 
+    /**Asigna un objeto como objetivo de edicion.*/
     private void itemSelected(ObservableValue<? extends String> observableValue, String s, String t1) {
         if (!(t1 == null)) {
             listview.getSelectionModel().selectedItemProperty().removeListener(preSelected);
@@ -198,6 +220,7 @@ public class CtrlEditRprerrequisitos {
         }
     }
 
+    /**Muestra un listview.*/
     public void setListview(ArrayList<Object> prerrequisitos) {
         ObservableList<String> asignaturas = FXCollections.observableArrayList();
         for (Map.Entry<String, ArrayList<Object>> asig : asignaturasFinal.entrySet()) {

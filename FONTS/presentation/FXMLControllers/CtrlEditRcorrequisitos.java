@@ -57,7 +57,7 @@ public class CtrlEditRcorrequisitos {
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
-    /**Constructora de la clase CtrlEditCorrequisitos.*/
+    /**Constructora de la clase CtrlEditRcorrequisitos.*/
     public CtrlEditRcorrequisitos() {
         edEsc = EditEscenario.getInstance();
         try {

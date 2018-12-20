@@ -104,6 +104,7 @@ public class escogerHorario {
         sc.activate("prova1");
     }
 
+    /**Boton que puede arrastrarse.*/
     private Button draggableButton(String text) {
         Button button = new Button(text);
         button.setOnDragDetected(e -> {
@@ -118,6 +119,7 @@ public class escogerHorario {
         return button ;
     }
 
+    /**Accion que se ejecuta al soltar un objeto.*/
     private void addDropHandling(Pane pane) {
         pane.setOnDragOver(e -> {
             Dragboard db = e.getDragboard();
