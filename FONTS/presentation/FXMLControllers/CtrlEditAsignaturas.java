@@ -49,6 +49,7 @@ public class CtrlEditAsignaturas {
     private ArrayList<ArrayList<Object>> currentGrupos;
 
     private CtrlEditSesiones ctrlEditSesiones;
+    private CtrlEditGrupos ctrlEditGrupos;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
@@ -113,7 +114,6 @@ public class CtrlEditAsignaturas {
         window.setResizable(false);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editSesiones.fxml"));
-        System.out.println(loader);
         Parent root = null;
         try {
             root = loader.load();
@@ -149,11 +149,43 @@ public class CtrlEditAsignaturas {
     }
 
     public void manageAddGruposBtn() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setResizable(false);
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editGrupos.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+            ctrlEditGrupos = loader.getController();
+            ctrlEditGrupos.display(false, currentGrupos);
+            HBox hb = (HBox)root;
+
+            window.setScene(new Scene(hb));
+            window.showAndWait();
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
     }
 
     public void manageEditGruposBtn() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setResizable(false);
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editGrupos.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+            ctrlEditGrupos = loader.getController();
+            ctrlEditGrupos.display(true, currentGrupos);
+            HBox hb = (HBox)root;
+
+            window.setScene(new Scene(hb));
+            window.showAndWait();
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
     }
 
     /**
