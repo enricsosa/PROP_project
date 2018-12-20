@@ -103,13 +103,13 @@ public class EditEscenario {
     /**Restricciones final.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
 
-    /**Insica si ha cambiado PlanEstudios.*/
+    /**Indica si ha cambiado PlanEstudios.*/
     private boolean peChanged;
-    /**Insica si ha cambiado Asignaturas.*/
+    /**Indica si ha cambiado Asignaturas.*/
     private boolean asChanged;
-    /**Insica si ha cambiado Aulas.*/
+    /**Indica si ha cambiado Aulas.*/
     private boolean auChanged;
-    /**Insica si ha cambiado Restricciones.*/
+    /**Indica si ha cambiado Restricciones.*/
     private boolean reChanged;
 
     /**
@@ -230,6 +230,13 @@ public class EditEscenario {
             VBox lay = (VBox)parentEdAsignaturas;
             if (parent.getChildren().size() == 2)
                 parent.getChildren().remove(1);
+
+            if (!(item == null)) {
+                ArrayList<Object> as = asignaturasFinal.get(item);
+                ctrlEdAsignaturas.setEditLayout(item, as);
+                ctrlEdAsignaturas.setRemoveLayout(item, as);
+            }
+
             parent.getChildren().add(lay);
         } catch (Exception e) {
             System.out.println("ERROR EN LA CARGA DEL LAYOUT PARA EDITAR ASIGNATURAS");
