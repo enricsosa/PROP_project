@@ -1,5 +1,12 @@
 package presentation;
 
+import com.sun.javafx.scene.control.skin.ScrollPaneSkin;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import presentation.FXMLControllers.*;
 import domaincontrollers.CtrlDomain;
 import javafx.scene.Scene;
@@ -19,6 +26,16 @@ public class showHorario {
     private static showHorario sH;
     private CtrlDomain cd;
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
+    /**buttonFormat*/
+    private DataFormat buttonFormat = new DataFormat("hola2");
+    /**draggingButton*/
+    private Button draggingButton;
+    /**editing*/
+    private boolean editing = false;
+    private String nomH;
+
+    private FXMLLoader loader;
+    private Parent root;
 
     /**Constructoras*/
 
@@ -33,30 +50,140 @@ public class showHorario {
         return sH;
     }
 
+    private boolean checkChange(String buttonText, int iD, int iH, int fD, int fH) {
+        int firstSpace = buttonText.indexOf(" ");
+        int secondSpace = buttonText.indexOf(" ", firstSpace+1);
+        int thirdSpace = buttonText.indexOf(" ", secondSpace+1);
+        String idAsignatura = buttonText.substring(0, buttonText.indexOf(" "));
+        String idsubG = buttonText.substring(secondSpace+1, thirdSpace);
+        return (cd.moverAsignacion(idAsignatura, idsubG, iD, iH, fD, fH) >= 0);
+    }
+
+    private void checkOptions(GridPane gp, String buttonText, int iD, int iH) {
+        ObservableList ol = gp.getChildren();
+        for (Object n : ol) {
+            if (n.getClass().equals(ScrollPane.class)) {
+                ScrollPane sp = (ScrollPane)n;
+                String destVBox = sp.getId();
+                Integer fD = Integer.parseInt(destVBox.substring(0, 1));
+                Integer fH = Integer.parseInt(destVBox.substring(destVBox.indexOf(',')+1));
+                System.out.println(fD);
+                System.out.println(fH);
+                if (checkChange(buttonText, iD, iH, fD, fH)) {
+                    sp.setStyle("-fx-border-color: green");
+                }
+            }
+        }
+    }
+
+    private Button draggableButton(String text) {
+        Button button = new Button(text);
+        button.setOnDragDetected(e -> {
+            Dragboard db = button.startDragAndDrop(TransferMode.MOVE);
+            db.setDragView(button.snapshot(null, null));
+            ClipboardContent cc = new ClipboardContent();
+            cc.put(buttonFormat, "button");
+            db.setContent(cc);
+            draggingButton = button;
+/*
+            VBox parent = (VBox)draggingButton.getParent();
+            ScrollPane sp = (ScrollPane)parent.getParent().getParent().getParent();
+            sp.setStyle("-fx-border-color: blue");
+
+            BorderPane bP = (BorderPane)root;
+            GridPane gP = (GridPane)bP.getCenter();
+            String initVBox = ((Pane)draggingButton.getParent()).getId();
+            Integer iD = Integer.parseInt(initVBox.substring(0, 1));
+            Integer iH = Integer.parseInt(initVBox.substring(initVBox.indexOf(',')+1));
+            checkOptions(gP, draggingButton.getText(), iD, iH);
+            */
+
+            System.out.println();
+        });
+        button.setOnDragDone(e -> draggingButton = null);
+        return button ;
+    }
+
+    private void addDropHandling(Pane pane) {
+        pane.setOnDragOver(e -> {
+            Dragboard db = e.getDragboard();
+            if (db.hasContent(buttonFormat)
+                    && draggingButton != null
+                    && draggingButton.getParent() != pane) {
+                e.acceptTransferModes(TransferMode.MOVE);
+
+            }
+        });
+
+        pane.setOnDragDropped(e -> {
+            Dragboard db = e.getDragboard();
+            if (db.hasContent(buttonFormat)) {
+                String initVBox = ((Pane)draggingButton.getParent()).getId();
+                String destVBox = pane.getId();
+                Integer iD, iH, fD, fH;
+                iD = Integer.parseInt(initVBox.substring(0, 1));
+                iH = Integer.parseInt(initVBox.substring(initVBox.indexOf(',')+1));
+                fD = Integer.parseInt(destVBox.substring(0, 1));
+                fH = Integer.parseInt(destVBox.substring(destVBox.indexOf(',')+1));
+                boolean aux = checkChange(draggingButton.getText(), iD, iH, fD, fH);
+                System.out.println(aux);
+                if (aux) {
+                    try {
+                        cd.writeHorario(cd.getHorarioActivo().toString(), nomH);
+                        horario = cd.escaneaHorario(nomH, false);
+                    } catch (Exception ee) {
+                        System.out.println("ERROR");
+                    }
+
+                    BorderPane bP = (BorderPane)root;
+                    GridPane gP = (GridPane)bP.getCenter();
+                    setHorario(gP);
+
+                    /*
+                    horario.get(iD).get(iH).remove(draggingButton.getText());
+                    horario.get(fD).get(fH).add(draggingButton.getText());
+
+                    ((Pane)draggingButton.getParent()).getChildren().remove(draggingButton);
+                    pane.getChildren().add(draggingButton);
+                    */
+                }
+                e.setDropCompleted(true);
+            }
+        });
+    }
+
     private void setHorario(GridPane gp) {
         for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
                 ScrollPane sp = new ScrollPane();
                 VBox vB = new VBox();
+                vB.prefHeightProperty().bind(sp.heightProperty());
+                vB.prefWidthProperty().bind(sp.widthProperty());
                 for (String sesion : hora.getValue()) {
-                    Button b = new Button(sesion);
+                    Button b = draggableButton(sesion);
                     b.setId("ses-btn");
                     vB.getChildren().add(b);
                 }
+                addDropHandling(vB);
                 sp.setContent(vB);
                 sp.setPannable(true);
+                sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+                //vB.setStyle("-fx-border-color: red");
 
                 gp.add(sp, dia.getKey(), hora.getKey() - 7);
+                vB.setId(dia.getKey().toString() + ',' + hora.getKey().toString());
+                sp.setId(dia.getKey().toString() + ',' + hora.getKey().toString());
             }
         }
     }
 
     public void display(String file) {
+        nomH = file;
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/showHorario2.fxml"));
-        Parent root = null;
+        loader = new FXMLLoader(getClass().getResource("FXML/showHorario2.fxml"));
+        root = null;
         try {
             root = loader.load();
             BorderPane bP = (BorderPane)root;

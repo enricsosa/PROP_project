@@ -148,6 +148,43 @@ public class CtrlDomain {
     }
 
     /**
+     * Comprueba mover una Asignacion de horarioActivo.
+     * @param idAsignatura          id de la Asignatura de la Asignacion que se quiere mover.
+     * @param idSubGrupoCompleta    idCompleta del SubGrupo de la Asignatura de la Asignacion que se quiere mover.
+     * @param dia                   dia donde se encuentra la Asignacion que se quiere mover.
+     * @param hora                  hora donde se encuentra la Asignacion que se quiere mover.
+     * @param nuevoDia              dia la que se quiere mover la Asignacion.
+     * @param nuevaHoraIni          hora la que se quiere mover la Asignacion.
+     * @return                      true si se puede, false si no.
+     */
+    public Boolean checkMoverAsignacion(String idAsignatura, String idSubGrupoCompleta, int dia, int hora, int nuevoDia, int nuevaHoraIni) {
+        if (this.horarioActivo == null)
+            return false;
+        Hora h = this.horarioActivo.getHora(dia, hora);
+        boolean found = false;
+        Asignacion asignacion = null;
+        for (Map.Entry<String, Asignacion> entry : h.getAsignaciones().entrySet()) {
+            if ((entry.getValue().getAsignatura().getId().equals(idAsignatura)) && (entry.getValue().getSubGrupo().getIdCompleta().equals(idSubGrupoCompleta))) {
+                found = true;
+                asignacion = entry.getValue();
+            }
+        }
+        if (!(found))
+            return false;
+        Horario nuevoHorario = new Horario(this.horarioActivo);
+        nuevoHorario.eliminarAsignacion(asignacion);
+        Clase clase = asignacion.getClase();
+        if (CtrlHorario.comprovarSubGrupoDia(clase, nuevoDia, nuevoHorario)
+                || CtrlHorario.comprovarGrupoDia(clase, nuevoDia, nuevoHorario))
+            return false;
+        if (CtrlHorario.aulaOcupada(clase, nuevoDia, nuevaHoraIni, asignacion.getAula(), nuevoHorario))
+            return false;
+        if (!(CtrlHorario.comprobarRestricciones(clase, nuevoDia, nuevaHoraIni, nuevoHorario)))
+            return false;
+        return true;
+    }
+
+    /**
      * Mueve una Asignacion de horarioActivo.
      * @param idAsignatura          id de la Asignatura de la Asignacion que se quiere mover.
      * @param idSubGrupoCompleta    idCompleta del SubGrupo de la Asignatura de la Asignacion que se quiere mover.
@@ -1096,6 +1133,10 @@ public class CtrlDomain {
         return controladorEscenarios.escaneaHorario(h, extended);
     }
 
+    public Horario getHorarioActivo() {
+        return horarioActivo;
+    }
+
     /**
      * Escribe un Horario.
      * @param horario   String con los datos de Horario.
@@ -1507,6 +1548,8 @@ public class CtrlDomain {
         }
         else return "false";
     }
+
+    //public String
 
     /**
      * Activa o desactiva las Restricciones del escenario en función de un HashMap<String, ArrayList<Boolean>>.
