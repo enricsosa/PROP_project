@@ -9,22 +9,12 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="quitBtn" mnemonicParsing="false" text="Ignorar cambios y salir">
+            <!--Button fx:id="quitBtn" mnemonicParsing="false" text="Cerrar">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
-            </Button>
+            </Button-->
             <Region prefHeight="38.0" prefWidth="122.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="histBtn" mnemonicParsing="false" text="Historial">
-               <HBox.margin>
-                  <Insets right="3.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="savequitBtn" mnemonicParsing="false" text="Guadar y salir">
-               <HBox.margin>
-                  <Insets left="3.0" right="10.0" />
-               </HBox.margin>
-            </Button>
          </children>
       </HBox>
    </bottom>

@@ -174,6 +174,8 @@ public class CtrlDomain {
         Horario nuevoHorario = new Horario(this.horarioActivo);
         nuevoHorario.eliminarAsignacion(asignacion);
         Clase clase = asignacion.getClase();
+        if (nuevaHoraIni + clase.getDuracion() > 24)
+            return false;
         if (CtrlHorario.comprovarSubGrupoDia(clase, nuevoDia, nuevoHorario)
                 || CtrlHorario.comprovarGrupoDia(clase, nuevoDia, nuevoHorario))
             return false;
@@ -211,6 +213,8 @@ public class CtrlDomain {
         Horario nuevoHorario = new Horario(this.horarioActivo);
         nuevoHorario.eliminarAsignacion(asignacion);
         Clase clase = asignacion.getClase();
+        if (nuevaHoraIni + clase.getDuracion() > 24)
+            return -17;
         if (CtrlHorario.comprovarSubGrupoDia(clase, nuevoDia, nuevoHorario)
                 || CtrlHorario.comprovarGrupoDia(clase, nuevoDia, nuevoHorario))
             return -18;
