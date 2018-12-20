@@ -39,10 +39,16 @@ public class CtrlEditAsignaturas {
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     /**Restriccion seleccionada.*/
     private String currentId;
+    /**Restriccion seleccionada.*/
+    private String currentNom;
+    /**Restriccion seleccionada.*/
+    private String currentNiv;
     /**idAsignatura1.*/
-    private String currentAs1 = null;
+    private ArrayList<ArrayList<Object>> currentSesiones;
     /**idAsignatura2.*/
-    private String currentAs2 = null;
+    private ArrayList<ArrayList<Object>> currentGrupos;
+
+    private CtrlEditSesiones ctrlEditSesiones;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
@@ -101,6 +107,55 @@ public class CtrlEditAsignaturas {
     @FXML
     Button rmBtn;
 
+    public void manageAddSesionesBtn() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setResizable(false);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editSesiones.fxml"));
+        System.out.println(loader);
+        Parent root = null;
+        try {
+            root = loader.load();
+            ctrlEditSesiones = loader.getController();
+            ctrlEditSesiones.display(false, currentSesiones);
+            HBox hb = (HBox)root;
+
+            window.setScene(new Scene(hb));
+            window.showAndWait();
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
+    }
+
+    public void manageEditSesionesBtn() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setResizable(false);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editSesiones.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+            ctrlEditSesiones = loader.getController();
+            ctrlEditSesiones.display(true, currentSesiones);
+            HBox hb = (HBox)root;
+
+            window.setScene(new Scene(hb));
+            window.showAndWait();
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
+    }
+
+    public void manageAddGruposBtn() {
+
+    }
+
+    public void manageEditGruposBtn() {
+
+    }
+
     /**
      * Asigna un nuevo Nivel a edit layout.
      * @param id    nombre del Nivel.
@@ -109,6 +164,8 @@ public class CtrlEditAsignaturas {
         currentId = id;
         String nombre = (String)attr.get(0);
         String nivel = (String)attr.get(1);
+        currentNom = nombre;
+        currentNiv = nivel;
         idEdit.setText(id);
         nomEdit.setText(nombre);
         nivEdit.setText(nivel);
@@ -125,8 +182,10 @@ public class CtrlEditAsignaturas {
         idRm.setText(id);
         nomRm.setText(nombre);
         nivRm.setText(nivel);
-        System.out.println(attr);
+        currentNom = nombre;
+        currentNiv = nivel;
         ArrayList<ArrayList<Object>> sesProperties = (ArrayList<ArrayList<Object>>)attr.get(2);
+        currentSesiones = sesProperties;
         Integer i = 1;
         sesRm.getItems().clear();
         for (ArrayList<Object> ses : sesProperties) {
@@ -135,6 +194,7 @@ public class CtrlEditAsignaturas {
         }
         grRm.getItems().clear();
         ArrayList<ArrayList<Object>> grProperties = (ArrayList<ArrayList<Object>>)attr.get(3);
+        currentGrupos = grProperties;
         for (ArrayList<Object> gr : grProperties) {
             ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)gr.get(1);
             for (ArrayList<Object> sg : subgr) {

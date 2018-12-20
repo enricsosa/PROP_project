@@ -49,12 +49,12 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <Button fx:id="sesAdd" mnemonicParsing="false" text="Gestionar sesiones">
+                        <Button fx:id="sesAdd" mnemonicParsing="false" onAction="#manageAddSesionesBtn" text="Gestionar sesiones">
                            <HBox.margin>
                               <Insets right="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="grAdd" mnemonicParsing="false" text="Gestionar grupos">
+                        <Button fx:id="grAdd" mnemonicParsing="false" onAction="#manageAddGruposBtn" text="Gestionar grupos">
                            <HBox.margin>
                               <Insets left="7.0" />
                            </HBox.margin>
@@ -111,12 +111,12 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <Button fx:id="sesEdit" mnemonicParsing="false" text="Gestionar sesiones">
+                        <Button fx:id="sesEdit" mnemonicParsing="false" onAction="#manageEditSesionesBtn" text="Gestionar sesiones">
                            <HBox.margin>
                               <Insets right="7.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="grEdit" mnemonicParsing="false" text="Gestionar grupos">
+                        <Button fx:id="grEdit" mnemonicParsing="false" onAction="#manageEditGruposBtn" text="Gestionar grupos">
                            <HBox.margin>
                               <Insets left="7.0" />
                            </HBox.margin>

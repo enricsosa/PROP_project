@@ -47,9 +47,11 @@ public class CtrlEditSesiones {
     /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     /**Restriccion seleccionada.*/
-    private ArrayList<Object> currentRestr = null;
+    private Integer currentSes;
+    /**Restriccion seleccionada.*/
+    private ArrayList<Object> currentSesAttr;
     /**idAsignatura1.*/
-    private String currentAs1 = null;
+    private ArrayList<ArrayList<Object>> currentSesiones;
     /**idAsignatura2.*/
     private String currentAs2 = null;
     /**Instancia de CtrlDomain.*/
@@ -119,11 +121,42 @@ public class CtrlEditSesiones {
 
     }
 
-    /**Asigna un elemento a layout.*/
+
     private void setLayout() {
-        ObservableList<String> sesiones = FXCollections.observableArrayList();
+        currentSesAttr = currentSesiones.get(currentSes-1);
+
+        //EDIT & REMOVE
+        rbTremove.setDisable(true);
+        rbPremove.setDisable(true);
+        rbLremove.setDisable(true);
+        if (currentSesAttr.get(1).equals("Teoria")) {
+            rbTedit.setSelected(true);
+            rbPedit.setSelected(false);
+            rbLedit.setSelected(false);
+            rbTremove.setSelected(true);
+            rbPremove.setSelected(false);
+            rbLremove.setSelected(false);
+        } else if (currentSesAttr.get(1).equals("Problemas")) {
+            rbTedit.setSelected(false);
+            rbPedit.setSelected(true);
+            rbLedit.setSelected(false);
+            rbTremove.setSelected(false);
+            rbPremove.setSelected(true);
+            rbLremove.setSelected(false);
+        } else if (currentSesAttr.get(1).equals("Laboratorio")) {
+            rbTedit.setSelected(false);
+            rbPedit.setSelected(false);
+            rbLedit.setSelected(true);
+            rbTremove.setSelected(false);
+            rbPremove.setSelected(false);
+            rbLremove.setSelected(true);
+        }
+        labHrm.setText(currentSesAttr.get(0).toString() + "h");
+        chHedit.getSelectionModel().select(Integer.parseInt(currentSesAttr.get(0).toString()) - 1);
 
     }
+
+
 
     @FXML
     ListView listview;
@@ -136,38 +169,70 @@ public class CtrlEditSesiones {
 
             listview.getSelectionModel().selectedItemProperty().removeListener(seSelected);
             listview.getSelectionModel().selectedItemProperty().addListener(seSelected);
-            /*
-            currentAs1 = t1.substring(t1.indexOf("[")+1, t1.indexOf(","));
-            currentAs2 = t1.substring(t1.indexOf(",")+2, t1.indexOf("]"));
-            currentRestr = new ArrayList<>();
-            currentRestr.add(currentAs1);
-            currentRestr.add(currentAs2);
+
+            currentSes = Integer.parseInt(t1.substring(t1.indexOf("#")+1, t1.indexOf(" ")));
             setLayout();
-            */
         }
     }
 
-    /**Genera un listview*/
-    public void setListview(ArrayList<Object> correquisits) {
-        /*
-        ObservableList<String> asignaturas = FXCollections.observableArrayList();
-        for (Map.Entry<String, ArrayList<Object>> asig : asignaturasFinal.entrySet()) {
-            asignaturas.add(asig.getKey());
+    private void setRadioButtons(String rb) {
+        switch (rb) {
+            case "Tadd":
+                rbPadd.setSelected(false);
+                rbLadd.setSelected(false);
+                break;
+            case "Padd":
+                rbTadd.setSelected(false);
+                rbLadd.setSelected(false);
+                break;
+            case "Ladd":
+                rbTadd.setSelected(false);
+                rbPadd.setSelected(false);
+                break;
+            case "Tedit":
+                rbPedit.setSelected(false);
+                rbLedit.setSelected(false);
+                break;
+            case "Pedit":
+                rbTedit.setSelected(false);
+                rbLedit.setSelected(false);
+                break;
+            case "Ledit":
+                rbTedit.setSelected(false);
+                rbPedit.setSelected(false);
+                break;
+            default:
+                    break;
         }
+    }
 
-        add1.setItems(asignaturas);
-        add2.setItems(asignaturas);
-        add1.setOnAction(actionEvent -> checkSameAsigsAdd());
-        add2.setOnAction(actionEvent -> checkSameAsigsAdd());
+    /**Asigna un elemento a layout.*/
+    public void display(boolean editing, ArrayList<ArrayList<Object>> sesiones) {
+        if (editing) {
+            currentSesiones = sesiones;
 
-        listview.getItems().clear();
-        for (Object o : correquisits) {
-            listview.getItems().add(o.toString());
+            listview.getItems().clear();
+            Integer i = 1;
+            for (ArrayList<Object> s: sesiones) {
+                listview.getItems().add((String)("Sesion#" + i.toString() + " " + s.get(1).toString().charAt(0)));
+                ++i;
+            }
+            listview.getSelectionModel().selectedItemProperty().removeListener(seSelected);
+            listview.getSelectionModel().selectedItemProperty().addListener(seSelected);
+        } else {
+            currentSesiones = new ArrayList<>();
         }
-        */
-        listview.getSelectionModel().selectedItemProperty().removeListener(seSelected);
-        listview.getSelectionModel().selectedItemProperty().addListener(seSelected);
+        chHadd.getItems().clear();
+        chHadd.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+        chHedit.getItems().clear();
+        chHedit.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
 
+        rbTadd.setOnAction( e -> setRadioButtons("Tadd"));
+        rbPadd.setOnAction( e -> setRadioButtons("Padd"));
+        rbLadd.setOnAction( e -> setRadioButtons("Ladd"));
+        rbTedit.setOnAction( e -> setRadioButtons("Tedit"));
+        rbPedit.setOnAction( e -> setRadioButtons("Pedit"));
+        rbLedit.setOnAction( e -> setRadioButtons("Ledit"));
     }
 
 }
