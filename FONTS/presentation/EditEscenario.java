@@ -24,25 +24,45 @@ import presentation.FXMLControllers.*;
 import domain.Correquisito;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Gestiona la edición de escenarios.
+ * @author  Enric Sosa
+ * @see     ChangeListener
+ * @see     ObservableValue
+ * @see     Stage
+ * @see     Scene
+ * @see     Parent
+ * @see     VBox
+ * @see     Modality
+ * @see     FXMLLoader
+ * @see     ArrayList
+ * @see     Map
+ */
 public class EditEscenario {
 
+    /**Instancia de si misma para Singleton*/
     private static EditEscenario edEsc;
+    /**Ventana en que se muestra.*/
     private Stage window;
-
+    /**Padre del Menú.*/
     private ctrl2 parent;
 
+    //Menú de edición de Aulas
     private CtrlEditAulas ctrlEdAulas;
     private FXMLLoader loaderEdAulas;
     private Parent parentEdAulas;
 
+    //Menú de edición de PlanEstudios
     private CtrlEditPlanEstudios ctrlEdPlanEstudios;
     private FXMLLoader loaderEdPlanEstudios;
     private Parent parentEdPlanEstudios;
 
+    //Menú de edición de Asignaturas
     private CtrlEditAsignaturas ctrlEdAsignaturas;
     private FXMLLoader loaderEdAsignaturas;
     private Parent parentEdAsignaturas;
 
+    //Menús de edición de restricciones
     private CtrlEditRfranjaTrabajo ctrlEdRfranjaTrabajo; //FT
     private FXMLLoader loaderEdRfranjaTrabajo;
     private Parent parentEdRfranjaTrabajo;
@@ -65,37 +85,69 @@ public class EditEscenario {
     private FXMLLoader loaderEdRfranjaNivel;
     private Parent parentEdRfranjaNivel;
 
+    /**PlanEstudios inicial.*/
     private ArrayList<String> planEstudios;
+    /**Asignaturas inicial.*/
     private HashMap<String, ArrayList<Object>> asignaturas;
+    /**Aulas inicial.*/
     private HashMap<String, ArrayList<Object>> aulas;
+    /**Restricciones inicial.*/
     private HashMap<String, ArrayList<Object>> restricciones;
 
+    /**PlanEstudios final.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas final.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Aulas final.*/
     private HashMap<String, ArrayList<Object>> aulasFinal;
+    /**Restricciones final.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
 
+    /**Insica si ha cambiado PlanEstudios.*/
     private boolean peChanged;
+    /**Insica si ha cambiado Asignaturas.*/
     private boolean asChanged;
+    /**Insica si ha cambiado Aulas.*/
     private boolean auChanged;
+    /**Insica si ha cambiado Restricciones.*/
     private boolean reChanged;
 
+    /**
+     * Devuelve planEstudiosFinal.
+     * @return  planEstudiosFinal
+     */
     public ArrayList<String> getPlanEstudiosFinal() {
         return planEstudiosFinal;
     }
 
+    /**
+     * Devuelve aulasFinal.
+     * @return  aulasFinal
+     */
     public HashMap<String, ArrayList<Object>> getAulasFinal() {
         return aulasFinal;
     }
 
+    /**
+     * Devuelve asignaturasFinal.
+     * @return  asignaturasFinal
+     */
     public HashMap<String, ArrayList<Object>> getAsignaturasFinal() {
         return asignaturasFinal;
     }
 
+    /**
+     * Devuelve restriccionesFinal.
+     * @return  restriccionesFinal
+     */
     public HashMap<String, ArrayList<Object>> getRestriccionesFinal() {
         return restriccionesFinal;
     }
 
+    /**
+     * Asigna un nuevo valor a aulasFinal.
+     * @param newAulas  Valor que se asigna.
+     */
     public void setAulasFinal(HashMap<String, ArrayList<Object>> newAulas) {
         aulasFinal = newAulas;
         BorderPane lay = (BorderPane)window.getScene().getRoot();
@@ -106,6 +158,10 @@ public class EditEscenario {
         showEdtingAulas(null, center);
     }
 
+    /**
+     * Asigna un nuevo valor a restriccionesFinal.
+     * @param newRestricciones  Valor que se asigna.
+     */
     public void setRestriccionesFinal(HashMap<String, ArrayList<Object>> newRestricciones) {
         restriccionesFinal = newRestricciones;
         BorderPane lay = (BorderPane)window.getScene().getRoot();
@@ -116,6 +172,10 @@ public class EditEscenario {
         showEdtingRestricciones(null, center);
     }
 
+    /**
+     * Asigna un nuevo valor a planEstudiosFinal.
+     * @param newPlanEstudios   Valor que se asigna.
+     */
     public void setPlanEstudiosFinal(ArrayList<String> newPlanEstudios) {
         planEstudiosFinal = newPlanEstudios;
         BorderPane lay = (BorderPane)window.getScene().getRoot();
@@ -126,11 +186,11 @@ public class EditEscenario {
         showEdtingPlanEstudios(null, center);
     }
 
-    private ArrayList<String> historial = new ArrayList<>();
-
+    /**Constructora de la clase EditEscenario.*/
     private EditEscenario() {
     }
 
+    /**Instanciadora de la clase EditEscenario.*/
     public static EditEscenario getInstance() {
         if (edEsc == null)
             edEsc = new EditEscenario() {
@@ -138,6 +198,11 @@ public class EditEscenario {
         return edEsc;
     }
 
+    /**
+     * Muestra menú de edición de planEstudios.
+     * @param item      item a mostrar.
+     * @param parent    padre del item.
+     */
     private void showEdtingPlanEstudios(String item, VBox parent) {
         try {
             VBox lay = (VBox)parentEdPlanEstudios;
@@ -155,6 +220,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Muestra menú de edición de Asignaturas.
+     * @param item      item a mostrar.
+     * @param parent    padre del item.
+     */
     private void showEdtingAsignaturas(String item, VBox parent) {
         try {
             VBox lay = (VBox)parentEdAsignaturas;
@@ -166,6 +236,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Muestra menú de edición de Aulas.
+     * @param item      item a mostrar.
+     * @param parent    padre del item.
+     */
     private void showEdtingAulas(String item, VBox parent) {
         try {
             VBox lay = (VBox)parentEdAulas;
@@ -184,6 +259,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Muestra menú de edición de Restricciones.
+     * @param item      item a mostrar.
+     * @param parent    padre del item.
+     */
     private void showEdtingRestricciones(String item, VBox parent) {
         if (!(item == null)) {
             try {
@@ -253,6 +333,13 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Gestiona la seleccion de menús de edición.
+     * @param title     título del menú.
+     * @param oldItem   antigua menú seleccionado.
+     * @param newItem   nuevo menú seleccionado.
+     * @param center    VBox donde se colocan los menús.
+     */
     private void selectedItem(Label title, String oldItem, String newItem, VBox center) {
         switch (title.getText()) {
             case "Plan estudios":
@@ -277,6 +364,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Crea el menú lateral de EditarPlanEstudios.
+     * @param title     Título que se le da.
+     * @param leftPane  Panel donde se muestra.
+     */
     private void showPlanEstudios(Label title, ListView<String> leftPane) {
         title.setText("Plan estudios");
         leftPane.getItems().clear();
@@ -285,6 +377,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Crea el menú lateral de EditarAsignaturas.
+     * @param title     Título que se le da.
+     * @param leftPane  Panel donde se muestra.
+     */
     private void showAsignaturas(Label title, ListView<String> leftPane) {
         title.setText("Asignaturas");
         leftPane.getItems().clear();
@@ -293,6 +390,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Crea el menú lateral de EditarAulas.
+     * @param title     Título que se le da.
+     * @param leftPane  Panel donde se muestra.
+     */
     private void showAulas(Label title, ListView<String> leftPane) {
         title.setText("Aulas");
         leftPane.getItems().clear();
@@ -301,6 +403,11 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Crea el menú lateral de EditarRestricciones.
+     * @param title     Título que se le da.
+     * @param leftPane  Panel donde se muestra.
+     */
     private void showRestricciones(Label title, ListView<String> leftPane) {
         title.setText("Restricciones");
         leftPane.getItems().clear();
@@ -309,6 +416,10 @@ public class EditEscenario {
         }
     }
 
+    /**
+     * Asigna los controllers
+     * @param window    Ventana en que se muestra el menú.
+     */
     private void setControllers(Stage window) {
         //LOADERS
         loaderEdAulas = new FXMLLoader(getClass().getResource("FXML/editAulas.fxml"));
@@ -351,6 +462,15 @@ public class EditEscenario {
         ctrlEdRfranjaNivel = loaderEdRfranjaNivel.getController();
     }
 
+    /**
+     * Muestra el menú de edición de escenarios.
+     * @param escenario escenario a editar.
+     * @param pE        planEstudios
+     * @param asigs     Asiganturas
+     * @param aulas     Aulas
+     * @param restrs    Restricciones
+     * @param parent    Padre que ha mostrado el menú.
+     */
     public void display(String escenario, ArrayList<String> pE, HashMap<String, ArrayList<Object>> asigs,
                         HashMap<String, ArrayList<Object>> aulas, HashMap<String, ArrayList<Object>> restrs, ctrl2 parent) {
 
