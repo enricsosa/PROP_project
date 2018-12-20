@@ -68,13 +68,16 @@ public class showHorario {
         return sH;
     }
 
-    private boolean checkChange(String buttonText, int iD, int iH, int fD, int fH) {
+    private boolean checkChange(String buttonText, int iD, int iH, int fD, int fH, boolean onlyCheck) {
         int firstSpace = buttonText.indexOf(" ");
         int secondSpace = buttonText.indexOf(" ", firstSpace+1);
         int thirdSpace = buttonText.indexOf(" ", secondSpace+1);
         String idAsignatura = buttonText.substring(0, buttonText.indexOf(" "));
         String idsubG = buttonText.substring(secondSpace+1, thirdSpace);
-        return (cd.moverAsignacion(idAsignatura, idsubG, iD, iH, fD, fH) >= 0);
+        if (onlyCheck)
+            return (cd.checkMoverAsignacion(idAsignatura, idsubG, iD, iH, fD, fH));
+        else
+            return (cd.moverAsignacion(idAsignatura, idsubG, iD, iH, fD, fH) >= 0);
     }
 
     private void checkOptions(GridPane gp, String buttonText, int iD, int iH) {
@@ -85,10 +88,10 @@ public class showHorario {
                 String destVBox = sp.getId();
                 Integer fD = Integer.parseInt(destVBox.substring(0, 1));
                 Integer fH = Integer.parseInt(destVBox.substring(destVBox.indexOf(',')+1));
-                System.out.println(fD);
-                System.out.println(fH);
-                if (checkChange(buttonText, iD, iH, fD, fH)) {
-                    sp.setStyle("-fx-border-color: green");
+                if (checkChange(buttonText, iD, iH, fD, fH, true)) {
+                    sp.setStyle("-fx-border-color: #42f442");
+                } else {
+                    sp.setStyle("-fx-border-color: #f9bbb3");
                 }
             }
         }
@@ -103,10 +106,6 @@ public class showHorario {
             cc.put(buttonFormat, "button");
             db.setContent(cc);
             draggingButton = button;
-/*
-            VBox parent = (VBox)draggingButton.getParent();
-            ScrollPane sp = (ScrollPane)parent.getParent().getParent().getParent();
-            sp.setStyle("-fx-border-color: blue");
 
             BorderPane bP = (BorderPane)root;
             GridPane gP = (GridPane)bP.getCenter();
@@ -114,9 +113,6 @@ public class showHorario {
             Integer iD = Integer.parseInt(initVBox.substring(0, 1));
             Integer iH = Integer.parseInt(initVBox.substring(initVBox.indexOf(',')+1));
             checkOptions(gP, draggingButton.getText(), iD, iH);
-            */
-
-            System.out.println();
         });
         button.setOnDragDone(e -> draggingButton = null);
         return button ;
@@ -143,7 +139,7 @@ public class showHorario {
                 iH = Integer.parseInt(initVBox.substring(initVBox.indexOf(',')+1));
                 fD = Integer.parseInt(destVBox.substring(0, 1));
                 fH = Integer.parseInt(destVBox.substring(destVBox.indexOf(',')+1));
-                boolean aux = checkChange(draggingButton.getText(), iD, iH, fD, fH);
+                boolean aux = checkChange(draggingButton.getText(), iD, iH, fD, fH, false);
                 System.out.println(aux);
                 if (aux) {
                     try {
@@ -156,14 +152,6 @@ public class showHorario {
                     BorderPane bP = (BorderPane)root;
                     GridPane gP = (GridPane)bP.getCenter();
                     setHorario(gP);
-
-                    /*
-                    horario.get(iD).get(iH).remove(draggingButton.getText());
-                    horario.get(fD).get(fH).add(draggingButton.getText());
-
-                    ((Pane)draggingButton.getParent()).getChildren().remove(draggingButton);
-                    pane.getChildren().add(draggingButton);
-                    */
                 }
                 e.setDropCompleted(true);
             }
@@ -190,7 +178,6 @@ public class showHorario {
                 sp.setContent(vB);
                 sp.setPannable(true);
                 sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-                //vB.setStyle("-fx-border-color: red");
 
                 gp.add(sp, dia.getKey(), hora.getKey() - 7);
                 vB.setId(dia.getKey().toString() + ',' + hora.getKey().toString());
