@@ -14,17 +14,35 @@ import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * Muestra un Horario extendido.
+ * @author  Enric Sosa
+ * @see     Scene
+ * @see     Parent
+ * @see     Stage
+ * @see     FXMLLoader
+ * @see     ArrayList
+ * @see     HashMap
+ * @see     Map
+ * @see     Button
+ * @see     VBox
+ */
 public class showExtendedHorario {
 
+    /**Instancia de sí mismo para singleton.*/
     private static showExtendedHorario sH;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
+    /**Horario a mostrar.*/
     private HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario = new HashMap<>();
 
     /**Constructoras*/
 
+    /**Constructora de la clase showExtendedHorario.*/
     private showExtendedHorario() {
     }
 
+    /**Instanciadora de la clase showExtendedHorario.*/
     public static showExtendedHorario getInstance() {
         if (sH == null) {
             sH = new showExtendedHorario() {
@@ -33,6 +51,10 @@ public class showExtendedHorario {
         return sH;
     }
 
+    /**
+     * Asigna el horario a mostrar.
+     * @param gp    Grid donde se muestra el Horario.
+     */
     private void setHorario(GridPane gp) {
         for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
@@ -54,6 +76,10 @@ public class showExtendedHorario {
         }
     }
 
+    /**
+     * Función que muestra el Horario.
+     * @param file  archivo del Horario que se muestra.
+     */
     public void display(String file) {
         cd = CtrlPresentacion.getInstance().getCD();
         Stage window = new Stage();

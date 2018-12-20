@@ -31,18 +31,35 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Gestiona la edición de Restricciones FranjaNivel.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRfranjaNivel {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Restricicon seleccionada.*/
     private ArrayList<Object> currentRestr = null;
+    /**Id del elemento seleccionado.*/
     private String currentId = null;
+    /**horaIni de restriccion.*/
     private String currenthI = null;
+    /**horaFin de restriccion.*/
     private String currenthF = null;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditRfranjaNivel.*/
     public CtrlEditRfranjaNivel() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -85,6 +102,7 @@ public class CtrlEditRfranjaNivel {
     @FXML
     Button removeBtn;
 
+    /**Crea el layout*/
     private void setLayout() {
         ObservableList<String> niveles = FXCollections.observableArrayList();
         for (int i = 1; i < planEstudiosFinal.size(); ++i) {
@@ -138,6 +156,7 @@ public class CtrlEditRfranjaNivel {
         });
     }
 
+    /**Acción que se ejecuta al pulsar el botón añadir.*/
     public void addBtnClicked() {
         ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
         currentRestr = new ArrayList<>();
@@ -165,6 +184,7 @@ public class CtrlEditRfranjaNivel {
         }
     }
 
+    /**Acción que se ejecuta al pulsar el botón editar.*/
     public void editBtnClicked() {
         ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
         try {
@@ -195,6 +215,7 @@ public class CtrlEditRfranjaNivel {
         }
     }
 
+    /**Acción que se ejecuta al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         ArrayList<Object> frNiveles = (ArrayList<Object>)restriccionesFinal.get("franjaNivel");
         try {
@@ -219,6 +240,7 @@ public class CtrlEditRfranjaNivel {
 
     ChangeListener<String> lvSelected = this::itemSelected;
 
+    /**Acción que se ejecuta al seleccionar un item.*/
     private void itemSelected(ObservableValue<? extends String> observableValue, String s, String t1) {
         if (!(t1 == null)) {
             listview.getSelectionModel().selectedItemProperty().removeListener(lvSelected);
@@ -234,6 +256,7 @@ public class CtrlEditRfranjaNivel {
         }
     }
 
+    /**Crea un Listview*/
     public void setListview(ArrayList<Object> frNiveles) {
         ObservableList<String> niveles = FXCollections.observableArrayList();
         for (int i = 1; i < planEstudiosFinal.size(); ++i) {

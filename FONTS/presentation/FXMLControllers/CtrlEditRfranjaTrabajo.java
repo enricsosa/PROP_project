@@ -33,15 +33,29 @@ import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
 
+/**
+ * Gestiona la edición de Restricciones FranjaTrabajo.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRfranjaTrabajo {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Id del elemento seleccionado.*/
     private String currentId;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditRfranjaTrabajo.*/
     public CtrlEditRfranjaTrabajo() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -66,7 +80,11 @@ public class CtrlEditRfranjaTrabajo {
     Button updateBtn;
 
 
-
+    /**
+     * Asigna una FranjaTrabajo a layout.
+     * @param hI    horaIni de FranjaTrabajo.
+     * @param hF    horaFin de FranjaTrabajo.
+     */
     public void setLayout(String hI, String hF) {
         int hi = Integer.parseInt(hI);
         int hf = Integer.parseInt(hF);
@@ -111,6 +129,7 @@ public class CtrlEditRfranjaTrabajo {
         });
     }
 
+    /**Acción que se ejecuta al pulsar el botón actualizar.*/
     public void updateBtnClicked() {
         String hiStr = horaIniPost.getSelectionModel().getSelectedItem().toString();
         String hfStr;

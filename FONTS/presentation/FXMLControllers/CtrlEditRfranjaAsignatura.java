@@ -31,18 +31,35 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Gestiona la edición de Restricciones FranjaAsignatura.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRfranjaAsignatura {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
+    /**Restricicon seleccionada.*/
     private ArrayList<Object> currentRestr = null;
+    /**Id del elemento seleccionado.*/
     private String currentId = null;
+    /**horaIni de restriccion.*/
     private String currenthI = null;
+    /**horaFin de restriccion.*/
     private String currenthF = null;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
+    /**Constructora de la clase CtrlEditRfranjaAsignatura.*/
     public CtrlEditRfranjaAsignatura() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -85,6 +102,7 @@ public class CtrlEditRfranjaAsignatura {
     @FXML
     Button removeBtn;
 
+    /**Asigna una restricción a layout.*/
     private void setLayout() {
         ObservableList<String> asignaturas = FXCollections.observableArrayList();
         for (Map.Entry<String, ArrayList<Object>> asig : asignaturasFinal.entrySet()) {
@@ -137,6 +155,7 @@ public class CtrlEditRfranjaAsignatura {
         });
     }
 
+    /**Acción que se ejecuta al pulsar añadir.*/
     public void addBtnClicked() {
         ArrayList<Object> frAsignaturas = (ArrayList<Object>)restriccionesFinal.get("franjaAsignatura");
         currentRestr = new ArrayList<>();
@@ -164,6 +183,7 @@ public class CtrlEditRfranjaAsignatura {
         }
     }
 
+    /**Acción que se ejecuta al pulsar el botón editar.*/
     public void editBtnClicked() {
         ArrayList<Object> frAsignaturas = (ArrayList<Object>)restriccionesFinal.get("franjaAsignatura");
         try {
@@ -194,6 +214,7 @@ public class CtrlEditRfranjaAsignatura {
         }
     }
 
+    /**Acción que se ejecuta al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         ArrayList<Object> frAsignaturas = (ArrayList<Object>)restriccionesFinal.get("franjaAsignatura");
         try {
@@ -218,6 +239,7 @@ public class CtrlEditRfranjaAsignatura {
 
     ChangeListener<String> asSelected = this::itemSelected;
 
+    /**Acción que se ejecuta al seleccionar un item.*/
     private void itemSelected(ObservableValue<? extends String> observableValue, String s, String t1) {
         if (!(t1 == null)) {
             listview.getSelectionModel().selectedItemProperty().removeListener(asSelected);
@@ -235,6 +257,7 @@ public class CtrlEditRfranjaAsignatura {
         }
     }
 
+    /**Crea un Listview*/
     public void setListview(ArrayList<Object> frAsigs) {
         ObservableList<String> asignaturas = FXCollections.observableArrayList();
         for (Map.Entry<String, ArrayList<Object>> asig : asignaturasFinal.entrySet()) {

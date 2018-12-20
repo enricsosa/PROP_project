@@ -31,16 +31,31 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
+/**
+ * Gestiona la edición de Restricciones NivelHora.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditRnivelHora {
 
+    /**Instancia de EditEscenario.*/
     private EditEscenario edEsc;
+    /**PlanEstudios despues de editar.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas despues de editar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
-    private ArrayList<String> niveles;
+    /**Id del elemento seleccionado.*/
     private String currentId;
+    /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
+    /**Listado de Niveles.*/
+    private ArrayList<String> niveles;
 
+    /**Constructora de la clase CtrlEditRnivelHora.*/
     public CtrlEditRnivelHora() {
         edEsc = EditEscenario.getInstance();
         try {
@@ -58,6 +73,11 @@ public class CtrlEditRnivelHora {
     @FXML
     FlowPane mainFPpost;
 
+    /**
+     * Asigna un NivelHora a Layout.
+     * @param nHs       NivelHora involucrado.
+     * @param allNiv    todos los NivelesHora.
+     */
     public void setLayout(ArrayList<Object> nHs, ArrayList<String> allNiv) {
         niveles = allNiv;
 
@@ -73,6 +93,7 @@ public class CtrlEditRnivelHora {
         }
     }
 
+    /**Acción que se ejecuta al pulsar el botón actualizar.*/
     public void updateBtnClicked() {
         ArrayList<Object> newNivs = new ArrayList<>();
         int i = 0;
