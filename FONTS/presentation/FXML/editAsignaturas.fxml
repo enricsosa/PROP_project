@@ -27,38 +27,28 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="184.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="223.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="99.0">
                                  <children>
                                     <Label text="id: " />
-                                    <TextField fx:id="idAdd" prefHeight="25.0" prefWidth="47.0" />
+                                    <TextField fx:id="idAdd" prefHeight="25.0" prefWidth="61.0" />
                                     <Label text="Nivel: ">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="nivAdd" prefHeight="25.0" prefWidth="54.0" />
+                                    <TextField fx:id="nivAdd" prefHeight="25.0" prefWidth="72.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="129.0">
                                  <children>
                                     <Label prefHeight="15.0" prefWidth="65.0" text="nombre: " />
-                                    <TextField fx:id="nomAdd" prefHeight="25.0" prefWidth="104.0" />
+                                    <TextField fx:id="nomAdd" prefHeight="25.0" prefWidth="136.0" />
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <Button fx:id="sesAdd" mnemonicParsing="false" onAction="#manageAddSesionesBtn" text="Gestionar sesiones">
-                           <HBox.margin>
-                              <Insets right="7.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="grAdd" mnemonicParsing="false" onAction="#manageAddGruposBtn" text="Gestionar grupos">
-                           <HBox.margin>
-                              <Insets left="7.0" />
-                           </HBox.margin>
-                        </Button>
                      </children>
                   </HBox>
                </children>

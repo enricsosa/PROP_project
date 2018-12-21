@@ -47,6 +47,10 @@ public class CtrlEditAsignaturas {
     private ArrayList<ArrayList<Object>> currentSesiones;
     /**idAsignatura2.*/
     private ArrayList<ArrayList<Object>> currentGrupos;
+    /**idAsignatura1.*/
+    private ArrayList<ArrayList<Object>> editedSesiones = new ArrayList<>();
+    /**idAsignatura2.*/
+    private ArrayList<ArrayList<Object>> editedGrupos = new ArrayList<>();
 
     private CtrlEditSesiones ctrlEditSesiones;
     private CtrlEditGrupos ctrlEditGrupos;
@@ -73,10 +77,6 @@ public class CtrlEditAsignaturas {
     TextField nivAdd;
     @FXML
     TextField nomAdd;
-    @FXML
-    Button sesAdd;
-    @FXML
-    Button grAdd;
     @FXML
     Button addBtn;
 
@@ -108,24 +108,10 @@ public class CtrlEditAsignaturas {
     @FXML
     Button rmBtn;
 
-    public void manageAddSesionesBtn() {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setResizable(false);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editSesiones.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-            ctrlEditSesiones = loader.getController();
-            ctrlEditSesiones.display(false, currentSesiones);
-            HBox hb = (HBox)root;
-
-            window.setScene(new Scene(hb));
-            window.showAndWait();
-        } catch (Exception e) {
-            System.out.println("ERROR");
-        }
+    public void closeSesions() {
+        System.out.println(currentSesiones);
+        currentSesiones = ctrlEditSesiones.getCurrentSesiones();
+        System.out.println(currentSesiones);
     }
 
     public void manageEditSesionesBtn() {
@@ -138,7 +124,8 @@ public class CtrlEditAsignaturas {
         try {
             root = loader.load();
             ctrlEditSesiones = loader.getController();
-            ctrlEditSesiones.display(true, currentSesiones);
+            window.setOnCloseRequest(e -> closeSesions());
+            ctrlEditSesiones.display(true, currentSesiones, currentId);
             HBox hb = (HBox)root;
 
             window.setScene(new Scene(hb));
@@ -148,24 +135,8 @@ public class CtrlEditAsignaturas {
         }
     }
 
-    public void manageAddGruposBtn() {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setResizable(false);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editGrupos.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-            ctrlEditGrupos = loader.getController();
-            ctrlEditGrupos.display(false, currentGrupos);
-            HBox hb = (HBox)root;
-
-            window.setScene(new Scene(hb));
-            window.showAndWait();
-        } catch (Exception e) {
-            System.out.println("ERROR");
-        }
+    public void closeGrupos() {
+        //currentGrupos = ctrlEditGrupos.getCurrentGrupos();
     }
 
     public void manageEditGruposBtn() {
@@ -176,9 +147,11 @@ public class CtrlEditAsignaturas {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/editGrupos.fxml"));
         Parent root = null;
         try {
+            System.out.println(currentId);
             root = loader.load();
             ctrlEditGrupos = loader.getController();
-            ctrlEditGrupos.display(true, currentGrupos);
+            window.setOnCloseRequest(e -> closeGrupos());
+            ctrlEditGrupos.display(true, currentGrupos, currentId);
             HBox hb = (HBox)root;
 
             window.setScene(new Scene(hb));
@@ -237,17 +210,55 @@ public class CtrlEditAsignaturas {
 
     /**Accion al pulsar el botón añadir.*/
     public void addBtnClicked() {
-
+        if (!idAdd.getText().equals("") && !nivAdd.getText().equals("") && !nomAdd.getText().equals("")) {
+            if (cd.addAsignatura(idAdd.getText(), nomAdd.getText(), nivAdd.getText()) >= 0) {
+                ArrayList<Object> asigAttr = new ArrayList<>();
+                ArrayList<ArrayList<Object>> sesProperties = new ArrayList<>();
+                ArrayList<ArrayList<Object>> grProperties = new ArrayList<>();
+                asigAttr.add(nomAdd.getText());
+                asigAttr.add(nivAdd.getText());
+                asigAttr.add(sesProperties);
+                asigAttr.add(grProperties);
+                asignaturasFinal.put(idAdd.getText(), asigAttr);
+                edEsc.setAsignaturasFinal(asignaturasFinal);
+            } else {
+                //TRANSACCIO INVIABLE
+            }
+        }
     }
 
     /**Accion al pulsar el botón editar.*/
     public void editBtnClicked() {
-
+        if (!idEdit.getText().equals("") && !nivEdit.getText().equals("") && !nomEdit.getText().equals("")) {
+            System.out.println(currentId);
+            if (cd.eliminarAsignatura(currentId) >= 0) {
+                System.out.println(currentId);
+                if (cd.addAsignatura(idEdit.getText(), nomEdit.getText(), nivEdit.getText()) >= 0) {
+                    System.out.println(currentId);
+                    ArrayList<Object> asigAttr = new ArrayList<>();
+                    asigAttr.add(nomEdit.getText());
+                    asigAttr.add(nivEdit.getText());
+                    asigAttr.add(editedSesiones);
+                    asigAttr.add(editedGrupos);
+                    asignaturasFinal.put(idAdd.getText(), asigAttr);
+                    edEsc.setAsignaturasFinal(asignaturasFinal);
+                } else {
+                    //TRANSACCIO INVIABLE
+                }
+            } else {
+                //TRANSACCIO INVIABLE
+            }
+        }
     }
 
     /**Accion al pulsar el botón borrar.*/
     public void removeBtnClicked() {
-
+        if (cd.eliminarAsignatura(currentId) >= 0) {
+            asignaturasFinal.remove(idAdd.getText());
+            edEsc.setAsignaturasFinal(asignaturasFinal);
+        } else {
+            //TRANSACCIO INVIABLE
+        }
     }
 
 }

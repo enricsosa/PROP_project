@@ -80,7 +80,7 @@
             </VBox>
             <VBox fx:id="VBeditAula" prefHeight="124.0" prefWidth="484.0">
                <children>
-                  <Label text="Editar Grupo">
+                  <Label text="Eliminar Subgrupo">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -92,13 +92,13 @@
                               <HBox fx:id="inHB1111" alignment="CENTER" prefHeight="46.0" prefWidth="136.0">
                                  <children>
                                     <Label text="id grupo: " />
-                                    <ChoiceBox fx:id="idGedit" prefHeight="25.0" prefWidth="57.0" />
+                                    <Label fx:id="idGedit" text="Label" />
                                  </children>
                               </HBox>
                               <HBox fx:id="inHB11111" alignment="CENTER" prefHeight="46.0" prefWidth="136.0">
                                  <children>
                                     <Label text="id subgrupo: " />
-                                    <ChoiceBox fx:id="idSedit" prefHeight="25.0" prefWidth="57.0" />
+                                    <Label fx:id="idSedit" text="Label" />
                                  </children>
                               </HBox>
                            </children>
@@ -106,7 +106,7 @@
                         <HBox fx:id="inHB22" alignment="CENTER" prefHeight="74.0" prefWidth="128.0">
                            <children>
                               <Label prefHeight="15.0" prefWidth="65.0" text="#plazas: " />
-                              <TextField fx:id="plazasIdedit" prefHeight="25.0" prefWidth="54.0" />
+                              <Label fx:id="plazasIdedit" text="Label" />
                            </children>
                         </HBox>
                         <HBox fx:id="inHB23" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -123,7 +123,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editBtnClicked" text="Editar">
+                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editBtnClicked" text="Eliminar">
                      <VBox.margin>
                         <Insets bottom="5.0" left="3.0" />
                      </VBox.margin>

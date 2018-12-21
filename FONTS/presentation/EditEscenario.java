@@ -144,6 +144,21 @@ public class EditEscenario {
         return restriccionesFinal;
     }
 
+
+    /**
+     * Asigna un nuevo valor a asignaturasFinal.
+     * @param newAsignaturas  Valor que se asigna.
+     */
+    public void setAsignaturasFinal(HashMap<String, ArrayList<Object>> newAsignaturas) {
+        asignaturasFinal = newAsignaturas;
+        BorderPane lay = (BorderPane)window.getScene().getRoot();
+        ListView<String> left = (ListView<String>)lay.getLeft();
+        VBox center = (VBox)lay.getCenter();
+        Label itemTitle = (Label)center.lookup("#itemTitle");
+        showAsignaturas(itemTitle, left);
+        showEdtingAsignaturas(null, center);
+    }
+
     /**
      * Asigna un nuevo valor a aulasFinal.
      * @param newAulas  Valor que se asigna.
@@ -232,7 +247,9 @@ public class EditEscenario {
                 parent.getChildren().remove(1);
 
             if (!(item == null)) {
+                System.out.println(item);
                 ArrayList<Object> as = asignaturasFinal.get(item);
+                System.out.println(as);
                 ctrlEdAsignaturas.setEditLayout(item, as);
                 ctrlEdAsignaturas.setRemoveLayout(item, as);
             }

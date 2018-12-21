@@ -53,7 +53,7 @@ public class CtrlEditSesiones {
     /**idAsignatura1.*/
     private ArrayList<ArrayList<Object>> currentSesiones;
     /**idAsignatura2.*/
-    private String currentAs2 = null;
+    private String currentAsignatura = null;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
@@ -84,7 +84,29 @@ public class CtrlEditSesiones {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void addBtnClicked() {
+        Integer duracion = Integer.parseInt(chHadd.getValue().toString());
+        String tipo = "";
+        if (rbTadd.isSelected())
+            tipo = "Teoria";
+        if (rbPadd.isSelected())
+            tipo = "Problemas";
+        if (rbLadd.isSelected())
+            tipo = "Laboratorio";
+        if (cd.addSesion(duracion, tipo, currentAsignatura) >= 0) {
+            ArrayList<Object> attr = new ArrayList<>();
 
+            attr.add(duracion);
+            attr.add(tipo);
+            currentSesiones.add(attr);
+            listview.getItems().clear();
+            Integer i = 1;
+            for (ArrayList<Object> s: currentSesiones) {
+                listview.getItems().add((String)("Sesion#" + i.toString() + " " + s.get(1).toString().charAt(0)));
+                ++i;
+            }
+        } else {
+            //TRANSACCIO INVALIDA
+        }
     }
 
     //EDIT LAYOUT
@@ -101,6 +123,32 @@ public class CtrlEditSesiones {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void editBtnClicked() {
+        Integer duracion = Integer.parseInt(chHedit.getValue().toString());
+        String tipo = "";
+        if (rbTedit.isSelected())
+            tipo = "Teoria";
+        if (rbPedit.isSelected())
+            tipo = "Problemas";
+        if (rbLedit.isSelected())
+            tipo = "Laboratorio";
+        Integer antDur = (Integer)currentSesAttr.get(0);
+        String antTipo = (String)currentSesAttr.get(1);
+
+        if (cd.editarSesion(antDur, antTipo, currentAsignatura, duracion, tipo) >= 0) {
+            ArrayList<Object> attr = new ArrayList<>();
+            currentSesiones.remove(currentSesAttr);
+            attr.add(duracion);
+            attr.add(tipo);
+            currentSesiones.add(attr);
+            listview.getItems().clear();
+            Integer i = 1;
+            for (ArrayList<Object> s: currentSesiones) {
+                listview.getItems().add((String)("Sesion#" + i.toString() + " " + s.get(1).toString().charAt(0)));
+                ++i;
+            }
+        } else {
+            //TRANSACCIO INVALIDA
+        }
 
     }
 
@@ -118,7 +166,22 @@ public class CtrlEditSesiones {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void removeBtnClicked() {
+        Integer antDur = (Integer)currentSesAttr.get(0);
+        String antTipo = (String)currentSesAttr.get(1);
 
+        if (cd.eliminarSesion(antDur, antTipo, currentAsignatura) >= 0) {
+            ArrayList<Object> attr = new ArrayList<>();
+            currentSesiones.remove(currentSesAttr);
+
+            listview.getItems().clear();
+            Integer i = 1;
+            for (ArrayList<Object> s: currentSesiones) {
+                listview.getItems().add((String)("Sesion#" + i.toString() + " " + s.get(1).toString().charAt(0)));
+                ++i;
+            }
+        } else {
+            //TRANSACCIO INVALIDA
+        }
     }
 
 
@@ -206,8 +269,13 @@ public class CtrlEditSesiones {
         }
     }
 
+    public ArrayList<ArrayList<Object>> getCurrentSesiones() {
+        return currentSesiones;
+    }
+
     /**Asigna un elemento a layout.*/
-    public void display(boolean editing, ArrayList<ArrayList<Object>> sesiones) {
+    public void display(boolean editing, ArrayList<ArrayList<Object>> sesiones, String idAsignatura) {
+        currentAsignatura = idAsignatura;
         if (editing) {
             currentSesiones = sesiones;
 

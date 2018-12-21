@@ -55,7 +55,7 @@ public class CtrlEditGrupos {
     /**idAsignatura1.*/
     private ArrayList<ArrayList<Object>> currentGrupos;
     /**idAsignatura2.*/
-    private String currentAs2 = null;
+    private String currentAsignatura = null;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
 
@@ -70,6 +70,22 @@ public class CtrlEditGrupos {
         planEstudiosFinal = edEsc.getPlanEstudiosFinal();
         asignaturasFinal = edEsc.getAsignaturasFinal();
         restriccionesFinal = edEsc.getRestriccionesFinal();
+    }
+
+    /**
+     * Devuelve si un string representa un entero.
+     * @param num   string a evaluar
+     * @return      true si es entero, false en caso opuesto.
+     */
+    private boolean isInt(String num) {
+        boolean isInt;
+        try {
+            Integer.parseInt(num);
+            isInt = true;
+        } catch (Exception e) {
+            isInt = false;
+        }
+        return isInt;
     }
 
     //ADD LAYOUT
@@ -90,17 +106,94 @@ public class CtrlEditGrupos {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void addBtnClicked() {
+        if (isInt(plazasIdadd.getText())) {
+            if (cd.addGrupo(idGadd.getValue().toString(), currentAsignatura) >= 0) {
+                String tipo = "";
+                if (rbTadd.isSelected())
+                    tipo = "Teoria";
+                if (rbPadd.isSelected())
+                    tipo = "Problemas";
+                if (rbLadd.isSelected())
+                    tipo = "Laboratorio";
+                if (cd.addSubGrupo(idSadd.getValue().toString(), Integer.parseInt(plazasIdadd.getText()), tipo, idGadd.getValue().toString(), currentAsignatura) >= 0) {
+                    ArrayList<Object> as = new ArrayList<>();
+                    as.add(idSadd.getValue().toString());
+                    as.add(Integer.parseInt(plazasIdadd.getText()));
+                    as.add(tipo);
+                    boolean found = false;
+                    int i;
+                    for (i = 0; i < currentGrupos.size() && !found; ++i) {
+                        found = currentGrupos.get(i).get(0).equals(idGadd.getValue().toString());
+                    }
+                    if (found) {
+                        currentGrupos.get(i).add(as);
+                    } else {
+                        ArrayList<Object> g = new ArrayList<>();
+                        ArrayList<Object> subg = new ArrayList<>();
+                        g.add(idGadd.getValue().toString());
+                        subg.add(as);
+                        g.add(subg);
+                        currentGrupos.add(g);
+                    }
 
+                    listview.getItems().clear();
+                    for (ArrayList<Object> g: currentGrupos) {
+                        String idG = (String)g.get(0);
+                        ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)g.get(1);
+                        for (ArrayList<Object> sg : subgr) {
+                            listview.getItems().add(idG + sg.get(0) + " " + sg.get(2));
+                        }
+                    }
+                } else {
+                    //TRANSACCION INVALIDA
+                }
+            } else {
+                String tipo = "";
+                if (rbTadd.isSelected())
+                    tipo = "Teoria";
+                if (rbPadd.isSelected())
+                    tipo = "Problemas";
+                if (rbLadd.isSelected())
+                    tipo = "Laboratorio";
+                if (cd.addSubGrupo(idSadd.getValue().toString(), Integer.parseInt(plazasIdadd.getText()), tipo, idGadd.getValue().toString(), currentAsignatura) >= 0) {
+                    ArrayList<Object> as = new ArrayList<>();
+                    as.add(idSadd.getValue().toString());
+                    as.add(Integer.parseInt(plazasIdadd.getText()));
+                    as.add(tipo);
+
+                    boolean found = false;
+                    int i;
+                    for (i = 0; i < currentGrupos.size() && !found; ++i) {
+                        found = currentGrupos.get(i).get(0).equals(idGadd.getValue().toString());
+                    }
+                    if (found) {
+                        ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)currentGrupos.get(i-1).get(1);
+                        subgr.add(as);
+                        currentGrupos.get(i-1).remove(1);
+                        currentGrupos.get(i-1).add(subgr);
+                    }
+
+                    listview.getItems().clear();
+                    for (ArrayList<Object> g: currentGrupos) {
+                        String idG = (String)g.get(0);
+                        ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)g.get(1);
+                        for (ArrayList<Object> sg : subgr) {
+                            listview.getItems().add(idG + sg.get(0) + " " + sg.get(2));
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
     //EDIT LAYOUT
     @FXML
-    ChoiceBox idGedit;
+    Label idGedit;
     @FXML
-    ChoiceBox idSedit;
+    Label idSedit;
     @FXML
-    TextField plazasIdedit;
+    Label plazasIdedit;
     @FXML
     RadioButton rbTedit;
     @FXML
@@ -112,7 +205,43 @@ public class CtrlEditGrupos {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void editBtnClicked() {
+        String tipo = "";
+        if (rbTedit.isSelected())
+            tipo = "Teoria";
+        if (rbPedit.isSelected())
+            tipo = "Problemas";
+        if (rbLedit.isSelected())
+            tipo = "Laboratorio";
+        if (cd.eliminarSubGrupo(idSedit.getText(), tipo, idGedit.getText(), currentAsignatura) >= 0) {
+            boolean found = false;
+            int i;
+            for (i = 0; i < currentGrupos.size() && !found; ++i) {
+                found = currentGrupos.get(i).get(0).equals(idGadd.getValue().toString());
+            }
+            if (found) {
+                ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)currentGrupos.get(i - 1).get(1);
+                int j = 0;
+                for (ArrayList<Object> sg : subgr) {
+                    if (sg.get(0).equals(Character.toString(currentSGr))) {
+                        subgr.remove(j);
+                    }
+                    ++j;
+                }
+                currentGrupos.get(i - 1).remove(1);
+                currentGrupos.get(i - 1).add(subgr);
+            }
 
+            listview.getItems().clear();
+            for (ArrayList<Object> g: currentGrupos) {
+                String idG = (String)g.get(0);
+                ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)g.get(1);
+                for (ArrayList<Object> sg : subgr) {
+                    listview.getItems().add(idG + sg.get(0) + " " + sg.get(2));
+                }
+            }
+        } else {
+            //TRANSACCIO INVALIDA
+        }
     }
 
 
@@ -134,7 +263,27 @@ public class CtrlEditGrupos {
 
     /**Accion que se ejecuta al pulsar el botón añadir.*/
     public void removeBtnClicked() {
+        if (cd.eliminarGrupo(idGrm.getText(), currentAsignatura) >= 0) {
+            boolean found = false;
+            int i;
+            for (i = 0; i < currentGrupos.size() && !found; ++i) {
+                found = currentGrupos.get(i).get(0).equals(idGrm.getText());
+            }
+            if (found) {
+                currentGrupos.remove(i-1);
+            }
 
+            listview.getItems().clear();
+            for (ArrayList<Object> g: currentGrupos) {
+                String idG = (String)g.get(0);
+                ArrayList<ArrayList<Object>> subgr = (ArrayList<ArrayList<Object>>)g.get(1);
+                for (ArrayList<Object> sg : subgr) {
+                    listview.getItems().add(idG + sg.get(0) + " " + sg.get(2));
+                }
+            }
+        } else {
+            //TRANSACCIO INVALIDA
+        }
     }
 
     private void setLayout() {
@@ -165,8 +314,14 @@ public class CtrlEditGrupos {
             rbPrm.setSelected(false);
             rbLrm.setSelected(true);
         }
+        if (!Character.toString(currentSGr).equals("0"))
+            rmBtn.setDisable(true);
+        else
+            rmBtn.setDisable(false);
         idGrm.setText(Character.toString(currentGr));
         idSrm.setText(Character.toString(currentSGr));
+        idGedit.setText(Character.toString(currentGr));
+        idSedit.setText(Character.toString(currentSGr));
         plazasIdrm.setText(currentPlazas.toString());
         plazasIdedit.setText(currentPlazas.toString());
     }
@@ -197,10 +352,6 @@ public class CtrlEditGrupos {
                     }
                 }
             }
-            System.out.println(currentGr);
-            System.out.println(currentSGr);
-            System.out.println(currentType);
-            System.out.println(currentPlazas);
             setLayout();
         }
     }
@@ -237,7 +388,8 @@ public class CtrlEditGrupos {
     }
 
     /**Asigna un elemento a layout.*/
-    public void display(boolean editing, ArrayList<ArrayList<Object>> grupos) {
+    public void display(boolean editing, ArrayList<ArrayList<Object>> grupos, String idAsignatura) {
+        currentAsignatura = idAsignatura;
         if (editing) {
             currentGrupos = grupos;
             System.out.println(grupos);
@@ -260,10 +412,6 @@ public class CtrlEditGrupos {
         idGadd.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         idSadd.getItems().clear();
         idSadd.setItems(FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        idGedit.getItems().clear();
-        idGedit.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        idSedit.getItems().clear();
-        idSedit.setItems(FXCollections.observableArrayList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
 
         rbTadd.setOnAction( e -> setRadioButtons("Tadd"));
         rbPadd.setOnAction( e -> setRadioButtons("Padd"));
