@@ -1,4 +1,4 @@
-Elegimos escenario 2
+Elegimos Escenario2
 
 Añadimos un Correqusito entre PRO1 y PRO2
 

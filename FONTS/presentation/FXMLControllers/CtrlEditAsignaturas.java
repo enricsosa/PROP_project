@@ -254,6 +254,7 @@ public class CtrlEditAsignaturas {
     /**Accion al pulsar el botón borrar.*/
     public void removeBtnClicked() {
         if (cd.eliminarAsignatura(currentId) >= 0) {
+            System.out.println("Se ha podido borrrar Asig");
             asignaturasFinal.remove(idAdd.getText());
             edEsc.setAsignaturasFinal(asignaturasFinal);
         } else {

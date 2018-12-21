@@ -844,10 +844,11 @@ public class CtrlDomain {
      * @return      codigoResultado de la operación.
      */
     public int eliminarAsignatura(String id) {
+        if (this.planEstudios.getAsignatura(id).tieneNivel())
+            this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
         if (!(this.planEstudios.tieneAsignatura(id)))
             return -2;
         this.planEstudios.eliminarAsignatura(id);
-        if (this.planEstudios.getAsignatura(id).tieneNivel()) this.planEstudios.getAsignatura(id).getNivel().eliminarAsignatura(id);
         return 23;
     }
 
@@ -999,6 +1000,7 @@ public class CtrlDomain {
      * @return              codigoResultado de la operación.
      */
     public int eliminarSubGrupo(String id, String tipo, String idGrupo, String idAsignatura) {
+        System.out.println(id + ' ' + tipo + ' ' + idGrupo + ' ' + idAsignatura);
         if (!(this.planEstudios.tieneAsignatura(idAsignatura)))
             return -2;
         if (!this.planEstudios.getAsignatura(idAsignatura).tieneGrupo(idGrupo))
