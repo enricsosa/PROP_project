@@ -53,7 +53,7 @@ public class MainMenu extends Application {
 
     /**
      * Lanza el MainMenu.
-     * @param primaryStage
+     * @param primaryStage  Stage
      * @throws Exception    Indica que algo salió mal en start.
      */
     @Override

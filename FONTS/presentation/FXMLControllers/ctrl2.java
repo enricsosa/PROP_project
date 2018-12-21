@@ -405,7 +405,10 @@ public class ctrl2 {
         }
     }
 
-    /**Asigna un mainMenu.*/
+    /**
+     * Asigna un mainMenu.
+     * @throws Exception    Ha habido un problema
+     */
     public void setMainMenu() throws Exception {
         sc.activate("prova1");
     }

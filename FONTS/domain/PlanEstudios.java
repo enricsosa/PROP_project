@@ -396,7 +396,8 @@ public class PlanEstudios {
 
     /**
      * Devuelve un Map con las Aulas compatibles con Clases de Teoria de PlanEstudios.
-     * @return  Map con las Aulas compatibles con Clases de Teoria de PlanEstudios.
+     * @param plazas    plazas que debe tener Aula como mínimo
+     * @return          Map con las Aulas compatibles con Clases de Teoria de PlanEstudios.
      */
     public Map<String, Aula> getAulasTeoria(int plazas) {
         return this.aulas.entrySet().stream()
@@ -406,7 +407,8 @@ public class PlanEstudios {
 
     /**
      * Devuelve un Map con las Aulas compatibles con Clases de Laboratorio de PlanEstudios.
-     * @return  Map con las Aulas compatibles con Clases de Laboratorio de PlanEstudios.
+     * @param plazas    plazas que debe tener Aula como mínimo
+     * @return          Map con las Aulas compatibles con Clases de Laboratorio de PlanEstudios.
      */
     public Map<String, Aula> getAulasLaboratorio(int plazas) {
         return this.aulas.entrySet().stream()
@@ -416,7 +418,8 @@ public class PlanEstudios {
 
     /**
      * Devuelve un Map con las Aulas compatibles con Clases de Problemas de PlanEstudios.
-     * @return  Map con las Aulas compatibles con Clases de Problemas de PlanEstudios.
+     * @param plazas    plazas que debe tener Aula como mínimo
+     * @return          Map con las Aulas compatibles con Clases de Problemas de PlanEstudios.
      */
     public Map<String, Aula> getAulasProblemas(int plazas) {
         return this.aulas.entrySet().stream()

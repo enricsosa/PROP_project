@@ -50,10 +50,18 @@ public class Correquisito extends Restriccion {
 
     /**Consultoras*/
 
+    /**
+     * Devuelve asignatura1.
+     * @return  asignatura1
+     */
     public Asignatura getAsignatura1() {
         return this.asignatura1;
     }
 
+    /**
+     * Devuelve asignatura2.
+     * @return  asignatura2
+     */
     public Asignatura getAsignatura2() {
         return this.asignatura2;
     }

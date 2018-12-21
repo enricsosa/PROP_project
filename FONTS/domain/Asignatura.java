@@ -335,7 +335,8 @@ public class Asignatura {
 
     /**
      * Indica si la Asignatura tiene un Grupo.
-     * @return  Devuelve true si la Asignatura tiene un Grupo, false en caso contrario.
+     * @param id    id del Grupo.
+     * @return      Devuelve true si la Asignatura tiene un Grupo, false en caso contrario.
      */
     public Boolean tieneGrupo(String id) {
         return this.grupos.containsKey(id);

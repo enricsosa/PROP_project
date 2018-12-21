@@ -181,6 +181,7 @@ public class CtrlEditAsignaturas {
     /**
      * Asigna un nuevo Nivel a edit layout.
      * @param id    nombre del Nivel.
+     * @param attr  atributos del Nivel.
      */
     public void setEditLayout(String id, ArrayList<Object> attr) {
         currentId = id;
@@ -196,6 +197,7 @@ public class CtrlEditAsignaturas {
     /**
      * Asigna un nuevo Nivel a remove layout.
      * @param id    nombre del Nivel.
+     * @param attr  atributos del Nivel.
      */
     public void setRemoveLayout(String id, ArrayList<Object> attr) {
         currentId = id;

@@ -265,6 +265,7 @@ public class CtrlEscenariosDir {
     /**
      * Escanea un Horario.
      * @param h             Horario en forma de String.
+     * @param extended      indica si es un extendedHorario.
      * @return              Horario escaneado.
      * @throws Exception    Algo ha fallado al escanear el Horario.
      */
@@ -437,7 +438,7 @@ public class CtrlEscenariosDir {
      * Guarda un Horario en un archivo txt.
      * @param horario       String con la información de un Horario.
      * @param idHorario     Código identificador del Horario.
-     * @throws IOException
+     * @throws IOException  Ha fallado una operación IO.
      */
     public void writeHorario(String horario, Integer idHorario) throws IOException {
         PrintWriter writer = new PrintWriter("DATA/Output/"+"Horario#" + idHorario.toString(), "UTF-8");
@@ -448,7 +449,7 @@ public class CtrlEscenariosDir {
     /**
      * Lee un Horario de un archivo txt.
      * @param horario                  Nombre del horario que se quiere cargar.
-     * @return String con los datos de un Horario.
+     * @return                          String con los datos de un Horario.
      * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
      * @throws IOException              Ha fallado una operación IO.
      */

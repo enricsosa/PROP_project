@@ -20,9 +20,9 @@ public class Main1a {
     /**
      * Método que ejecuta el programa de la 1a entrega.
      * @param args                      Argumentos del programa.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException  {
         System.out.println("Generador de horarios PROP 2017/18 Q1\n");

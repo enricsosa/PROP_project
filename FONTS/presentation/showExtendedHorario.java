@@ -59,7 +59,10 @@ public class showExtendedHorario {
     private showExtendedHorario() {
     }
 
-    /**Instanciadora de la clase showExtendedHorario.*/
+    /**
+     * Instanciadora de la clase showExtendedHorario.
+     * @return  Instancia.
+     */
     public static showExtendedHorario getInstance() {
         if (sH == null) {
             sH = new showExtendedHorario() {

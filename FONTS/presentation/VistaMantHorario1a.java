@@ -28,9 +28,9 @@ public class VistaMantHorario1a {
 
     /**
      * Gestiona la orden que da el usuario.
-     * @param nOps  Orden que da el usuario.
-     * @return      Valor necesario para interpretar la orden.
-     * @throws InputMismatchException
+     * @param nOps                      Orden que da el usuario.
+     * @return                          Valor necesario para interpretar la orden.
+     * @throws InputMismatchException   Error en Input.
      */
     public int obtenerOp(int nOps) throws InputMismatchException {
         int op = -1;

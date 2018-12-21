@@ -205,7 +205,10 @@ public class EditEscenario {
     private EditEscenario() {
     }
 
-    /**Instanciadora de la clase EditEscenario.*/
+    /**
+     * Instanciadora de la clase EditEscenario.
+     * @return  instancia.
+     */
     public static EditEscenario getInstance() {
         if (edEsc == null)
             edEsc = new EditEscenario() {

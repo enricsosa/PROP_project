@@ -31,9 +31,9 @@ public class CtrlPresentacion1a {
 
     /**
      * Constructora de la clase CtrlPresentacion1a.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public CtrlPresentacion1a() throws FileNotFoundException, IOException, ParseException {
         CD = CtrlDomain.getInstance();
@@ -41,9 +41,9 @@ public class CtrlPresentacion1a {
 
     /**
      * Inicializa un CtrlPresentacion.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initCtrlPresentacion() throws FileNotFoundException, IOException, ParseException {
         this.CD.initCtrlDomain();
@@ -52,9 +52,9 @@ public class CtrlPresentacion1a {
 
     /**
      * Inicializa VistaMantHorario.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void initMantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
         ArrayList<String> escenarios = this.CD.allEscenarios();

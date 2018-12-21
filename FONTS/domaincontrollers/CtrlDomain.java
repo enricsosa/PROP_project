@@ -142,7 +142,9 @@ public class CtrlDomain {
 
     /**Métodos públicos*/
 
-    /**Asigna un Horario a horarioActivo.*/
+    /**
+     * Asigna un Horario a horarioActivo.
+     * @param horarioActivo Nuevo horarioActivo.*/
     public void setHorarioActivo(Horario horarioActivo) {
         this.horarioActivo = horarioActivo;
     }
@@ -927,6 +929,7 @@ public class CtrlDomain {
     /**
      * Edita la id de un SubGrupo de planEstudios.
      * @param id            id del SubGrupo a editar.
+     * @param tipo          tipo del SubGrupo.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @param nuevaId       nueva id que se quiere asignar a SubGrupo.
@@ -950,6 +953,7 @@ public class CtrlDomain {
     /**
      * Edita el tipo de un SubGrupo de planEstudios.
      * @param id            id del SubGrupo a editar.
+     * @param tipo          tipo del SubGrupo.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @param nuevoTipo     nuevo tipo que se quiere asignar a SubGrupo.
@@ -972,6 +976,7 @@ public class CtrlDomain {
     /**
      * Edita el número de plazas de un SubGrupo de planEstudios.
      * @param id            id del SubGrupo a editar.
+     * @param tipo          tipo del SubGrupo.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @param nuevaPlazas   nuevo número de plazas que se quiere asignar a SubGrupo.
@@ -995,6 +1000,7 @@ public class CtrlDomain {
     /**
      * Elimina un SubGrupo de planEstudios.
      * @param id            id del SubGrupo a eliminar.
+     * @param tipo          tipo del SubGrupo.
      * @param idGrupo       id del Grupo del SubGrupo.
      * @param idAsignatura  id de la Asignatura del SubGrupo.
      * @return              codigoResultado de la operación.
@@ -1163,9 +1169,9 @@ public class CtrlDomain {
 
     /**
      * Escribe un Horario por consola.
-     * @param horario   String con los datos de Horario.
-     * @param idHorario id del Horario que se escribe.
-     * @throws IOException
+     * @param horario       String con los datos de Horario.
+     * @param idHorario     id del Horario que se escribe.
+     * @throws IOException  Problema en IO.
      */
     public void writeHorario(String horario, Integer idHorario) throws IOException {
         controladorEscenarios.writeHorario(horario, idHorario);
@@ -1173,9 +1179,9 @@ public class CtrlDomain {
 
     /**
      * Escribe un horario a partir de un HashMap.
-     * @param horario   HashMap con los datos de Horario.
-     * @param idHorario id del horario que se escribe.
-     * @throws IOException
+     * @param horario       HashMap con los datos de Horario.
+     * @param idHorario     id del horario que se escribe.
+     * @throws IOException  Problema en IO.
      */
     public void writeHorarioFromMap(HashMap<Integer, HashMap<Integer, ArrayList<String>>> horario, String idHorario) throws IOException {
         controladorEscenarios.writeHorarioFromMap(horario, idHorario);

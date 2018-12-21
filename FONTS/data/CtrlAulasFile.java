@@ -40,7 +40,10 @@ public class CtrlAulasFile {
     private CtrlAulasFile() {
     }
 
-    /**Constructora de la clase CtrlAulasFile.*/
+    /**
+     * Constructora de la clase CtrlAulasFile.
+     *  @return     Instancia.
+     */
     public static CtrlAulasFile getInstance() {
         if (infoAulas == null)
             infoAulas = new CtrlAulasFile() {

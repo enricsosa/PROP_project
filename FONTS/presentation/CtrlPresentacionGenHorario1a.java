@@ -56,9 +56,9 @@ public class CtrlPresentacionGenHorario1a {
 
     /**
      * Gestiona el menú de Horarios.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     public void mantenimientoHorario() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
@@ -94,9 +94,9 @@ public class CtrlPresentacionGenHorario1a {
 
     /**
      * Gestiona el menú de selección de escenarios.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     private void escogerEscenarios() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
@@ -128,9 +128,9 @@ public class CtrlPresentacionGenHorario1a {
 
     /**
      * Gestiona el menú de generación de Horarios.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     private void escogerGenHorario() throws FileNotFoundException, IOException, ParseException {
         int op = -1;
@@ -162,10 +162,10 @@ public class CtrlPresentacionGenHorario1a {
 
     /**
      * Muestra un Horario por consola.
-     * @param saveHorario
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ParseException
+     * @param saveHorario               indica si se quiere guardar.
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     private void mostrarHorario(boolean saveHorario) throws FileNotFoundException, IOException, ParseException {
         System.out.println(this.horario);
@@ -177,8 +177,9 @@ public class CtrlPresentacionGenHorario1a {
 
     /**
      * Consulta un Horario.
-     * @throws FileNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException    No se ha encontrado el archivo a abrir.
+     * @throws IOException              Ha fallado una operación IO.
+     * @throws ParseException           Ha ocurrido un error al parsear.
      */
     private void consultarHorarios() throws FileNotFoundException, IOException {
         int op = -1;
