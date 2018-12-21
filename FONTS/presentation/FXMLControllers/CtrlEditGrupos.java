@@ -35,7 +35,13 @@ import java.lang.reflect.Array;
 import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
-
+/**
+ * Gestiona la edición de Grupos.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditGrupos {
 
     /**Instancia de EditEscenario.*/
@@ -46,15 +52,17 @@ public class CtrlEditGrupos {
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
     /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
-    /**Restriccion seleccionada.*/
+    /**Grupo seleccioonado.*/
     private char currentGr;
-    /**Restriccion seleccionada.*/
+    /**SubGrupo seleccionado.*/
     private char currentSGr;
+    /**Tipo del SubGrupo seleccionado.*/
     private String currentType;
+    /**plazas del SubGrupo seleccionado.*/
     private Integer currentPlazas;
-    /**idAsignatura1.*/
+    /**Grupos*/
     private ArrayList<ArrayList<Object>> currentGrupos;
-    /**idAsignatura2.*/
+    /**idAsignatura del grupo.*/
     private String currentAsignatura = null;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;

@@ -36,6 +36,13 @@ import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
 
+/**
+ * Gestiona la edición de Sesiones.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditSesiones {
 
     /**Instancia de EditEscenario.*/
@@ -46,13 +53,13 @@ public class CtrlEditSesiones {
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
     /**Restriciones despues de editar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
-    /**Restriccion seleccionada.*/
+    /**Sesion seleccionada.*/
     private Integer currentSes;
-    /**Restriccion seleccionada.*/
+    /**atributos de Sesion seleccionada.*/
     private ArrayList<Object> currentSesAttr;
-    /**idAsignatura1.*/
+    /**Sesiones disponibles.*/
     private ArrayList<ArrayList<Object>> currentSesiones;
-    /**idAsignatura2.*/
+    /**idAsignatura.*/
     private String currentAsignatura = null;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;

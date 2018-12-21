@@ -46,6 +46,7 @@ public class showExtendedHorario {
     private Button draggingButton;
     /**editing*/
     private boolean editing = false;
+    /**nombre del Horario.*/
     private String nomH;
 
     private FXMLLoader loader;
@@ -67,6 +68,16 @@ public class showExtendedHorario {
         return sH;
     }
 
+    /**
+     * Comprueba o comprueba y realiza un moviemto de asignación.
+     * @param buttonText    texto del objeto que se mueve.
+     * @param iD            dia inicial
+     * @param iH            hora inicial
+     * @param fD            dia final
+     * @param fH            horaIni final
+     * @param onlyCheck     bollean que indica si se realiza movimiento.
+     * @return              si se puede realizar el movimiento o no.
+     */
     private boolean checkChange(String buttonText, int iD, int iH, int fD, int fH, boolean onlyCheck) {
         int firstSpace = buttonText.indexOf(" ");
         int secondSpace = buttonText.indexOf(" ", firstSpace+1);

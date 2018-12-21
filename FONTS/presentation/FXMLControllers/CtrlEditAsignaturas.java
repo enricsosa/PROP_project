@@ -31,11 +31,22 @@ import presentation.EditEscenario;
 import domaincontrollers.CtrlDomain;
 
 
+/**
+ * Menú de edición de Asignaturas.
+ * @author  Enric Sosa
+ * @see     FXML
+ * @see     ArrayList
+ * @see     HashMap
+ */
 public class CtrlEditAsignaturas {
 
+    /**Menú de editar escenarios que lo genera.*/
     private EditEscenario edEsc;
+    /**PlanEstudios final.*/
     private ArrayList<String> planEstudiosFinal;
+    /**Asignaturas después de modificar.*/
     private HashMap<String, ArrayList<Object>> asignaturasFinal;
+    /**Restricciones después de modificar.*/
     private HashMap<String, ArrayList<Object>> restriccionesFinal;
     /**Restriccion seleccionada.*/
     private String currentId;
@@ -52,7 +63,9 @@ public class CtrlEditAsignaturas {
     /**idAsignatura2.*/
     private ArrayList<ArrayList<Object>> editedGrupos = new ArrayList<>();
 
+    /**Menú de edición de Sesiones de la Asignatura.*/
     private CtrlEditSesiones ctrlEditSesiones;
+    /**Menú de edición de Grupos de la Asignatura.*/
     private CtrlEditGrupos ctrlEditGrupos;
     /**Instancia de CtrlDomain.*/
     private CtrlDomain cd;
@@ -108,12 +121,14 @@ public class CtrlEditAsignaturas {
     @FXML
     Button rmBtn;
 
+    /**Cierra menú de Sesiones.*/
     public void closeSesions() {
         System.out.println(currentSesiones);
         currentSesiones = ctrlEditSesiones.getCurrentSesiones();
         System.out.println(currentSesiones);
     }
 
+    /**Abre menú de edición de Sesiones.*/
     public void manageEditSesionesBtn() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -135,10 +150,12 @@ public class CtrlEditAsignaturas {
         }
     }
 
+    /**Cierra menú de edición de Grupos.*/
     public void closeGrupos() {
         //currentGrupos = ctrlEditGrupos.getCurrentGrupos();
     }
 
+    /**Abre menú de edición de Grupos.*/
     public void manageEditGruposBtn() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

@@ -230,6 +230,7 @@ public class escogerHorario {
 
 
 
+    /**Asigna un Horario extendido.*/
     private void setHorarioExt(GridPane gp) {
         for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
             for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
