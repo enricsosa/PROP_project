@@ -227,6 +227,36 @@ public class escogerHorario {
         }
     }
 
+
+
+
+    private void setHorarioExt(GridPane gp) {
+        for (Map.Entry<Integer, HashMap<Integer, ArrayList<String>>> dia : horario.entrySet()) {
+            for (Map.Entry<Integer, ArrayList<String>> hora : dia.getValue().entrySet()) {
+                ScrollPane sp = new ScrollPane();
+                VBox vB = new VBox();
+                vB.prefHeightProperty().bind(sp.heightProperty());
+                vB.prefWidthProperty().bind(sp.widthProperty());
+                for (String sesion : hora.getValue()) {
+                    Button b = new Button(sesion);
+                    b.setId("ses-btn");
+                    vB.getChildren().add(b);
+                }
+                sp.setContent(vB);
+                sp.setPannable(true);
+                sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+                gp.add(sp, dia.getKey(), hora.getKey()+1);
+                vB.setId(dia.getKey().toString() + ',' + hora.getKey().toString());
+                sp.setId(dia.getKey().toString() + ',' + hora.getKey().toString());
+            }
+        }
+    }
+
+
+
+
+
     /**
      * Escanea un Horario y lo asigna.
      * @param s Horario a escanear.
@@ -234,14 +264,46 @@ public class escogerHorario {
     public void horarioSeleccionado(String s) {
         horario_label.setText(s);
         try {
-            horario = cd.escaneaHorario(s, false);
+            boolean b = cd.readExtension(s);
+            if (!b) {
+                horario = cd.escaneaHorario(s, false);
+                BorderPane bP = (BorderPane) sc.getPane("escogerHorario");
+                GridPane gP = (GridPane) bP.getCenter();
+                setHorario(gP);
+                bP.setCenter(gP);
+            } else {
+                Stage window = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/showExtendedHorario.fxml"));
+                System.out.println(loader);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                    System.out.println(root);
+                    ScrollPane sP = (ScrollPane)root;
+                    sP.getStylesheets().add("presentation/CSS/escogerHorarios.css");
+
+                    try {
+                        horario = cd.escaneaHorario(s, true);
+                    } catch (Exception e) {
+                        System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
+                    }
+
+                    //Grid Pane
+                    GridPane gP = (GridPane)sP.getContent();
+                    gP.prefWidthProperty().bind(sP.widthProperty());
+                    setHorarioExt(gP);
+
+                    window.setScene(new Scene(sP));
+                    window.showAndWait();
+                } catch (Exception e) {
+                    System.out.println("ERROR");
+                    System.out.println(e.toString());
+                }
+            }
         } catch (Exception e) {
             System.out.println("ERROR: CARGA DEL HORARIO FALLIDA");
         }
-        BorderPane bP = (BorderPane)sc.getPane("escogerHorario");
-        GridPane gP = (GridPane)bP.getCenter();
-        setHorario(gP);
-        bP.setCenter(gP);
+
     }
 
     /**

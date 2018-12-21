@@ -52,7 +52,7 @@ public class CtrlEscenariosDir {
         File[] listEsc = dir.listFiles();
         if (listEsc != null) {
             for (File file : listEsc) {
-                if (file.isDirectory() && !file.getName().equals("Output")) {
+                if (file.isDirectory() && !file.getName().equals("Output") && !file.getName().equals("HorarioExtended")) {
                     nomEscenarios.add(file.getName());
                 }
             }
@@ -356,6 +356,10 @@ public class CtrlEscenariosDir {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("DATA/Output/" + idHorario + ".txt", "UTF-8");
+            PrintWriter extending = new PrintWriter("DATA/HorarioExtended/" + idHorario + ".txt", "UTF-8");
+            String content = "false";
+            extending.print(content);
+            extending.close();
         } catch (Exception e) {
             System.out.println("ERROR EN ESCRIBIR EL HORARIO: PATH NO ENCONTRADO");
         }
@@ -411,6 +415,22 @@ public class CtrlEscenariosDir {
         PrintWriter writer = new PrintWriter("DATA/Output/" + idHorario + ".txt", "UTF-8");
         writer.println(horario);
         writer.close();
+    }
+
+    public void writeExtension(String extended, String idHorario) throws IOException {
+        PrintWriter writer = new PrintWriter("DATA/HorarioExtended/" + idHorario + ".txt", "UTF-8");
+        writer.print(extended);
+        writer.close();
+    }
+
+    public boolean readExtension(String idHorario) throws IOException {
+        File file = new File("DATA/HorarioExtended/" + idHorario + ".txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String s = br.readLine();
+        if (s.equals("true"))
+            return true;
+        else
+            return false;
     }
 
     /**

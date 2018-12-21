@@ -363,6 +363,7 @@ public class setRestricciones {
                                 restrCtrlD.get("diaLibre").get(restrDL.indexOf("6")) &&
                                 restrCtrlD.get("diaLibre").get(restrDL.indexOf("7"))) {
                                 try {
+                                    cd.writeExtension("false", nomH.getText());
                                     horario = cd.escaneaHorario(nomH.getText(), false);
                                 } catch ( Exception e) {
                                     System.out.println("ERROR: CREACION DEL HORARIO FALLIDA");
@@ -383,6 +384,7 @@ public class setRestricciones {
                 }
                 if (extend) {
                     try {
+                        cd.writeExtension("true", nomH.getText());
                         horario = cd.escaneaHorario(nomH.getText(), true);
                     } catch ( Exception e) {
                         System.out.println("ERROR: CREACION DEL HORARIO EXTENDIDO FALLIDA");

@@ -1151,6 +1151,14 @@ public class CtrlDomain {
         controladorEscenarios.writeHorario(horario, idHorario);
     }
 
+    public void writeExtension(String extended, String idHorario) throws IOException {
+        controladorEscenarios.writeExtension(extended, idHorario);
+    }
+
+    public boolean readExtension(String idHorario) throws IOException {
+        return controladorEscenarios.readExtension(idHorario);
+    }
+
     /**
      * Escribe un Horario por consola.
      * @param horario   String con los datos de Horario.
